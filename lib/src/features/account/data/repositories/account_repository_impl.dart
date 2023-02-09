@@ -51,7 +51,7 @@ class AccountRepositoryImpl implements AccountRepository {
 
   @override
   Future<UserInformation> signUpWithEmailAndPassword(
-      UserInformation userInformation, File image, String password) async {
+      UserInformation userInformation, File? image, String password) async {
     if (await networkInfo.isNotConnected) {
       throw OfflineException();
     }
@@ -60,7 +60,10 @@ class AccountRepositoryImpl implements AccountRepository {
       final userId = await remoteAuth.signUpWithEmailAndPassword(
           userInformation.email, password);
 
-      final downloadURL = await remoteStorage.upload(userId, image);
+      String? downloadURL;
+      if (image != null) {
+        downloadURL = await remoteStorage.upload(userId, image);
+      }
 
       userInformation = userInformation.copyWith(
         id: userId,

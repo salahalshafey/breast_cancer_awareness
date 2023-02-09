@@ -10,7 +10,7 @@ class SignUpWithEmailAndPasswordUsecase {
 
   Future<UserInformation> call(
     UserInformation userInformation,
-    File image,
+    File? image,
     String password,
   ) =>
       repository.signUpWithEmailAndPassword(userInformation, image, password);

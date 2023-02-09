@@ -7,5 +7,5 @@ abstract class AccountRepository {
   Future<UserInformation> signInWithEmailAndPassword(
       String email, String password);
   Future<UserInformation> signUpWithEmailAndPassword(
-      UserInformation userInformation, File image, String password);
+      UserInformation userInformation, File? image, String password);
 }
