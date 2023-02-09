@@ -1,3 +1,5 @@
+import 'package:breast_cancer_awareness/src/core/util/builders/custom_alret_dialoge.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -67,8 +69,69 @@ class MyApp extends StatelessWidget {
         progressIndicatorTheme:
             ProgressIndicatorThemeData(color: _myPrimaryColor),
       ),
-      home: const MainScreen(),
+      home: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (ctx, userSnapshot) {
+            if (userSnapshot.connectionState == ConnectionState.waiting) {
+              return const Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+            if (userSnapshot.hasData) {
+              return const MainScreen();
+            }
+            return const SignInScreen();
+          }),
       routes: {},
+    );
+  }
+}
+
+class SignInScreen extends StatelessWidget {
+  const SignInScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () async {
+            try {
+              final credential =
+                  await FirebaseAuth.instance.signInWithEmailAndPassword(
+                email: "salahalshafey@gmail.com",
+                password: "123456789",
+              );
+            } on FirebaseAuthException catch (e) {
+              if (e.code == 'user-not-found') {
+                showCustomAlretDialog(
+                  context: context,
+                  title: "Error",
+                  titleColor: Colors.red,
+                  content: "There is no user with this email.",
+                );
+              } else if (e.code == 'wrong-password') {
+                showCustomAlretDialog(
+                  context: context,
+                  title: "Error",
+                  titleColor: Colors.red,
+                  content: "Wrong password provided for that user.",
+                );
+              } else {
+                showCustomAlretDialog(
+                  context: context,
+                  title: "Error",
+                  titleColor: Colors.red,
+                  content: e.code,
+                );
+              }
+            }
+          },
+          child: Text("sign in"),
+        ),
+      ),
     );
   }
 }
