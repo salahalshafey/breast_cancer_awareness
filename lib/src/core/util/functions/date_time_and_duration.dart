@@ -1,7 +1,7 @@
 String time24To12HoursFormat(int hours, int minuts) {
   String minut = minuts.toString();
   if (minut.length < 2) {
-    minut = '0' + minut;
+    minut = '0$minut';
   }
 
   if (hours == 0) {

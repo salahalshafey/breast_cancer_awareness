@@ -39,6 +39,7 @@ class AccountRepositoryImpl implements AccountRepository {
     if (await networkInfo.isNotConnected) {
       throw OfflineException();
     }
+
     try {
       final userId =
           await remoteAuth.signInWithEmailAndPassword(email, password);

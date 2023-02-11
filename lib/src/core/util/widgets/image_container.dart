@@ -675,6 +675,7 @@ class _DownloadButtonState extends State<DownloadButton> {
 
     _loadingState(false);
     if (savedToGallery == null || !savedToGallery) {
+      // ignore: use_build_context_synchronously
       showCustomSnackBar(
         context: context,
         content: 'Error happend while saving the image to gallery.',
@@ -739,8 +740,8 @@ class __ShareButtonState extends State<_ShareButton> {
           widget.image, widget.imageSource);
 
       _loadingState(false);
-      await Share.shareFiles(
-        [imagePath],
+      await Share.shareXFiles(
+        [XFile(imagePath)],
         text: widget.caption,
         subject: widget.title,
         //sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,

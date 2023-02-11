@@ -13,17 +13,17 @@ class BackButtonWithImage extends StatelessWidget {
         padding: const EdgeInsets.only(left: 5),
         child: ElevatedButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Row(
-            children: [
-              const Icon(Icons.arrow_back),
-              CircleAvatar(backgroundImage: NetworkImage(networkImage)),
-            ],
-          ),
           style: ButtonStyle(
             padding: MaterialStateProperty.all(const EdgeInsets.all(4)),
             elevation: MaterialStateProperty.all(0),
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25))),
+          ),
+          child: Row(
+            children: [
+              const Icon(Icons.arrow_back),
+              CircleAvatar(backgroundImage: NetworkImage(networkImage)),
+            ],
           ),
         ),
       ),

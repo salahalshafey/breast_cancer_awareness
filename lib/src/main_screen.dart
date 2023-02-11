@@ -11,12 +11,12 @@ class MainScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Main Screens Will Be Here"),
+            const Text("Main Screens Will Be Here"),
             ElevatedButton(
               onPressed: () async {
                 await FirebaseAuth.instance.signOut();
               },
-              child: Text("sign out"),
+              child: const Text("sign out"),
             ),
           ],
         ),
