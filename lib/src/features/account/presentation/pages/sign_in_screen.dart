@@ -1,7 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'first_sign_up_screen.dart';
+import '../widgets/sign_in_form.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../core/util/builders/custom_alret_dialoge.dart';
+import 'package:flutter_svg/svg.dart';
 
 class SignInScreen extends StatelessWidget {
   static const routName = '/sign-in';
@@ -10,42 +11,98 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () async {
-            try {
-              await FirebaseAuth.instance.signInWithEmailAndPassword(
-                email: "salahalshafey@gmail.com",
-                password: "123456789",
-              );
-            } on FirebaseAuthException catch (e) {
-              if (e.code == 'user-not-found') {
-                showCustomAlretDialog(
-                  context: context,
-                  title: "Error",
-                  titleColor: Colors.red,
-                  content: "There is no user with this email.",
-                );
-              } else if (e.code == 'wrong-password') {
-                showCustomAlretDialog(
-                  context: context,
-                  title: "Error",
-                  titleColor: Colors.red,
-                  content: "Wrong password provided for that user.",
-                );
-              } else {
-                showCustomAlretDialog(
-                  context: context,
-                  title: "Error",
-                  titleColor: Colors.red,
-                  content: e.code,
-                );
-              }
-            }
-          },
-          child: const Text("sign in"),
-        ),
+      body: Stack(
+        children: [
+          Positioned(
+            top: -205,
+            right: -65,
+            child: Opacity(
+              opacity: 0.58,
+              child: SvgPicture.asset(
+                "assets/images/background_flower.svg",
+                height: 350,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: -14 - _keyboardHeight,
+            left: -165,
+            child: Opacity(
+              opacity: 0.58,
+              child: SvgPicture.asset(
+                "assets/images/background_flower.svg",
+                height: 350,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: -15 - _keyboardHeight,
+            right: 5,
+            child: Opacity(
+              opacity: 0.7,
+              child: Image.asset(
+                "assets/images/background_cancer_sympol.png",
+                scale: 3,
+                filterQuality: FilterQuality.high,
+              ),
+            ),
+          ),
+          ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 60),
+            children: [
+              const Text(
+                "Log in",
+                style: TextStyle(
+                  color: Color.fromRGBO(191, 76, 136, 1),
+                  fontSize: 26,
+                ),
+              ),
+              const Text(
+                "Please sign in to continue",
+                style: TextStyle(
+                  color: Color.fromRGBO(206, 50, 116, 0.76),
+                  fontSize: 20,
+                ),
+              ),
+              const SizedBox(height: 30),
+              Align(
+                alignment: Alignment.topCenter,
+                child: Image.asset(
+                  "assets/images/person_avatar.png",
+                  scale: 1.5,
+                  filterQuality: FilterQuality.high,
+                ),
+              ),
+              const SizedBox(height: 50),
+              const SignInForm(),
+              const SizedBox(height: 70),
+              Text.rich(
+                TextSpan(
+                  style: const TextStyle(
+                    color: Color.fromRGBO(143, 39, 83, 1),
+                    fontSize: 18,
+                  ),
+                  children: [
+                    const TextSpan(text: "Don't have an account ? "),
+                    TextSpan(
+                      text: "Sign Up",
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.of(context)
+                              .pushReplacementNamed(FirstSignUpScreen.routName);
+                        },
+                    ),
+                  ],
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

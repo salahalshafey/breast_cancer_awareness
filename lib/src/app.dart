@@ -14,8 +14,8 @@ import 'injection_container.dart' as di;
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  Color get _myPrimaryColor => Colors.blue[900]!;
-  Color get _mysecondaryColor => Colors.blue[700]!;
+  Color get _myPrimaryColor => const Color.fromRGBO(191, 76, 136, 1);
+  Color get _mysecondaryColor => const Color.fromRGBO(223, 122, 175, 1);
 
   @override
   Widget build(BuildContext context) {
@@ -23,85 +23,101 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (ctx) => di.sl<Account>()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Breast Cancer Awareness',
-        theme: ThemeData(
-          primaryColor: _myPrimaryColor,
-          secondaryHeaderColor: _mysecondaryColor,
-          appBarTheme: AppBarTheme(
-            color: _myPrimaryColor,
-            centerTitle: true,
-            /* shape: const RoundedRectangleBorder(
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Breast Cancer Awareness',
+          theme: ThemeData(
+            primaryColor: _myPrimaryColor,
+            useMaterial3: true,
+            secondaryHeaderColor: _mysecondaryColor,
+            appBarTheme: AppBarTheme(
+              color: _myPrimaryColor,
+              centerTitle: true,
+              /* shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(25),
                 bottomRight: Radius.circular(25),
               ),
             ),*/
-          ),
-          iconTheme: IconThemeData(color: _myPrimaryColor),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all<Color>(_myPrimaryColor),
-              textStyle: MaterialStateProperty.all<TextStyle>(const TextStyle(
-                fontSize: 17,
-              )),
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            ),
+            iconTheme: IconThemeData(color: _myPrimaryColor),
+            inputDecorationTheme: InputDecorationTheme(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+              hintStyle: const TextStyle(color: Colors.white),
+              border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(22)),
+              filled: true,
+              fillColor: _mysecondaryColor,
+            ),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(_myPrimaryColor),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                textStyle: MaterialStateProperty.all<TextStyle>(const TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                )),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(22)),
+                ),
+                padding: MaterialStateProperty.all(
+                    const EdgeInsets.symmetric(vertical: 5, horizontal: 30)),
               ),
-              padding: MaterialStateProperty.all(
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 15)),
             ),
-          ),
-          outlinedButtonTheme: OutlinedButtonThemeData(
-            style: ButtonStyle(
-              foregroundColor:
-                  MaterialStateProperty.all<Color>(_myPrimaryColor),
-              textStyle: MaterialStateProperty.all<TextStyle>(const TextStyle(
-                fontSize: 17,
-              )),
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            outlinedButtonTheme: OutlinedButtonThemeData(
+              style: ButtonStyle(
+                foregroundColor:
+                    MaterialStateProperty.all<Color>(_myPrimaryColor),
+                textStyle: MaterialStateProperty.all<TextStyle>(const TextStyle(
+                  fontSize: 17,
+                )),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                ),
+                padding: MaterialStateProperty.all(
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 15)),
               ),
-              padding: MaterialStateProperty.all(
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 15)),
             ),
-          ),
-          textButtonTheme: TextButtonThemeData(
-            style: ButtonStyle(
-              foregroundColor:
-                  MaterialStateProperty.all<Color>(_myPrimaryColor),
+            textButtonTheme: TextButtonThemeData(
+              style: ButtonStyle(
+                foregroundColor:
+                    MaterialStateProperty.all<Color>(_myPrimaryColor),
+              ),
             ),
+            dialogTheme: DialogTheme(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+            ),
+            progressIndicatorTheme:
+                ProgressIndicatorThemeData(color: _myPrimaryColor),
           ),
-          dialogTheme: DialogTheme(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          ),
-          progressIndicatorTheme:
-              ProgressIndicatorThemeData(color: _myPrimaryColor),
-        ),
-        home: StreamBuilder(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (ctx, userSnapshot) {
-              if (userSnapshot.connectionState == ConnectionState.waiting) {
-                return const Scaffold(
-                  body: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              }
-              if (userSnapshot.hasData) {
-                return const MainScreen();
-              }
-              return const SignInScreen();
-            }),
-        routes: {
-          SignInScreen.routName: (ctx) => const SignInScreen(),
-          FirstSignUpScreen.routName: (ctx) => const FirstSignUpScreen(),
-          SecondSignUpScreen.routName: (ctx) => const SecondSignUpScreen(),
-        },
-      ),
+          home: StreamBuilder(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (ctx, userSnapshot) {
+                if (userSnapshot.connectionState == ConnectionState.waiting) {
+                  return const Scaffold(
+                    body: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+                if (userSnapshot.hasData) {
+                  return const MainScreen();
+                }
+                return const SignInScreen();
+              }),
+          routes: {
+            SignInScreen.routName: (ctx) => const SignInScreen(),
+            FirstSignUpScreen.routName: (ctx) => const FirstSignUpScreen(),
+            SecondSignUpScreen.routName: (ctx) => const SecondSignUpScreen(),
+          },
+        );
+      },
     );
   }
 }
