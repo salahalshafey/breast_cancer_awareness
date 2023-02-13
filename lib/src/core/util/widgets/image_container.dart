@@ -531,7 +531,7 @@ class _ImageScreenState extends State<ImageScreen> {
       extendBody: true,
       appBar: _showAppBar
           ? AppBar(
-              title: FittedBox(child: Text(widget.title)),
+              title: Text(widget.title),
               backgroundColor: Colors.black54,
               elevation: 0,
               actions: [

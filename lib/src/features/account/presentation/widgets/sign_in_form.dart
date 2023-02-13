@@ -2,12 +2,14 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../domain/usecases/signin_with_email_and_password.dart';
+import '../pages/first_sign_up_screen.dart';
 import '../providers/account.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../injection_container.dart' as di;
 
 import '../../../../core/util/builders/custom_alret_dialoge.dart';
+import 'dont_or_already_have_accout.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -70,12 +72,13 @@ class _SignInFormState extends State<SignInForm> {
     _formKey.currentState!.save();
 
     ///////// Login And handle the errors and loading /////////
-    // final account = Provider.of<Account>(context, listen: false);
+    //final account = Provider.of<Account>(context, listen: false);
     try {
       _isLoadingState(true);
-      //   await account.signInUsingEmailAndPassword(_userEmail, _userPassword);
+      // await account.signInUsingEmailAndPassword(_userEmail, _userPassword);
       await signInUsingEmailAndPassword(_userEmail, _userPassword);
     } catch (error) {
+      _isLoadingState(false);
       showCustomAlretDialog(
         context: context,
         title: 'ERROR',
@@ -83,7 +86,6 @@ class _SignInFormState extends State<SignInForm> {
         content: '$error',
       );
     }
-    _isLoadingState(false);
   }
 
   @override
@@ -108,6 +110,9 @@ class _SignInFormState extends State<SignInForm> {
                 fillColor: _isEmailFocused ? focusColor : null),
             onTapOutside: (_) {
               _focusNodeForEmail.unfocus();
+            },
+            onFieldSubmitted: (value) {
+              _focusNodeForPassword.requestFocus();
             },
             validator: (value) {
               if (value == null ||
@@ -162,6 +167,9 @@ class _SignInFormState extends State<SignInForm> {
             onTapOutside: (_) {
               _focusNodeForPassword.unfocus();
             },
+            onFieldSubmitted: (value) {
+              _saveForm();
+            },
             validator: (value) {
               if (value == null || value.trim().length < 8) {
                 return 'Password must be at least 8 characters long.';
@@ -195,6 +203,19 @@ class _SignInFormState extends State<SignInForm> {
                   onPressed: _saveForm,
                   child: const Text("Sign in"),
                 ),
+          const SizedBox(height: 70),
+          DontOrAlreadyHaveAccount(
+            text: "Don't have an account ? ",
+            actionText: "Sign Up",
+            onTap: () {
+              Navigator.of(context).pushNamed(FirstSignUpScreen.routName);
+              _formKey.currentState!.reset();
+              setState(() {
+                _isPasswordIconShowen = false;
+                _isPasswordShowen = false;
+              });
+            },
+          ),
         ],
       ),
     );

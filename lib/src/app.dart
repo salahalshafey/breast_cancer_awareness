@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -14,8 +15,9 @@ import 'injection_container.dart' as di;
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  Color get _myPrimaryColor => const Color.fromRGBO(191, 76, 136, 1);
-  Color get _mysecondaryColor => const Color.fromRGBO(223, 122, 175, 1);
+  final _myPrimaryColor = const Color.fromRGBO(191, 76, 136, 1);
+  final _mysecondaryColor = const Color.fromRGBO(223, 122, 175, 1);
+  final _appBarForGroundColor = const Color.fromRGBO(90, 135, 208, 1);
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +30,43 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Breast Cancer Awareness',
           theme: ThemeData(
-            primaryColor: _myPrimaryColor,
+            colorScheme:
+                ColorScheme.fromSeed(seedColor: _myPrimaryColor).copyWith(
+              primary: _myPrimaryColor,
+              secondary: _mysecondaryColor,
+            ),
+            // primaryColor: _myPrimaryColor,
+            //secondaryHeaderColor: _mysecondaryColor,
             useMaterial3: true,
-            secondaryHeaderColor: _mysecondaryColor,
+            textSelectionTheme: TextSelectionThemeData(
+              selectionColor: _mysecondaryColor.withOpacity(0.6),
+              cursorColor: _mysecondaryColor,
+              selectionHandleColor: _mysecondaryColor,
+            ),
             appBarTheme: AppBarTheme(
-              color: _myPrimaryColor,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              scrolledUnderElevation: 0,
               centerTitle: true,
-              /* shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(25),
-                bottomRight: Radius.circular(25),
+              foregroundColor: _appBarForGroundColor,
+              titleTextStyle: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: _appBarForGroundColor,
               ),
-            ),*/
+              //toolbarHeight: 100,
+
+              systemOverlayStyle: SystemUiOverlayStyle().copyWith(
+                statusBarColor: _mysecondaryColor.withOpacity(0.5),
+                statusBarBrightness: Brightness.dark,
+              ),
+
+              /* shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(1000),
+                  bottomRight: Radius.circular(1000),
+                ),
+              ),*/
             ),
             iconTheme: IconThemeData(color: _myPrimaryColor),
             inputDecorationTheme: InputDecorationTheme(
@@ -53,6 +80,7 @@ class MyApp extends StatelessWidget {
             ),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all<Color>(Colors.white12),
                 backgroundColor:
                     MaterialStateProperty.all<Color>(_myPrimaryColor),
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -73,29 +101,31 @@ class MyApp extends StatelessWidget {
                 foregroundColor:
                     MaterialStateProperty.all<Color>(_myPrimaryColor),
                 textStyle: MaterialStateProperty.all<TextStyle>(const TextStyle(
-                  fontSize: 17,
+                  fontSize: 20,
                 )),
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.circular(22)),
                 ),
                 padding: MaterialStateProperty.all(
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 15)),
+                    const EdgeInsets.symmetric(vertical: 5, horizontal: 30)),
               ),
             ),
             textButtonTheme: TextButtonThemeData(
               style: ButtonStyle(
                 foregroundColor:
                     MaterialStateProperty.all<Color>(_myPrimaryColor),
+                textStyle: MaterialStateProperty.all(TextStyle(fontSize: 20)),
               ),
             ),
             dialogTheme: DialogTheme(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
+                  borderRadius: BorderRadius.circular(22)),
             ),
-            progressIndicatorTheme:
-                ProgressIndicatorThemeData(color: _myPrimaryColor),
+            // progressIndicatorTheme:
+            // ProgressIndicatorThemeData(color: _myPrimaryColor),
           ),
+          themeMode: ThemeMode.dark,
           home: StreamBuilder(
               stream: FirebaseAuth.instance.authStateChanges(),
               builder: (ctx, userSnapshot) {

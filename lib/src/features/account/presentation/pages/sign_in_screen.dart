@@ -1,6 +1,4 @@
-import 'first_sign_up_screen.dart';
 import '../widgets/sign_in_form.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -11,9 +9,12 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return Scaffold(
+      extendBody: true,
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(),
       body: Stack(
         children: [
           Positioned(
@@ -28,7 +29,7 @@ class SignInScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: -14 - _keyboardHeight,
+            bottom: -14 - keyboardHeight,
             left: -165,
             child: Opacity(
               opacity: 0.58,
@@ -39,7 +40,7 @@ class SignInScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: -15 - _keyboardHeight,
+            bottom: -15 - keyboardHeight,
             right: 5,
             child: Opacity(
               opacity: 0.7,
@@ -53,6 +54,7 @@ class SignInScreen extends StatelessWidget {
           ListView(
             padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 60),
             children: [
+              const SizedBox(height: 35),
               const Text(
                 "Log in",
                 style: TextStyle(
@@ -78,28 +80,6 @@ class SignInScreen extends StatelessWidget {
               ),
               const SizedBox(height: 50),
               const SignInForm(),
-              const SizedBox(height: 70),
-              Text.rich(
-                TextSpan(
-                  style: const TextStyle(
-                    color: Color.fromRGBO(143, 39, 83, 1),
-                    fontSize: 18,
-                  ),
-                  children: [
-                    const TextSpan(text: "Don't have an account ? "),
-                    TextSpan(
-                      text: "Sign Up",
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.of(context)
-                              .pushReplacementNamed(FirstSignUpScreen.routName);
-                        },
-                    ),
-                  ],
-                ),
-                textAlign: TextAlign.center,
-              ),
             ],
           ),
         ],
