@@ -203,7 +203,7 @@ class _SignInFormState extends State<SignInForm> {
                   onPressed: _saveForm,
                   child: const Text("Sign in"),
                 ),
-          const SizedBox(height: 70),
+          const SizedBox(height: 55),
           DontOrAlreadyHaveAccount(
             text: "Don't have an account ? ",
             actionText: "Sign Up",

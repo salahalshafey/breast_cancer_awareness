@@ -63,6 +63,18 @@ class GetUserData extends StatelessWidget {
   }
 }
 
+class PaintForFirstSignUpScreen extends StatelessWidget {
+  const PaintForFirstSignUpScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      size: Size(422, (422 * 1.0950332320446576).toDouble()),
+      painter: RPSCustomPainter(),
+    );
+  }
+}
+
 //Copy this CustomPainter code to the Bottom of the File
 class RPSCustomPainter extends CustomPainter {
   @override

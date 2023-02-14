@@ -412,6 +412,14 @@ class __ImageContainerState extends State<_ImageContainer> {
   }
 
   void _showImageDialog(BuildContext context, bool showImageScreen) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    var imageDialogHeight = 0.0;
+    if (screenHeight < 400) {
+      imageDialogHeight = screenHeight * 0.8;
+    } else {
+      imageDialogHeight = screenHeight * 0.5;
+    }
+
     Navigator.of(context).push(
       PageRouteBuilder(
           opaque: false,
@@ -422,56 +430,66 @@ class __ImageContainerState extends State<_ImageContainer> {
               body: Column(
                 children: [
                   _popBuilder(context),
-                  Hero(
-                    tag: widget.image,
-                    child: GestureDetector(
-                      onTap: () {
-                        if (!showImageScreen) return;
-                        Navigator.of(context).pop();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ImageScreen(
-                              widget.image,
-                              widget.imageSource,
-                              widget.imageTitle ?? '',
-                              widget.imageCaption,
-                              widget.errorBuilder,
-                            ),
+                  SizedBox(
+                    height: imageDialogHeight,
+                    child: Row(
+                      children: [
+                        _popBuilder(context),
+                        Hero(
+                          tag: widget.image,
+                          child: GestureDetector(
+                            onTap: () {
+                              if (!showImageScreen) return;
+                              Navigator.of(context).pop();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ImageScreen(
+                                    widget.image,
+                                    widget.imageSource,
+                                    widget.imageTitle ?? '',
+                                    widget.imageCaption,
+                                    widget.errorBuilder,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: widget.imageSource == From.asset
+                                ? Image.asset(
+                                    widget.image,
+                                    fit: widget.fit,
+                                    errorBuilder:
+                                        widget.errorBuilder ?? _errorBuilder,
+                                  )
+                                : widget.imageSource == From.network
+                                    ? Image.network(
+                                        widget.image,
+                                        fit: widget.fit,
+                                        loadingBuilder:
+                                            widget.showLoadingIndicator
+                                                ? _loadingBuilder
+                                                : null,
+                                        errorBuilder: widget.errorBuilder ??
+                                            _errorBuilder,
+                                      )
+                                    : widget.imageSource == From.file
+                                        ? Image.file(
+                                            File(widget.image),
+                                            fit: widget.fit,
+                                            errorBuilder: widget.errorBuilder ??
+                                                _errorBuilder,
+                                          )
+                                        : Image.memory(
+                                            Uint8List.fromList(
+                                                widget.image.codeUnits),
+                                            fit: widget.fit,
+                                            errorBuilder: widget.errorBuilder ??
+                                                _errorBuilder,
+                                          ),
                           ),
-                        );
-                      },
-                      child: widget.imageSource == From.asset
-                          ? Image.asset(
-                              widget.image,
-                              fit: widget.fit,
-                              errorBuilder:
-                                  widget.errorBuilder ?? _errorBuilder,
-                            )
-                          : widget.imageSource == From.network
-                              ? Image.network(
-                                  widget.image,
-                                  fit: widget.fit,
-                                  loadingBuilder: widget.showLoadingIndicator
-                                      ? _loadingBuilder
-                                      : null,
-                                  errorBuilder:
-                                      widget.errorBuilder ?? _errorBuilder,
-                                )
-                              : widget.imageSource == From.file
-                                  ? Image.file(
-                                      File(widget.image),
-                                      fit: widget.fit,
-                                      errorBuilder:
-                                          widget.errorBuilder ?? _errorBuilder,
-                                    )
-                                  : Image.memory(
-                                      Uint8List.fromList(
-                                          widget.image.codeUnits),
-                                      fit: widget.fit,
-                                      errorBuilder:
-                                          widget.errorBuilder ?? _errorBuilder,
-                                    ),
+                        ),
+                        _popBuilder(context),
+                      ],
                     ),
                   ),
                   _popBuilder(context),

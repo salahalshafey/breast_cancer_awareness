@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
               ),
               //toolbarHeight: 100,
 
-              systemOverlayStyle: SystemUiOverlayStyle().copyWith(
+              systemOverlayStyle: const SystemUiOverlayStyle().copyWith(
                 statusBarColor: _mysecondaryColor.withOpacity(0.5),
                 statusBarBrightness: Brightness.dark,
               ),
@@ -115,7 +115,8 @@ class MyApp extends StatelessWidget {
               style: ButtonStyle(
                 foregroundColor:
                     MaterialStateProperty.all<Color>(_myPrimaryColor),
-                textStyle: MaterialStateProperty.all(TextStyle(fontSize: 20)),
+                textStyle:
+                    MaterialStateProperty.all(const TextStyle(fontSize: 20)),
               ),
             ),
             dialogTheme: DialogTheme(
@@ -139,6 +140,7 @@ class MyApp extends StatelessWidget {
                 if (userSnapshot.hasData) {
                   return const MainScreen();
                 }
+                //userSnapshot.data!.metadata.creationTime;
                 return const SignInScreen();
               }),
           routes: {

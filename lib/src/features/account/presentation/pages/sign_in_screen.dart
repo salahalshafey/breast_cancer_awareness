@@ -11,6 +11,12 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
+    final screenWidth = MediaQuery.of(context).size.width;
+    var horizantalPadding = 40.0;
+    if (screenWidth > 600) {
+      horizantalPadding = (screenWidth - 600) / 2 + 40.0;
+    }
+
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
@@ -52,7 +58,8 @@ class SignInScreen extends StatelessWidget {
             ),
           ),
           ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 60),
+            padding: EdgeInsets.symmetric(
+                horizontal: horizantalPadding, vertical: 60),
             children: [
               const SizedBox(height: 35),
               const Text(
@@ -78,7 +85,7 @@ class SignInScreen extends StatelessWidget {
                   filterQuality: FilterQuality.high,
                 ),
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 30),
               const SignInForm(),
             ],
           ),

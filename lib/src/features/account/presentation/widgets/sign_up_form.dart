@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:breast_cancer_awareness/src/features/account/presentation/pages/second_sign_up_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../injection_container.dart' as di;
@@ -26,7 +29,7 @@ class _SignUpFormState extends State<SignUpForm> {
     email: "",
     imageURl: null,
     dateOfSignUp: DateTime.now(),
-    userType: "normal",
+    userType: "Normal",
   );
 
   final _focusNodeForFirstName = FocusNode();
@@ -115,8 +118,14 @@ class _SignUpFormState extends State<SignUpForm> {
   Widget build(BuildContext context) {
     final focusColor = Theme.of(context).primaryColor;
 
+    final screenWidth = MediaQuery.of(context).size.width;
+    var horizantalPadding = 40.0;
+    if (screenWidth > 600) {
+      horizantalPadding = (screenWidth - 600) / 2 + 40.0;
+    }
+
     // width of entire screen - padding of above ListView - width between 2 forms
-    final widthOfNameForm = (MediaQuery.of(context).size.width - 80 - 15) / 2;
+    final widthOfNameForm = (screenWidth - horizantalPadding * 2 - 15) / 2;
 
     return Form(
       key: _formKey,
@@ -332,9 +341,21 @@ class _SignUpFormState extends State<SignUpForm> {
             },
           ),
           const SizedBox(height: 30),
-          ElevatedButton(
-            onPressed: _saveForm,
-            child: const Text("Continue"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ElevatedButton(
+                onPressed: _saveForm,
+                child: const Text("Sign Up"),
+              ),
+              Transform.rotate(
+                angle: pi,
+                child: SvgPicture.asset(
+                  "assets/icons/sign_up_icon.svg",
+                  height: 40,
+                ),
+              ),
+            ],
           ),
         ],
       ),

@@ -27,13 +27,14 @@ class _DontOrAlreadyHaveAccountState extends State<DontOrAlreadyHaveAccount> {
       TextSpan(
         style: const TextStyle(
           color: Color.fromRGBO(143, 39, 83, 1),
-          fontSize: 18,
+          fontSize: 16,
         ),
         children: [
           TextSpan(text: widget.text),
           TextSpan(
             text: widget.actionText,
             style: TextStyle(
+              fontSize: 17,
               fontWeight: FontWeight.bold,
               backgroundColor: _isEntered
                   ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
