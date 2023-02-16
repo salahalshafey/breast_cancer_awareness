@@ -420,6 +420,9 @@ class __ImageContainerState extends State<_ImageContainer> {
       imageDialogHeight = screenHeight * 0.5;
     }
 
+    final isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+
     Navigator.of(context).push(
       PageRouteBuilder(
           opaque: false,
@@ -430,8 +433,8 @@ class __ImageContainerState extends State<_ImageContainer> {
               body: Column(
                 children: [
                   _popBuilder(context),
-                  SizedBox(
-                    height: imageDialogHeight,
+                  Expanded(
+                    flex: isPortrait ? 1 : 5,
                     child: Row(
                       children: [
                         _popBuilder(context),

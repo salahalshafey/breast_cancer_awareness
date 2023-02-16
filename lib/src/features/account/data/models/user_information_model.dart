@@ -7,7 +7,7 @@ class UserInformationModel extends UserInformation {
     required super.firstName,
     required super.lastName,
     required super.email,
-    required super.imageURl,
+    required super.imageUrl,
     required super.dateOfSignUp,
     required super.userType,
   });
@@ -19,7 +19,7 @@ class UserInformationModel extends UserInformation {
       firstName: document['first_name'],
       lastName: document['last_name'],
       email: document['email'],
-      imageURl: document['image_url'],
+      imageUrl: document['image_url'],
       dateOfSignUp: (document['date_of_sign_up'] as Timestamp).toDate(),
       userType: document['user_type'],
     );
@@ -29,7 +29,7 @@ class UserInformationModel extends UserInformation {
         'first_name': firstName,
         'last_name': lastName,
         'email': email,
-        'image_url': imageURl,
+        'image_url': imageUrl,
         'date_of_sign_up': dateOfSignUp,
         'user_type': userType,
       };

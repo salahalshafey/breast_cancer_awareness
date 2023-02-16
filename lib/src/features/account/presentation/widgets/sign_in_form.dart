@@ -1,6 +1,7 @@
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/error/exceptions.dart';
+import '../../domain/entities/user_information.dart';
 import '../../domain/usecases/signin_with_email_and_password.dart';
 import '../pages/first_sign_up_screen.dart';
 import '../providers/account.dart';
@@ -76,7 +77,9 @@ class _SignInFormState extends State<SignInForm> {
     try {
       _isLoadingState(true);
       // await account.signInUsingEmailAndPassword(_userEmail, _userPassword);
-      await signInUsingEmailAndPassword(_userEmail, _userPassword);
+      final currentUser =
+          await signInUsingEmailAndPassword(_userEmail, _userPassword);
+      print(currentUser);
     } catch (error) {
       _isLoadingState(false);
       showCustomAlretDialog(
@@ -248,10 +251,12 @@ String? validatPassword(String? value) {
   return null;
 }
 
-Future<void> signInUsingEmailAndPassword(String email, String password) async {
+Future<UserInformation> signInUsingEmailAndPassword(
+    String email, String password) async {
   try {
-    final userInfo =
-        await di.sl<SignInWithEmailAndPasswordUsecase>().call(email, password);
+    return await di
+        .sl<SignInWithEmailAndPasswordUsecase>()
+        .call(email, password);
   } on OfflineException {
     throw Error('You are currently offline.');
   } on ServerException {

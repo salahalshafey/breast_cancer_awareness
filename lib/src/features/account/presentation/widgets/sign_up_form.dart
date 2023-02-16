@@ -1,10 +1,12 @@
 import 'dart:math';
 
+import 'package:breast_cancer_awareness/src/features/account/domain/usecases/signup_with_email_and_password.dart';
 import 'package:breast_cancer_awareness/src/features/account/presentation/pages/second_sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/error/exceptions.dart';
+import '../../../../core/util/builders/custom_alret_dialoge.dart';
 import '../../../../injection_container.dart' as di;
 
 import '../../domain/entities/user_information.dart';
@@ -27,7 +29,7 @@ class _SignUpFormState extends State<SignUpForm> {
     firstName: "",
     lastName: "",
     email: "",
-    imageURl: null,
+    imageUrl: null,
     dateOfSignUp: DateTime.now(),
     userType: "Normal",
   );
@@ -46,6 +48,14 @@ class _SignUpFormState extends State<SignUpForm> {
   bool _isPasswordIconShowen = false;
   bool _isPasswordConfirmIconShowen = false;
   bool _isPasswordShowen = false;
+
+  bool _isLoading = false;
+
+  void _isLoadingState(bool state) {
+    setState(() {
+      _isLoading = state;
+    });
+  }
 
   @override
   void initState() {
@@ -94,7 +104,7 @@ class _SignUpFormState extends State<SignUpForm> {
     super.dispose();
   }
 
-  void _saveForm() {
+  void _saveForm() async {
     ///////// Validate all Fields /////////
     final isValid = _formKey.currentState!.validate();
     if (!isValid) {
@@ -105,13 +115,30 @@ class _SignUpFormState extends State<SignUpForm> {
     _formKey.currentState!.save();
 
     ///////// Send the inputs to the next screen /////////
-    Navigator.of(context).pushNamed(
+    //final account = Provider.of<Account>(context, listen: false);
+    try {
+      _isLoadingState(true);
+      // await account.signUpUsingEmailAndPassword(_editedUserInformation, _userPassword);
+      final currentUser = await signUpUsingEmailAndPassword(
+          _editedUserInformation, _userPassword);
+      print(currentUser);
+      Navigator.of(context).pop();
+    } catch (error) {
+      _isLoadingState(false);
+      showCustomAlretDialog(
+        context: context,
+        title: 'ERROR',
+        titleColor: Colors.red,
+        content: '$error',
+      );
+    }
+    /*Navigator.of(context).pushNamed(
       SecondSignUpScreen.routName,
       arguments: {
         "user_info": _editedUserInformation,
         "password": _userPassword,
       },
-    );
+    );*/
   }
 
   @override
@@ -344,10 +371,13 @@ class _SignUpFormState extends State<SignUpForm> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              ElevatedButton(
-                onPressed: _saveForm,
-                child: const Text("Sign Up"),
-              ),
+              _isLoading
+                  ? const CircularProgressIndicator()
+                  : ElevatedButton(
+                      onPressed: _saveForm,
+                      child: const Text("Sign Up"),
+                    ),
+              if (_isLoading) const SizedBox(width: 30),
               Transform.rotate(
                 angle: pi,
                 child: SvgPicture.asset(
@@ -492,5 +522,31 @@ String? _joinValidations(List<String> validations) {
     return s + validations.join();
   } else {
     return "$s${validations.sublist(0, validations.length - 1).join(", ")} and ${validations.last}";
+  }
+}
+
+Future<UserInformation> signUpUsingEmailAndPassword(
+  UserInformation userInformation,
+  String password,
+) async {
+  try {
+    return await di
+        .sl<SignUpWithEmailAndPasswordUsecase>()
+        .call(userInformation, password);
+  } on OfflineException {
+    throw Error('You are currently offline.');
+  } on ServerException {
+    throw Error('Something went wrong, please try again later.');
+  } on EmptyDataException {
+    throw Error("Error happend, There is no data for that user");
+  } on WeakPasswordException {
+    throw Error("The provided password is weak try to put a strong password.");
+  } on EmailAlreadyInUseException {
+    throw Error(
+        "The provided email already exists, sign in instead or provide another email.");
+  } on EmailNotValidException {
+    throw Error("Email Not Valid.");
+  } catch (error) {
+    throw Error('An unexpected error happened.');
   }
 }

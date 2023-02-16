@@ -4,7 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class AccountRemoteDataSource {
   Future<UserInformationModel> getUser(String userId);
+
   Future<void> addUser(UserInformationModel user);
+
+  Future<void> storeUserImageAndType(
+      String userId, String? imageUrl, String userType);
 }
 
 class AccountFirestoreImpl implements AccountRemoteDataSource {
@@ -37,6 +41,21 @@ class AccountFirestoreImpl implements AccountRemoteDataSource {
           .collection('users')
           .doc(user.id)
           .set(user.toFirestore());
+    } catch (error) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<void> storeUserImageAndType(
+      String userId, String? imageUrl, String userType) async {
+    try {
+      await FirebaseFirestore.instance.collection('users').doc(userId).update(
+        {
+          'image_url': imageUrl,
+          'user_type': userType,
+        },
+      );
     } catch (error) {
       throw ServerException();
     }

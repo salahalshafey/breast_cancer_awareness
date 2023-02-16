@@ -1,3 +1,4 @@
+import 'package:breast_cancer_awareness/src/features/account/domain/usecases/send_user_image_and_type.dart';
 import 'package:get_it/get_it.dart';
 
 import 'core/network/network_info.dart';
@@ -21,9 +22,10 @@ Future<void> init() async {
 // Provider
 
   sl.registerFactory(() => Account(
-        getUserInformation: sl(),
-        signUserInUsingEmailAndPassword: sl(),
-        signUserUpUsingEmailAndPassword: sl(),
+        getUserInformationUseCase: sl(),
+        signUserInUsingEmailAndPasswordUseCase: sl(),
+        signUserUpUsingEmailAndPasswordUseCase: sl(),
+        sendUserImageAndTypeUseCase: sl(),
       ));
 
 // Usecases
@@ -31,6 +33,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetUserInformationUsecase(sl()));
   sl.registerLazySingleton(() => SignInWithEmailAndPasswordUsecase(sl()));
   sl.registerLazySingleton(() => SignUpWithEmailAndPasswordUsecase(sl()));
+  sl.registerLazySingleton(() => SendUserImageAndTypeUseCase(sl()));
 
 // Repository
 

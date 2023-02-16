@@ -137,16 +137,25 @@ class MyApp extends StatelessWidget {
                     ),
                   );
                 }
-                if (userSnapshot.hasData) {
-                  return const MainScreen();
+                if (!userSnapshot.hasData) {
+                  return const SignInScreen();
+                } else if (userSnapshot.data!.metadata.creationTime!
+                        .difference(DateTime.now())
+                        .inSeconds
+                        .abs() <
+                    5) {
+                  return const SecondSignUpScreen();
                 }
-                //userSnapshot.data!.metadata.creationTime;
-                return const SignInScreen();
+
+                print(userSnapshot.data!.metadata.creationTime);
+
+                return const MainScreen();
               }),
           routes: {
             SignInScreen.routName: (ctx) => const SignInScreen(),
             FirstSignUpScreen.routName: (ctx) => const FirstSignUpScreen(),
             SecondSignUpScreen.routName: (ctx) => const SecondSignUpScreen(),
+            MainScreen.routName: (ctx) => const MainScreen(),
           },
         );
       },

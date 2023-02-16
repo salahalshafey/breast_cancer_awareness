@@ -1,3 +1,5 @@
+import 'package:breast_cancer_awareness/src/features/account/presentation/pages/second_sign_up_screen.dart';
+
 import '../widgets/sign_in_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -76,6 +78,12 @@ class SignInScreen extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushNamed(SecondSignUpScreen.routName);
+                  },
+                  child: Text("go")),
               const SizedBox(height: 30),
               Align(
                 alignment: Alignment.topCenter,

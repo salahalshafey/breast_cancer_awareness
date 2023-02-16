@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import '../entities/user_information.dart';
 import '../repositories/account_repository.dart';
 
@@ -10,8 +8,7 @@ class SignUpWithEmailAndPasswordUsecase {
 
   Future<UserInformation> call(
     UserInformation userInformation,
-    File? image,
     String password,
   ) =>
-      repository.signUpWithEmailAndPassword(userInformation, image, password);
+      repository.signUpWithEmailAndPassword(userInformation, password);
 }

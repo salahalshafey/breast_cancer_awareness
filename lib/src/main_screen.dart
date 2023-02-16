@@ -9,6 +9,8 @@ import 'dart:ui' as ui;
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatelessWidget {
+  static const routName = '/main-screen';
+
   const MainScreen({super.key});
 
   @override
@@ -56,7 +58,7 @@ class GetUserData extends StatelessWidget {
         final account = Provider.of<Account>(context, listen: false);
         final info = await account.getUserInfo();
         print(
-            "${info.firstName}, ${info.lastName}, ${info.id}, ${info.imageURl}, ${info.userType}");
+            "${info.firstName}, ${info.lastName}, ${info.id}, ${info.imageUrl}, ${info.userType}");
       },
       child: Text("get user data"),
     );

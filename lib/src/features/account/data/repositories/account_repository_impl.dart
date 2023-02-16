@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/network_info.dart';
 
@@ -52,7 +54,7 @@ class AccountRepositoryImpl implements AccountRepository {
 
   @override
   Future<UserInformation> signUpWithEmailAndPassword(
-      UserInformation userInformation, File? image, String password) async {
+      UserInformation userInformation, String password) async {
     if (await networkInfo.isNotConnected) {
       throw OfflineException();
     }
@@ -61,14 +63,8 @@ class AccountRepositoryImpl implements AccountRepository {
       final userId = await remoteAuth.signUpWithEmailAndPassword(
           userInformation.email, password);
 
-      String? downloadURL;
-      if (image != null) {
-        downloadURL = await remoteStorage.upload(userId, image);
-      }
-
       userInformation = userInformation.copyWith(
         id: userId,
-        imageURl: downloadURL,
         dateOfSignUp: DateTime.now(),
       );
 
@@ -78,13 +74,44 @@ class AccountRepositoryImpl implements AccountRepository {
           firstName: userInformation.firstName,
           lastName: userInformation.lastName,
           email: userInformation.email,
-          imageURl: userInformation.imageURl,
+          imageUrl: userInformation.imageUrl,
           dateOfSignUp: userInformation.dateOfSignUp,
           userType: userInformation.userType,
         ),
       );
 
       return userInformation;
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<String?> sendUserImageAndType(File? image, String userType) async {
+    userType = userType.isEmpty ? "Normal" : userType;
+    if (image == null && userType == "Normal") {
+      return null;
+    }
+
+    if (await networkInfo.isNotConnected) {
+      throw OfflineException();
+    }
+
+    try {
+      final userId = FirebaseAuth.instance.currentUser!.uid;
+      String? downloadUrl;
+
+      if (image != null) {
+        downloadUrl = await remoteStorage.upload(userId, image);
+      }
+
+      await remoteDataSource.storeUserImageAndType(
+        userId,
+        downloadUrl,
+        userType,
+      );
+
+      return downloadUrl;
     } catch (error) {
       rethrow;
     }

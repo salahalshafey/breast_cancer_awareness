@@ -7,19 +7,24 @@ import '../../../../core/error/exceptions.dart';
 
 import '../../domain/entities/user_information.dart';
 import '../../domain/usecases/get_user_information.dart';
+import '../../domain/usecases/send_user_image_and_type.dart';
 import '../../domain/usecases/signin_with_email_and_password.dart';
 import '../../domain/usecases/signup_with_email_and_password.dart';
 
 class Account with ChangeNotifier {
   Account({
-    required this.getUserInformation,
-    required this.signUserInUsingEmailAndPassword,
-    required this.signUserUpUsingEmailAndPassword,
+    required this.getUserInformationUseCase,
+    required this.signUserInUsingEmailAndPasswordUseCase,
+    required this.signUserUpUsingEmailAndPasswordUseCase,
+    required this.sendUserImageAndTypeUseCase,
   });
 
-  final GetUserInformationUsecase getUserInformation;
-  final SignInWithEmailAndPasswordUsecase signUserInUsingEmailAndPassword;
-  final SignUpWithEmailAndPasswordUsecase signUserUpUsingEmailAndPassword;
+  final GetUserInformationUsecase getUserInformationUseCase;
+  final SignInWithEmailAndPasswordUsecase
+      signUserInUsingEmailAndPasswordUseCase;
+  final SignUpWithEmailAndPasswordUsecase
+      signUserUpUsingEmailAndPasswordUseCase;
+  final SendUserImageAndTypeUseCase sendUserImageAndTypeUseCase;
 
   UserInformation? _userInfo;
   bool _userFetchedFromBackend = false;
@@ -40,7 +45,7 @@ class Account with ChangeNotifier {
 
   Future<UserInformation> updateAndGetUserInfo() async {
     try {
-      _userInfo = await getUserInformation.call(userId);
+      _userInfo = await getUserInformationUseCase.call(userId);
       notifyListeners();
       _userFetchedFromBackend = true;
 
@@ -59,7 +64,8 @@ class Account with ChangeNotifier {
   Future<void> signInUsingEmailAndPassword(
       String email, String password) async {
     try {
-      _userInfo = await signUserInUsingEmailAndPassword.call(email, password);
+      _userInfo =
+          await signUserInUsingEmailAndPasswordUseCase.call(email, password);
       notifyListeners();
       _userFetchedFromBackend = true;
     } on OfflineException {
@@ -81,12 +87,11 @@ class Account with ChangeNotifier {
 
   Future<void> signUpUsingEmailAndPassword(
     UserInformation userInformation,
-    File? image,
     String password,
   ) async {
     try {
-      _userInfo = await signUserUpUsingEmailAndPassword.call(
-          userInformation, image, password);
+      _userInfo = await signUserUpUsingEmailAndPasswordUseCase.call(
+          userInformation, password);
       notifyListeners();
       _userFetchedFromBackend = true;
     } on OfflineException {
@@ -103,6 +108,24 @@ class Account with ChangeNotifier {
           "The provided email already exists, sign in instead or provide another email.");
     } on EmailNotValidException {
       throw Error("Email Not Valid.");
+    } catch (error) {
+      throw Error('An unexpected error happened.');
+    }
+  }
+
+  Future<void> sendUserImageAndType(File? image, String userType) async {
+    try {
+      final imageUrl = await sendUserImageAndTypeUseCase.call(image, userType);
+
+      _userInfo = _userInfo!.copyWith(imageUrl: imageUrl, userType: userType);
+
+      notifyListeners();
+    } on OfflineException {
+      throw Error('You are currently offline.');
+    } on ServerException {
+      throw Error('Something went wrong, please try again later.');
+    } on EmptyDataException {
+      throw Error("Error happend, There is no data for that user");
     } catch (error) {
       throw Error('An unexpected error happened.');
     }
