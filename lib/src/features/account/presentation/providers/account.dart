@@ -46,8 +46,8 @@ class Account with ChangeNotifier {
   Future<UserInformation> updateAndGetUserInfo() async {
     try {
       _userInfo = await getUserInformationUseCase.call(userId);
-      notifyListeners();
       _userFetchedFromBackend = true;
+      notifyListeners();
 
       return _userInfo!;
     } on OfflineException {
@@ -92,8 +92,8 @@ class Account with ChangeNotifier {
     try {
       _userInfo = await signUserUpUsingEmailAndPasswordUseCase.call(
           userInformation, password);
-      notifyListeners();
       _userFetchedFromBackend = true;
+      notifyListeners();
     } on OfflineException {
       throw Error('You are currently offline.');
     } on ServerException {

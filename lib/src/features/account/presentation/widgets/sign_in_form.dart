@@ -73,13 +73,11 @@ class _SignInFormState extends State<SignInForm> {
     _formKey.currentState!.save();
 
     ///////// Login And handle the errors and loading /////////
-    //final account = Provider.of<Account>(context, listen: false);
+    final account = Provider.of<Account>(context, listen: false);
     try {
       _isLoadingState(true);
-      // await account.signInUsingEmailAndPassword(_userEmail, _userPassword);
-      final currentUser =
-          await signInUsingEmailAndPassword(_userEmail, _userPassword);
-      print(currentUser);
+
+      await account.signInUsingEmailAndPassword(_userEmail, _userPassword);
     } catch (error) {
       _isLoadingState(false);
       showCustomAlretDialog(
@@ -109,8 +107,9 @@ class _SignInFormState extends State<SignInForm> {
             style: const TextStyle(color: Colors.white, fontSize: 20),
             textAlign: TextAlign.center,
             decoration: InputDecoration(
-                hintText: 'Email',
-                fillColor: _isEmailFocused ? focusColor : null),
+              hintText: 'Email',
+              fillColor: _isEmailFocused ? focusColor : null,
+            ),
             onTapOutside: (_) {
               _focusNodeForEmail.unfocus();
             },
@@ -188,7 +187,13 @@ class _SignInFormState extends State<SignInForm> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset("assets/icons/remember_me_icon.svg", height: 15),
+              SvgPicture.asset(
+                "assets/icons/remember_me_icon.svg",
+                height: 15,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white
+                    : null,
+              ),
               const SizedBox(width: 10),
               const Text(
                 "Remember me",
@@ -249,27 +254,4 @@ String? validatPassword(String? value) {
   }
 
   return null;
-}
-
-Future<UserInformation> signInUsingEmailAndPassword(
-    String email, String password) async {
-  try {
-    return await di
-        .sl<SignInWithEmailAndPasswordUsecase>()
-        .call(email, password);
-  } on OfflineException {
-    throw Error('You are currently offline.');
-  } on ServerException {
-    throw Error('Something went wrong, please try again later.');
-  } on EmptyDataException {
-    throw Error("Error happend, There is no data for that user");
-  } on UserNotFoundException {
-    throw Error("User not found for that email.");
-  } on WrongPasswordException {
-    throw Error("The password is wrong.");
-  } on EmailNotValidException {
-    throw Error("Email Not Valid.");
-  } catch (error) {
-    throw Error('An unexpected error happened.');
-  }
 }

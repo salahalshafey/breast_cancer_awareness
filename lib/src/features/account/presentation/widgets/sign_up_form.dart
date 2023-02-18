@@ -4,6 +4,7 @@ import 'package:breast_cancer_awareness/src/features/account/domain/usecases/sig
 import 'package:breast_cancer_awareness/src/features/account/presentation/pages/second_sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/util/builders/custom_alret_dialoge.dart';
@@ -11,6 +12,7 @@ import '../../../../injection_container.dart' as di;
 
 import '../../domain/entities/user_information.dart';
 import '../../domain/usecases/signin_with_email_and_password.dart';
+import '../providers/account.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
@@ -115,13 +117,13 @@ class _SignUpFormState extends State<SignUpForm> {
     _formKey.currentState!.save();
 
     ///////// Send the inputs to the next screen /////////
-    //final account = Provider.of<Account>(context, listen: false);
+    final account = Provider.of<Account>(context, listen: false);
     try {
       _isLoadingState(true);
-      // await account.signUpUsingEmailAndPassword(_editedUserInformation, _userPassword);
-      final currentUser = await signUpUsingEmailAndPassword(
+      await account.signUpUsingEmailAndPassword(
           _editedUserInformation, _userPassword);
-      print(currentUser);
+
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
     } catch (error) {
       _isLoadingState(false);
@@ -158,6 +160,7 @@ class _SignUpFormState extends State<SignUpForm> {
       key: _formKey,
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -172,8 +175,10 @@ class _SignUpFormState extends State<SignUpForm> {
                   keyboardType: TextInputType.name,
                   style: const TextStyle(color: Colors.white, fontSize: 20),
                   decoration: InputDecoration(
-                      hintText: 'First name',
-                      fillColor: _isFirstNameFocused ? focusColor : null),
+                    hintText: 'First name',
+                    fillColor: _isFirstNameFocused ? focusColor : null,
+                    errorMaxLines: 2,
+                  ),
                   onTapOutside: (_) {
                     _focusNodeForFirstName.unfocus();
                   },
@@ -204,8 +209,10 @@ class _SignUpFormState extends State<SignUpForm> {
                   keyboardType: TextInputType.name,
                   style: const TextStyle(color: Colors.white, fontSize: 20),
                   decoration: InputDecoration(
-                      hintText: 'Last name',
-                      fillColor: _isLastNameFocused ? focusColor : null),
+                    hintText: 'Last name',
+                    fillColor: _isLastNameFocused ? focusColor : null,
+                    errorMaxLines: 2,
+                  ),
                   onTapOutside: (_) {
                     _focusNodeForLastName.unfocus();
                   },
@@ -378,13 +385,14 @@ class _SignUpFormState extends State<SignUpForm> {
                       child: const Text("Sign Up"),
                     ),
               if (_isLoading) const SizedBox(width: 30),
-              Transform.rotate(
-                angle: pi,
-                child: SvgPicture.asset(
-                  "assets/icons/sign_up_icon.svg",
-                  height: 40,
+              if (Theme.of(context).brightness == Brightness.light)
+                Transform.rotate(
+                  angle: pi,
+                  child: SvgPicture.asset(
+                    "assets/icons/sign_up_icon.svg",
+                    height: 40,
+                  ),
                 ),
-              ),
             ],
           ),
         ],
@@ -525,7 +533,7 @@ String? _joinValidations(List<String> validations) {
   }
 }
 
-Future<UserInformation> signUpUsingEmailAndPassword(
+Future<UserInformation> _signUpUsingEmailAndPassword(
   UserInformation userInformation,
   String password,
 ) async {

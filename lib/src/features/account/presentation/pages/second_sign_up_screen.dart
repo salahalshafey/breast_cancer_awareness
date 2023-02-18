@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:breast_cancer_awareness/src/app.dart';
 import 'package:breast_cancer_awareness/src/main_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/util/builders/custom_alret_dialoge.dart';
 import '../../../../injection_container.dart' as di;
@@ -16,6 +17,8 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/error/exceptions.dart';
 import 'dart:developer' as developer;
+
+import '../providers/account.dart';
 
 class SecondSignUpScreen extends StatefulWidget {
   static const routName = '/sign-up2';
@@ -52,13 +55,10 @@ class _SecondSignUpScreenState extends State<SecondSignUpScreen>
   }
 
   void _sendUserImageAndType() async {
-    //final account = Provider.of<Account>(context, listen: false);
+    final account = Provider.of<Account>(context, listen: false);
     try {
       _isLoadingState(true);
-      // await account.signUpUsingEmailAndPassword(_editedUserInformation, _userPassword);
-      final imageUrl =
-          await sendUserImageAndType(_currentImage, _sellectedUserType);
-      print(imageUrl);
+      await account.sendUserImageAndType(_currentImage, _sellectedUserType);
 
       await _goToMainScreen();
     } catch (error) {
@@ -105,8 +105,6 @@ class _SecondSignUpScreenState extends State<SecondSignUpScreen>
       _previousImage = _currentImage;
       _currentImage = File(imageXFile.path);
     });
-
-    _animationController.forward();
   }
 
   double get _horizantalPadding {
@@ -126,21 +124,24 @@ class _SecondSignUpScreenState extends State<SecondSignUpScreen>
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("data go from back"),
+      ),
       body: Stack(
         alignment: Alignment.center,
         children: [
-          Positioned(
-            bottom: -30,
-            child: Opacity(
-              opacity: 0.7,
-              child: Image.asset(
-                "assets/images/background_cancer_sympol.png",
-                scale: 1.5,
-                filterQuality: FilterQuality.high,
+          if (Theme.of(context).brightness == Brightness.light)
+            Positioned(
+              bottom: -30,
+              child: Opacity(
+                opacity: 0.7,
+                child: Image.asset(
+                  "assets/images/background_cancer_sympol.png",
+                  scale: 1.5,
+                  filterQuality: FilterQuality.high,
+                ),
               ),
             ),
-          ),
           ListView(
             padding: EdgeInsets.symmetric(
                 horizontal: _horizantalPadding, vertical: 60),
@@ -220,29 +221,31 @@ class _SecondSignUpScreenState extends State<SecondSignUpScreen>
                           .fadeIn(duration: 1.5.seconds)
                 ],
               ),
-
-              /* _currentImage == null
-                  ? Align(
-                      alignment: Alignment.topCenter,
-                      child: Image.asset(
-                        "assets/images/person_avatar.png",
-                        height: 140,
-                        filterQuality: FilterQuality.high,
+              /*AnimatedSwitcher(
+                duration: 1.5.seconds,
+                child: _currentImage == null
+                    ? Align(
+                        alignment: Alignment.topCenter,
+                        child: Image.asset(
+                          "assets/images/person_avatar.png",
+                          height: 140,
+                          filterQuality: FilterQuality.high,
+                        ),
+                      )
+                    : ImageContainer(
+                        image: _currentImage!.path,
+                        imageSource: From.file,
+                        radius: 70,
+                        shape: BoxShape.circle,
+                        fit: BoxFit.cover,
+                        border: Border.all(
+                          color: const Color.fromRGBO(203, 100, 140, 1),
+                          width: 2,
+                        ),
+                        showHighlight: true,
+                        showImageDialoge: true,
                       ),
-                    )
-                  : ImageContainer(
-                      image: _currentImage!.path,
-                      imageSource: From.file,
-                      radius: 70,
-                      shape: BoxShape.circle,
-                      fit: BoxFit.cover,
-                      border: Border.all(
-                        color: const Color.fromRGBO(203, 100, 140, 1),
-                        width: 2,
-                      ),
-                      showHighlight: true,
-                      showImageDialoge: true,
-                    ).animate().fadeIn(duration: 2.seconds),*/
+              ),*/
               const SizedBox(height: 10),
               Align(
                 child: ElevatedButton(
@@ -372,8 +375,9 @@ class UserType extends StatelessWidget {
     return Align(
       child: CustomCard(
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-        color:
-            isSelected ? primaryColor : const Color.fromRGBO(229, 183, 207, 1),
+        color: isSelected
+            ? primaryColor
+            : const Color.fromRGBO(229, 183, 207, 0.22),
         borderRadius: BorderRadius.circular(30),
         side: const BorderSide(color: Color.fromRGBO(112, 112, 112, 1)),
         elevation: 0, //isSellected ? 20 : 15,
@@ -457,7 +461,7 @@ class IconFromAsset extends StatelessWidget {
   }
 }
 
-Future<String?> sendUserImageAndType(File? image, String userType) async {
+Future<String?> _sendUserImageAndType(File? image, String userType) async {
   try {
     return await di.sl<SendUserImageAndTypeUseCase>().call(image, userType);
   } on OfflineException {

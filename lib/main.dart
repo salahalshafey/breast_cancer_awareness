@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'src/core/theme/theme_provider.dart';
+import 'src/features/account/presentation/providers/account.dart';
 import 'src/injection_container.dart' as di;
 
 import 'src/app.dart';
@@ -12,5 +15,13 @@ void main() async {
 
   await di.init();
 
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (ctx) => ThemeProvider()..initialize()),
+        ChangeNotifierProvider(create: (ctx) => di.sl<Account>()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }

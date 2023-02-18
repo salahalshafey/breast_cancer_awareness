@@ -1,4 +1,3 @@
-import 'package:breast_cancer_awareness/src/features/account/domain/usecases/send_user_image_and_type.dart';
 import 'package:get_it/get_it.dart';
 
 import 'core/network/network_info.dart';
@@ -11,7 +10,8 @@ import 'features/account/domain/repositories/account_repository.dart';
 import 'features/account/domain/usecases/get_user_information.dart';
 import 'features/account/domain/usecases/signin_with_email_and_password.dart';
 import 'features/account/domain/usecases/signup_with_email_and_password.dart';
-import 'features/account/presentation/providers/Account.dart';
+import 'features/account/domain/usecases/send_user_image_and_type.dart';
+import 'features/account/presentation/providers/account.dart';
 
 final sl = GetIt.instance;
 

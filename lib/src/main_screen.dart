@@ -57,13 +57,20 @@ class GetUserData extends StatelessWidget {
       onPressed: () async {
         final account = Provider.of<Account>(context, listen: false);
         final info = await account.getUserInfo();
-        print(
-            "${info.firstName}, ${info.lastName}, ${info.id}, ${info.imageUrl}, ${info.userType}");
+        print(info);
       },
       child: Text("get user data"),
     );
   }
 }
+
+/*color: Theme.of(context).colorScheme.background,
+  colorBlendMode: BlendMode.hardLight,
+
+colorFilter: ColorFilter.mode(
+             Theme.of(context).colorScheme.background,
+             BlendMode.hardLight,
+                ),*/
 
 class PaintForFirstSignUpScreen extends StatelessWidget {
   const PaintForFirstSignUpScreen({super.key});

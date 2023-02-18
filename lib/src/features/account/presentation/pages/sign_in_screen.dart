@@ -1,5 +1,9 @@
+import 'package:breast_cancer_awareness/src/core/theme/colors.dart';
 import 'package:breast_cancer_awareness/src/features/account/presentation/pages/second_sign_up_screen.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../core/theme/theme_provider.dart';
 import '../widgets/sign_in_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -47,18 +51,19 @@ class SignInScreen extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            bottom: -15 - keyboardHeight,
-            right: 5,
-            child: Opacity(
-              opacity: 0.7,
-              child: Image.asset(
-                "assets/images/background_cancer_sympol.png",
-                scale: 3,
-                filterQuality: FilterQuality.high,
+          if (Theme.of(context).brightness == Brightness.light)
+            Positioned(
+              bottom: -15 - keyboardHeight,
+              right: 5,
+              child: Opacity(
+                opacity: 0.7,
+                child: Image.asset(
+                  "assets/images/background_cancer_sympol.png",
+                  scale: 3,
+                  filterQuality: FilterQuality.high,
+                ),
               ),
             ),
-          ),
           ListView(
             padding: EdgeInsets.symmetric(
                 horizontal: horizantalPadding, vertical: 60),
@@ -79,11 +84,13 @@ class SignInScreen extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context)
-                        .pushNamed(SecondSignUpScreen.routName);
-                  },
-                  child: Text("go")),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(SecondSignUpScreen.routName);
+                },
+                child: const Text("go"),
+              ),
+              const SizedBox(height: 30),
+              const SetThemeMode(),
               const SizedBox(height: 30),
               Align(
                 alignment: Alignment.topCenter,
@@ -92,10 +99,89 @@ class SignInScreen extends StatelessWidget {
                   scale: 1.5,
                   filterQuality: FilterQuality.high,
                 ),
-              ),
+              ).animate(delay: 1.5.seconds).shimmer(duration: 1.seconds),
               const SizedBox(height: 30),
               const SignInForm(),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SetThemeMode extends StatelessWidget {
+  const SetThemeMode({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            "Apperance",
+            style: TextStyle(
+              color: MyColors.appBarForGroundColor,
+              fontSize: 18,
+            ),
+          ),
+          Consumer<ThemeProvider>(
+            builder: (context, provider, child) {
+              return DropdownButton<String>(
+                value: provider.currentTheme,
+                items: [
+                  DropdownMenuItem<String>(
+                    value: 'light',
+                    child: TextButton.icon(
+                      onPressed: null,
+                      icon: const Icon(Icons.light_mode),
+                      label: Text(
+                        "Light",
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  DropdownMenuItem<String>(
+                    value: 'dark',
+                    child: TextButton.icon(
+                      onPressed: null,
+                      icon: const Icon(Icons.dark_mode),
+                      label: Text(
+                        "Dark",
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  DropdownMenuItem<String>(
+                    value: 'system',
+                    child: TextButton.icon(
+                      onPressed: null,
+                      icon: const Icon(Icons.auto_graph),
+                      label: Text(
+                        "System default",
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+                onChanged: (String? value) {
+                  provider.changeTheme(value ?? 'system');
+                },
+              );
+            },
           ),
         ],
       ),
