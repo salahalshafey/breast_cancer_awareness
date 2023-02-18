@@ -1,113 +1,19 @@
-import 'dart:io';
+import 'package:flutter/material.dart';
 
-import 'package:breast_cancer_awareness/src/app.dart';
-import 'package:breast_cancer_awareness/src/main_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/util/builders/custom_alret_dialoge.dart';
-import '../../../../injection_container.dart' as di;
-import 'package:breast_cancer_awareness/src/core/util/builders/image_picker.dart';
-import 'package:breast_cancer_awareness/src/core/util/widgets/custom_card.dart';
-import 'package:breast_cancer_awareness/src/core/util/widgets/image_container.dart';
-import 'package:breast_cancer_awareness/src/features/account/domain/usecases/send_user_image_and_type.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_svg/svg.dart';
+import '../providers/image_and_user_type.dart';
 
-import '../../../../core/error/exceptions.dart';
-import 'dart:developer' as developer;
+import '../widgets/choose_image.dart';
+import '../widgets/continue_and_skip_button.dart';
+import '../widgets/select_user_type.dart';
 
-import '../providers/account.dart';
-
-class SecondSignUpScreen extends StatefulWidget {
+class SecondSignUpScreen extends StatelessWidget {
   static const routName = '/sign-up2';
 
   const SecondSignUpScreen({super.key});
 
-  @override
-  State<SecondSignUpScreen> createState() => _SecondSignUpScreenState();
-}
-
-class _SecondSignUpScreenState extends State<SecondSignUpScreen>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-
-  File? _currentImage;
-  File? _previousImage;
-  String _sellectedUserType = "";
-
-  bool _isLoading = false;
-  bool _isSkipForNowButtonShowen = false;
-
-  late DateTime _dateTimeFromStartingThePage;
-
-  @override
-  void initState() {
-    _dateTimeFromStartingThePage = DateTime.now();
-    super.initState();
-  }
-
-  void _isLoadingState(bool state) {
-    setState(() {
-      _isLoading = state;
-    });
-  }
-
-  void _sendUserImageAndType() async {
-    final account = Provider.of<Account>(context, listen: false);
-    try {
-      _isLoadingState(true);
-      await account.sendUserImageAndType(_currentImage, _sellectedUserType);
-
-      await _goToMainScreen();
-    } catch (error) {
-      _isLoadingState(false);
-
-      setState(() {
-        _isSkipForNowButtonShowen = true;
-      });
-
-      showCustomAlretDialog(
-        context: context,
-        title: 'ERROR',
-        titleColor: Colors.red,
-        content: '$error',
-      );
-    }
-  }
-
-  Future<void> _goToMainScreen() async {
-    final elapsedTime =
-        DateTime.now().difference(_dateTimeFromStartingThePage).inSeconds.abs();
-    if (elapsedTime < 10) {
-      await Future.delayed((10 - elapsedTime).seconds);
-    }
-
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
-      return const MyApp();
-    }));
-  }
-
-  void _selectUserType(String userType) {
-    setState(() {
-      _sellectedUserType = userType;
-    });
-  }
-
-  Future<void> _chooseImage() async {
-    final imageXFile = await myImagePicker(context);
-    if (imageXFile == null) {
-      return;
-    }
-
-    setState(() {
-      _previousImage = _currentImage;
-      _currentImage = File(imageXFile.path);
-    });
-  }
-
-  double get _horizantalPadding {
+  double _horizantalPadding(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     var horizantalPadding = 15.0;
     if (screenWidth > 500) {
@@ -119,198 +25,86 @@ class _SecondSignUpScreenState extends State<SecondSignUpScreen>
 
   @override
   Widget build(BuildContext context) {
-    // final m = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      extendBody: true,
-      appBar: AppBar(
-        title: Text("data go from back"),
-      ),
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          if (Theme.of(context).brightness == Brightness.light)
-            Positioned(
-              bottom: -30,
-              child: Opacity(
-                opacity: 0.7,
-                child: Image.asset(
-                  "assets/images/background_cancer_sympol.png",
-                  scale: 1.5,
-                  filterQuality: FilterQuality.high,
+      body: ChangeNotifierProvider<ImageAndUserType>(
+        create: (context) => ImageAndUserType(),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            if (Theme.of(context).brightness == Brightness.light)
+              Positioned(
+                bottom: -30,
+                child: Opacity(
+                  opacity: 0.7,
+                  child: Image.asset(
+                    "assets/images/background_cancer_sympol.png",
+                    scale: 1.5,
+                    filterQuality: FilterQuality.high,
+                  ),
                 ),
               ),
+            ListView(
+              padding: EdgeInsets.symmetric(
+                horizontal: _horizantalPadding(context),
+                vertical: 60,
+              ),
+              children: const [
+                SizedBox(height: 20),
+                ChooseImage(),
+                SizedBox(height: 60),
+                SelectUserTypeHeader(),
+                SizedBox(height: 40),
+                SellectUserType(),
+                SizedBox(height: 60),
+                ContinueAndskipButton(),
+              ],
             ),
-          ListView(
-            padding: EdgeInsets.symmetric(
-                horizontal: _horizantalPadding, vertical: 60),
-            children: [
-              const SizedBox(height: 20),
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  _previousImage == null
-                      ? Align(
-                          alignment: Alignment.topCenter,
-                          child: Image.asset(
-                            "assets/images/person_avatar.png",
-                            height: 140,
-                            filterQuality: FilterQuality.high,
-                          ),
-                        )
-                          .animate(
-                            onPlay: (controller) {},
-                          )
-                          .fadeOut(
-                              duration: _previousImage == null &&
-                                      _currentImage == null
-                                  ? 0.0.seconds
-                                  : 1.5.seconds)
-                      : ImageContainer(
-                          image: _previousImage!.path,
-                          imageSource: From.file,
-                          radius: 70,
-                          shape: BoxShape.circle,
-                          fit: BoxFit.cover,
-                          border: Border.all(
-                            color: const Color.fromRGBO(203, 100, 140, 1),
-                            width: 2,
-                          ),
-                          showHighlight: true,
-                          showImageDialoge: true,
-                        )
-                          .animate(
-                            onPlay: (controller) {},
-                          )
-                          .fadeOut(duration: 1.5.seconds),
-                  _currentImage == null
-                      ? Align(
-                          alignment: Alignment.topCenter,
-                          child: Image.asset(
-                            "assets/images/person_avatar.png",
-                            height: 140,
-                            filterQuality: FilterQuality.high,
-                          ),
-                        )
-                          .animate(
-                              onPlay: (controller) {},
-                              delay: _previousImage == null &&
-                                      _currentImage == null
-                                  ? 0.0.seconds
-                                  : 1.5.seconds)
-                          .fadeIn(
-                              duration: _previousImage == null &&
-                                      _currentImage == null
-                                  ? 0.0.seconds
-                                  : 1.5.seconds)
-                      : ImageContainer(
-                          image: _currentImage!.path,
-                          imageSource: From.file,
-                          radius: 70,
-                          shape: BoxShape.circle,
-                          fit: BoxFit.cover,
-                          border: Border.all(
-                            color: const Color.fromRGBO(203, 100, 140, 1),
-                            width: 2,
-                          ),
-                          showHighlight: true,
-                          showImageDialoge: true,
-                        )
-                          .animate(onPlay: (controller) {}, delay: 1.5.seconds)
-                          .fadeIn(duration: 1.5.seconds)
-                ],
-              ),
-              /*AnimatedSwitcher(
-                duration: 1.5.seconds,
-                child: _currentImage == null
-                    ? Align(
-                        alignment: Alignment.topCenter,
-                        child: Image.asset(
-                          "assets/images/person_avatar.png",
-                          height: 140,
-                          filterQuality: FilterQuality.high,
-                        ),
-                      )
-                    : ImageContainer(
-                        image: _currentImage!.path,
-                        imageSource: From.file,
-                        radius: 70,
-                        shape: BoxShape.circle,
-                        fit: BoxFit.cover,
-                        border: Border.all(
-                          color: const Color.fromRGBO(203, 100, 140, 1),
-                          width: 2,
-                        ),
-                        showHighlight: true,
-                        showImageDialoge: true,
-                      ),
-              ),*/
-              const SizedBox(height: 10),
-              Align(
-                child: ElevatedButton(
-                  onPressed: _chooseImage,
-                  child: const Text("Choose Image"),
-                ),
-              ),
-              const SizedBox(height: 60),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Container(
-                  margin: const EdgeInsets.only(left: 10),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                  decoration: BoxDecoration(
-                    color: const Color.fromRGBO(196, 143, 171, 0.22),
-                    borderRadius: BorderRadius.circular(22),
-                  ),
-                  child: Text(
-                    "Select User Type",
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 40),
-              SellectUserType(
-                currentSelectedUser: _sellectedUserType,
-                onSelected: _selectUserType,
-              ),
-              const SizedBox(height: 60),
-              Row(
-                mainAxisAlignment: _isSkipForNowButtonShowen
-                    ? MainAxisAlignment.spaceBetween
-                    : MainAxisAlignment.end,
-                children: [
-                  if (_isSkipForNowButtonShowen)
-                    TextButton(
-                      onPressed: _goToMainScreen,
-                      child: const Text(
-                        "Skip For Now",
-                      ),
-                    ),
-                  _isLoading
-                      ? const CircularProgressIndicator()
-                      : ElevatedButton(
-                          onPressed: _sendUserImageAndType,
-                          child: const Text(
-                            "Continue",
-                          ),
-                        ),
-                ],
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
 
-class SellectUserType extends StatelessWidget {
+class SelectUserTypeHeader extends StatelessWidget {
+  const SelectUserTypeHeader({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Container(
+        margin: const EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        decoration: BoxDecoration(
+          color: const Color.fromRGBO(196, 143, 171, 0.22),
+          borderRadius: BorderRadius.circular(22),
+        ),
+        child: Text(
+          "Select User Type",
+          style: TextStyle(
+            color: Theme.of(context).primaryColor,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*class SellectUserType extends StatelessWidget {
   const SellectUserType({
     super.key,
     required this.onSelected,
@@ -460,17 +254,6 @@ class IconFromAsset extends StatelessWidget {
     );
   }
 }
+*/
 
-Future<String?> _sendUserImageAndType(File? image, String userType) async {
-  try {
-    return await di.sl<SendUserImageAndTypeUseCase>().call(image, userType);
-  } on OfflineException {
-    throw Error('You are currently offline.');
-  } on ServerException {
-    throw Error('Something went wrong, please try again later.');
-  } on EmptyDataException {
-    throw Error("Error happend, There is no data for that user");
-  } catch (error) {
-    throw Error('An unexpected error happened.');
-  }
-}
+

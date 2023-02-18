@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'core/theme/dark_theme.dart';
 import 'core/theme/light_theme.dart';
-import 'core/theme/theme_provider.dart';
+import 'features/settings/providers/theme_provider.dart';
 
 import 'features/account/presentation/pages/sign_in_screen.dart';
 import 'features/account/presentation/pages/first_sign_up_screen.dart';
