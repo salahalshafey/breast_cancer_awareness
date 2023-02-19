@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -31,7 +33,7 @@ class Account with ChangeNotifier {
 
   String get userId => FirebaseAuth.instance.currentUser!.uid;
 
-  Future<UserInformation> getUserInfo() async {
+  Future<UserInformation?> getUserInfo() async {
     if (!_userFetchedFromBackend) {
       try {
         await updateAndGetUserInfo();
@@ -40,16 +42,16 @@ class Account with ChangeNotifier {
       }
     }
 
-    return _userInfo!;
+    return _userInfo;
   }
 
-  Future<UserInformation> updateAndGetUserInfo() async {
+  Future<UserInformation?> updateAndGetUserInfo() async {
     try {
       _userInfo = await getUserInformationUseCase.call(userId);
       _userFetchedFromBackend = true;
       notifyListeners();
 
-      return _userInfo!;
+      return _userInfo;
     } on OfflineException {
       throw Error('You are currently offline.');
     } on ServerException {
@@ -76,10 +78,10 @@ class Account with ChangeNotifier {
       throw Error("Error happend, There is no data for that user");
     } on UserNotFoundException {
       throw Error("User not found for that email.");
-    } on WrongPasswordException {
-      throw Error("The password is wrong.");
     } on EmailNotValidException {
       throw Error("Email Not Valid.");
+    } on WrongPasswordException {
+      throw Error("The password is wrong.");
     } catch (error) {
       throw Error('An unexpected error happened.');
     }

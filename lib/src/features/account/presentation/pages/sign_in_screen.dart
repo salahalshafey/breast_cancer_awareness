@@ -23,9 +23,6 @@ class SignInScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      extendBody: true,
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(),
       body: Stack(
         children: [
           Positioned(

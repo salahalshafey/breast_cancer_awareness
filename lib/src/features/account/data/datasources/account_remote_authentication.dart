@@ -20,8 +20,10 @@ class AccountFirebaseAuthenticationImpl implements AccountRemoteAuthentication {
         throw UserNotFoundException();
       } else if (e.code == 'wrong-password') {
         throw WrongPasswordException();
-      } else {
+      } else if (e.code == 'email-not-valid') {
         throw EmailNotValidException();
+      } else {
+        throw ServerException();
       }
     } catch (error) {
       throw ServerException();
@@ -41,8 +43,10 @@ class AccountFirebaseAuthenticationImpl implements AccountRemoteAuthentication {
         throw WeakPasswordException();
       } else if (e.code == 'email-already-in-use') {
         throw EmailAlreadyInUseException();
-      } else {
+      } else if (e.code == 'email-not-valid') {
         throw EmailNotValidException();
+      } else {
+        throw ServerException();
       }
     } catch (error) {
       throw ServerException();

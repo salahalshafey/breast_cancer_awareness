@@ -1,18 +1,15 @@
 import 'dart:math';
 
-import 'package:breast_cancer_awareness/src/features/account/domain/usecases/signup_with_email_and_password.dart';
-import 'package:breast_cancer_awareness/src/features/account/presentation/pages/second_sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/error/exceptions.dart';
-import '../../../../core/util/builders/custom_alret_dialoge.dart';
-import '../../../../injection_container.dart' as di;
-
 import '../../domain/entities/user_information.dart';
-import '../../domain/usecases/signin_with_email_and_password.dart';
+
 import '../providers/account.dart';
+
+import '../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../core/util/functions/password_validation.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
@@ -25,6 +22,7 @@ class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+
   var _userPassword = '';
   var _editedUserInformation = UserInformation(
     id: "",
@@ -36,11 +34,15 @@ class _SignUpFormState extends State<SignUpForm> {
     userType: "Normal",
   );
 
+  String? _apiErrorForEmail;
+  String? _apiErrorForPassword;
+
   final _focusNodeForFirstName = FocusNode();
   final _focusNodeForLastName = FocusNode();
   final _focusNodeForEmail = FocusNode();
   final _focusNodeForPassword = FocusNode();
   final _focusNodeForConfirmPassword = FocusNode();
+
   bool _isFirstNameFocused = false;
   bool _isLastNameFocused = false;
   bool _isEmailFocused = false;
@@ -107,6 +109,12 @@ class _SignUpFormState extends State<SignUpForm> {
   }
 
   void _saveForm() async {
+    ////////// we are sending new request so, we should setting api errors to null /////////////
+    setState(() {
+      _apiErrorForEmail = null;
+      _apiErrorForPassword = null;
+    });
+
     ///////// Validate all Fields /////////
     final isValid = _formKey.currentState!.validate();
     if (!isValid) {
@@ -127,20 +135,34 @@ class _SignUpFormState extends State<SignUpForm> {
       Navigator.of(context).pop();
     } catch (error) {
       _isLoadingState(false);
-      showCustomAlretDialog(
-        context: context,
-        title: 'ERROR',
-        titleColor: Colors.red,
-        content: '$error',
-      );
+
+      // if the error on any textField show that error on the validator
+      // if not, for example you are offline, show it to alret dialoge
+      if (error.toString() ==
+              "The provided email already exists, sign in instead or provide another email." ||
+          error.toString() == "Email Not Valid.") {
+        setState(() {
+          _apiErrorForEmail = error.toString();
+        });
+        _formKey.currentState!.validate();
+        // _focusNodeForEmail.requestFocus();
+      } else if (error.toString() ==
+          "The provided password is weak try to put a strong password.") {
+        setState(() {
+          _apiErrorForPassword = error.toString();
+        });
+        _formKey.currentState!.validate();
+        _focusNodeForPassword.requestFocus();
+        _confirmPasswordController.clear();
+      } else {
+        showCustomAlretDialog(
+          context: context,
+          title: 'ERROR',
+          titleColor: Colors.red,
+          content: '$error',
+        );
+      }
     }
-    /*Navigator.of(context).pushNamed(
-      SecondSignUpScreen.routName,
-      arguments: {
-        "user_info": _editedUserInformation,
-        "password": _userPassword,
-      },
-    );*/
   }
 
   @override
@@ -244,6 +266,7 @@ class _SignUpFormState extends State<SignUpForm> {
             style: const TextStyle(color: Colors.white, fontSize: 20),
             decoration: InputDecoration(
                 hintText: 'Email',
+                errorMaxLines: 3,
                 fillColor: _isEmailFocused ? focusColor : null),
             onTapOutside: (_) {
               _focusNodeForEmail.unfocus();
@@ -257,7 +280,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   !value.contains('@')) {
                 return 'Please enter a valid email address.';
               }
-              return null;
+              return _apiErrorForEmail;
             },
             onSaved: (value) {
               _editedUserInformation =
@@ -310,7 +333,14 @@ class _SignUpFormState extends State<SignUpForm> {
             onFieldSubmitted: (value) {
               _focusNodeForConfirmPassword.requestFocus();
             },
-            validator: _validatPassword3,
+            validator: (value) {
+              final validation = validatPassword3(value);
+              if (validation == null) {
+                return _apiErrorForPassword;
+              }
+
+              return validation;
+            },
             onSaved: (value) {
               _userPassword = value!;
             },
@@ -398,163 +428,5 @@ class _SignUpFormState extends State<SignUpForm> {
         ],
       ),
     );
-  }
-}
-
-String? _validatPassword(String? value) {
-  const errorMessage =
-      "Password must be at least 8 characters long, with at least 5 alphabet, 2 numbers and 1 special charachters like '~!@#\$%^&*()_'.";
-
-  if (value == null || value.length < 8) {
-    return errorMessage;
-  }
-
-  final alphabet =
-      ("abcdefghijklmnopqrstuvwxyz${"abcdefghijklmnopqrstuvwxyz".toUpperCase()}")
-          .characters
-          .toSet();
-  var countAlpha = 0;
-  value.characters.toList().forEach((char) {
-    if (alphabet.contains(char)) countAlpha++;
-  });
-  if (countAlpha < 5) {
-    return errorMessage;
-  }
-
-  final numbers = "0123456789".characters.toSet();
-  var countNum = 0;
-  value.characters.toList().forEach((char) {
-    if (numbers.contains(char)) countNum++;
-  });
-  if (countNum < 2) {
-    return errorMessage;
-  }
-
-  final specialChar = "~!@#\$%^&*()_-+={}[]'\"\\;: ,.<>?/،؟".characters.toSet();
-  var countSpecial = 0;
-  value.characters.toList().forEach((char) {
-    if (specialChar.contains(char)) countSpecial++;
-  });
-  if (countSpecial < 1) {
-    return errorMessage;
-  }
-
-  return null;
-}
-
-String? _validatPassword2(String? value) {
-  if (value == null || value.trim().length < 8) {
-    return 'Password must be at least 8 characters long.';
-  }
-
-  final alphabet =
-      ("abcdefghijklmnopqrstuvwxyz${"abcdefghijklmnopqrstuvwxyz".toUpperCase()}")
-          .characters
-          .toSet();
-  var countAlpha = 0;
-  value.characters.toList().forEach((char) {
-    if (alphabet.contains(char)) countAlpha++;
-  });
-  if (countAlpha < 5) {
-    return "Password must contain at least 5 alphabet characters.";
-  }
-
-  final numbers = "0123456789".characters.toSet();
-  var countNum = 0;
-  value.characters.toList().forEach((char) {
-    if (numbers.contains(char)) countNum++;
-  });
-  if (countNum < 2) {
-    return "Password must contain at least 2 numbers.";
-  }
-
-  final specialChar = "~!@#\$%^&*()_-+={}[]'\"\\;: ,.<>?/،؟".characters.toSet();
-  var countSpecial = 0;
-  value.characters.toList().forEach((char) {
-    if (specialChar.contains(char)) countSpecial++;
-  });
-  if (countSpecial < 1) {
-    return "Password must contain at least 1 special charachters like '~!@#\$%^&*()_'.";
-  }
-
-  return null;
-}
-
-String? _validatPassword3(String? value) {
-  if (value == null || value.length < 8) {
-    return "Password must be at least 8 characters long, with at least 5 alphabet, 2 numbers and 1 special charachters like '~!@#\$%^&*()_'.";
-  }
-
-  List<String> validationValues = [];
-
-  final alphabet =
-      ("abcdefghijklmnopqrstuvwxyz${"abcdefghijklmnopqrstuvwxyz".toUpperCase()}")
-          .characters
-          .toSet();
-  var countAlpha = 0;
-  value.characters.toList().forEach((char) {
-    if (alphabet.contains(char)) countAlpha++;
-  });
-  if (countAlpha < 5) {
-    validationValues.add("5 alphabet characters");
-  }
-
-  final numbers = "0123456789".characters.toSet();
-  var countNum = 0;
-  value.characters.toList().forEach((char) {
-    if (numbers.contains(char)) countNum++;
-  });
-  if (countNum < 2) {
-    validationValues.add("2 numbers");
-  }
-
-  final specialChar = "~!@#\$%^&*()_-+={}[]'\"\\;: ,.<>?/،؟".characters.toSet();
-  var countSpecial = 0;
-  value.characters.toList().forEach((char) {
-    if (specialChar.contains(char)) countSpecial++;
-  });
-  if (countSpecial < 1) {
-    validationValues.add("1 special charachters like '~!@#\$%^&*()_'.");
-  }
-
-  return _joinValidations(validationValues);
-}
-
-String? _joinValidations(List<String> validations) {
-  if (validations.isEmpty) {
-    return null;
-  }
-
-  const s = "Password must contain at least ";
-  if (validations.length == 1) {
-    return s + validations.join();
-  } else {
-    return "$s${validations.sublist(0, validations.length - 1).join(", ")} and ${validations.last}";
-  }
-}
-
-Future<UserInformation> _signUpUsingEmailAndPassword(
-  UserInformation userInformation,
-  String password,
-) async {
-  try {
-    return await di
-        .sl<SignUpWithEmailAndPasswordUsecase>()
-        .call(userInformation, password);
-  } on OfflineException {
-    throw Error('You are currently offline.');
-  } on ServerException {
-    throw Error('Something went wrong, please try again later.');
-  } on EmptyDataException {
-    throw Error("Error happend, There is no data for that user");
-  } on WeakPasswordException {
-    throw Error("The provided password is weak try to put a strong password.");
-  } on EmailAlreadyInUseException {
-    throw Error(
-        "The provided email already exists, sign in instead or provide another email.");
-  } on EmailNotValidException {
-    throw Error("Email Not Valid.");
-  } catch (error) {
-    throw Error('An unexpected error happened.');
   }
 }

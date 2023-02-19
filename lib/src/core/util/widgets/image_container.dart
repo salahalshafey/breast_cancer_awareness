@@ -412,13 +412,13 @@ class __ImageContainerState extends State<_ImageContainer> {
   }
 
   void _showImageDialog(BuildContext context, bool showImageScreen) {
-    final screenHeight = MediaQuery.of(context).size.height;
+    /*final screenHeight = MediaQuery.of(context).size.height;
     var imageDialogHeight = 0.0;
     if (screenHeight < 400) {
       imageDialogHeight = screenHeight * 0.8;
     } else {
       imageDialogHeight = screenHeight * 0.5;
-    }
+    }*/
 
     final isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;

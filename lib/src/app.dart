@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
+import 'core/theme/colors.dart';
 import 'core/theme/dark_theme.dart';
 import 'core/theme/light_theme.dart';
 import 'features/settings/providers/theme_provider.dart';
@@ -16,12 +18,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentThemeMode = Provider.of<ThemeProvider>(context).themeMode;
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: MyColors.primaryColor.withOpacity(0.5),
+      systemNavigationBarColor: currentThemeMode == ThemeMode.light
+          ? MyColors.primaryColor.withOpacity(0.5)
+          : Colors.black87,
+      systemNavigationBarIconBrightness: Brightness.light,
+    ));
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Breast Cancer Awareness',
       theme: myLightTheme(),
       darkTheme: myDarkTheme(),
-      themeMode: Provider.of<ThemeProvider>(context).themeMode,
+      themeMode: currentThemeMode,
       home: const HomeScreen(),
       routes: {
         SignInScreen.routName: (ctx) => const SignInScreen(),

@@ -1,13 +1,10 @@
-import 'package:flutter_svg/svg.dart';
-
-import '../../../../core/error/exceptions.dart';
-import '../../domain/entities/user_information.dart';
-import '../../domain/usecases/signin_with_email_and_password.dart';
-import '../pages/first_sign_up_screen.dart';
-import '../providers/account.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../injection_container.dart' as di;
+import 'package:flutter_svg/svg.dart';
+
+import '../providers/account.dart';
+
+import '../pages/first_sign_up_screen.dart';
 
 import '../../../../core/util/builders/custom_alret_dialoge.dart';
 import 'dont_or_already_have_accout.dart';
@@ -21,8 +18,13 @@ class SignInForm extends StatefulWidget {
 
 class _SignInFormState extends State<SignInForm> {
   final _formKey = GlobalKey<FormState>();
+
   var _userEmail = '';
   var _userPassword = '';
+
+  String? _apiErrorForEmail;
+  String? _apiErrorForPassword;
+
   var _isLoading = false;
 
   final _focusNodeForEmail = FocusNode();
@@ -63,6 +65,12 @@ class _SignInFormState extends State<SignInForm> {
   }
 
   Future<void> _saveForm() async {
+    ////////// we are sending new request so, we should setting api errors to null /////////////
+    setState(() {
+      _apiErrorForEmail = null;
+      _apiErrorForPassword = null;
+    });
+
     ///////// Validate all Fields /////////
     final isValid = _formKey.currentState!.validate();
     if (!isValid) {
@@ -80,18 +88,37 @@ class _SignInFormState extends State<SignInForm> {
       await account.signInUsingEmailAndPassword(_userEmail, _userPassword);
     } catch (error) {
       _isLoadingState(false);
-      showCustomAlretDialog(
-        context: context,
-        title: 'ERROR',
-        titleColor: Colors.red,
-        content: '$error',
-      );
+
+      // if the error on any textField show that error on the validator
+      // if not, for example you are offline, show it to alret dialoge
+      if (error.toString() == "User not found for that email." ||
+          error.toString() == "Email Not Valid.") {
+        setState(() {
+          _apiErrorForEmail = error.toString();
+        });
+        _formKey.currentState!.validate();
+        // _focusNodeForEmail.requestFocus();
+      } else if (error.toString() == "The password is wrong.") {
+        setState(() {
+          _apiErrorForPassword = error.toString();
+        });
+        _formKey.currentState!.validate();
+        // _focusNodeForPassword.requestFocus();
+      } else {
+        showCustomAlretDialog(
+          context: context,
+          title: 'ERROR',
+          titleColor: Colors.red,
+          content: '$error',
+        );
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final focusColor = Theme.of(context).primaryColor;
+
     return Form(
       key: _formKey,
       child: Column(
@@ -122,7 +149,7 @@ class _SignInFormState extends State<SignInForm> {
                   !value.contains('@')) {
                 return 'Please enter a valid email address.';
               }
-              return null;
+              return _apiErrorForEmail;
             },
             onSaved: (value) {
               _userEmail = value!;
@@ -177,7 +204,7 @@ class _SignInFormState extends State<SignInForm> {
                 return 'Password must be at least 8 characters long.';
               }
 
-              return null;
+              return _apiErrorForPassword;
             },
             onSaved: (value) {
               _userPassword = value!;
@@ -190,6 +217,7 @@ class _SignInFormState extends State<SignInForm> {
               SvgPicture.asset(
                 "assets/icons/remember_me_icon.svg",
                 height: 15,
+                // ignore: deprecated_member_use
                 color: Theme.of(context).brightness == Brightness.dark
                     ? Colors.white
                     : null,
@@ -228,30 +256,4 @@ class _SignInFormState extends State<SignInForm> {
       ),
     );
   }
-}
-
-String? validatPassword(String? value) {
-  if (value == null || value.trim().length < 8) {
-    return 'Password must be at least 8 characters long.';
-  }
-
-  final numbers = "0123456789".characters.toSet();
-  var countNum = 0;
-  value.characters.toList().forEach((char) {
-    if (numbers.contains(char)) countNum++;
-  });
-  if (countNum < 2) {
-    return "Password must contain at least 2 numbers.";
-  }
-
-  final specialChar = "~!@#\$%^&*()_-+={}[]'\"\\;: ,.<>?/،؟".characters.toSet();
-  var countSpecial = 0;
-  value.characters.toList().forEach((char) {
-    if (specialChar.contains(char)) countSpecial++;
-  });
-  if (countSpecial < 1) {
-    return "Password must contain at least 1 special charachters like '~!@#\$%^&*()_'.";
-  }
-
-  return null;
 }
