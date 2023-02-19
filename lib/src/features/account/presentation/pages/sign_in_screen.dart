@@ -95,7 +95,7 @@ class SignInScreen extends StatelessWidget {
                   scale: 1.5,
                   filterQuality: FilterQuality.high,
                 ),
-              ).animate(delay: 1.5.seconds).shimmer(duration: 1.seconds),
+              ).animate(delay: 1.seconds).shimmer(duration: 1.seconds),
               const SizedBox(height: 30),
               const SignInForm(),
             ],

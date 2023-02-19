@@ -152,7 +152,7 @@ class _SignInFormState extends State<SignInForm> {
               return _apiErrorForEmail;
             },
             onSaved: (value) {
-              _userEmail = value!;
+              _userEmail = value!.trim();
             },
           ),
           const SizedBox(height: 20),

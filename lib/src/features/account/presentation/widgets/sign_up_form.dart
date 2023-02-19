@@ -214,8 +214,11 @@ class _SignUpFormState extends State<SignUpForm> {
                     return null;
                   },
                   onSaved: (value) {
-                    _editedUserInformation =
-                        _editedUserInformation.copyWith(firstName: value);
+                    final enhancedValue =
+                        value!.trim().split(RegExp(r' +')).join(' ');
+
+                    _editedUserInformation = _editedUserInformation.copyWith(
+                        firstName: enhancedValue);
                   },
                 ),
               ),
@@ -248,8 +251,10 @@ class _SignUpFormState extends State<SignUpForm> {
                     return null;
                   },
                   onSaved: (value) {
-                    _editedUserInformation =
-                        _editedUserInformation.copyWith(lastName: value);
+                    final enhancedValue =
+                        value!.trim().split(RegExp(r' +')).join(' ');
+                    _editedUserInformation = _editedUserInformation.copyWith(
+                        lastName: enhancedValue);
                   },
                 ),
               ),
@@ -284,7 +289,7 @@ class _SignUpFormState extends State<SignUpForm> {
             },
             onSaved: (value) {
               _editedUserInformation =
-                  _editedUserInformation.copyWith(email: value);
+                  _editedUserInformation.copyWith(email: value!.trim());
             },
           ),
           const SizedBox(height: 15),

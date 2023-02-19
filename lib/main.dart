@@ -13,7 +13,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
-  // FirebaseAuth.instance.setSettings(appVerificationDisabledForTesting: true);
 
   await di.init();
 

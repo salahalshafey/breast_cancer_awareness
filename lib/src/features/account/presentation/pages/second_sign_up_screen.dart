@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
 import '../providers/image_and_user_type.dart';
 
+import '../widgets/backgroud_shapes/second_sign_up_screen_shapes.dart';
 import '../widgets/choose_image.dart';
 import '../widgets/continue_and_skip_button.dart';
 import '../widgets/select_user_type.dart';
@@ -31,6 +34,30 @@ class SecondSignUpScreen extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
+            const Positioned(
+              top: 0,
+              left: 0,
+              child: ShapeForSecondSignUpScreen(
+                angle: -pi / 2,
+                widthFactor: 0.50,
+              ),
+            ),
+            const Positioned(
+              top: 0,
+              right: 0,
+              child: ShapeForSecondSignUpScreen(
+                angle: 0,
+                widthFactor: 0.33,
+              ),
+            ),
+            const Positioned(
+              bottom: 0,
+              right: 0,
+              child: ShapeForSecondSignUpScreen(
+                angle: pi / 2,
+                widthFactor: 0.40,
+              ),
+            ),
             if (Theme.of(context).brightness == Brightness.light)
               Positioned(
                 bottom: -30,
