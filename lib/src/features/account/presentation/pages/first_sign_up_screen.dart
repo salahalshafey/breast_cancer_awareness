@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/backgroud_shapes/first_sign_up_screen_shape.dart';
+import '../widgets/backgroud_shapes/first_sign_up_screen_shapes.dart';
 import '../widgets/dont_or_already_have_accout.dart';
 import '../widgets/sign_up_form.dart';
 

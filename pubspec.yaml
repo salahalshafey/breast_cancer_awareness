@@ -81,7 +81,7 @@ flutter:
     - assets/images/person_avatar.png
     - assets/images/background_flower.svg
     - assets/images/background_cancer_sympol.png
-    - assets/images/background_image.svg
+    - assets/images/background_image.png
     - assets/icons/remember_me_icon.svg
     - assets/icons/normal_user_icon.png
     - assets/icons/patient_icon.svg
@@ -89,10 +89,10 @@ flutter:
     - assets/icons/doctor_icon.png
     - assets/icons/home_icon.svg
     - assets/icons/drawer_icon.svg
+    - assets/icons/drawer_icon.png
     - assets/icons/settings_icon.svg
     - assets/icons/share_icon.svg
     - assets/icons/about_icon.png
-    - assets/images/shape_sign_up1.svg
     
     
 

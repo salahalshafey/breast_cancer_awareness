@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'colors.dart';
 
@@ -20,18 +21,22 @@ ThemeData myLightTheme() {
       selectionHandleColor: _mysecondaryColor,
     ),
 
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.transparent,
+    appBarTheme: AppBarTheme(
+      backgroundColor: const Color.fromRGBO(246, 168, 201, 1),
       elevation: 0,
       scrolledUnderElevation: 0,
       centerTitle: true,
       foregroundColor: _appBarForGroundColor,
-      titleTextStyle: TextStyle(
-        fontSize: 30,
+      titleTextStyle: const TextStyle(
+        fontSize: 35,
         fontWeight: FontWeight.bold,
         color: _appBarForGroundColor,
       ),
-      //toolbarHeight: 100,
+      systemOverlayStyle: const SystemUiOverlayStyle().copyWith(
+        statusBarColor: _mysecondaryColor.withOpacity(0.5),
+        systemNavigationBarColor: MyColors.secondaryColor,
+        systemNavigationBarIconBrightness: Brightness.light,
+      ),
     ),
     iconTheme: const IconThemeData(color: _myPrimaryColor),
 

@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       theme: myLightTheme(),
       darkTheme: myDarkTheme(),
       themeMode: currentThemeMode,
-      home: const HomeScreen(),
+      home: const LandingPage(),
       routes: {
         SignInScreen.routName: (ctx) => const SignInScreen(),
         FirstSignUpScreen.routName: (ctx) => const FirstSignUpScreen(),
@@ -45,8 +45,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({
+class LandingPage extends StatelessWidget {
+  const LandingPage({
     super.key,
   });
 

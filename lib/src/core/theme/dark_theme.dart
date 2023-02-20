@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'colors.dart';
 
@@ -9,18 +10,22 @@ const _appBarForGroundColor = MyColors.appBarForGroundColor;
 ThemeData myDarkTheme() {
   return ThemeData.dark(useMaterial3: true).copyWith(
     primaryColor: _myPrimaryColor,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.transparent,
+    appBarTheme: AppBarTheme(
+      backgroundColor: const Color.fromARGB(255, 168, 123, 141),
       elevation: 0,
       scrolledUnderElevation: 0,
       centerTitle: true,
       foregroundColor: _appBarForGroundColor,
-      titleTextStyle: TextStyle(
-        fontSize: 30,
+      titleTextStyle: const TextStyle(
+        fontSize: 35,
         fontWeight: FontWeight.bold,
         color: _appBarForGroundColor,
       ),
-      //toolbarHeight: 100,
+      systemOverlayStyle: const SystemUiOverlayStyle().copyWith(
+        statusBarColor: _mysecondaryColor.withOpacity(0.5),
+        systemNavigationBarColor: Colors.black87,
+        systemNavigationBarIconBrightness: Brightness.light,
+      ),
     ),
     textSelectionTheme: TextSelectionThemeData(
       selectionColor: _mysecondaryColor.withOpacity(0.6),
