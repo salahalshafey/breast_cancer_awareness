@@ -57,7 +57,7 @@ class Account with ChangeNotifier {
     } on ServerException {
       throw Error('Something went wrong, please try again later.');
     } on EmptyDataException {
-      throw Error("Error happend, There is no data for that user");
+      throw Error("Error happend, There is no data for that Account");
     } catch (error) {
       throw Error('An unexpected error happened.');
     }

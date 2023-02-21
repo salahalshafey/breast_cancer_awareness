@@ -96,6 +96,8 @@ ThemeData myLightTheme() {
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
         ),
+        side:
+            const MaterialStatePropertyAll(BorderSide(color: _myPrimaryColor)),
         padding: MaterialStateProperty.all(
             const EdgeInsets.symmetric(vertical: 5, horizontal: 30)),
       ),

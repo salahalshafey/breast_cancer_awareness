@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:breast_cancer_awareness/src/features/main_and_menu_screens/main_screen_state_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:provider/provider.dart';
@@ -12,26 +13,10 @@ import '../settings/widgets/set_theme_mode.dart';
 import '../account/presentation/widgets/icon_from_asset.dart';
 import '../account/presentation/providers/account.dart';
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends StatelessWidget {
   static const routName = '/main-screen';
 
   const MainScreen({super.key});
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-int _index = 0;
-
-class _MainScreenState extends State<MainScreen> {
-  late final _pageController = PageController(initialPage: _index);
-  int _currentPageIndex = _index;
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
 
   static const List<String> _screenTitles = [
     "Home",
@@ -45,33 +30,10 @@ class _MainScreenState extends State<MainScreen> {
     ForPatientsScreen(key: PageStorageKey('ForPatientsScreen')),
   ];
 
-  void _onPageScrolled(int index) {
-    setState(() {
-      _currentPageIndex = index;
-      _index = index;
-    });
-  }
-
-  void _onBottomNavigationBarClicked(int index) {
-    int animationDurationInmilliseconds = 250;
-    if ((index - _currentPageIndex).abs() > 1) {
-      animationDurationInmilliseconds = 100;
-    }
-
-    _pageController.animateToPage(
-      index,
-      duration: Duration(milliseconds: animationDurationInmilliseconds),
-      curve: Curves.easeInOut,
-    );
-
-    setState(() {
-      _currentPageIndex = index;
-      _index = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<MainScreenState>(context);
+
     final screenSize = MediaQuery.of(context).size;
     final isportrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
@@ -100,8 +62,8 @@ class _MainScreenState extends State<MainScreen> {
               vertical: shapeHeight - 5,
             ),
             child: PageView(
-              controller: _pageController,
-              onPageChanged: _onPageScrolled,
+              controller: provider.pageController,
+              onPageChanged: provider.setCurrentPageIndex,
               children: _screenOptions,
             ),
           ),
@@ -114,7 +76,7 @@ class _MainScreenState extends State<MainScreen> {
           Positioned(
             top: 40,
             child: Text(
-              _screenTitles[_currentPageIndex],
+              _screenTitles[provider.currentPageIndex],
               style: Theme.of(context).appBarTheme.titleTextStyle,
             ),
           ),
@@ -122,6 +84,7 @@ class _MainScreenState extends State<MainScreen> {
             top: 40,
             left: 20,
             child: IconButton(
+              tooltip: "Open Menu",
               onPressed: () {
                 ZoomDrawer.of(context)!.toggle();
               },
@@ -140,8 +103,8 @@ class _MainScreenState extends State<MainScreen> {
           Positioned(
             bottom: 0,
             child: CustomBottomNavigationBar(
-              onSelected: _onBottomNavigationBarClicked,
-              currentSelectedIndex: _currentPageIndex,
+              onSelected: provider.animateToPage,
+              currentSelectedIndex: provider.currentPageIndex,
             ),
           ),
         ],
