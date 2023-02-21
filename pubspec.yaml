@@ -52,6 +52,7 @@ dependencies:
   flutter_svg: ^2.0.0+1
   flutter_animate: ^4.0.0
   shared_preferences: ^2.0.17
+  flutter_zoom_drawer: ^3.0.3
   
 
 dev_dependencies:
@@ -85,13 +86,12 @@ flutter:
     - assets/icons/remember_me_icon.svg
     - assets/icons/normal_user_icon.png
     - assets/icons/patient_icon.svg
-    - assets/icons/sign_up_icon.svg
+    - assets/icons/sign_up_icon.png
     - assets/icons/doctor_icon.png
     - assets/icons/home_icon.svg
-    - assets/icons/drawer_icon.svg
     - assets/icons/drawer_icon.png
-    - assets/icons/settings_icon.svg
-    - assets/icons/share_icon.svg
+    - assets/icons/settings_icon.png
+    - assets/icons/share_icon.png
     - assets/icons/about_icon.png
     
     

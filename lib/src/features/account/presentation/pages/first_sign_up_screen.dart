@@ -28,19 +28,19 @@ class FirstSignUpScreen extends StatelessWidget {
             top: 0,
             child: ShapeForFirsrSignUpScreen(),
           ),
-          if (Theme.of(context).brightness == Brightness.light)
-            Positioned(
-              bottom: -15 - keyboardHeight,
-              right: 5,
-              child: Opacity(
-                opacity: 0.7,
-                child: Image.asset(
-                  "assets/images/background_cancer_sympol.png",
-                  scale: 2,
-                  filterQuality: FilterQuality.high,
-                ),
+          // if (Theme.of(context).brightness == Brightness.light)
+          Positioned(
+            bottom: -15 - keyboardHeight,
+            right: 5,
+            child: Opacity(
+              opacity: 0.48,
+              child: Image.asset(
+                "assets/images/background_cancer_sympol.png",
+                height: 120,
+                filterQuality: FilterQuality.high,
               ),
             ),
+          ),
           ListView(
             padding: EdgeInsets.symmetric(
                 horizontal: horizantalPadding, vertical: 60),

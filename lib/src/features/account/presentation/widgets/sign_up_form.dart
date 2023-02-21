@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../domain/entities/user_information.dart';
@@ -10,6 +7,7 @@ import '../providers/account.dart';
 
 import '../../../../core/util/builders/custom_alret_dialoge.dart';
 import '../../../../core/util/functions/password_validation.dart';
+import 'icon_from_asset.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
@@ -420,14 +418,12 @@ class _SignUpFormState extends State<SignUpForm> {
                       child: const Text("Sign Up"),
                     ),
               if (_isLoading) const SizedBox(width: 30),
-              if (Theme.of(context).brightness == Brightness.light)
-                Transform.rotate(
-                  angle: pi,
-                  child: SvgPicture.asset(
-                    "assets/icons/sign_up_icon.svg",
-                    height: 40,
-                  ),
-                ),
+              /*IconFromAsset(
+                assetIcon: "assets/icons/sign_up_icon.png",
+                iconHeight: 40,
+                opacity:
+                    Theme.of(context).brightness == Brightness.dark ? 0.7 : 1,
+              ),*/
             ],
           ),
         ],

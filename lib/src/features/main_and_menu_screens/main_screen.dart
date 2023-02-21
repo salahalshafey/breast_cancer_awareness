@@ -1,12 +1,16 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import 'features/settings/widgets/set_theme_mode.dart';
-import 'features/account/presentation/widgets/icon_from_asset.dart';
-import 'features/account/presentation/providers/account.dart';
+import '../articles/presentation/pages/for_patients_screen.dart';
+import '../articles/presentation/pages/home_screen.dart';
+import '../breast_cancer_detection/presentation/pages/for_doctors_screen.dart';
+import '../settings/widgets/set_theme_mode.dart';
+import '../account/presentation/widgets/icon_from_asset.dart';
+import '../account/presentation/providers/account.dart';
 
 class MainScreen extends StatefulWidget {
   static const routName = '/main-screen';
@@ -17,9 +21,17 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
+int _index = 0;
+
 class _MainScreenState extends State<MainScreen> {
-  final _controler = PageController();
-  int _currentPageIndex = 0;
+  late final _pageController = PageController(initialPage: _index);
+  int _currentPageIndex = _index;
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   static const List<String> _screenTitles = [
     "Home",
@@ -28,14 +40,15 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   static const List<Widget> _screenOptions = <Widget>[
-    Screen(key: PageStorageKey('HomeScreen')),
-    Screen(key: PageStorageKey('ForDoctorsScreen')),
-    Screen(key: PageStorageKey('ForPatientsScreen')),
+    HomeScreen(key: PageStorageKey('HomeScreen')),
+    ForDoctorsScreen(key: PageStorageKey('ForDoctorsScreen')),
+    ForPatientsScreen(key: PageStorageKey('ForPatientsScreen')),
   ];
 
   void _onPageScrolled(int index) {
     setState(() {
       _currentPageIndex = index;
+      _index = index;
     });
   }
 
@@ -45,7 +58,7 @@ class _MainScreenState extends State<MainScreen> {
       animationDurationInmilliseconds = 100;
     }
 
-    _controler.animateToPage(
+    _pageController.animateToPage(
       index,
       duration: Duration(milliseconds: animationDurationInmilliseconds),
       curve: Curves.easeInOut,
@@ -53,14 +66,16 @@ class _MainScreenState extends State<MainScreen> {
 
     setState(() {
       _currentPageIndex = index;
+      _index = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final isPortial =
+    final isportrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
+    final shapeHeight = screenSize.width * (isportrait ? 0.30 : 0.13);
 
     return Scaffold(
       body: Stack(
@@ -72,17 +87,23 @@ class _MainScreenState extends State<MainScreen> {
                 Theme.of(context).brightness == Brightness.light ? 0.16 : 0.12,
             child: Image.asset(
               "assets/images/background_image.png",
-              height: isPortial ? screenSize.height : null,
-              width: isPortial ? null : screenSize.width,
-              fit: isPortial ? BoxFit.fitHeight : BoxFit.fitWidth,
+              height: isportrait ? screenSize.height : null,
+              width: isportrait ? null : screenSize.width,
+              fit: isportrait ? BoxFit.fitHeight : BoxFit.fitWidth,
             ),
           ),
 
-          //////// The pages that can scroll between /////////
-          PageView(
-            controller: _controler,
-            onPageChanged: _onPageScrolled,
-            children: _screenOptions,
+          //////// The pages that can be scrolled between /////////
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: shapeHeight - 5,
+            ),
+            child: PageView(
+              controller: _pageController,
+              onPageChanged: _onPageScrolled,
+              children: _screenOptions,
+            ),
           ),
 
           //////////////// AppBar ////////////////////
@@ -101,7 +122,9 @@ class _MainScreenState extends State<MainScreen> {
             top: 40,
             left: 20,
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                ZoomDrawer.of(context)!.toggle();
+              },
               icon: const IconFromAsset(
                 assetIcon: "assets/icons/drawer_icon.png",
                 iconHeight: 40,
@@ -285,6 +308,7 @@ class Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //(shape) appBar and bottom navigation bar
     final shapeWidth = MediaQuery.of(context).size.width;
     final isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;

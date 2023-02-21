@@ -58,18 +58,18 @@ class SecondSignUpScreen extends StatelessWidget {
                 widthFactor: 0.40,
               ),
             ),
-            if (Theme.of(context).brightness == Brightness.light)
-              Positioned(
-                bottom: -30,
-                child: Opacity(
-                  opacity: 0.7,
-                  child: Image.asset(
-                    "assets/images/background_cancer_sympol.png",
-                    scale: 1.5,
-                    filterQuality: FilterQuality.high,
-                  ),
+            //  if (Theme.of(context).brightness == Brightness.light)
+            Positioned(
+              bottom: -30,
+              child: Opacity(
+                opacity: 0.48,
+                child: Image.asset(
+                  "assets/images/background_cancer_sympol.png",
+                  height: 180,
+                  filterQuality: FilterQuality.high,
                 ),
               ),
+            ),
             ListView(
               padding: EdgeInsets.symmetric(
                 horizontal: _horizantalPadding(context),
