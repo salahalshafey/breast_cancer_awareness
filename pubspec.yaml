@@ -53,6 +53,7 @@ dependencies:
   flutter_animate: ^4.0.0
   shared_preferences: ^2.0.17
   flutter_zoom_drawer: ^3.0.3
+  dotted_border: ^2.0.0+3
   
 
 dev_dependencies:

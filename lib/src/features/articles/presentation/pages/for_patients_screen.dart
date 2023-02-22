@@ -5,9 +5,17 @@ class ForPatientsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final isportrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+    final shapeHeight = screenSize.width * (isportrait ? 0.30 : 0.13);
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: ListView(
+        padding: EdgeInsets.symmetric(
+          vertical: shapeHeight - 5,
+        ),
         children: const [
           SizedBox(height: 50),
           Text(

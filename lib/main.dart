@@ -1,3 +1,4 @@
+import 'package:breast_cancer_awareness/src/features/breast_cancer_detection/presentation/providers/for_doctor_screen_state_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -23,6 +24,7 @@ void main() async {
         ChangeNotifierProvider(create: (ctx) => ThemeProvider()..initialize()),
         ChangeNotifierProvider(create: (ctx) => di.sl<Account>()),
         ChangeNotifierProvider(create: (ctx) => MainScreenState()),
+        ChangeNotifierProvider(create: (ctx) => ForDoctorScreenState()),
       ],
       child: const MyApp(),
     ),

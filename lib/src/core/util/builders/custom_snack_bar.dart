@@ -17,6 +17,7 @@ void showCustomSnackBar({
   ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    key: UniqueKey(),
     duration: Duration(seconds: durationInSec),
     content: Text(
       content,

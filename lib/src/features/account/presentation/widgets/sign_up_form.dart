@@ -7,7 +7,6 @@ import '../providers/account.dart';
 
 import '../../../../core/util/builders/custom_alret_dialoge.dart';
 import '../../../../core/util/functions/password_validation.dart';
-import 'icon_from_asset.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});

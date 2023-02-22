@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MainScreenState with ChangeNotifier {
-  final PageController _pageController = PageController();
-  int _currentPageIndex = 0;
+  final PageController _pageController = PageController(initialPage: 1);
+  int _currentPageIndex = 1;
 
   int get currentPageIndex => _currentPageIndex;
 

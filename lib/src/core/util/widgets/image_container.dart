@@ -11,6 +11,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../builders/custom_alret_dialoge.dart';
 import '../builders/custom_snack_bar.dart';
 
 import '../functions/string_manipulations_and_search.dart';
@@ -687,9 +688,11 @@ class _DownloadButtonState extends State<DownloadButton> {
       );
     } catch (error) {
       _loadingState(false);
-      showCustomSnackBar(
+      showCustomAlretDialog(
         context: context,
+        title: "Error",
         content: 'Error happend while saving the image to gallery.',
+        titleColor: Colors.red,
       );
       return;
     }
@@ -697,10 +700,13 @@ class _DownloadButtonState extends State<DownloadButton> {
     _loadingState(false);
     if (savedToGallery == null || !savedToGallery) {
       // ignore: use_build_context_synchronously
-      showCustomSnackBar(
+      showCustomAlretDialog(
         context: context,
+        title: "Error",
         content: 'Error happend while saving the image to gallery.',
+        titleColor: Colors.red,
       );
+
       return;
     }
 

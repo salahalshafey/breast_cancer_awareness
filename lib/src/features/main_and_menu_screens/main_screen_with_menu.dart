@@ -1,4 +1,3 @@
-import 'package:breast_cancer_awareness/src/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
@@ -16,17 +15,15 @@ class MainScreenWithDrawer extends StatelessWidget {
       style: DrawerStyle.defaultStyle,
       menuScreen: const MenuScreen(),
       mainScreen: const MainScreen(),
+      //dragOffset: 0,
       borderRadius: 24.0,
-
       androidCloseOnBackTap: true,
-
       angle: 0,
-
-      slideWidth: MediaQuery.of(context).size.width * 0.80,
+      slideWidth: MediaQuery.of(context).size.width * 0.85,
       mainScreenTapClose: true,
       moveMenuScreen: false,
       menuScreenWidth: MediaQuery.of(context).size.width,
-      // openCurve: Curves.fastOutSlowIn,
+      //openCurve: Curves.fastOutSlowIn,
       // closeCurve: Curves.bounceIn,
     );
   }
