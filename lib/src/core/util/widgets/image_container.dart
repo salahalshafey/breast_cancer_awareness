@@ -22,7 +22,7 @@ class ImageContainer extends StatefulWidget {
     required this.image,
     required this.imageSource,
     required this.radius,
-    this.saveNetworkImageToLocalStorage = true,
+    this.saveNetworkImageToLocalStorage = false,
     this.localStorageType = LocalStorage.applicationDocumentsDirectory,
     this.imageTitle,
     this.imageCaption,

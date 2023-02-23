@@ -21,14 +21,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentThemeMode = Provider.of<ThemeProvider>(context).themeMode;
 
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: MyColors.primaryColor.withOpacity(0.5),
-      systemNavigationBarColor: currentThemeMode == ThemeMode.light
-          ? MyColors.secondaryColor
-          : Colors.black87,
-      systemNavigationBarIconBrightness: Brightness.light,
-    ));
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Breast Cancer Awareness',
@@ -53,16 +45,17 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: MyColors.primaryColor.withOpacity(0.5),
+      systemNavigationBarColor: Theme.of(context).brightness == Brightness.light
+          ? MyColors.secondaryColor
+          : Colors.black87,
+      systemNavigationBarIconBrightness: Brightness.light,
+    ));
+
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (ctx, userSnapshot) {
-        if (userSnapshot.connectionState == ConnectionState.waiting) {
-          return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
         if (!userSnapshot.hasData) {
           return const SignInScreen();
         } else if (userSnapshot.data!.metadata.creationTime!

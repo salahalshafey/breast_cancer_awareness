@@ -39,19 +39,25 @@ class MainScreen extends StatelessWidget {
     final isportrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
 
+    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
         children: [
           ////////// backGround image ////////////
-          Opacity(
-            opacity:
-                Theme.of(context).brightness == Brightness.light ? 0.16 : 0.12,
-            child: Image.asset(
-              "assets/images/background_image.png",
-              height: isportrait ? screenSize.height : null,
-              width: isportrait ? null : screenSize.width,
-              fit: isportrait ? BoxFit.fitHeight : BoxFit.fitWidth,
+          Positioned(
+            bottom: isportrait ? 0 - keyboardHeight : null,
+            child: Opacity(
+              opacity: Theme.of(context).brightness == Brightness.light
+                  ? 0.16
+                  : 0.12,
+              child: Image.asset(
+                "assets/images/background_image.png",
+                height: isportrait ? screenSize.height : null,
+                width: isportrait ? null : screenSize.width,
+                fit: isportrait ? BoxFit.fitHeight : BoxFit.fitWidth,
+              ),
             ),
           ),
 
@@ -95,12 +101,12 @@ class MainScreen extends StatelessWidget {
           ),
 
           /////////// Bottom Navigation Bar //////////////
-          const Positioned(
-            bottom: 0,
-            child: ShapeForMainScreen(angle: pi),
+          Positioned(
+            bottom: 0 - keyboardHeight,
+            child: const ShapeForMainScreen(angle: pi),
           ),
           Positioned(
-            bottom: 0,
+            bottom: 0 - keyboardHeight,
             child: CustomBottomNavigationBar(
               onSelected: provider.animateToPage,
               currentSelectedIndex: provider.currentPageIndex,

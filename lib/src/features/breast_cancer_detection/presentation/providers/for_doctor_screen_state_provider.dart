@@ -2,11 +2,15 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-class ForDoctorScreenState with ChangeNotifier {
+import '../../../../dispose_container.dart';
+
+class ForDoctorScreenState extends DisposableProvider {
   bool _isBoxShown = false;
   File? _fileImage;
   String? _networkImage;
+
   final _formKey = GlobalKey<FormState>();
+  bool _isTextFieldIconShowen = false;
 
   bool get isBoxShown => _isBoxShown;
 
@@ -15,6 +19,8 @@ class ForDoctorScreenState with ChangeNotifier {
   String? get networkImage => _networkImage;
 
   GlobalKey<FormState> get formKey => _formKey;
+
+  bool get isTextFieldIconShowen => _isTextFieldIconShowen;
 
   void togoleBoxShown() {
     _isBoxShown = !_isBoxShown;
@@ -32,10 +38,27 @@ class ForDoctorScreenState with ChangeNotifier {
     notifyListeners();
   }
 
+  void setTextFieldIconShowen(bool state) {
+    _isTextFieldIconShowen = state;
+    notifyListeners();
+  }
+
   void resetBox() {
+    if (_fileImage == null && _networkImage == null) {
+      _formKey.currentState!.reset();
+    }
     _fileImage = null;
     _networkImage = null;
-    // _formKey.currentState!.reset();
+    _isTextFieldIconShowen = false;
+
     notifyListeners();
+  }
+
+  @override
+  void disposeValues() {
+    _isBoxShown = false;
+    _fileImage = null;
+    _networkImage = null;
+    _isTextFieldIconShowen = false;
   }
 }

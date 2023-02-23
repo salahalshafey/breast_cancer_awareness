@@ -59,7 +59,7 @@ class SetThemeMode extends StatelessWidget {
                     value: 'system',
                     child: TextButton.icon(
                       onPressed: null,
-                      icon: const Icon(Icons.auto_graph),
+                      icon: const Icon(Icons.brightness_6),
                       label: Text(
                         "System default",
                         style: TextStyle(

@@ -79,14 +79,6 @@ class SignInScreen extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(SecondSignUpScreen.routName);
-                },
-                child: const Text("go"),
-              ),
-              const SizedBox(height: 30),
-              const SetThemeMode(),
               const SizedBox(height: 30),
               Align(
                 alignment: Alignment.topCenter,

@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../../../core/theme/colors.dart';
 import '../../account/presentation/providers/account.dart';
-import '../main_screen_state_provider.dart';
 
 class LogOutButton extends StatelessWidget {
   const LogOutButton({
@@ -15,9 +14,8 @@ class LogOutButton extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomLeft,
       child: OutlinedButton.icon(
-        onPressed: () async {
-          Provider.of<MainScreenState>(context, listen: false).jumpToPage(0);
-          await Provider.of<Account>(context, listen: false).signOut();
+        onPressed: () {
+          Provider.of<Account>(context, listen: false).signOut(context);
         },
         label: const Text(
           "Log out",

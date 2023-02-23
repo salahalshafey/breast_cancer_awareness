@@ -2,18 +2,19 @@
 
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../core/error/exceptions.dart';
 
+import '../../../../dispose_container.dart';
 import '../../domain/entities/user_information.dart';
 import '../../domain/usecases/get_user_information.dart';
 import '../../domain/usecases/send_user_image_and_type.dart';
 import '../../domain/usecases/signin_with_email_and_password.dart';
 import '../../domain/usecases/signup_with_email_and_password.dart';
 
-class Account with ChangeNotifier {
+class Account extends DisposableProvider {
   Account({
     required this.getUserInformationUseCase,
     required this.signUserInUsingEmailAndPasswordUseCase,
@@ -133,8 +134,13 @@ class Account with ChangeNotifier {
     }
   }
 
-  Future<void> signOut() async {
-    await FirebaseAuth.instance.signOut();
+  void signOut(BuildContext context) {
+    FirebaseAuth.instance.signOut();
+    AppProviders.disposeAllDisposableProviders(context);
+  }
+
+  @override
+  void disposeValues() {
     _userInfo = null;
     _userFetchedFromBackend = false;
   }
