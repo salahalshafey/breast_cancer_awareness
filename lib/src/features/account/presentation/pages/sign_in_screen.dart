@@ -1,4 +1,3 @@
-import 'package:breast_cancer_awareness/src/features/account/presentation/pages/second_sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,7 +19,6 @@ class SignInScreen extends StatelessWidget {
     if (screenWidth > 600) {
       horizantalPadding = (screenWidth - 600) / 2 + 40.0;
     }
-    print(MediaQuery.of(context).size);
 
     return Scaffold(
       body: Stack(
@@ -64,13 +62,6 @@ class SignInScreen extends StatelessWidget {
                 horizontal: horizantalPadding, vertical: 60),
             children: [
               const SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(SecondSignUpScreen.routName);
-                },
-                child: Text("go"),
-              ),
-              const SizedBox(height: 15),
               const Text(
                 "Log in",
                 style: TextStyle(

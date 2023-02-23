@@ -1,14 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/colors.dart';
 import '../../account/presentation/widgets/icon_from_asset.dart';
 import '../main_screen_state_provider.dart';
 
+import '../../settings/pages/settings_screen.dart';
+import '../about_screen.dart';
+import '../../account/presentation/pages/profile_screen.dart';
+
 class MenuItems extends StatelessWidget {
   const MenuItems({super.key});
+
+  void _goToScreen(BuildContext context, Widget screen) {
+    // Navigator.of(context).pushNamed(ProfileScreen.routName);
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => screen,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(1, 0),
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          );
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +50,13 @@ class MenuItems extends StatelessWidget {
           title: "Profile",
           assetIcon: "assets/icons/normal_user_icon.png",
           iconHeight: 40,
-          onTap: () {},
+          onTap: () => _goToScreen(context, const ProfileScreen()),
         ),
         MenuItem(
           title: "Settings",
           assetIcon: "assets/icons/settings_icon.png",
           iconHeight: 40,
-          onTap: () {},
+          onTap: () => _goToScreen(context, const SettingsScreen()),
         ),
         MenuItem(
           title: "Share",
@@ -57,7 +80,7 @@ class MenuItems extends StatelessWidget {
           title: "About",
           assetIcon: "assets/icons/about_icon.png",
           iconHeight: 40,
-          onTap: () {},
+          onTap: () => _goToScreen(context, const AboutScreen()),
         ),
       ],
     );

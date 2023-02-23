@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 
 import '../providers/image_and_user_type.dart';
@@ -28,8 +27,6 @@ class SecondSignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size);
-
     return Scaffold(
       body: ChangeNotifierProvider<ImageAndUserType>(
         create: (context) => ImageAndUserType(),

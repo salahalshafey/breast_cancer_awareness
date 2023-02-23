@@ -14,9 +14,9 @@ class SetThemeMode extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(
-            "Apperance",
+            "Theme",
             style: TextStyle(
-              color: MyColors.appBarForGroundColor,
+              color: MyColors.tetraryColor,
               fontSize: 20,
             ),
           ),

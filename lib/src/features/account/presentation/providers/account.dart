@@ -46,13 +46,11 @@ class Account extends DisposableProvider {
     return _userInfo;
   }
 
-  Future<UserInformation?> updateAndGetUserInfo() async {
+  Future<void> updateAndGetUserInfo() async {
     try {
       _userInfo = await getUserInformationUseCase.call(userId);
       _userFetchedFromBackend = true;
       notifyListeners();
-
-      return _userInfo;
     } on OfflineException {
       throw Error('You are currently offline.');
     } on ServerException {

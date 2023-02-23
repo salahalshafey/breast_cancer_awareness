@@ -1,18 +1,36 @@
-import 'package:breast_cancer_awareness/src/features/account/presentation/pages/profile_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/theme/colors.dart';
+import '../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../core/util/widgets/image_container.dart';
+
 import '../../account/domain/entities/user_information.dart';
 import '../../account/presentation/providers/account.dart';
+
+import '../../account/presentation/pages/profile_screen.dart';
 
 class ImageWithName extends StatelessWidget {
   const ImageWithName({super.key});
 
   void _goToProfileScreen(BuildContext context) {
-    Navigator.of(context).pushNamed(ProfileScreen.routName);
+    // Navigator.of(context).pushNamed(ProfileScreen.routName);
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const ProfileScreen(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(1, 0),
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          );
+        },
+      ),
+    );
   }
 
   @override
@@ -59,7 +77,8 @@ class ImageWithName extends StatelessWidget {
                 child: ListTile(
                   onTap: () => _goToProfileScreen(context),
                   title: Text(
-                    "${userInfo.firstName} ${userInfo.lastName}",
+                    wellFormatedString(
+                        "${userInfo.firstName} ${userInfo.lastName}"),
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
