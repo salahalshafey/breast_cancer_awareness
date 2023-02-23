@@ -1,14 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
 
-import '../../../../core/util/builders/custom_alret_dialoge.dart';
-import '../../../../core/util/functions/general_functions.dart';
 import '../providers/for_doctor_screen_state_provider.dart';
 
 import 'link_form.dart';
+import 'read_link_by_qr_code.dart';
 
 class BoxContent extends StatelessWidget {
   const BoxContent({super.key});
@@ -53,7 +52,7 @@ class PickImage extends StatelessWidget {
           child: Text(
             "Open Camera",
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: FontWeight.bold,
               color: Theme.of(context).appBarTheme.titleTextStyle!.color,
             ),
@@ -79,7 +78,7 @@ class PickImage extends StatelessWidget {
           child: Text(
             "Pick an Image",
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: FontWeight.bold,
               color: Theme.of(context).appBarTheme.titleTextStyle!.color,
             ),
@@ -110,7 +109,7 @@ class OrDivider extends StatelessWidget {
         Text(
           "Or",
           style: TextStyle(
-            fontSize: 18,
+            fontSize: 16,
             fontWeight: FontWeight.bold,
             color: Theme.of(context).appBarTheme.titleTextStyle!.color,
           ),
@@ -123,48 +122,6 @@ class OrDivider extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class ReadLinkByQRCode extends StatelessWidget {
-  const ReadLinkByQRCode({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final provider = Provider.of<ForDoctorScreenState>(context, listen: false);
-
-    return TextButton(
-      onPressed: () async {
-        // read QR Code
-        // check if link is valid image (find a way without download)
-        // if not valid show error (alret dialog), then return
-        // if valid: provider.setNetworkImage("imageUrl");
-        final imagelink =
-            "https://firebasestorage.googleapis.com/v0/b/servicesapp-e006f.appspot.com/o/chat%2F2oUTBQRGiD9rZOAbHFNg%2F2022-08-13%2002%3A54%3A00.921322?alt=media&token=c19f1256-cc17-4a67-9493-7221d7a25006";
-        final error = await validateImageLink(imagelink);
-        if (error != null) {
-          // ignore: use_build_context_synchronously
-          showCustomAlretDialog(
-            context: context,
-            title: "Error",
-            content: error,
-            titleColor: Colors.red,
-          );
-          return;
-        }
-
-        provider.setNetworkImage(imagelink);
-      },
-      child: Text(
-        "Get Image Link By Reading QR Code",
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          color: Theme.of(context).appBarTheme.titleTextStyle!.color,
-        ),
-      ),
-      //style: ButtonStyle(textStyle: ),
     );
   }
 }

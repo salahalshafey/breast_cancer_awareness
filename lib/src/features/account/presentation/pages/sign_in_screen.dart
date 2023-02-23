@@ -1,10 +1,9 @@
+import 'package:breast_cancer_awareness/src/features/account/presentation/pages/second_sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'second_sign_up_screen.dart';
-
-import '../../../settings/widgets/set_theme_mode.dart';
+import '../../../settings/widgets/toggle_theme_button.dart';
 import '../widgets/sign_in_form.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -21,6 +20,7 @@ class SignInScreen extends StatelessWidget {
     if (screenWidth > 600) {
       horizantalPadding = (screenWidth - 600) / 2 + 40.0;
     }
+    print(MediaQuery.of(context).size);
 
     return Scaffold(
       body: Stack(
@@ -47,7 +47,6 @@ class SignInScreen extends StatelessWidget {
               ),
             ),
           ),
-          //if (Theme.of(context).brightness == Brightness.light)
           Positioned(
             bottom: -15 - keyboardHeight,
             right: 5,
@@ -64,7 +63,14 @@ class SignInScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(
                 horizontal: horizantalPadding, vertical: 60),
             children: [
-              const SizedBox(height: 35),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(SecondSignUpScreen.routName);
+                },
+                child: Text("go"),
+              ),
+              const SizedBox(height: 15),
               const Text(
                 "Log in",
                 style: TextStyle(
@@ -79,7 +85,11 @@ class SignInScreen extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 10),
+              const Align(
+                alignment: Alignment.center,
+                child: ToggleThemeButton(),
+              ),
               Align(
                 alignment: Alignment.topCenter,
                 child: Image.asset(

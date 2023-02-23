@@ -30,6 +30,7 @@ class HomeScreen extends StatelessWidget {
           SizedBox(height: 20),
           Text(
             "General Information About Breast Cancer Awareness like: ",
+            textAlign: TextAlign.center,
             style: TextStyle(
               color: Color.fromRGBO(199, 40, 107, 1),
               fontSize: 18,
@@ -39,6 +40,7 @@ class HomeScreen extends StatelessWidget {
           SizedBox(height: 20),
           Text(
             "- Medical Articles.",
+            textAlign: TextAlign.center,
             style: TextStyle(
               color: Color.fromRGBO(199, 40, 107, 1),
               fontSize: 18,
@@ -48,6 +50,7 @@ class HomeScreen extends StatelessWidget {
           SizedBox(height: 20),
           Text(
             "- Ways to reduce or prevent breast cancer.",
+            textAlign: TextAlign.center,
             style: TextStyle(
               color: Color.fromRGBO(199, 40, 107, 1),
               fontSize: 18,
@@ -57,6 +60,7 @@ class HomeScreen extends StatelessWidget {
           SizedBox(height: 20),
           Text(
             "- How to examine yourself for breast cancer etc...",
+            textAlign: TextAlign.center,
             style: TextStyle(
               color: Color.fromRGBO(199, 40, 107, 1),
               fontSize: 18,

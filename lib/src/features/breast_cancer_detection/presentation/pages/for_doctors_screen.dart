@@ -7,7 +7,6 @@ import '../widgets/box_content.dart';
 import '../widgets/image.dart';
 import '../widgets/add_and_show_result_button.dart';
 
-import '../../../settings/widgets/set_theme_mode.dart';
 import '../providers/for_doctor_screen_state_provider.dart';
 
 class ForDoctorsScreen extends StatelessWidget {
@@ -30,22 +29,24 @@ class ForDoctorsScreen extends StatelessWidget {
           const SizedBox(height: 10),
           const Text(
             "Pick a Medical Image of Breast Cancer Radiology of The Patient.",
+            textAlign: TextAlign.center,
             style: TextStyle(
               color: Color.fromRGBO(199, 40, 107, 1),
-              fontSize: 18,
+              fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 15),
           const Text(
             "See The Result OR Prediction Using The Machine Learning Model.",
+            textAlign: TextAlign.center,
             style: TextStyle(
               color: Color.fromRGBO(199, 40, 107, 1),
-              fontSize: 18,
+              fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: 30),
           Align(
             child: DottedBorder(
               borderType: BorderType.RRect,
@@ -55,7 +56,7 @@ class ForDoctorsScreen extends StatelessWidget {
               dashPattern: const [7, 7],
               child: Container(
                 width: screenSize.width,
-                height: screenSize.width * 0.6,
+                height: screenSize.width * 0.65,
                 constraints: const BoxConstraints(
                   maxWidth: 450,
                   maxHeight: 450 * 0.5,

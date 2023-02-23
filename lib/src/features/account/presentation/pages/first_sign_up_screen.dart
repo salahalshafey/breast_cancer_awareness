@@ -15,9 +15,9 @@ class FirstSignUpScreen extends StatelessWidget {
 
     final screenWidth = MediaQuery.of(context).size.width;
 
-    var horizantalPadding = 40.0;
+    var horizantalPadding = 25.0;
     if (screenWidth > 600) {
-      horizantalPadding = (screenWidth - 600) / 2 + 40;
+      horizantalPadding += (screenWidth - 600) / 2;
     }
 
     return Scaffold(

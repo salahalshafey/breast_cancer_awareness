@@ -76,7 +76,7 @@ class AddAndShowResultButton extends StatelessWidget {
             child: const Text(
               "Show Result",
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -86,7 +86,7 @@ class AddAndShowResultButton extends StatelessWidget {
                           provider.networkImage != null
                       ? 1
                       : 0)
-              .slideX(begin: 2, end: 0, duration: 250.ms)
+              .slideX(begin: 2, end: 0, duration: 500.ms)
               .fade(begin: 0, end: 1)
         ],
       ),

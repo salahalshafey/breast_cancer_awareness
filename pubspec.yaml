@@ -55,6 +55,7 @@ dependencies:
   flutter_zoom_drawer: ^3.0.3
   dotted_border: ^2.0.0+3
   http: ^0.13.5
+  mobile_scanner: ^3.0.0
   
 
 dev_dependencies:

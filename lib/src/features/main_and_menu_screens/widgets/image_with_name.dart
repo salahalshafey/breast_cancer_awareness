@@ -1,4 +1,6 @@
+import 'package:breast_cancer_awareness/src/features/account/presentation/pages/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/theme/colors.dart';
@@ -8,6 +10,10 @@ import '../../account/presentation/providers/account.dart';
 
 class ImageWithName extends StatelessWidget {
   const ImageWithName({super.key});
+
+  void _goToProfileScreen(BuildContext context) {
+    Navigator.of(context).pushNamed(ProfileScreen.routName);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +49,7 @@ class ImageWithName extends StatelessWidget {
                       Border.all(color: const Color.fromRGBO(191, 76, 136, 1)),
                   showHighlight: true,
                   showLoadingIndicator: true,
-                  onTap: () {},
+                  onTap: () => _goToProfileScreen(context),
                 ),
               ),
               Container(
@@ -51,11 +57,11 @@ class ImageWithName extends StatelessWidget {
                 // width: 200,
                 constraints: const BoxConstraints(minWidth: 100, maxWidth: 200),
                 child: ListTile(
-                  onTap: () {},
+                  onTap: () => _goToProfileScreen(context),
                   title: Text(
                     "${userInfo.firstName} ${userInfo.lastName}",
                     style: const TextStyle(
-                      fontSize: 22,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: MyColors.tetraryColor,
                     ),

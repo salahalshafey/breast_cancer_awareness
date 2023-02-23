@@ -167,9 +167,9 @@ class _SignUpFormState extends State<SignUpForm> {
     final focusColor = Theme.of(context).primaryColor;
 
     final screenWidth = MediaQuery.of(context).size.width;
-    var horizantalPadding = 40.0;
+    var horizantalPadding = 25.0;
     if (screenWidth > 600) {
-      horizantalPadding = (screenWidth - 600) / 2 + 40.0;
+      horizantalPadding += (screenWidth - 600) / 2;
     }
 
     // width of entire screen - padding of above ListView - width between 2 forms
@@ -192,7 +192,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   textCapitalization: TextCapitalization.none,
                   enableSuggestions: false,
                   keyboardType: TextInputType.name,
-                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
                   decoration: InputDecoration(
                     hintText: 'First name',
                     fillColor: _isFirstNameFocused ? focusColor : null,
@@ -229,7 +229,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   textCapitalization: TextCapitalization.none,
                   enableSuggestions: false,
                   keyboardType: TextInputType.name,
-                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
                   decoration: InputDecoration(
                     hintText: 'Last name',
                     fillColor: _isLastNameFocused ? focusColor : null,

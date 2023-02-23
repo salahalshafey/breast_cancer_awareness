@@ -28,6 +28,8 @@ class SecondSignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size);
+
     return Scaffold(
       body: ChangeNotifierProvider<ImageAndUserType>(
         create: (context) => ImageAndUserType(),

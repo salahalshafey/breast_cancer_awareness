@@ -24,13 +24,17 @@ class _LinkFormState extends State<LinkForm> {
       child: TextFormField(
         keyboardType: TextInputType.url,
         autocorrect: false,
-        style: const TextStyle(color: Colors.black),
+        style: const TextStyle(
+          color: Colors.black,
+          fontSize: 15,
+        ),
         decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.only(left: 20, right: 5, top: 5, bottom: 5),
           hintText: 'Or Past a Link here',
-          hintStyle:
-              const TextStyle(color: Color.fromRGBO(112, 112, 112, 0.85)),
+          hintStyle: const TextStyle(
+            color: Color.fromRGBO(112, 112, 112, 0.85),
+          ),
           isDense: true,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide.none,

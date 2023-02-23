@@ -17,7 +17,7 @@ ThemeData myDarkTheme() {
       centerTitle: true,
       foregroundColor: _appBarForGroundColor,
       titleTextStyle: const TextStyle(
-        fontSize: 35,
+        fontSize: 30,
         fontWeight: FontWeight.bold,
         color: _appBarForGroundColor,
       ),

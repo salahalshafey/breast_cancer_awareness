@@ -30,7 +30,7 @@ class SellectUserType extends StatelessWidget {
         UserType(
           userType: "Doctor",
           userAssetIcon: "assets/icons/doctor_icon.png",
-          iconHeight: 65,
+          iconHeight: 66,
           isSelected: userType == "Doctor",
           onTap: (userType) {
             provider.changeUserType(userType);
@@ -73,7 +73,7 @@ class UserType extends StatelessWidget {
 
     return Align(
       child: CustomCard(
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 17),
         color: isSelected
             ? primaryColor
             : const Color.fromRGBO(229, 183, 207, 0.22),
