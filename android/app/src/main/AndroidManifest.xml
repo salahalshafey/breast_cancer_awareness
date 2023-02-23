@@ -19,8 +19,9 @@
           <data android:scheme="tel" />
         </intent>
     </queries>
+   <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="breast_cancer_awareness"
+        android:label="Breast Cancer Awareness"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

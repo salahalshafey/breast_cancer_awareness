@@ -58,13 +58,13 @@ class _QRCodeReaderScreenState extends State<QRCodeReaderScreen> {
         controller: cameraController,
         onDetect: (capture) {
           final barcode = capture.barcodes.first;
-          print(
+          /* print(
               "<<<<<<<<<<<<<<<<<<<<<<<<<<<, Result >>>>>>>>>>>>>>>>>>>>>>>>>>>>.>>>>>>");
           print(barcode.url?.url);
           print(barcode.rawValue);
           print(
               "<<<<<<<<<<<<<<<<<<<<<<<<<<<, Result >>>>>>>>>>>>>>>>>>>>>>>>>>>>.>>>>>>");
-
+*/
           if (barcode.rawValue != null) {
             Navigator.of(context).pop(barcode.rawValue);
           }
