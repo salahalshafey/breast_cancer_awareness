@@ -45,11 +45,7 @@ class AddAndShowResultButton extends StatelessWidget {
                   : "show image box",
               onPressed: provider.togoleBoxShown,
               padding: EdgeInsets.zero,
-              icon: const Icon(
-                Icons.add,
-                size: 70,
-                color: Colors.white,
-              )
+              icon: const AddIcon()
                   .animate(target: provider.isBoxShown ? 1 : 0)
                   .rotate(begin: 0, end: -1.043 * 3, duration: 50.ms),
             ),
@@ -93,5 +89,38 @@ class AddAndShowResultButton extends StatelessWidget {
       ),
     );
     //.moveY(begin: -200, end: 0, duration: 50.ms);
+  }
+}
+
+class AddIcon extends StatelessWidget {
+  const AddIcon({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: const [
+        CustomLine(),
+        CustomLine(isHorizantal: false),
+      ],
+    );
+  }
+}
+
+class CustomLine extends StatelessWidget {
+  const CustomLine({super.key, this.isHorizantal = true});
+
+  final bool isHorizantal;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: isHorizantal ? 40 : 9,
+      height: isHorizantal ? 9 : 40,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(5),
+      ),
+    );
   }
 }

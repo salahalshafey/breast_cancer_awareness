@@ -451,7 +451,7 @@ class __ImageContainerState extends State<_ImageContainer> {
                                   builder: (context) => ImageScreen(
                                     widget.image,
                                     widget.imageSource,
-                                    widget.imageTitle ?? '',
+                                    widget.imageTitle ?? ' ',
                                     widget.imageCaption,
                                     widget.errorBuilder,
                                   ),
@@ -553,7 +553,7 @@ class _ImageScreenState extends State<ImageScreen> {
       extendBody: true,
       appBar: _showAppBar
           ? AppBar(
-              title: Text(widget.title),
+              title: FittedBox(child: Text(widget.title)),
               backgroundColor: Colors.black54,
               elevation: 0,
               actions: [
@@ -586,7 +586,7 @@ class _ImageScreenState extends State<ImageScreen> {
                                 Uint8List.fromList(widget.image.codeUnits)),
                 initialScale: PhotoViewComputedScale.contained * 1.0,
                 minScale: PhotoViewComputedScale.contained * 0.5,
-                maxScale: PhotoViewComputedScale.contained * 3.0,
+                maxScale: PhotoViewComputedScale.contained * 4.0, // 3.0
                 errorBuilder: widget.errorBuilder,
               ),
             ),

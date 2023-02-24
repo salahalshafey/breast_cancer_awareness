@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../core/theme/colors.dart';
 
@@ -24,14 +25,6 @@ class AboutScreen extends StatelessWidget {
       body: Stack(
         alignment: Alignment.center,
         children: [
-          const Positioned(
-            bottom: -30,
-            child: IconFromAsset(
-              assetIcon: "assets/images/background_cancer_sympol.png",
-              iconHeight: 150,
-              opacity: 0.62,
-            ),
-          ),
           const Positioned(
             right: 0,
             bottom: 40,
@@ -57,12 +50,11 @@ class AboutScreen extends StatelessWidget {
             padding: const EdgeInsets.only(
               right: 25,
               left: 25,
-              top: 40,
-              bottom: 110,
+              top: 100,
+              bottom: 50,
             ),
-            children: const [
-              SizedBox(height: 60),
-              Text(
+            children: [
+              const Text(
                 "App Overview",
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -71,8 +63,8 @@ class AboutScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 40),
-              SelectableText(
+              const SizedBox(height: 40),
+              const SelectableText(
                 "Will Provide a brief overview of the app, including what it does and how it can help users become more aware of breast cancer.\n\n"
                 "Explain why we created the app and the problem it is trying to solve.\n\n"
                 "Describe the target audience for the app, such as women over a certain age or those with a family history of breast cancer.\n\n"
@@ -84,6 +76,46 @@ class AboutScreen extends StatelessWidget {
                   color: MyColors.tetraryColor,
                   fontSize: 18,
                 ),
+              ),
+              const SizedBox(height: 40),
+              FutureBuilder(
+                future: PackageInfo.fromPlatform(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting ||
+                      snapshot.hasError) {
+                    return const Text("");
+                  }
+
+                  final info = snapshot.data!;
+
+                  return Column(
+                    children: [
+                      const IconFromAsset(
+                        assetIcon: "assets/images/background_cancer_sympol.png",
+                        iconHeight: 150,
+                      ),
+                      Text(
+                        info.appName,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: MyColors.primaryColor,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        "Version ${info.version}",
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: MyColors.secondaryColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  );
+                },
               ),
             ],
           )

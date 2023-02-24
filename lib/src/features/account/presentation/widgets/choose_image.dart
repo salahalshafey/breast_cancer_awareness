@@ -108,6 +108,7 @@ class _ChooseImageState extends State<ChooseImage> {
                     ),
                     showHighlight: true,
                     showImageDialoge: true,
+                    showImageScreen: true,
                   )
                     .animate(onPlay: (controller) {}, delay: 1.5.seconds)
                     .fadeIn(duration: 1.5.seconds)
