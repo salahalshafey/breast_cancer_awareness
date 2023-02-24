@@ -67,11 +67,23 @@ class ProfileScreen extends StatelessWidget {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError || snapshot.data == null) {
-                  return Center(
-                    child: Text(snapshot.error == null
-                        ? "Something went wrong!!"
-                        : "${snapshot.error}"),
+                }
+
+                // if error or no internet connection
+                else if (snapshot.hasError || snapshot.data == null) {
+                  final topPadding =
+                      (MediaQuery.of(context).size.height - 20) / 2;
+
+                  return ListView(
+                    padding: EdgeInsets.only(top: topPadding),
+                    children: [
+                      Text(
+                        snapshot.error == null
+                            ? "Something went wrong!!"
+                            : "${snapshot.error}",
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   );
                 }
 

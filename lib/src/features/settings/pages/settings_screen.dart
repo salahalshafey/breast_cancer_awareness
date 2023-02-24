@@ -56,7 +56,7 @@ class SettingsScreen extends StatelessWidget {
             ),
           ),
           ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 80),
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 80),
             children: const [
               SizedBox(height: 60),
               SetThemeMode(),

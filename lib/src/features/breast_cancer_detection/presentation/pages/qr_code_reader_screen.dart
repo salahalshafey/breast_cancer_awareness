@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class QRCodeReaderScreen extends StatefulWidget {
@@ -9,22 +9,22 @@ class QRCodeReaderScreen extends StatefulWidget {
 }
 
 class _QRCodeReaderScreenState extends State<QRCodeReaderScreen> {
-  final MobileScannerController cameraController = MobileScannerController(
-      // detectionSpeed: DetectionSpeed.noDuplicates,
-      );
+  MobileScannerController cameraController =
+      MobileScannerController(detectionSpeed: DetectionSpeed.noDuplicates);
+  bool _screenOpened = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const FittedBox(child: Text('Mobile Scanner')),
+        title: const Text("Mobile Scanner"),
         actions: [
           IconButton(
             color: Colors.white,
             icon: ValueListenableBuilder(
               valueListenable: cameraController.torchState,
               builder: (context, state, child) {
-                switch (state) {
+                switch (state as TorchState) {
                   case TorchState.off:
                     return const Icon(Icons.flash_off, color: Colors.grey);
                   case TorchState.on:
@@ -40,7 +40,7 @@ class _QRCodeReaderScreenState extends State<QRCodeReaderScreen> {
             icon: ValueListenableBuilder(
               valueListenable: cameraController.cameraFacingState,
               builder: (context, state, child) {
-                switch (state) {
+                switch (state as CameraFacing) {
                   case CameraFacing.front:
                     return const Icon(Icons.camera_front);
                   case CameraFacing.back:
@@ -54,23 +54,88 @@ class _QRCodeReaderScreenState extends State<QRCodeReaderScreen> {
         ],
       ),
       body: MobileScanner(
-        // fit: BoxFit.contain,
+        //   allowDuplicates: true,
         controller: cameraController,
-        onDetect: (capture) {
-          final barcode = capture.barcodes.first;
-          /* print(
-              "<<<<<<<<<<<<<<<<<<<<<<<<<<<, Result >>>>>>>>>>>>>>>>>>>>>>>>>>>>.>>>>>>");
-          print(barcode.url?.url);
-          print(barcode.rawValue);
-          print(
-              "<<<<<<<<<<<<<<<<<<<<<<<<<<<, Result >>>>>>>>>>>>>>>>>>>>>>>>>>>>.>>>>>>");
-*/
-          if (barcode.rawValue != null) {
-            Navigator.of(context).pop(barcode.rawValue);
-          }
-          //
-        },
+        onDetect: _foundBarcode,
       ),
     );
   }
+
+  void _foundBarcode(BarcodeCapture barcodeCapture) {
+    /// open screen
+    if (!_screenOpened) {
+      final String code = barcodeCapture.barcodes.first.rawValue ?? "---";
+      debugPrint('Barcode found! $code');
+      _screenOpened = true;
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                FoundCodeScreen(screenClosed: _screenWasClosed, value: code),
+          ));
+    }
+  }
+
+  void _screenWasClosed() {
+    _screenOpened = false;
+  }
 }
+
+class FoundCodeScreen extends StatefulWidget {
+  final String value;
+  final Function() screenClosed;
+  const FoundCodeScreen({
+    Key? key,
+    required this.value,
+    required this.screenClosed,
+  }) : super(key: key);
+
+  @override
+  State<FoundCodeScreen> createState() => _FoundCodeScreenState();
+}
+
+class _FoundCodeScreenState extends State<FoundCodeScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Found Code"),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            widget.screenClosed();
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_outlined,
+          ),
+        ),
+      ),
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "Scanned Code:",
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                widget.value,
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}*/

@@ -71,6 +71,7 @@ class AddAndShowResultButton extends StatelessWidget {
               showCustomAlretDialog(
                   context: context,
                   title: "Soon",
+                  titleColor: Colors.red,
                   content: "This feature will be available soon.");
             },
             child: const Text(

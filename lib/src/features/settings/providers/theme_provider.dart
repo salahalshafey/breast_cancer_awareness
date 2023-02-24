@@ -26,20 +26,11 @@ class ThemeProvider extends ChangeNotifier {
 
   void toggleThemeMode() {
     if (themeMode == ThemeMode.dark) {
-      currentTheme = "light";
+      changeTheme("light");
     } else if (themeMode == ThemeMode.light) {
-      currentTheme = "system";
+      changeTheme("system");
     } else {
-      currentTheme = "dark";
+      changeTheme("dark");
     }
-
-    notifyListeners();
   }
-
-  /* Future<void> initialize() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    currentTheme = prefs.getString('theme') ?? 'system';
-    notifyListeners();
-  }*/
 }

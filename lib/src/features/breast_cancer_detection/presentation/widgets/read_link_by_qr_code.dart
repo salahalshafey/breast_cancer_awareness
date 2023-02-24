@@ -1,73 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
+import '../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../core/util/builders/custom_snack_bar.dart';
 import '../../../../core/util/functions/general_functions.dart';
 
-import '../pages/qr_code_reader_screen.dart';
 import '../providers/for_doctor_screen_state_provider.dart';
 
-class ReadLinkByQRCode extends StatelessWidget {
+class ReadLinkByQRCode extends StatefulWidget {
   const ReadLinkByQRCode({super.key});
 
+  @override
+  State<ReadLinkByQRCode> createState() => _ReadLinkByQRCodeState();
+}
+
+class _ReadLinkByQRCodeState extends State<ReadLinkByQRCode> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ForDoctorScreenState>(context, listen: false);
 
     return TextButton(
-      onPressed: () {
-        Navigator.of(context).push<String?>(MaterialPageRoute(
-          builder: (ctx) {
-            return const QRCodeReaderScreen();
-          },
-        )).then((imagelink) {
-          if (imagelink == null) {
-            /*showCustomSnackBar(
+      onPressed: () async {
+        try {
+          final String imagelink = await FlutterBarcodeScanner.scanBarcode(
+              '#ff6666', 'Cancel', true, ScanMode.QR);
+          if (!mounted) return;
+
+          if (imagelink == "-1") {
+            showCustomSnackBar(
               context: context,
               content: "you didn't read QR Code",
-            );*/
-          } else {
-            validateImageLink(imagelink).then((error) {
-              if (error != null) {
-                /*showCustomAlretDialog(
-                  context: context,
-                  title: "Error",
-                  content: error,
-                  titleColor: Colors.red,
-                );*/
-              } else {
-                provider.setNetworkImage(imagelink);
-              }
-            });
+            );
+            return;
           }
-        });
 
-        /* final String? imagelink =
-            await Navigator.of(context).push(PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) {
-            return QRCodeReaderScreen();
-          },
-        ));
+          final error = await validateImageLink(imagelink);
+          if (!mounted) return;
 
-        if (imagelink == null) {
-          showCustomSnackBar(
-            context: context,
-            content: "you didn't read QR Code",
-          );
-          return;
-        }
+          if (error != null) {
+            showCustomAlretDialog(
+              context: context,
+              title: "Error",
+              content: error,
+              titleColor: Colors.red,
+            );
+            return;
+          }
 
-        final error = await validateImageLink(imagelink);
-        if (error != null) {
+          provider.setNetworkImage(imagelink);
+        } on PlatformException {
           showCustomAlretDialog(
             context: context,
             title: "Error",
-            content: error,
+            content: "Error happened while trying to open QR Code Scanner",
             titleColor: Colors.red,
           );
-          return;
         }
-
-        provider.setNetworkImage(imagelink);*/
       },
       child: Text(
         "Get Image Link By Reading QR Code",

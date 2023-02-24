@@ -54,7 +54,12 @@ class AboutScreen extends StatelessWidget {
             ),
           ),
           ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 80),
+            padding: const EdgeInsets.only(
+              right: 25,
+              left: 25,
+              top: 40,
+              bottom: 110,
+            ),
             children: const [
               SizedBox(height: 60),
               Text(
