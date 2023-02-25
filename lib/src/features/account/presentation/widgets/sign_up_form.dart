@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 
 import '../../domain/entities/user_information.dart';
@@ -7,6 +8,7 @@ import '../providers/account.dart';
 
 import '../../../../core/util/builders/custom_alret_dialoge.dart';
 import '../../../../core/util/functions/password_validation.dart';
+import 'dont_or_already_have_accout.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
@@ -179,7 +181,6 @@ class _SignUpFormState extends State<SignUpForm> {
       key: _formKey,
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -411,7 +412,10 @@ class _SignUpFormState extends State<SignUpForm> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               _isLoading
-                  ? const CircularProgressIndicator()
+                  ? const Padding(
+                      padding: EdgeInsets.only(bottom: 11),
+                      child: CircularProgressIndicator(),
+                    )
                   : ElevatedButton(
                       onPressed: _saveForm,
                       child: const Text("Sign Up"),
@@ -424,6 +428,25 @@ class _SignUpFormState extends State<SignUpForm> {
                     Theme.of(context).brightness == Brightness.dark ? 0.7 : 1,
               ),*/
             ],
+          ),
+          const SizedBox(height: 30),
+          WillPopScope(
+            onWillPop: () async {
+              if (_isLoading) {
+                return false;
+              }
+              return true;
+            },
+            child: DontOrAlreadyHaveAccount(
+              text: "Already have an account ? ",
+              actionText: "Sign In",
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+            )
+                .animate(target: _isLoading ? 0 : 1)
+                .scaleXY(begin: 0, end: 1)
+                .fade(begin: 0, end: 1),
           ),
         ],
       ),

@@ -6,13 +6,17 @@ import '../../../../dispose_container.dart';
 
 class ForDoctorScreenState extends DisposableProvider {
   bool _isBoxShown = false;
+  bool _isBoxResetted = false;
   File? _fileImage;
   String? _networkImage;
 
   final _formKey = GlobalKey<FormState>();
   bool _isTextFieldIconShowen = false;
+  bool _isTextFieldLaodinShowen = false;
 
   bool get isBoxShown => _isBoxShown;
+
+  bool get isBoxResetted => _isBoxResetted;
 
   File? get fileImage => _fileImage;
 
@@ -22,10 +26,17 @@ class ForDoctorScreenState extends DisposableProvider {
 
   bool get isTextFieldIconShowen => _isTextFieldIconShowen;
 
+  bool get isTextFieldLaodinShowen => _isTextFieldLaodinShowen;
+
   void togoleBoxShown() {
     _isBoxShown = !_isBoxShown;
 
     resetBox();
+  }
+
+  void setBoxNotRestted() {
+    _isBoxResetted = false;
+    notifyListeners();
   }
 
   void setFileImage(File fileImage) {
@@ -43,6 +54,11 @@ class ForDoctorScreenState extends DisposableProvider {
     notifyListeners();
   }
 
+  void setTextFieldLading(bool state) {
+    _isTextFieldLaodinShowen = state;
+    notifyListeners();
+  }
+
   void resetBox() {
     if (_fileImage == null && _networkImage == null) {
       _formKey.currentState!.reset();
@@ -50,6 +66,8 @@ class ForDoctorScreenState extends DisposableProvider {
     _fileImage = null;
     _networkImage = null;
     _isTextFieldIconShowen = false;
+    _isTextFieldLaodinShowen = false;
+    _isBoxResetted = true;
 
     notifyListeners();
   }
@@ -57,8 +75,10 @@ class ForDoctorScreenState extends DisposableProvider {
   @override
   void disposeValues() {
     _isBoxShown = false;
+    _isBoxResetted = false;
     _fileImage = null;
     _networkImage = null;
     _isTextFieldIconShowen = false;
+    _isTextFieldLaodinShowen = false;
   }
 }

@@ -13,8 +13,8 @@ import 'src/injection_container.dart' as di;
 import 'src/app.dart';
 
 void main() async {
-  // to show splash screen for 3 more seconds
-  await Future.delayed(const Duration(seconds: 3));
+  // to show splash screen for 2 more seconds
+  await Future.delayed(const Duration(seconds: 2));
 
   WidgetsFlutterBinding.ensureInitialized();
 

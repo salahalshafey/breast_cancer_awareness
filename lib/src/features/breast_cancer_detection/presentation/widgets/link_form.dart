@@ -16,8 +16,8 @@ class _LinkFormState extends State<LinkForm> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ForDoctorScreenState>(context);
-    final formKey = provider.formKey;
+    final forDoctorScreenState = Provider.of<ForDoctorScreenState>(context);
+    final formKey = forDoctorScreenState.formKey;
 
     return Form(
       key: formKey,
@@ -60,16 +60,27 @@ class _LinkFormState extends State<LinkForm> {
           fillColor: Theme.of(context).brightness == Brightness.dark
               ? Colors.white70
               : Colors.white,
-          suffixIconColor: Colors.white,
-          suffixIconConstraints: const BoxConstraints(maxHeight: 30),
-          suffixIcon: provider.isTextFieldIconShowen
+          prefixIconConstraints: const BoxConstraints(maxWidth: 30),
+          prefixIcon: forDoctorScreenState.isTextFieldLaodinShowen
+              ? const Center(
+                  child: SizedBox(
+                    height: 15,
+                    width: 15,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 3,
+                      color: Colors.black45,
+                    ),
+                  ),
+                )
+              : null,
+          suffixIconConstraints: const BoxConstraints(maxHeight: 20),
+          suffixIcon: forDoctorScreenState.isTextFieldIconShowen
               ? SizedBox(
                   width: 30,
                   child: Center(
                     child: GestureDetector(
                       onTap: () {
-                        provider.setTextFieldIconShowen(false);
-                        formKey.currentState!.reset();
+                        forDoctorScreenState.resetBox();
                       },
                       child: const Icon(
                         Icons.close,
@@ -85,15 +96,24 @@ class _LinkFormState extends State<LinkForm> {
           FocusScope.of(context).unfocus();
         },
         onChanged: (value) async {
+          forDoctorScreenState.setBoxNotRestted();
+
           value = value.trim();
           if (value.isEmpty) {
-            provider.setTextFieldIconShowen(false);
-            formKey.currentState!.reset();
+            forDoctorScreenState.resetBox();
             return;
           } else {
-            provider.setTextFieldIconShowen(true);
+            forDoctorScreenState.setTextFieldIconShowen(true);
           }
+
+          forDoctorScreenState.setTextFieldLading(true);
           final error = await validateImageLink(value);
+          forDoctorScreenState.setTextFieldLading(false);
+
+          if (forDoctorScreenState.isBoxResetted) {
+            return;
+          }
+
           if (error != null) {
             setState(() {
               _linkError = error;
@@ -102,7 +122,7 @@ class _LinkFormState extends State<LinkForm> {
             return;
           }
 
-          provider.setNetworkImage(value);
+          forDoctorScreenState.setNetworkImage(value);
         },
         validator: (value) {
           return _linkError;

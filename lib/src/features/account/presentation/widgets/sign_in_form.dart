@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -234,7 +235,10 @@ class _SignInFormState extends State<SignInForm> {
           ),
           const SizedBox(height: 30),
           _isLoading
-              ? const CircularProgressIndicator()
+              ? const Padding(
+                  padding: EdgeInsets.only(bottom: 12),
+                  child: CircularProgressIndicator(),
+                )
               : ElevatedButton(
                   onPressed: _saveForm,
                   child: const Text("Sign in"),
@@ -249,9 +253,13 @@ class _SignInFormState extends State<SignInForm> {
               setState(() {
                 _isPasswordIconShowen = false;
                 _isPasswordShowen = false;
+                _isLoading = false;
               });
             },
-          ),
+          )
+              .animate(target: _isLoading ? 0 : 1)
+              .scaleXY(begin: 0, end: 1)
+              .fade(begin: 0, end: 1),
         ],
       ),
     );

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/backgroud_shapes/first_sign_up_screen_shapes.dart';
-import '../widgets/dont_or_already_have_accout.dart';
 import '../widgets/sign_up_form.dart';
 
 class FirstSignUpScreen extends StatelessWidget {
@@ -67,14 +66,6 @@ class FirstSignUpScreen extends StatelessWidget {
               ),
               const SizedBox(height: 50),
               const SignUpForm(),
-              const SizedBox(height: 30),
-              DontOrAlreadyHaveAccount(
-                text: "Already have an account ? ",
-                actionText: "Sign In",
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-              ),
             ],
           ),
         ],

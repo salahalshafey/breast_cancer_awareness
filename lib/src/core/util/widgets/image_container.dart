@@ -349,7 +349,7 @@ class __ImageContainerState extends State<_ImageContainer> {
                           builder: (context) => ImageScreen(
                             widget.image,
                             widget.imageSource,
-                            widget.imageTitle ?? '',
+                            widget.imageTitle ?? ' ',
                             widget.imageCaption,
                             widget.errorBuilder,
                           ),
