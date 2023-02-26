@@ -10,12 +10,14 @@ Future<bool> onWillPopWithDialog(BuildContext context) async {
             }),
             builder: (context, snapshot) {
               return AlertDialog(
-                title: const Text("Attention"),
-                titleTextStyle:
-                    const TextStyle(color: Colors.red, fontSize: 25),
-                content: const Text("Do you really want to exit?"),
-                contentTextStyle:
-                    const TextStyle(color: Colors.black, fontSize: 18),
+                title: const Text(
+                  "Attention",
+                  style: TextStyle(color: Colors.red, fontSize: 25),
+                ),
+                content: const Text(
+                  "Do you really want to exit?",
+                  style: TextStyle(fontSize: 18),
+                ),
                 actions: [
                   TextButton(
                       onPressed: () {
@@ -26,13 +28,13 @@ Future<bool> onWillPopWithDialog(BuildContext context) async {
                         style: TextStyle(color: Colors.red),
                       )),
                   TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop(false);
-                      },
-                      child: const Text(
-                        "No",
-                        style: TextStyle(color: Colors.black),
-                      )),
+                    onPressed: () {
+                      Navigator.of(context).pop(false);
+                    },
+                    child: const Text(
+                      "No",
+                    ),
+                  ),
                 ],
                 actionsAlignment: MainAxisAlignment.spaceAround,
               );
