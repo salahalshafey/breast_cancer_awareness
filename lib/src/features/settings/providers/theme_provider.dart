@@ -24,11 +24,9 @@ class ThemeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleThemeMode() {
-    if (themeMode == ThemeMode.dark) {
+  void toggleThemeMode(BuildContext context) {
+    if (Theme.of(context).brightness == Brightness.dark) {
       changeTheme("light");
-    } else if (themeMode == ThemeMode.light) {
-      changeTheme("system");
     } else {
       changeTheme("dark");
     }

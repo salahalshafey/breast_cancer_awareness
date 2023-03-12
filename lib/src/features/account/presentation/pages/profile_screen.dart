@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -102,7 +103,7 @@ class ProfileScreen extends StatelessWidget {
                             ? From.asset
                             : From.network,
                         radius: 60,
-                        saveNetworkImageToLocalStorage: true,
+                        saveNetworkImageToLocalStorage: kIsWeb ? false : true,
                         shape: BoxShape.circle,
                         border: Border.all(
                             color: const Color.fromRGBO(191, 76, 136, 1)),

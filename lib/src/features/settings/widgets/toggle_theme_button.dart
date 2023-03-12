@@ -11,18 +11,14 @@ class ToggleThemeButton extends StatelessWidget {
     final provider = Provider.of<ThemeProvider>(context);
 
     return IconButton(
-      onPressed: provider.toggleThemeMode,
-      tooltip: provider.themeMode == ThemeMode.light
-          ? "Change to System Mode"
-          : provider.themeMode == ThemeMode.dark
-              ? "Change to Light Mode"
-              : "Change to Dark Mode",
+      onPressed: () => provider.toggleThemeMode(context),
+      tooltip: Theme.of(context).brightness == Brightness.dark
+          ? "Change to Light Mode"
+          : "Change to Dark Mode",
       icon: Icon(
-        provider.themeMode == ThemeMode.light
-            ? Icons.light_mode
-            : provider.themeMode == ThemeMode.dark
-                ? Icons.dark_mode
-                : Icons.brightness_6,
+        Theme.of(context).brightness == Brightness.dark
+            ? Icons.dark_mode //light_mode
+            : Icons.light_mode,
       ),
     );
   }

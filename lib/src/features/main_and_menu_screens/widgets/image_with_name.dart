@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -61,7 +62,7 @@ class ImageWithName extends StatelessWidget {
                   imageSource:
                       userInfo.imageUrl == null ? From.asset : From.network,
                   radius: 50,
-                  saveNetworkImageToLocalStorage: true,
+                  saveNetworkImageToLocalStorage: kIsWeb ? false : true,
                   shape: BoxShape.circle,
                   border:
                       Border.all(color: const Color.fromRGBO(191, 76, 136, 1)),
