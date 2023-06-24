@@ -8,6 +8,7 @@ import '../../../../core/util/builders/custom_alret_dialoge.dart';
 import '../../../account/presentation/providers/account.dart';
 
 import '../providers/for_doctor_screen_state_provider.dart';
+import '../pages/prediction_screen.dart';
 
 class AddAndShowResultButton extends StatelessWidget {
   const AddAndShowResultButton({super.key});
@@ -64,11 +65,14 @@ class AddAndShowResultButton extends StatelessWidget {
                 );
                 return;
               }
-              showCustomAlretDialog(
-                  context: context,
-                  title: "Soon",
-                  titleColor: Colors.red,
-                  content: "This feature will be available soon.");
+
+              final isXray = await selectImageTypeDialog(context);
+              if (isXray == null) {
+                return;
+              }
+
+              Navigator.of(context)
+                  .pushNamed(PredictionScreen.routName, arguments: isXray);
             },
             child: const Text(
               "Show Result",
@@ -120,6 +124,83 @@ class CustomLine extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(5),
+      ),
+    );
+  }
+}
+
+Future<bool?> selectImageTypeDialog(BuildContext context) {
+  void selectChoice(bool isXray) {
+    Navigator.of(context).pop(isXray);
+  }
+
+  return showDialog<bool>(
+    context: context,
+    builder: (BuildContext context) {
+      return Dialog(
+        child: RadioList(onSellected: selectChoice),
+      );
+    },
+  );
+}
+
+class RadioList extends StatefulWidget {
+  const RadioList({super.key, required this.onSellected});
+
+  final void Function(bool isXray) onSellected;
+
+  @override
+  State<RadioList> createState() => _RadioListState();
+}
+
+class _RadioListState extends State<RadioList> {
+  bool _isXray = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 280,
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Select Medical Image Type",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
+          const SizedBox(height: 20),
+          RadioListTile<bool>(
+            title: const Text('X-Ray Image'),
+            value: true,
+            groupValue: _isXray,
+            onChanged: (value) {
+              setState(() {
+                _isXray = true;
+              });
+            },
+          ),
+          RadioListTile(
+            title: const Text('Histology Image'),
+            value: false,
+            groupValue: _isXray,
+            onChanged: (value) {
+              setState(() {
+                _isXray = false;
+              });
+            },
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+              onPressed: () {
+                widget.onSellected(_isXray);
+              },
+              child: const Text("Select")),
+        ],
       ),
     );
   }

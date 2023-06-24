@@ -8,6 +8,7 @@ import '../widgets/image.dart';
 import '../widgets/add_and_show_result_button.dart';
 
 import '../providers/for_doctor_screen_state_provider.dart';
+import '../widgets/styled_text.dart';
 
 class ForDoctorsScreen extends StatelessWidget {
   const ForDoctorsScreen({super.key});
@@ -27,24 +28,14 @@ class ForDoctorsScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: shapeHeight),
         children: [
           const SizedBox(height: 10),
-          const Text(
-            "Pick a Medical Image of Breast Cancer Radiology of The Patient.",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color.fromRGBO(199, 40, 107, 1),
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+          const StyledText(
+            text:
+                "Pick a Medical Image of Breast Cancer Radiology (X-Ray) or Histology of The Patient.",
           ),
           const SizedBox(height: 15),
-          const Text(
-            "See The Result OR Prediction Using The Machine Learning Model.",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color.fromRGBO(199, 40, 107, 1),
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+          const StyledText(
+            text:
+                "See The Result OR Prediction Using The Machine Learning Model.",
           ),
           const SizedBox(height: 30),
           Align(

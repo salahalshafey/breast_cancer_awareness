@@ -7,6 +7,7 @@ import 'core/theme/colors.dart';
 import 'core/theme/dark_theme.dart';
 import 'core/theme/light_theme.dart';
 import 'features/account/presentation/pages/profile_screen.dart';
+import 'features/breast_cancer_detection/presentation/pages/prediction_screen.dart';
 import 'features/main_and_menu_screens/main_screen_with_menu.dart';
 import 'features/settings/providers/theme_provider.dart';
 
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         SecondSignUpScreen.routName: (ctx) => const SecondSignUpScreen(),
         MainScreen.routName: (ctx) => const MainScreen(),
         ProfileScreen.routName: (ctx) => const ProfileScreen(),
+        PredictionScreen.routName: (ctx) => const PredictionScreen(),
       },
     );
   }
