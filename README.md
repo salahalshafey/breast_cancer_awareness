@@ -1,14 +1,14 @@
 # breast_cancer_awareness
 
 ## A Flutter project is mainly used for 
-* detecting breast cancer using deep learning 
+* detecting breast cancer using deep learning.
 * providing awareness of this disease.
 
 ## This link provides the details of how we built the Breast Cancer Detection Models for both histopathology and X-ray
 * https://github.com/salahalshafey/breast_cancer_detection.git
 
 ## Download the app in apk for android
-[Download the app](https://firebasestorage.googleapis.com/v0/b/breast-cancer-awareness-bf348.appspot.com/o/the%20app%20in%20apk%2Fbreast_cancer_awareness_v_0_5_0.apk?alt=media&token=e3d928cc-7c89-452c-aee3-20eadfb352f1)
+* [Download the app](https://firebasestorage.googleapis.com/v0/b/breast-cancer-awareness-bf348.appspot.com/o/the%20app%20in%20apk%2Fbreast_cancer_awareness_v_0_5_0.apk?alt=media&token=e3d928cc-7c89-452c-aee3-20eadfb352f1)
 
 
 ## App pages
