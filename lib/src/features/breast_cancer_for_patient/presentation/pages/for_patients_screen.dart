@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class ForPatientsScreen extends StatelessWidget {
+  const ForPatientsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,47 +22,37 @@ class HomeScreen extends StatelessWidget {
             "The Features That Will Be Implemented In This Screen",
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Color.fromRGBO(199, 40, 107, 1),
+              //color: Color.fromRGBO(199, 40, 107, 1),
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 50),
           Text(
-            "General Information About Breast Cancer Awareness like: ",
+            "- Improve spirits for breast cancer patients.",
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Color.fromRGBO(199, 40, 107, 1),
+              //color: Color.fromRGBO(199, 40, 107, 1),
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
           SizedBox(height: 20),
           Text(
-            "- Medical Articles.",
+            "- Healthy life style for patients.",
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Color.fromRGBO(199, 40, 107, 1),
+              //color: Color.fromRGBO(199, 40, 107, 1),
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
           SizedBox(height: 20),
           Text(
-            "- Ways to reduce or prevent breast cancer.",
+            "- Nutrition, Fitness, etc...",
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Color.fromRGBO(199, 40, 107, 1),
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 20),
-          Text(
-            "- How to examine yourself for breast cancer etc...",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color.fromRGBO(199, 40, 107, 1),
+              //color: Color.fromRGBO(199, 40, 107, 1),
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),

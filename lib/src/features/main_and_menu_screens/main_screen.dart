@@ -7,9 +7,9 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import '../../core/util/builders/on_will_pop_dialog.dart';
 import 'main_screen_state_provider.dart';
 
-import '../articles/presentation/pages/for_patients_screen.dart';
-import '../articles/presentation/pages/home_screen.dart';
+import '../breast_cancer_for_normal/presentation/pages/home_screen.dart';
 import '../breast_cancer_detection/presentation/pages/for_doctors_screen.dart';
+import '../breast_cancer_for_patient/presentation/pages/for_patients_screen.dart';
 
 import '../account/presentation/widgets/icon_from_asset.dart';
 import 'widgets/custom_navigation_bar.dart';
@@ -43,7 +43,13 @@ class MainScreen extends StatelessWidget {
     final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return WillPopScope(
-      onWillPop: () => onWillPopWithDialog(context),
+      onWillPop: () async {
+        if (provider.currentPageIndex != 0) {
+          provider.animateToPage(0);
+          return false;
+        }
+        return onWillPopWithDialog(context);
+      },
       child: Scaffold(
         body: Stack(
           alignment: Alignment.center,

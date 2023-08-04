@@ -31,8 +31,12 @@ Future<bool> onWillPopWithDialog(BuildContext context) async {
                     onPressed: () {
                       Navigator.of(context).pop(false);
                     },
-                    child: const Text(
+                    child: Text(
                       "No",
+                      style: TextStyle(
+                        color:
+                            Theme.of(context).appBarTheme.titleTextStyle!.color,
+                      ),
                     ),
                   ),
                 ],

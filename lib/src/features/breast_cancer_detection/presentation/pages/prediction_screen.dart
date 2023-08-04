@@ -47,15 +47,17 @@ class _PredictionScreenState extends State<PredictionScreen> {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  CircularProgressIndicator(),
-                  SizedBox(height: 10),
+                children: [
+                  const CircularProgressIndicator(),
+                  const SizedBox(height: 10),
                   Center(
                     child: Text(
                       "it may take a while, the model is getting downloaded or updated.",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.black54,
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? Colors.black54
+                            : Colors.grey,
                       ),
                     ),
                   )

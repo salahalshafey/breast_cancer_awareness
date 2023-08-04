@@ -31,7 +31,7 @@ class _LinkFormState extends State<LinkForm> {
         decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.only(left: 20, right: 5, top: 5, bottom: 5),
-          hintText: 'Or Past a Link here',
+          hintText: 'Or Paste a Link here',
           hintStyle: const TextStyle(
             color: Color.fromRGBO(112, 112, 112, 0.85),
           ),

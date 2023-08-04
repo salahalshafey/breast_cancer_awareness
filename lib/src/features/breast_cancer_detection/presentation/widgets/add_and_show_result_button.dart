@@ -159,7 +159,12 @@ class _RadioListState extends State<RadioList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 280,
+      constraints: const BoxConstraints(
+        minHeight: 260,
+        maxHeight: 280,
+        minWidth: 200,
+        maxWidth: 350,
+      ),
       padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
