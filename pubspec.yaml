@@ -58,6 +58,9 @@ dependencies:
   flutter_barcode_scanner: ^2.0.0
   firebase_ml_model_downloader: ^0.2.3+3
   tflite: ^1.1.2
+  observe_internet_connectivity: ^1.0.2
+  youtube_player_flutter: ^8.1.2
+  #connectivity_plus: ^4.0.2
   
 
 dev_dependencies:
