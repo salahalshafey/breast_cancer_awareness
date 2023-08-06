@@ -5,10 +5,12 @@ class TextNormal extends StatelessWidget {
     super.key,
     required this.data,
     required this.fontSize,
+    this.color,
   });
 
   final String data;
   final double fontSize;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class TextNormal extends StatelessWidget {
       data,
       textAlign: TextAlign.center,
       style: TextStyle(
-        //color: const Color.fromRGBO(199, 40, 107, 1),
+        color: color,
         fontSize: fontSize,
       ),
     );
@@ -28,10 +30,12 @@ class TextTitle extends StatelessWidget {
     super.key,
     required this.data,
     required this.fontSize,
+    this.color,
   });
 
   final String data;
   final double fontSize;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,7 @@ class TextTitle extends StatelessWidget {
       data,
       textAlign: TextAlign.center,
       style: TextStyle(
-        //color: const Color.fromRGBO(199, 40, 107, 1),
+        color: color,
         fontSize: fontSize,
         fontWeight: FontWeight.bold,
       ),

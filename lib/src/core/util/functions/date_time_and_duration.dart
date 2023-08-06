@@ -47,6 +47,37 @@ String formatedDuration(Duration time) {
   return time.toString().substring(2, 7);
 }
 
+String longFormattedDateTime(DateTime dateTime, {bool seperateByLine = false}) {
+  const List<String> months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  final date =
+      "${months[dateTime.month - 1]} ${dateTime.day}, ${dateTime.year}";
+  return date +
+      (seperateByLine ? '\n' : ' ') +
+      time24To12HoursFormat(dateTime.hour, dateTime.minute);
+}
+
+DateTime getCurrentDateTimeremovedMinutesAndSeconds() =>
+    DateTime.now().copyWith(
+      minute: 0,
+      second: 0,
+      millisecond: 0,
+      microsecond: 0,
+    );
+
 String wellFormatedDuration(Duration duration, {bool lineEach = false}) {
   int durationInSecond = duration.inSeconds;
 

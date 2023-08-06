@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:wakelock/wakelock.dart';
 
 import '../../../../core/util/widgets/default_screen.dart';
+
 import '../widgets/custom_texts.dart';
+import '../widgets/dots_navigator.dart';
+import '../widgets/self_check_page_navigator.dart';
+import 'findings_screen.dart';
 
 class SelfCheckScreen extends StatefulWidget {
   static const routName = '/self-check-screen';
@@ -17,6 +22,39 @@ class SelfCheckScreen extends StatefulWidget {
 class _SelfCheckScreenState extends State<SelfCheckScreen> {
   final PageController _pageController = PageController();
   int _currentPageIndex = 0;
+
+  final _screenOptions = _selfCheckSteps
+      .map((selfCheckStep) => SelfCheckItem(
+            selfCheckStep.title,
+            selfCheckStep.description,
+            selfCheckStep.image,
+          ))
+      .toList();
+
+  void _goToNextPage() {
+    if (_currentPageIndex == _selfCheckSteps.length - 1) {
+      Navigator.of(context).pushReplacementNamed(FindingsScreen.routName);
+      return;
+    }
+
+    _pageController.animateToPage(
+      _currentPageIndex + 1,
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  void _goToPrevPage() {
+    if (_currentPageIndex == 0) {
+      return;
+    }
+
+    _pageController.animateToPage(
+      _currentPageIndex - 1,
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeInOut,
+    );
+  }
 
   @override
   void initState() {
@@ -33,7 +71,7 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
 
   @override
   void dispose() {
-    // Reset system UI overlays when the page is disposed
+    // Reset system UI overlays when the page is disposed (exit full screen)
     SystemChrome.setEnabledSystemUIMode(
       SystemUiMode.manual,
       overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom],
@@ -52,7 +90,13 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
         children: [
-          const Text("Self-check with page navigator"),
+          SelfCheckPageNavigator(
+            numOfPages: _selfCheckSteps.length,
+            currentPageIndex: _currentPageIndex,
+            gotToNextPage: _goToNextPage,
+            gotToPrevPage: _goToPrevPage,
+            color: const Color.fromRGBO(199, 40, 107, 1),
+          ),
           const SizedBox(height: 20),
           SizedBox(
             height: 600,
@@ -63,17 +107,16 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
                   _currentPageIndex = pageindex;
                 });
               },
-              children: _selfCheckSteps
-                  .map((selfCheckStep) => SelfCheckItem(
-                        selfCheckStep.title,
-                        selfCheckStep.description,
-                        selfCheckStep.image,
-                      ))
-                  .toList(),
+              children: _screenOptions,
             ),
           ),
           const SizedBox(height: 20),
-          const Text("dotes navigator"),
+          DotsNavigator(
+            numOfDots: _selfCheckSteps.length,
+            currentPageIndex: _currentPageIndex,
+            colorOfDots: Colors.grey,
+            colorOfCurrentDot: const Color.fromRGBO(199, 40, 107, 1),
+          ),
         ],
       ),
     );
@@ -103,9 +146,13 @@ class SelfCheckItem extends StatelessWidget {
         TextNormal(data: description, fontSize: 22),
         Image.asset(image, width: imageWidth),
       ],
-    );
+    ).animate().fadeIn(duration: 1.seconds);
   }
 }
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////// that data used for self-check screen ////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 class SelfCheckStep {
   final String title;
