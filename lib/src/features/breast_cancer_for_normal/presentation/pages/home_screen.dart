@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../widgets/awareness_title.dart';
 import '../widgets/custom_texts.dart';
+import '../widgets/go_to_screen_with_slide_transition.dart';
+import 'starting_self_check_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -33,7 +35,10 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(height: 30),
           Align(
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () => goToScreenWithSlideTransition(
+                context,
+                const StartingSelfCheckScreen(),
+              ),
               style: const ButtonStyle(
                 padding: MaterialStatePropertyAll(
                     EdgeInsets.symmetric(horizontal: 55)),

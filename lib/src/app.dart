@@ -6,15 +6,17 @@ import 'package:provider/provider.dart';
 import 'core/theme/colors.dart';
 import 'core/theme/dark_theme.dart';
 import 'core/theme/light_theme.dart';
-import 'features/account/presentation/pages/profile_screen.dart';
-import 'features/breast_cancer_detection/presentation/pages/prediction_screen.dart';
-import 'features/main_and_menu_screens/main_screen_with_menu.dart';
-import 'features/settings/providers/theme_provider.dart';
 
 import 'features/account/presentation/pages/sign_in_screen.dart';
 import 'features/account/presentation/pages/first_sign_up_screen.dart';
 import 'features/account/presentation/pages/second_sign_up_screen.dart';
+import 'features/account/presentation/pages/profile_screen.dart';
 import 'features/main_and_menu_screens/main_screen.dart';
+import 'features/breast_cancer_detection/presentation/pages/prediction_screen.dart';
+import 'features/breast_cancer_for_normal/presentation/pages/self_check_screen.dart';
+
+import 'features/main_and_menu_screens/main_screen_with_menu.dart';
+import 'features/settings/providers/theme_provider.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -37,6 +39,7 @@ class MyApp extends StatelessWidget {
         MainScreen.routName: (ctx) => const MainScreen(),
         ProfileScreen.routName: (ctx) => const ProfileScreen(),
         PredictionScreen.routName: (ctx) => const PredictionScreen(),
+        SelfCheckScreen.routName: (ctx) => const SelfCheckScreen(),
       },
     );
   }

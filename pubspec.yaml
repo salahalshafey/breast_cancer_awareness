@@ -60,6 +60,7 @@ dependencies:
   tflite: ^1.1.2
   observe_internet_connectivity: ^1.0.2
   youtube_player_flutter: ^8.1.2
+  wakelock: ^0.6.2
   #connectivity_plus: ^4.0.2
   
 

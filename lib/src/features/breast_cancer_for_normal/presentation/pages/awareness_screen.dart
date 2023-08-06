@@ -1,91 +1,100 @@
-import 'dart:math';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:observe_internet_connectivity/observe_internet_connectivity.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+import '../../../../core/util/widgets/default_screen.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
-import '../../../account/presentation/widgets/backgroud_shapes/profile_screen_shapes.dart';
-import '../../../account/presentation/widgets/backgroud_shapes/second_sign_up_screen_shapes.dart';
-import '../../../account/presentation/widgets/icon_from_asset.dart';
-import '../widgets/awareness_video_or_image.dart';
+
+import '../widgets/youtube_player.dart';
 import 'home_screen.dart';
 
-class AwarenessScreen extends StatelessWidget {
+class AwarenessScreen extends StatefulWidget {
   const AwarenessScreen(this.awarenessInfo, {super.key});
 
   final AwarenessInfo awarenessInfo;
 
   @override
+  State<AwarenessScreen> createState() => _AwarenessScreenState();
+}
+
+class _AwarenessScreenState extends State<AwarenessScreen> {
+  var _isDeviceConnected = false;
+  late StreamSubscription<bool> _connectivitySubscription;
+  late final YoutubePlayerController _controller = YoutubePlayerController(
+    initialVideoId:
+        YoutubePlayer.convertUrlToId(widget.awarenessInfo.videoLink)!,
+    flags: const YoutubePlayerFlags(
+      autoPlay: false,
+    ),
+  );
+
+  @override
+  void initState() {
+    _connectivitySubscription = InternetConnectivity()
+        .observeInternetConnection
+        .listen((bool hasInternetAccess) {
+      setState(() {
+        _isDeviceConnected = hasInternetAccess;
+      });
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _connectivitySubscription.cancel();
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.portraitUp,
+      // DeviceOrientation.portraitDown,
+    ]);
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-      ),
-      body: Stack(
-        alignment: Alignment.center,
+    return DefaultScreen(
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 80),
         children: [
-          const Positioned(
-            bottom: -30,
-            child: IconFromAsset(
-              assetIcon: "assets/images/background_cancer_sympol.png",
-              iconHeight: 150,
-              opacity: 0.62,
-            ),
-          ),
-          const Positioned(
-            right: 0,
-            bottom: 40,
-            child: ShapeForProfileScreen(),
-          ),
-          const Positioned(
-            bottom: 0,
-            left: 0,
-            child: ShapeForSecondSignUpScreen(
-              angle: pi,
-              widthFactor: 0.30,
-            ),
-          ),
-          const Positioned(
-            top: -20,
-            left: -20,
-            child: ShapeForSecondSignUpScreen(
-              angle: -pi / 2,
-              widthFactor: 0.30,
-            ),
-          ),
-          ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 80),
-            children: [
-              // const SizedBox(height: 60),
-              AwarenessVideoOrImage(
-                image: awarenessInfo.image,
-                videoLink: awarenessInfo.videoLink,
-              ),
-              const SizedBox(height: 20),
-              Text(
-                awarenessInfo.title,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Color.fromRGBO(199, 40, 107, 1),
-                  fontSize: 20,
-                  fontWeight: FontWeight.w900,
+          _isDeviceConnected
+              ? YoutubPlayer(
+                  videoLink: widget.awarenessInfo.videoLink,
+                  controller: _controller,
+                )
+              : SizedBox(
+                  height: 250,
+                  child: Image.asset(widget.awarenessInfo.image),
                 ),
-              ),
-              const SizedBox(height: 30),
-              Text(
-                awarenessInfo.description,
-                textAlign: TextAlign.justify,
-                textDirection: firstCharIsArabic(awarenessInfo.description)
-                    ? TextDirection.rtl
-                    : TextDirection.ltr,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          )
+          const SizedBox(height: 20),
+          Text(
+            widget.awarenessInfo.title,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Color.fromRGBO(199, 40, 107, 1),
+              fontSize: 20,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          const SizedBox(height: 30),
+          Text(
+            widget.awarenessInfo.description,
+            textAlign: TextAlign.justify,
+            textDirection: firstCharIsArabic(widget.awarenessInfo.description)
+                ? TextDirection.rtl
+                : TextDirection.ltr,
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );
