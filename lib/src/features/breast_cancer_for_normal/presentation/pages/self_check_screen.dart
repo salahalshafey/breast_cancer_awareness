@@ -8,6 +8,7 @@ import '../../../../core/util/widgets/default_screen.dart';
 import '../widgets/custom_texts.dart';
 import '../widgets/dots_navigator.dart';
 import '../widgets/self_check_page_navigator.dart';
+import '../widgets/switch_to_mirror_button.dart';
 import 'findings_screen.dart';
 
 class SelfCheckScreen extends StatefulWidget {
@@ -144,7 +145,12 @@ class SelfCheckItem extends StatelessWidget {
       children: [
         TextTitle(data: title, fontSize: 24),
         TextNormal(data: description, fontSize: 22),
-        Image.asset(image, width: imageWidth),
+        Stack(
+          children: [
+            Image.asset(image, width: imageWidth),
+            ...switchToMirrorButton(context),
+          ],
+        ),
       ],
     ).animate().fadeIn(duration: 1.seconds);
   }
