@@ -62,6 +62,7 @@ dependencies:
   youtube_player_flutter: ^8.1.2
   wakelock: ^0.6.2
   camera: ^0.10.5+2
+  flutter_local_notifications: ^15.1.0+1
   #connectivity_plus: ^4.0.2
   
 

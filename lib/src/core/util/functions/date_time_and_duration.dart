@@ -47,6 +47,8 @@ String formatedDuration(Duration time) {
   return time.toString().substring(2, 7);
 }
 
+/// * example of returning string: Sunday, August 8, 2023 02:30 PM
+/// * if seperateByLine = true, the time 02:30 PM will be in new line
 String longFormattedDateTime(DateTime dateTime, {bool seperateByLine = false}) {
   const List<String> months = [
     "January",
@@ -63,8 +65,20 @@ String longFormattedDateTime(DateTime dateTime, {bool seperateByLine = false}) {
     "December",
   ];
 
+  const List<String> daysInWeek = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+
   final date =
-      "${months[dateTime.month - 1]} ${dateTime.day}, ${dateTime.year}";
+      "${daysInWeek[dateTime.weekday - 1]}, ${months[dateTime.month - 1]} "
+      "${dateTime.day}, ${dateTime.year}";
+
   return date +
       (seperateByLine ? '\n' : ' ') +
       time24To12HoursFormat(dateTime.hour, dateTime.minute);

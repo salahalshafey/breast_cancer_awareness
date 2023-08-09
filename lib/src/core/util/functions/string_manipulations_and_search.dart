@@ -37,11 +37,8 @@ bool firstCharIsArabic(String text) {
 }
 
 extension on String {
-  Set<String> toSet() {
-    return {for (int i = 0; i < length; i++) substring(i, i + 1)};
-  }
+  Set<String> toSet() => {for (int i = 0; i < length; i++) substring(i, i + 1)};
 
-  List<String> toList() {
-    return [for (int i = 0; i < length; i++) substring(i, i + 1)];
-  }
+  List<String> toList() =>
+      [for (int i = 0; i < length; i++) substring(i, i + 1)];
 }

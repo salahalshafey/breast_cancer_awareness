@@ -12,6 +12,7 @@ void _goToMirrorScreen(BuildContext context) async {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => MirrorScreen(fronCamera: frontCamera),
+        fullscreenDialog: true,
       ),
     );
   } catch (error) {
@@ -45,7 +46,7 @@ List<Widget> switchToMirrorButton(BuildContext context) {
             "SWITCH TO MIRROR",
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 18,
               fontWeight: FontWeight.w900,
               color: Color.fromRGBO(199, 40, 107, 1),
             ),

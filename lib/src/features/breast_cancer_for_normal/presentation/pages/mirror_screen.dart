@@ -11,13 +11,17 @@ class MirrorScreen extends StatefulWidget {
 }
 
 class _MirrorScreenState extends State<MirrorScreen> {
-  late CameraController controller;
+  late CameraController _controller;
 
   @override
   void initState() {
     super.initState();
-    controller = CameraController(widget.fronCamera, ResolutionPreset.max);
-    controller.initialize().then((_) {
+    _controller = CameraController(
+      widget.fronCamera,
+      ResolutionPreset.max,
+      enableAudio: false,
+    );
+    _controller.initialize().then((_) {
       if (!mounted) {
         return;
       }
@@ -27,9 +31,11 @@ class _MirrorScreenState extends State<MirrorScreen> {
         switch (e.code) {
           case 'CameraAccessDenied':
             // Handle access errors here.
+            Navigator.of(context).pop();
             break;
           default:
             // Handle other errors here.
+            Navigator.of(context).pop();
             break;
         }
       }
@@ -38,21 +44,33 @@ class _MirrorScreenState extends State<MirrorScreen> {
 
   @override
   void dispose() {
-    controller.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (!controller.value.isInitialized) {
-      return const Scaffold(
-        body: Center(
-          child: Text("Error Happend."),
-        ),
+    if (!_controller.value.isInitialized) {
+      return Scaffold(
+        body: Container(color: Colors.black),
       );
     }
     return Scaffold(
-      body: CameraPreview(controller),
+      body: CameraPreview(
+        _controller,
+        child: Positioned(
+          top: 10,
+          right: 10,
+          child: IconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: const Icon(
+              Icons.close,
+              color: Colors.white,
+              size: 50,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

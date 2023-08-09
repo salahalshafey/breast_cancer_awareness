@@ -46,6 +46,7 @@ class NotesAndReminderScreen extends StatelessWidget {
                 data: longFormattedDateTime(
                   getCurrentDateTimeremovedMinutesAndSeconds()
                       .add(const Duration(days: 14)),
+                  seperateByLine: true,
                 ),
                 fontSize: 22,
               ),
