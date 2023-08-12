@@ -5,10 +5,18 @@ import '../../dispose_container.dart';
 class MainScreenState extends DisposableProvider {
   final PageController _pageController = PageController();
   int _currentPageIndex = 0;
+  bool _didLunchSelfCheckScreenOnce = false;
 
   int get currentPageIndex => _currentPageIndex;
 
   PageController get pageController => _pageController;
+
+  bool didLunchSelfCheckScreenOnce() => _didLunchSelfCheckScreenOnce;
+
+  void setAsAlreadyLunchedSelfCheckScreenOnce() {
+    _didLunchSelfCheckScreenOnce = true;
+    // notifyListeners();
+  }
 
   /* PageController initializePageController(PageController pageController) {
     _pageController = pageController;

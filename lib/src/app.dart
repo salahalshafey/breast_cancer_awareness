@@ -20,8 +20,10 @@ import 'features/breast_cancer_for_normal/presentation/pages/self_check_screen.d
 import 'features/main_and_menu_screens/main_screen_with_menu.dart';
 import 'features/settings/providers/theme_provider.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      navigatorKey: navigatorKey,
       title: 'Breast Cancer Awareness',
       theme: myLightTheme(),
       darkTheme: myDarkTheme(),

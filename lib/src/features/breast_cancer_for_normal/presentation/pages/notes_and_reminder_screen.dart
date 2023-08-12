@@ -1,7 +1,9 @@
-import 'package:breast_cancer_awareness/src/core/util/functions/date_time_and_duration.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/util/widgets/default_screen.dart';
+import '../../../../core/util/functions/date_time_and_duration.dart';
+
+import '../providers/notification.dart';
 import '../widgets/custom_texts.dart';
 
 class NotesAndReminderScreen extends StatelessWidget {
@@ -53,7 +55,13 @@ class NotesAndReminderScreen extends StatelessWidget {
             if (finding != "All is well")
               Align(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Noti.initialize();
+                    Noti.showBigTextNotification(
+                      title: "Self-Check",
+                      body: "Your next self-check is due.",
+                    );
+                  },
                   style: const ButtonStyle(
                     padding: MaterialStatePropertyAll(
                         EdgeInsets.symmetric(horizontal: 100)),

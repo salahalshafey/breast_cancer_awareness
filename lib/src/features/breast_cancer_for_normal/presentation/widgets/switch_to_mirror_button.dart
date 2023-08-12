@@ -1,6 +1,7 @@
-import 'package:breast_cancer_awareness/src/core/util/builders/custom_alret_dialoge.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../core/util/builders/custom_alret_dialoge.dart';
 
 import '../pages/mirror_screen.dart';
 
@@ -9,10 +10,10 @@ void _goToMirrorScreen(BuildContext context) async {
     final cameras = await availableCameras();
     final frontCamera = _getFrontCamera(cameras);
 
+    // ignore: use_build_context_synchronously
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => MirrorScreen(fronCamera: frontCamera),
-        fullscreenDialog: true,
       ),
     );
   } catch (error) {

@@ -63,6 +63,7 @@ dependencies:
   wakelock: ^0.6.2
   camera: ^0.10.5+2
   flutter_local_notifications: ^15.1.0+1
+  flutter_timezone: ^1.0.7
   #connectivity_plus: ^4.0.2
   
 
