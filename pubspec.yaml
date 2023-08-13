@@ -32,8 +32,10 @@ dependencies:
     sdk: flutter
 
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+ # flutter_local_notifications:
+  #  git:
+    #  url: https://github.com/salahalshafey/flutter_local_notifications.git
+     # path: flutter_local_notifications
   cupertino_icons: ^1.0.2
   provider: ^6.0.5
   get_it: ^7.2.0

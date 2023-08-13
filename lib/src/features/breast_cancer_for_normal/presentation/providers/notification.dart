@@ -64,6 +64,31 @@ class Noti {
     tz.initializeTimeZones();
     final String currentTimeZone = await FlutterTimezone.getLocalTimezone();
     tz.setLocalLocation(tz.getLocation(currentTimeZone));
+
+    // it will be every 2 weeks, the reason that I changed the pub.dev file:
+    // C:\Users\salah alaa\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_local_notifications-15.1.0+1\android\src\main\java\com\dexterous\flutterlocalnotifications
+    // in the file 'FlutterLocalNotificationsPlugin.java' line 744
+    // C:\Users\salah alaa\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_local_notifications-15.1.0+1\ios\Classes
+    // in the file 'FlutterLocalNotificationsPlugin.m' line 745
+    flutterLocalNotificationsPlugin.periodicallyShow(
+      id,
+      title,
+      body,
+      RepeatInterval.weekly, // it will be every 2 weeks
+      notificationDetails,
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
     // print(currentTimeZone);
 
     //print(tz.TZDateTime.now(tz.local).add(const Duration(seconds: 30)));
@@ -79,7 +104,7 @@ class Noti {
 
     tz.TZDateTime.from(scheduledDate, tz.getLocation(currentTimeZone));*/
 
-    await flutterLocalNotificationsPlugin.zonedSchedule(
+    /*await flutterLocalNotificationsPlugin.zonedSchedule(
       id,
       title,
       body,
@@ -88,6 +113,4 @@ class Noti {
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
-    );
-  }
-}
+    );*/

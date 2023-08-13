@@ -6,14 +6,37 @@ import '../../../../core/util/functions/date_time_and_duration.dart';
 import '../providers/notification.dart';
 import '../widgets/custom_texts.dart';
 
-class NotesAndReminderScreen extends StatelessWidget {
+class NotesAndReminderScreen extends StatefulWidget {
   static const routName = '/notes-and-reminder-screen';
 
   const NotesAndReminderScreen({super.key});
 
   @override
+  State<NotesAndReminderScreen> createState() => _NotesAndReminderScreenState();
+}
+
+class _NotesAndReminderScreenState extends State<NotesAndReminderScreen> {
+  bool _reminderSeted = false;
+
+  String get _reminder => _reminderSeted
+      ? "Your reminder has been set:"
+      : "Do you want to be reminded to check again in 2 weeks?";
+
+  void _setLocalNotificationEveryTwoWeeks() async {
+    await Noti.initialize();
+    Noti.showBigTextNotification(
+      title: "Self-Check",
+      body: "Your next self-check is due.",
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     final finding = ModalRoute.of(context)!.settings.arguments as String;
+
+    if (finding == "All is well") {
+      _setLocalNotificationEveryTwoWeeks();
+    }
 
     return WillPopScope(
       onWillPop: () async {
@@ -37,30 +60,28 @@ class NotesAndReminderScreen extends StatelessWidget {
                   ? "If you noticed anything unusual when examining your breasts, "
                       "stay calm! Check the area again after your next menstruation. "
                       "If the change persists, you should see a doctor.\n\n"
-                      "Do you want to be reminded to check again in 2 weeks?"
+                      "$_reminder"
                   : "You will automatically be reminded of your next self-check.\n\n"
                       "This is on:",
               fontSize: 22,
             ),
-            const SizedBox(height: 20),
-            if (finding == "All is well")
+            if (finding == "All is well" || _reminderSeted)
               TextTitle(
                 data: longFormattedDateTime(
-                  getCurrentDateTimeremovedMinutesAndSeconds()
-                      .add(const Duration(days: 14)),
+                  DateTime.now().add(const Duration(days: 14)),
                   seperateByLine: true,
                 ),
                 fontSize: 22,
               ),
-            if (finding != "All is well")
+            if (finding != "All is well" && !_reminderSeted) ...[
+              const SizedBox(height: 20),
               Align(
                 child: ElevatedButton(
                   onPressed: () {
-                    Noti.initialize();
-                    Noti.showBigTextNotification(
-                      title: "Self-Check",
-                      body: "Your next self-check is due.",
-                    );
+                    _setLocalNotificationEveryTwoWeeks();
+                    setState(() {
+                      _reminderSeted = true;
+                    });
                   },
                   style: const ButtonStyle(
                     padding: MaterialStatePropertyAll(
@@ -74,6 +95,7 @@ class NotesAndReminderScreen extends StatelessWidget {
                   ),
                 ),
               ),
+            ],
             const SizedBox(height: 40),
             const Placeholder(),
           ],
