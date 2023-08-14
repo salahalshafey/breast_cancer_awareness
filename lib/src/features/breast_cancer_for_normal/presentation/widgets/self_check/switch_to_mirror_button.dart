@@ -1,9 +1,9 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../../core/util/builders/custom_alret_dialoge.dart';
 
-import '../pages/mirror_screen.dart';
+import '../../pages/mirror_screen.dart';
 
 void _goToMirrorScreen(BuildContext context) async {
   try {

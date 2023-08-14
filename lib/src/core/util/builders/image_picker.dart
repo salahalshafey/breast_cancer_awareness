@@ -4,7 +4,14 @@ import 'package:image_picker/image_picker.dart';
 /////// Don't forget to get image_picker package by using this command: flutter pub add image_picker////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Future<XFile?> myImagePicker(BuildContext context) async {
+Future<XFile?> myImagePicker(
+  BuildContext context, {
+  double maxWidth = 960,
+  double? maxHeight,
+  int imageQuality = 50,
+  CameraDevice preferredCameraDevice = CameraDevice.front,
+  bool requestFullMetadata = true,
+}) async {
   final choiceCamera = await showDialog<bool>(
       context: context,
       builder: (context) => Dialog(
@@ -40,7 +47,10 @@ Future<XFile?> myImagePicker(BuildContext context) async {
   }
   return ImagePicker().pickImage(
     source: choiceCamera ? ImageSource.camera : ImageSource.gallery,
-    imageQuality: 50,
-    maxWidth: 960,
+    imageQuality: imageQuality,
+    maxWidth: maxWidth,
+    maxHeight: maxHeight,
+    preferredCameraDevice: CameraDevice.front,
+    requestFullMetadata: requestFullMetadata,
   );
 }

@@ -22,6 +22,8 @@ class DefaultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
@@ -35,7 +37,7 @@ class DefaultScreen extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Positioned(
-            bottom: -30,
+            bottom: -30 - keyboardHeight,
             child: containingBackgroundCancerSympol
                 ? const IconFromAsset(
                     assetIcon: "assets/images/background_cancer_sympol.png",
@@ -44,15 +46,15 @@ class DefaultScreen extends StatelessWidget {
                   )
                 : const SizedBox(),
           ),
-          const Positioned(
+          Positioned(
+            bottom: 40 - keyboardHeight,
             right: 0,
-            bottom: 40,
-            child: ShapeForProfileScreen(),
+            child: const ShapeForProfileScreen(),
           ),
-          const Positioned(
-            bottom: 0,
+          Positioned(
+            bottom: 0 - keyboardHeight,
             left: 0,
-            child: ShapeForSecondSignUpScreen(
+            child: const ShapeForSecondSignUpScreen(
               angle: pi,
               widthFactor: 0.30,
             ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/awareness_title.dart';
+import '../widgets/awareness/awareness_title.dart';
 import '../widgets/custom_texts.dart';
 import '../widgets/go_to_screen_with_slide_transition.dart';
 import 'starting_self_check_screen.dart';

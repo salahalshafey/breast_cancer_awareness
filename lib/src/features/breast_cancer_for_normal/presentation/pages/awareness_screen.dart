@@ -8,7 +8,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../../../../core/util/widgets/default_screen.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 
-import '../widgets/youtube_player.dart';
+import '../widgets/awareness/youtube_player.dart';
 import 'home_screen.dart';
 
 class AwarenessScreen extends StatefulWidget {

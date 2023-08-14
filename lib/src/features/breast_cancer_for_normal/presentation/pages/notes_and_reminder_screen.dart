@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/util/widgets/default_screen.dart';
 import '../../../../core/util/functions/date_time_and_duration.dart';
 
 import '../providers/notification.dart';
+import '../providers/add_notes_state_provider.dart';
+
+import '../widgets/add_notes/add_notes.dart';
 import '../widgets/custom_texts.dart';
 
 class NotesAndReminderScreen extends StatefulWidget {
@@ -42,63 +46,66 @@ class _NotesAndReminderScreenState extends State<NotesAndReminderScreen> {
       onWillPop: () async {
         return true;
       },
-      child: DefaultScreen(
-        containingBackgroundCancerSympol: false,
-        containingAppBar: false,
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 80),
-          children: [
-            const SizedBox(height: 20),
-            TextTitle(
-              data: finding != "All is well" ? "Don't worry" : "Next reminder",
-              fontSize: 24,
-              color: const Color.fromRGBO(199, 40, 107, 1),
-            ),
-            const SizedBox(height: 20),
-            TextNormal(
-              data: finding != "All is well"
-                  ? "If you noticed anything unusual when examining your breasts, "
-                      "stay calm! Check the area again after your next menstruation. "
-                      "If the change persists, you should see a doctor.\n\n"
-                      "$_reminder"
-                  : "You will automatically be reminded of your next self-check.\n\n"
-                      "This is on:",
-              fontSize: 22,
-            ),
-            if (finding == "All is well" || _reminderSeted)
+      child: ChangeNotifierProvider<AddNotesStateProvider>(
+        create: (context) => AddNotesStateProvider(),
+        child: DefaultScreen(
+          containingBackgroundCancerSympol: false,
+          containingAppBar: false,
+          child: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 80),
+            children: [
+              const SizedBox(height: 20),
               TextTitle(
-                data: longFormattedDateTime(
-                  DateTime.now().add(const Duration(days: 14)),
-                  seperateByLine: true,
-                ),
+                data:
+                    finding != "All is well" ? "Don't worry" : "Next reminder",
+                fontSize: 24,
+                color: const Color.fromRGBO(199, 40, 107, 1),
+              ),
+              const SizedBox(height: 20),
+              TextNormal(
+                data: finding != "All is well"
+                    ? "If you noticed anything unusual when examining your breasts, "
+                        "stay calm! Check the area again after your next menstruation. "
+                        "If the change persists, you should see a doctor.\n\n"
+                        "$_reminder"
+                    : "You will automatically be reminded of your next self-check.\n\n"
+                        "This is on:",
                 fontSize: 22,
               ),
-            if (finding != "All is well" && !_reminderSeted) ...[
-              const SizedBox(height: 20),
-              Align(
-                child: ElevatedButton(
-                  onPressed: () {
-                    _setLocalNotificationEveryTwoWeeks();
-                    setState(() {
-                      _reminderSeted = true;
-                    });
-                  },
-                  style: const ButtonStyle(
-                    padding: MaterialStatePropertyAll(
-                        EdgeInsets.symmetric(horizontal: 100)),
+              if (finding == "All is well" || _reminderSeted)
+                TextTitle(
+                  data: longFormattedDateTime(
+                    DateTime.now().add(const Duration(days: 14)),
+                    seperateByLine: true,
                   ),
-                  child: const Text(
-                    "OK",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                ),
+              if (finding != "All is well" && !_reminderSeted) ...[
+                const SizedBox(height: 20),
+                Align(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _setLocalNotificationEveryTwoWeeks();
+                      setState(() {
+                        _reminderSeted = true;
+                      });
+                    },
+                    style: const ButtonStyle(
+                        fixedSize:
+                            MaterialStatePropertyAll(Size.fromWidth(260))),
+                    child: const Text(
+                      "OK",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ],
+              const SizedBox(height: 40),
+              const AddNotes(),
             ],
-            const SizedBox(height: 40),
-            const Placeholder(),
-          ],
+          ),
         ),
       ),
     );
