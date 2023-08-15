@@ -10,6 +10,7 @@ import '../custom_texts.dart';
 import 'image_with_clear_badge.dart';
 import 'note_button.dart';
 import 'note_text_field.dart';
+import 'record_and_play_voice.dart';
 
 class AddNotes extends StatelessWidget {
   const AddNotes({super.key});
@@ -37,7 +38,11 @@ class AddNotes extends StatelessWidget {
             ),
             NoteButton(
               icon: Icons.mic_external_on,
-              onTap: () => showNoteDialog(context, child: const Text("data")),
+              // onTap: () => showNoteDialog(context, child: const Text("data")),
+              onTap: () => showBottomSheet(
+                context,
+                child: RecordAndPlayVoice(addNoteState),
+              ),
             ),
             NoteButton(
               icon: Icons.camera_alt,
@@ -78,7 +83,7 @@ Future<void> showNoteDialog(BuildContext context,
   await showDialog(
     context: context,
     barrierDismissible: false,
-    builder: (BuildContext context) {
+    builder: (context) {
       return Dialog(
         child: SizedBox(
           height: 260,
@@ -86,6 +91,22 @@ Future<void> showNoteDialog(BuildContext context,
           child: child,
         ),
       );
+    },
+  );
+
+  Wakelock.disable();
+}
+
+void showBottomSheet(BuildContext context, {required Widget child}) async {
+  Wakelock.enable();
+
+  await showModalBottomSheet(
+    context: context,
+    isDismissible: false,
+    shape: const BeveledRectangleBorder(),
+    enableDrag: false,
+    builder: (context) {
+      return SizedBox(height: 230, child: child);
     },
   );
 

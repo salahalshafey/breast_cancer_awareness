@@ -38,9 +38,12 @@ class _NoteTextFieldState extends State<NoteTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           TextField(
@@ -105,6 +108,7 @@ class _NoteTextFieldState extends State<NoteTextField> {
               ),
             ],
           ),
+          if (keyboardHeight != 0) const Spacer(),
         ],
       ),
     );

@@ -66,6 +66,8 @@ dependencies:
   camera: ^0.10.5+2
   flutter_local_notifications: ^15.1.0+1
   flutter_timezone: ^1.0.7
+  flutter_sound: ^9.2.13
+  permission_handler: ^10.4.3
   #connectivity_plus: ^4.0.2
   
 
