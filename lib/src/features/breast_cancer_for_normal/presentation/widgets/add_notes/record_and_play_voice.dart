@@ -21,7 +21,10 @@ class RecordAndPlayVoice extends StatefulWidget {
 
 class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
   final _recorder = FlutterSoundRecorder();
+
   bool _isRecording = false;
+  bool _isStarted = false;
+
   late String? _recorderFilePath = widget.addNoteState.recordFilePath;
   final _toFilePath = "${DateTime.now().toString().hashCode}.aac";
 
@@ -59,6 +62,7 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
 
     setState(() {
       _isRecording = true;
+      _isStarted = true;
     });
   }
 
@@ -67,7 +71,46 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
 
     setState(() {
       _isRecording = false;
+      _isStarted = false;
       _recorderFilePath = path;
+    });
+  }
+
+  Future<void> _resumeRecorder() async {
+    await _recorder.resumeRecorder();
+
+    setState(() {
+      _isRecording = true;
+    });
+  }
+
+  Future<void> _pauseRecorder() async {
+    await _recorder.pauseRecorder();
+    final path = await _recorder.getRecordURL(path: _toFilePath);
+
+    setState(() {
+      _isRecording = false;
+      _recorderFilePath = path;
+    });
+  }
+
+  Future<void> _toggoleAudioRecording() async {
+    if (_isStarted && _isRecording) {
+      await _pauseRecorder();
+    } else if (_isStarted && !_isRecording) {
+      await _resumeRecorder();
+    } else {
+      await _startTheRecorder();
+    }
+  }
+
+  Future<void> _deleteRecording() async {
+    await _recorder.stopRecorder();
+
+    setState(() {
+      _isRecording = false;
+      _isStarted = false;
+      _recorderFilePath = null;
     });
   }
 
@@ -115,11 +158,7 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                onPressed: () {
-                  setState(() {
-                    _recorderFilePath = null;
-                  });
-                },
+                onPressed: _deleteRecording,
                 icon: const Icon(Icons.delete, size: 40),
               )
                   .animate(
@@ -129,11 +168,7 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
                   .scaleXY(begin: 0, end: 1, duration: 250.ms)
                   .fade(begin: 0, end: 1),
               ElevatedButton(
-                onPressed: () async {
-                  _recorder.isRecording
-                      ? await _stopTheRecorder()
-                      : await _startTheRecorder();
-                },
+                onPressed: _toggoleAudioRecording,
                 style: ButtonStyle(
                   fixedSize: const MaterialStatePropertyAll(Size(70, 70)),
                   shape: MaterialStatePropertyAll(RoundedRectangleBorder(
@@ -141,7 +176,7 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
                   padding: const MaterialStatePropertyAll(EdgeInsets.all(8.0)),
                 ),
                 child: Icon(
-                  _recorder.isRecording ? Icons.stop : Icons.mic,
+                  _isRecording ? Icons.pause : Icons.mic,
                   size: 40,
                 ),
               ),
@@ -185,9 +220,13 @@ class RecordInfo extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            formatedDuration(duration),
-            style: const TextStyle(fontSize: 18),
+          SizedBox(
+            width: 70,
+            child: Text(
+              duration.inSeconds.toString(), // formatedDuration(duration),
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 18),
+            ),
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -216,7 +255,20 @@ class RecordInfo extends StatelessWidget {
             begin: 1,
             end: 0,
           ),
-          const SizedBox(width: 50), // show decibels
+          Container(
+            decoration: BoxDecoration(border: Border.all(color: Colors.red)),
+            width: 70,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: (decibels / 71.0) * 70.0,
+                  height: 10,
+                  color: Colors.red,
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

@@ -144,7 +144,7 @@ class SelfCheckItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         TextTitle(data: title, fontSize: 24),
-        TextNormal(data: description, fontSize: 22),
+        TextNormal(data: description, fontSize: 20),
         Stack(
           children: [
             Image.asset(image, width: imageWidth),

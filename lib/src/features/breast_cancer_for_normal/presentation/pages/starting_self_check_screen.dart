@@ -57,6 +57,7 @@ class StartingSelfCheckScreen extends StatelessWidget {
                 "START SELF-CHECK",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
+                  fontSize: 18,
                 ),
               ),
             ),
@@ -71,6 +72,7 @@ class StartingSelfCheckScreen extends StatelessWidget {
                 "WHAT SHOULD I LOOK FOR?",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
+                  fontSize: 18,
                 ),
               ),
             ),

@@ -47,6 +47,7 @@ class HomeScreen extends StatelessWidget {
                 "SELF-CHECK NOW",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
+                  fontSize: 18,
                 ),
               ),
             ),
@@ -58,6 +59,7 @@ class HomeScreen extends StatelessWidget {
                 "MY BREAST-CHECK HISTORY",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
+                  fontSize: 18,
                 ),
               ),
             ),
@@ -66,7 +68,7 @@ class HomeScreen extends StatelessWidget {
           const TextTitle(
             data:
                 "Breast Cancer Awareness\nAnd\nWhy early detection is imprtant",
-            fontSize: 24,
+            fontSize: 22,
           ),
           const SizedBox(height: 30),
           for (int i = 0; i < _awarenessInfoes.length; i++)

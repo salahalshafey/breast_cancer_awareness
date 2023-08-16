@@ -86,7 +86,7 @@ Future<void> showNoteDialog(BuildContext context,
     builder: (context) {
       return Dialog(
         child: SizedBox(
-          height: 260,
+          height: 270,
           width: 200,
           child: child,
         ),
