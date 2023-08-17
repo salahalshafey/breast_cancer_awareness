@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -24,16 +23,14 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
 
   bool _isRecording = false;
   bool _isStarted = false;
+  DateTime _lastRecordingTime = DateTime.now();
+  Duration _lastRecordingDuration = Duration.zero;
 
   late String? _recorderFilePath = widget.addNoteState.recordFilePath;
   final _toFilePath = "${DateTime.now().toString().hashCode}.aac";
 
   @override
   void initState() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
-
     _initTheRecorder();
 
     super.initState();
@@ -48,6 +45,7 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
         context: context,
         content: 'We need microphone permission to send the recorder.',
       );
+      // Navigator.of(context).pop();
       return;
     }
 
@@ -63,6 +61,7 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
     setState(() {
       _isRecording = true;
       _isStarted = true;
+      _lastRecordingTime = DateTime.now();
     });
   }
 
@@ -72,6 +71,7 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
     setState(() {
       _isRecording = false;
       _isStarted = false;
+      _lastRecordingDuration = Duration.zero;
       _recorderFilePath = path;
     });
   }
@@ -81,6 +81,7 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
 
     setState(() {
       _isRecording = true;
+      _lastRecordingTime = DateTime.now();
     });
   }
 
@@ -91,6 +92,7 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
     setState(() {
       _isRecording = false;
       _recorderFilePath = path;
+      _lastRecordingDuration += DateTime.now().difference(_lastRecordingTime);
     });
   }
 
@@ -110,18 +112,13 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
     setState(() {
       _isRecording = false;
       _isStarted = false;
+      _lastRecordingDuration = Duration.zero;
       _recorderFilePath = null;
     });
   }
 
   @override
   void dispose() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.portraitUp,
-    ]);
-
     _recorder.closeRecorder();
 
     super.dispose();
@@ -139,12 +136,17 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          // recording state or audio player
           StreamBuilder(
             stream: _recorder.onProgress,
             builder: (context, snapshot) {
               if (snapshot.hasData & _isRecording) {
+                final currentDuration =
+                    DateTime.now().difference(_lastRecordingTime) +
+                        _lastRecordingDuration;
+
                 return RecordInfo(
-                  duration: snapshot.data!.duration,
+                  duration: currentDuration,
                   decibels: snapshot.data!.decibels ?? 0,
                 );
               }
@@ -154,6 +156,8 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
                   : const SizedBox(height: 55);
             },
           ),
+
+          // recorder | pause button and delete recorder button
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -183,6 +187,8 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
               const SizedBox(width: 60),
             ],
           ),
+
+          // actions appears at the bottom
           ActionsButtons(
             onSave: () async {
               if (_isRecording) {
@@ -223,7 +229,7 @@ class RecordInfo extends StatelessWidget {
           SizedBox(
             width: 70,
             child: Text(
-              duration.inSeconds.toString(), // formatedDuration(duration),
+              formatedDuration(duration),
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 18),
             ),

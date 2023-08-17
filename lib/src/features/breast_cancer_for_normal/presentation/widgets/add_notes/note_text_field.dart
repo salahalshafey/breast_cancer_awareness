@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../providers/add_notes_state_provider.dart';
 
@@ -15,26 +14,6 @@ class NoteTextField extends StatefulWidget {
 class _NoteTextFieldState extends State<NoteTextField> {
   late final TextEditingController _controller =
       TextEditingController(text: widget.addNoteState.text);
-
-  @override
-  void initState() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.portraitUp,
-    ]);
-
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

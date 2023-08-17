@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:wakelock/wakelock.dart';
 
@@ -48,7 +49,7 @@ class AddNotes extends StatelessWidget {
               icon: Icons.camera_alt,
               onTap: () async {
                 final imageFile =
-                    await myImagePicker(context, imageQuality: 100);
+                    await myImagePicker(context, imageQuality: 80);
                 if (imageFile == null) {
                   return;
                 }
@@ -76,9 +77,11 @@ class AddNotes extends StatelessWidget {
   }
 }
 
-Future<void> showNoteDialog(BuildContext context,
-    {required Widget child}) async {
+void showNoteDialog(BuildContext context, {required Widget child}) async {
   Wakelock.enable();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
 
   await showDialog(
     context: context,
@@ -95,10 +98,18 @@ Future<void> showNoteDialog(BuildContext context,
   );
 
   Wakelock.disable();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+    DeviceOrientation.portraitUp,
+  ]);
 }
 
 void showBottomSheet(BuildContext context, {required Widget child}) async {
   Wakelock.enable();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
 
   await showModalBottomSheet(
     context: context,
@@ -111,4 +122,9 @@ void showBottomSheet(BuildContext context, {required Widget child}) async {
   );
 
   Wakelock.disable();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+    DeviceOrientation.portraitUp,
+  ]);
 }

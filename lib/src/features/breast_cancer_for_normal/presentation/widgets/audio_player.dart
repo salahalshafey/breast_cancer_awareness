@@ -46,7 +46,7 @@ class _AudioPlayerState extends State<AudioPlayer> {
       });
     });
 
-    await _audioPlayer.startPlayer(
+    final duration = await _audioPlayer.startPlayer(
       fromURI: widget.recorderFilePath,
       whenFinished: () {
         _audioPlayer.stopPlayer();
@@ -62,6 +62,7 @@ class _AudioPlayerState extends State<AudioPlayer> {
 
     setState(() {
       _isStarted = true;
+      _duration = duration ?? Duration.zero;
     });
   }
 
@@ -141,12 +142,13 @@ class _AudioPlayerState extends State<AudioPlayer> {
               min: 0,
               max: _duration.inMilliseconds.toDouble(),
               value: _position.inMilliseconds.toDouble(),
-              onChanged: (newPosition) async {
-                await _audioPlayer
-                    .seekToPlayer(Duration(milliseconds: newPosition.toInt()));
+              onChanged: (value) async {
+                final newPosition = Duration(milliseconds: value.toInt());
+
+                await _audioPlayer.seekToPlayer(newPosition);
 
                 setState(() {
-                  _position = Duration(milliseconds: newPosition.toInt());
+                  _position = newPosition;
                 });
               },
             ),
