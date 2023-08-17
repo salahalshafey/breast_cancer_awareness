@@ -117,7 +117,7 @@ void showBottomSheet(BuildContext context, {required Widget child}) async {
     shape: const BeveledRectangleBorder(),
     enableDrag: false,
     builder: (context) {
-      return SizedBox(height: 230, child: child);
+      return SizedBox(height: 170, child: child);
     },
   );
 

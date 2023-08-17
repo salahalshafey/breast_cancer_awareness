@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../../../../core/theme/colors.dart';
 import '../../../../../core/util/builders/custom_snack_bar.dart';
 import '../../../../../core/util/functions/date_time_and_duration.dart';
 
@@ -25,9 +26,22 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
   bool _isStarted = false;
   DateTime _lastRecordingTime = DateTime.now();
   Duration _lastRecordingDuration = Duration.zero;
+  Icon _micOrPauseIcon = const Icon(Icons.mic, size: 40, key: ValueKey(1));
 
   late String? _recorderFilePath = widget.addNoteState.recordFilePath;
   final _toFilePath = "${DateTime.now().toString().hashCode}.aac";
+
+  final List<double> _decibelsProgress = [];
+  List<double> _getCurrentdecibelsProgress(double decibels) {
+    if (_decibelsProgress.length < 70) {
+      _decibelsProgress.add(decibels);
+    } else {
+      _decibelsProgress.removeAt(0);
+      _decibelsProgress.add(decibels);
+    }
+
+    return _decibelsProgress;
+  }
 
   @override
   void initState() {
@@ -50,7 +64,7 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
     }
 
     await _recorder.openRecorder();
-    _recorder.setSubscriptionDuration(const Duration(milliseconds: 500));
+    _recorder.setSubscriptionDuration(const Duration(milliseconds: 20));
   }
 
   Future<void> _startTheRecorder() async {
@@ -65,6 +79,7 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
     });
   }
 
+  // ignore: unused_element
   Future<void> _stopTheRecorder() async {
     final path = await _recorder.stopRecorder();
 
@@ -104,6 +119,12 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
     } else {
       await _startTheRecorder();
     }
+
+    setState(() {
+      _micOrPauseIcon = _isRecording
+          ? const Icon(Icons.pause, size: 40, key: ValueKey(2))
+          : const Icon(Icons.mic, size: 40, key: ValueKey(1));
+    });
   }
 
   Future<void> _deleteRecording() async {
@@ -145,9 +166,12 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
                     DateTime.now().difference(_lastRecordingTime) +
                         _lastRecordingDuration;
 
+                final decibelsProgress =
+                    _getCurrentdecibelsProgress(snapshot.data!.decibels ?? 0);
+
                 return RecordInfo(
                   duration: currentDuration,
-                  decibels: snapshot.data!.decibels ?? 0,
+                  decibelsProgress: decibelsProgress,
                 );
               }
 
@@ -157,7 +181,7 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
             },
           ),
 
-          // recorder | pause button and delete recorder button
+          // recorder | pause button and delete recorder button and save button
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -179,29 +203,38 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
                       borderRadius: BorderRadius.circular(1000))),
                   padding: const MaterialStatePropertyAll(EdgeInsets.all(8.0)),
                 ),
-                child: Icon(
-                  _isRecording ? Icons.pause : Icons.mic,
-                  size: 40,
+                child: AnimatedSwitcher(
+                  duration: 300.ms,
+                  child: _micOrPauseIcon,
+                  transitionBuilder: (child, animation) {
+                    return ScaleTransition(scale: animation, child: child);
+                  },
                 ),
               ),
-              const SizedBox(width: 60),
+              IconButton(
+                onPressed: () async {
+                  if (_isRecording) {
+                    final path = await _recorder.stopRecorder();
+                    widget.addNoteState.setRecord(path);
+                    // ignore: use_build_context_synchronously
+                    Navigator.of(context).pop();
+                    return;
+                  }
+
+                  widget.addNoteState.setRecord(_recorderFilePath);
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(Icons.check, size: 40),
+              )
+                  .animate(
+                    target: (widget.addNoteState.recordFilePath !=
+                            _recorderFilePath)
+                        ? 1
+                        : 0,
+                  )
+                  .scaleXY(begin: 0, end: 1, duration: 250.ms)
+                  .fade(begin: 0, end: 1),
             ],
-          ),
-
-          // actions appears at the bottom
-          ActionsButtons(
-            onSave: () async {
-              if (_isRecording) {
-                final path = await _recorder.stopRecorder();
-                widget.addNoteState.setRecord(path);
-                // ignore: use_build_context_synchronously
-                Navigator.of(context).pop();
-                return;
-              }
-
-              widget.addNoteState.setRecord(_recorderFilePath);
-              Navigator.of(context).pop();
-            },
           ),
         ],
       ),
@@ -214,15 +247,16 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
 ////////////////////////////////////////////////////////////////////////////////
 
 class RecordInfo extends StatelessWidget {
-  const RecordInfo({super.key, required this.duration, required this.decibels});
+  const RecordInfo(
+      {super.key, required this.duration, required this.decibelsProgress});
 
   final Duration duration;
-  final double decibels;
+  final List<double> decibelsProgress;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -241,7 +275,7 @@ class RecordInfo extends StatelessWidget {
                 height: 10,
                 width: 10,
                 decoration: const BoxDecoration(
-                  color: Colors.red,
+                  color: MyColors.primaryColor,
                   shape: BoxShape.circle,
                 ),
               ),
@@ -261,20 +295,7 @@ class RecordInfo extends StatelessWidget {
             begin: 1,
             end: 0,
           ),
-          Container(
-            decoration: BoxDecoration(border: Border.all(color: Colors.red)),
-            width: 70,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: (decibels / 71.0) * 70.0,
-                  height: 10,
-                  color: Colors.red,
-                ),
-              ],
-            ),
-          ),
+          AudioWaveProgress(decibelsProgress: decibelsProgress),
         ],
       ),
     );
@@ -284,34 +305,28 @@ class RecordInfo extends StatelessWidget {
 /////////////////////////////////////////////
 ////////////////////////////////////////////
 
-class ActionsButtons extends StatelessWidget {
-  const ActionsButtons({
-    super.key,
-    required this.onSave,
-  });
+class AudioWaveProgress extends StatelessWidget {
+  const AudioWaveProgress({super.key, required this.decibelsProgress});
 
-  final void Function() onSave;
+  final List<double> decibelsProgress;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: const Text(
-            "CANCEL",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-        TextButton(
-          onPressed: onSave,
-          child: const Text(
-            "SAVE  ",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-      ],
+    return SizedBox(
+      height: 50,
+      width: 70,
+      child: Row(
+        textDirection: TextDirection.ltr, // define the direction of the wave
+        mainAxisSize: MainAxisSize.min,
+        children: decibelsProgress
+            .map((decibels) => Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 0.1),
+                  width: 0.8,
+                  height: decibels < 0 ? 0 : decibels / 2,
+                  color: MyColors.primaryColor,
+                ))
+            .toList(),
+      ),
     );
   }
 }

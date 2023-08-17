@@ -1,3 +1,4 @@
+import 'package:breast_cancer_awareness/src/core/util/functions/string_manipulations_and_search.dart';
 import 'package:flutter/material.dart';
 
 import '../../providers/add_notes_state_provider.dart';
@@ -15,6 +16,11 @@ class _NoteTextFieldState extends State<NoteTextField> {
   late final TextEditingController _controller =
       TextEditingController(text: widget.addNoteState.text);
 
+  late TextDirection _textDirection =
+      firstCharIsArabic(widget.addNoteState.text ?? "")
+          ? TextDirection.rtl
+          : TextDirection.ltr;
+
   @override
   Widget build(BuildContext context) {
     final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
@@ -27,6 +33,7 @@ class _NoteTextFieldState extends State<NoteTextField> {
         children: [
           TextField(
             controller: _controller,
+            textDirection: _textDirection,
             keyboardType: TextInputType.multiline,
             autocorrect: false,
             minLines: 6,
@@ -63,6 +70,17 @@ class _NoteTextFieldState extends State<NoteTextField> {
             ),
             onTapOutside: (_) {
               FocusScope.of(context).unfocus();
+            },
+            onChanged: (value) {
+              if (firstCharIsArabic(value)) {
+                setState(() {
+                  _textDirection = TextDirection.rtl;
+                });
+              } else {
+                setState(() {
+                  _textDirection = TextDirection.ltr;
+                });
+              }
             },
           ),
           Row(

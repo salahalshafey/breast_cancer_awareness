@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 
 import '../../../../core/theme/colors.dart';
@@ -161,6 +162,6 @@ class _AudioPlayerState extends State<AudioPlayer> {
           ),
         ],
       ),
-    );
+    ).animate().scale();
   }
 }

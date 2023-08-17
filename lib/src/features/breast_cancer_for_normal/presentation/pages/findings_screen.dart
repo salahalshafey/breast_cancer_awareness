@@ -34,7 +34,7 @@ class FindingsScreen extends StatelessWidget {
                   "Congratulations! It's great that you are taking care of your health.",
               fontSize: 22,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 50),
             FindingItem(
               title: "All is well",
               assetIcon: "assets/breast_cancer/all_is_well.png",
