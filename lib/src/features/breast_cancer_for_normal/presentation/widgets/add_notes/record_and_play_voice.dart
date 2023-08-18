@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_sound/flutter_sound.dart';
@@ -36,8 +38,8 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
     if (_decibelsProgress.length < 70) {
       _decibelsProgress.add(decibels);
     } else {
-      _decibelsProgress.removeAt(0);
-      _decibelsProgress.add(decibels);
+      _decibelsProgress.insert(0, decibels);
+      _decibelsProgress.removeLast();
     }
 
     return _decibelsProgress;
@@ -54,12 +56,11 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
     final status = await Permission.microphone.request();
 
     if (status != PermissionStatus.granted) {
-      // ignore: use_build_context_synchronously
       showCustomSnackBar(
         context: context,
-        content: 'We need microphone permission to send the recorder.',
+        content: 'We need microphone permission to record a voice note.',
       );
-      // Navigator.of(context).pop();
+      Navigator.of(context).pop();
       return;
     }
 
@@ -216,7 +217,6 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
                   if (_isRecording) {
                     final path = await _recorder.stopRecorder();
                     widget.addNoteState.setRecord(path);
-                    // ignore: use_build_context_synchronously
                     Navigator.of(context).pop();
                     return;
                   }
@@ -316,7 +316,7 @@ class AudioWaveProgress extends StatelessWidget {
       height: 50,
       width: 70,
       child: Row(
-        textDirection: TextDirection.ltr, // define the direction of the wave
+        textDirection: TextDirection.rtl, // define the direction of the wave
         mainAxisSize: MainAxisSize.min,
         children: decibelsProgress
             .map((decibels) => Container(
