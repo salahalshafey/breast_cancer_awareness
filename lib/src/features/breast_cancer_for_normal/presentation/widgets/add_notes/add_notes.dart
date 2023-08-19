@@ -64,7 +64,7 @@ class AddNotes extends StatelessWidget {
         const SizedBox(height: 20),
         Align(
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () async {},
             style: const ButtonStyle(
               fixedSize: MaterialStatePropertyAll(Size.fromWidth(260)),
             ),
