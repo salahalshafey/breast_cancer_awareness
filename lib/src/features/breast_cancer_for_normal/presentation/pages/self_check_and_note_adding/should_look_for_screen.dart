@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/util/widgets/default_screen.dart';
+import '../../../../../core/util/widgets/default_screen.dart';
 
-import '../../../account/presentation/widgets/icon_from_asset.dart';
-import '../widgets/custom_texts.dart';
+import '../../../../account/presentation/widgets/icon_from_asset.dart';
+import '../../widgets/custom_texts.dart';
 
 class ShouldLookForScreen extends StatelessWidget {
   const ShouldLookForScreen({super.key});

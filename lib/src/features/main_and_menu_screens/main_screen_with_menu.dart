@@ -7,7 +7,8 @@ import 'package:provider/provider.dart';
 import 'main_screen.dart';
 import 'menu_screen.dart';
 import 'main_screen_state_provider.dart';
-import '../breast_cancer_for_normal/presentation/pages/starting_self_check_screen.dart';
+
+import '../breast_cancer_for_normal/presentation/pages/self_check_and_note_adding/starting_self_check_screen.dart';
 
 class MainScreenWithDrawer extends StatelessWidget {
   const MainScreenWithDrawer({super.key});

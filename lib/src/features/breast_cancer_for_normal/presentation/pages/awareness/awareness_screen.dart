@@ -5,11 +5,11 @@ import 'package:flutter/services.dart';
 import 'package:observe_internet_connectivity/observe_internet_connectivity.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../../../../core/util/widgets/default_screen.dart';
-import '../../../../core/util/functions/string_manipulations_and_search.dart';
+import '../../../../../core/util/widgets/default_screen.dart';
+import '../../../../../core/util/functions/string_manipulations_and_search.dart';
 
-import '../widgets/awareness/youtube_player.dart';
-import 'home_screen.dart';
+import '../../widgets/awareness/youtube_player.dart';
+import '../home_screen.dart';
 
 class AwarenessScreen extends StatefulWidget {
   const AwarenessScreen(this.awarenessInfo, {super.key});

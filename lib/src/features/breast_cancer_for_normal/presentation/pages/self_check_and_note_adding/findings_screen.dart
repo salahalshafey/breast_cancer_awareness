@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/util/widgets/default_screen.dart';
-import '../../../account/presentation/widgets/icon_from_asset.dart';
-import '../widgets/custom_texts.dart';
+import '../../../../../core/util/widgets/default_screen.dart';
+
+import '../../../../account/presentation/widgets/icon_from_asset.dart';
+import '../../widgets/custom_texts.dart';
 import 'notes_and_reminder_screen.dart';
 
 class FindingsScreen extends StatelessWidget {

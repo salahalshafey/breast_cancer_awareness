@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/util/widgets/default_screen.dart';
-import '../../../../core/util/functions/date_time_and_duration.dart';
+import '../../../../../core/util/functions/date_time_and_duration.dart';
+import '../../../../../core/util/widgets/default_screen.dart';
 
-import '../providers/notification.dart';
-import '../providers/add_notes_state_provider.dart';
+import '../../providers/add_notes_state_provider.dart';
+import '../../providers/notification.dart';
 
-import '../widgets/add_notes/add_notes.dart';
-import '../widgets/custom_texts.dart';
+import '../../widgets/add_notes/add_notes.dart';
+import '../../widgets/custom_texts.dart';
 
 class NotesAndReminderScreen extends StatefulWidget {
   static const routName = '/notes-and-reminder-screen';

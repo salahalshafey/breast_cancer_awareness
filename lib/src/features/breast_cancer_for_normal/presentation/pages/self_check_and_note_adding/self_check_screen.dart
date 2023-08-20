@@ -3,12 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:wakelock/wakelock.dart';
 
-import '../../../../core/util/widgets/default_screen.dart';
+import '../../../../../core/util/widgets/default_screen.dart';
 
-import '../widgets/custom_texts.dart';
-import '../widgets/self_check/dots_navigator.dart';
-import '../widgets/self_check/self_check_page_navigator.dart';
-import '../widgets/self_check/switch_to_mirror_button.dart';
+import '../../widgets/custom_texts.dart';
+import '../../widgets/self_check/dots_navigator.dart';
+import '../../widgets/self_check/self_check_page_navigator.dart';
+import '../../widgets/self_check/switch_to_mirror_button.dart';
+
 import 'findings_screen.dart';
 
 class SelfCheckScreen extends StatefulWidget {

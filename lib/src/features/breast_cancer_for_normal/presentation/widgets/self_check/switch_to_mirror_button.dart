@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/util/builders/custom_alret_dialoge.dart';
 
-import '../../pages/mirror_screen.dart';
+import '../../pages/self_check_and_note_adding/mirror_screen.dart';
 
 void _goToMirrorScreen(BuildContext context) async {
   try {

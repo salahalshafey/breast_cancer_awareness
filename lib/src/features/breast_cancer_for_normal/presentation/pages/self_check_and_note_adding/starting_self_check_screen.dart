@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/util/widgets/default_screen.dart';
+import '../../../../../core/util/widgets/default_screen.dart';
 
-import '../widgets/go_to_screen_with_slide_transition.dart';
+import '../../widgets/go_to_screen_with_slide_transition.dart';
 import 'self_check_screen.dart';
 import 'should_look_for_screen.dart';
 
