@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../account/presentation/providers/account.dart';
+import '../providers/notes.dart';
 
 import '../widgets/awareness/awareness_title.dart';
+import '../widgets/awareness/greeting.dart';
 import '../widgets/custom_texts.dart';
 import '../widgets/go_to_screen_with_slide_transition.dart';
 import 'starting_self_check_screen.dart';
@@ -24,14 +29,7 @@ class HomeScreen extends StatelessWidget {
         ),
         children: [
           const SizedBox(height: 30),
-          const TextTitle(data: "Hello", fontSize: 24),
-          const SizedBox(height: 30),
-          const TextNormal(
-            data:
-                "You understand that every day counts when it comes to early breast cancer detection."
-                " it's great that you take responsibility for your health and check your breasts regularly.",
-            fontSize: 20,
-          ),
+          const Greeting(),
           const SizedBox(height: 30),
           Align(
             child: ElevatedButton(
@@ -54,7 +52,20 @@ class HomeScreen extends StatelessWidget {
           ),
           Align(
             child: TextButton(
-              onPressed: () {},
+              onPressed: () async {
+                final userId =
+                    Provider.of<Account>(context, listen: false).userId;
+
+                final notesHistory = Provider.of<Notes>(context, listen: false);
+
+                await notesHistory.fetchAllNotes(userId);
+                final notes = notesHistory.getAllNotes();
+
+                for (var note in notes) {
+                  print(note);
+                  print("");
+                }
+              },
               child: const Text(
                 "MY BREAST-CHECK HISTORY",
                 style: TextStyle(

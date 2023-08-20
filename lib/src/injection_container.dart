@@ -13,6 +13,16 @@ import 'features/account/domain/usecases/signup_with_email_and_password.dart';
 import 'features/account/domain/usecases/send_user_image_and_type.dart';
 import 'features/account/presentation/providers/account.dart';
 
+import 'features/breast_cancer_for_normal/data/datasources/notes_local_data_source.dart';
+import 'features/breast_cancer_for_normal/data/datasources/notes_local_storage.dart';
+import 'features/breast_cancer_for_normal/data/repositories/notes_repositories_impl.dart';
+import 'features/breast_cancer_for_normal/domain/repositories/notes_repositories.dart';
+import 'features/breast_cancer_for_normal/domain/usecases/gt_all_notes.dart';
+import 'features/breast_cancer_for_normal/domain/usecases/add_note.dart';
+import 'features/breast_cancer_for_normal/domain/usecases/delete_note.dart';
+import 'features/breast_cancer_for_normal/domain/usecases/delete_all_notes.dart';
+import 'features/breast_cancer_for_normal/presentation/providers/notes.dart';
+
 final sl = GetIt.instance;
 
 Future<void> init() async {
@@ -53,11 +63,37 @@ Future<void> init() async {
   sl.registerLazySingleton<AccountRemoteAuthentication>(
       () => AccountFirebaseAuthenticationImpl());
 
-/////////////////////////////////////////////// !!!! Features - Articles !!!! /////////////////////////////////////////////////////
+/////////////////////////////////////////////// !!!! Features - Notes !!!! /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Provider
-  /** and so on................ */
+
+  sl.registerFactory(() => Notes(
+        getAllNotesUsecase: sl(),
+        addNoteUsecase: sl(),
+        deleteNoteUsecase: sl(),
+        deleteAllNotesUsecase: sl(),
+      ));
+
+// Usecases
+
+  sl.registerLazySingleton(() => GetAllNotesUsecase(sl()));
+  sl.registerLazySingleton(() => AddNoteUsecase(sl()));
+  sl.registerLazySingleton(() => DeleteNoteUsecase(sl()));
+  sl.registerLazySingleton(() => DeleteAllNotesUsecase(sl()));
+
+// Repository
+
+  sl.registerLazySingleton<NotesRepository>(() => NotesRepositoryImpl(
+        localDataSource: sl(),
+        localStorage: sl(),
+      ));
+
+// Datasources
+
+  sl.registerLazySingleton<NotesLocalDataSource>(
+      () => NotesSharedPreferencesImpl());
+  sl.registerLazySingleton<NotesLocalStorage>(() => NotesLocalStorageImpl());
 
 //////////////////////////////////////////////////// !!!! core !!!! ///////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

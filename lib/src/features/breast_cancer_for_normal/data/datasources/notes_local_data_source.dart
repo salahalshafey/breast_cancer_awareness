@@ -60,9 +60,7 @@ class NotesSharedPreferencesImpl implements NotesLocalDataSource {
       throw EmptyDataException();
     } else {
       final List<dynamic> allNotes = jsonDecode(allNotesJson);
-      final removedNote = allNotes.firstWhere((note) {
-        return note["id"] == noteId;
-      });
+      final removedNote = allNotes.firstWhere((note) => note["id"] == noteId);
 
       allNotes.removeWhere((note) {
         return note["id"] == noteId;

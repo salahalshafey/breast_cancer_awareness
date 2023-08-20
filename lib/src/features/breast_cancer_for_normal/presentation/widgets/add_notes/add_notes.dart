@@ -8,19 +8,21 @@ import '../../../../../core/util/builders/image_picker.dart';
 import '../../providers/add_notes_state_provider.dart';
 
 import '../custom_texts.dart';
+import 'finish_button.dart';
 import 'image_with_clear_badge.dart';
 import 'note_button.dart';
 import 'note_text_field.dart';
 import 'record_and_play_voice.dart';
 
 class AddNotes extends StatelessWidget {
-  const AddNotes({super.key});
+  const AddNotes(this.finding, {super.key});
+
+  final String finding;
 
   @override
   Widget build(BuildContext context) {
     final addNoteState =
         Provider.of<AddNotesStateProvider>(context, listen: false);
-    //final notesHistory = Provider
 
     return Column(
       children: [
@@ -39,7 +41,6 @@ class AddNotes extends StatelessWidget {
             ),
             NoteButton(
               icon: Icons.mic_external_on,
-              // onTap: () => showNoteDialog(context, child: const Text("data")),
               onTap: () => showBottomSheet(
                 context,
                 child: RecordAndPlayVoice(addNoteState),
@@ -62,20 +63,15 @@ class AddNotes extends StatelessWidget {
         const SizedBox(height: 10),
         const ImageWithClearBadge(),
         const SizedBox(height: 20),
-        Align(
-          child: ElevatedButton(
-            onPressed: () async {},
-            style: const ButtonStyle(
-              fixedSize: MaterialStatePropertyAll(Size.fromWidth(260)),
-            ),
-            child: const Text("FINISH",
-                style: TextStyle(fontWeight: FontWeight.bold)),
-          ),
-        ),
+        FinishButton(finding),
       ],
     );
   }
 }
+
+////////////////////////////////////////////////////////////////////////////////
+///////////////////// builders used above //////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 void showNoteDialog(BuildContext context, {required Widget child}) async {
   Wakelock.enable();
@@ -104,6 +100,9 @@ void showNoteDialog(BuildContext context, {required Widget child}) async {
     DeviceOrientation.portraitUp,
   ]);
 }
+
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
 
 void showBottomSheet(BuildContext context, {required Widget child}) async {
   Wakelock.enable();

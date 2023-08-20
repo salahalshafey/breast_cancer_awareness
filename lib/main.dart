@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'src/features/settings/providers/theme_provider.dart';
 import 'src/features/account/presentation/providers/account.dart';
+import 'src/features/breast_cancer_for_normal/presentation/providers/notes.dart';
 import 'src/features/main_and_menu_screens/main_screen_state_provider.dart';
 import 'src/features/breast_cancer_detection/presentation/providers/for_doctor_screen_state_provider.dart';
 
@@ -30,6 +31,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (ctx) => ThemeProvider(currentTheme)),
         ChangeNotifierProvider(create: (ctx) => di.sl<Account>()),
+        ChangeNotifierProvider(create: (ctx) => di.sl<Notes>()),
         ChangeNotifierProvider(create: (ctx) => MainScreenState()),
         ChangeNotifierProvider(create: (ctx) => ForDoctorScreenState()),
       ],

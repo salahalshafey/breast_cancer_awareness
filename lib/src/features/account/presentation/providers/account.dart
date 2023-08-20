@@ -15,19 +15,19 @@ import '../../domain/usecases/signin_with_email_and_password.dart';
 import '../../domain/usecases/signup_with_email_and_password.dart';
 
 class Account extends DisposableProvider {
-  Account({
-    required this.getUserInformationUseCase,
-    required this.signUserInUsingEmailAndPasswordUseCase,
-    required this.signUserUpUsingEmailAndPasswordUseCase,
-    required this.sendUserImageAndTypeUseCase,
-  });
-
   final GetUserInformationUsecase getUserInformationUseCase;
   final SignInWithEmailAndPasswordUsecase
       signUserInUsingEmailAndPasswordUseCase;
   final SignUpWithEmailAndPasswordUsecase
       signUserUpUsingEmailAndPasswordUseCase;
   final SendUserImageAndTypeUseCase sendUserImageAndTypeUseCase;
+
+  Account({
+    required this.getUserInformationUseCase,
+    required this.signUserInUsingEmailAndPasswordUseCase,
+    required this.signUserUpUsingEmailAndPasswordUseCase,
+    required this.sendUserImageAndTypeUseCase,
+  });
 
   UserInformation? _userInfo;
   bool _userFetchedFromBackend = false;

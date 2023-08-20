@@ -44,7 +44,7 @@ class _NotesAndReminderScreenState extends State<NotesAndReminderScreen> {
 
     return WillPopScope(
       onWillPop: () async {
-        return true;
+        return false;
       },
       child: ChangeNotifierProvider<AddNotesStateProvider>(
         create: (context) => AddNotesStateProvider(),
@@ -103,7 +103,7 @@ class _NotesAndReminderScreenState extends State<NotesAndReminderScreen> {
                 ),
               ],
               const SizedBox(height: 40),
-              const AddNotes(),
+              AddNotes(finding),
             ],
           ),
         ),

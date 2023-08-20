@@ -17,7 +17,7 @@ class NoteModel extends Note {
       text: json["text"],
       recorderFilePath: json["recorder_file_path"],
       imageFilePath: json["image_file_path"],
-      dateOfNote: json["date_of_note"],
+      dateOfNote: DateTime.parse(json["date_of_note"]),
     );
   }
 
@@ -27,6 +27,6 @@ class NoteModel extends Note {
         "text": text,
         "recorder_file_path": recorderFilePath,
         "image_file_path": imageFilePath,
-        "date_of_note": dateOfNote,
+        "date_of_note": dateOfNote.toString(),
       };
 }
