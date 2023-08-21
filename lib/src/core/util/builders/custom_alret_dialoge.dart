@@ -13,7 +13,10 @@ Future<T?> showCustomAlretDialog<T>({
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(title, style: TextStyle(color: titleColor)),
-          content: Text(content, style: TextStyle(color: contentColor)),
+          content: Text(
+            content,
+            style: TextStyle(color: contentColor, fontSize: 18),
+          ),
           actions: <Widget>[
             if (actions == null)
               TextButton(
@@ -24,6 +27,9 @@ Future<T?> showCustomAlretDialog<T>({
               ),
             if (actions != null) ...actions,
           ],
+          actionsAlignment: actions == null || actions.length == 1
+              ? null
+              : MainAxisAlignment.spaceAround,
         );
       },
     );

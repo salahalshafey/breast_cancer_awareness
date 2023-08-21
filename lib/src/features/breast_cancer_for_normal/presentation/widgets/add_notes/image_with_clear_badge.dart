@@ -20,9 +20,13 @@ class ImageWithClearBadge extends StatelessWidget {
               ImageContainer(
                 image: addNoteState.imageFilePath!,
                 imageSource: From.file,
-                radius: 100,
-                showHighlight: true,
+                radius: 150,
                 showImageScreen: true,
+                imageCaption: addNoteState.text,
+                borderRadius: BorderRadius.circular(25),
+                showHighlight: true,
+                containingShadow: true,
+                fit: BoxFit.cover,
               ),
               Positioned(
                 top: 0,

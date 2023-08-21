@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../../account/presentation/providers/account.dart';
-import '../providers/notes.dart';
 
 import '../widgets/awareness/awareness_title.dart';
 import '../widgets/awareness/greeting.dart';
 import '../widgets/custom_texts.dart';
 import '../widgets/go_to_screen_with_slide_transition.dart';
 
+import 'breast_check_history/breast_check_history_screen.dart';
 import 'self_check_and_note_adding/starting_self_check_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -53,20 +50,10 @@ class HomeScreen extends StatelessWidget {
           ),
           Align(
             child: TextButton(
-              onPressed: () async {
-                final userId =
-                    Provider.of<Account>(context, listen: false).userId;
-
-                final notesHistory = Provider.of<Notes>(context, listen: false);
-
-                await notesHistory.fetchAllNotes(userId);
-                final notes = notesHistory.getAllNotes();
-
-                for (var note in notes) {
-                  print(note);
-                  print("");
-                }
-              },
+              onPressed: () => goToScreenWithSlideTransition(
+                context,
+                const BreastCheckHistoryScreen(),
+              ),
               child: const Text(
                 "MY BREAST-CHECK HISTORY",
                 style: TextStyle(

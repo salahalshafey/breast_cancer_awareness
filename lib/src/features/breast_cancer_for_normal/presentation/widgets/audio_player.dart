@@ -8,16 +8,24 @@ import '../../../../core/theme/colors.dart';
 import '../../../../core/util/functions/date_time_and_duration.dart';
 
 class AudioPlayer extends StatefulWidget {
-  const AudioPlayer({super.key, required this.recorderFilePath});
+  const AudioPlayer({
+    super.key,
+    required this.recorderFilePath,
+    this.audioPlayerController,
+  });
 
   final String recorderFilePath;
+
+  /// to set speed of the audio only (from outside this widget)
+  final FlutterSoundPlayer? audioPlayerController;
 
   @override
   State<AudioPlayer> createState() => _AudioPlayerState();
 }
 
 class _AudioPlayerState extends State<AudioPlayer> {
-  final FlutterSoundPlayer _audioPlayer = FlutterSoundPlayer();
+  late final FlutterSoundPlayer _audioPlayer =
+      widget.audioPlayerController ?? FlutterSoundPlayer();
 
   late StreamSubscription<PlaybackDisposition> _playerStateSubscription;
 
@@ -38,7 +46,7 @@ class _AudioPlayerState extends State<AudioPlayer> {
   Future<void> _initTheAudioPlayer() async {
     await _audioPlayer.openPlayer();
     await _audioPlayer
-        .setSubscriptionDuration(const Duration(milliseconds: 10));
+        .setSubscriptionDuration(const Duration(milliseconds: 50));
 
     _playerStateSubscription = _audioPlayer.onProgress!.listen((event) {
       setState(() {

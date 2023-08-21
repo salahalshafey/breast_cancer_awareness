@@ -137,7 +137,7 @@ flutter:
     - assets/breast_cancer/all_is_well.png
     - assets/breast_cancer/not_sure.png
     - assets/breast_cancer/noticed_something.png
-    
+    - assets/images/empty.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

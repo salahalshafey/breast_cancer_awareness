@@ -55,20 +55,21 @@ class MainScreen extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             ////////// backGround image ////////////
-            Positioned(
-              bottom: isportrait ? 0 - keyboardHeight : null,
-              child: Opacity(
-                opacity: Theme.of(context).brightness == Brightness.light
-                    ? 0.16
-                    : 0.12,
-                child: Image.asset(
-                  "assets/images/background_image.png",
-                  height: isportrait ? screenSize.height : null,
-                  width: isportrait ? null : screenSize.width,
-                  fit: isportrait ? BoxFit.fitHeight : BoxFit.fitWidth,
+            if (Theme.of(context).brightness == Brightness.light)
+              Positioned(
+                bottom: isportrait ? 0 - keyboardHeight : null,
+                child: Opacity(
+                  opacity: Theme.of(context).brightness == Brightness.light
+                      ? 0.16
+                      : 0.12,
+                  child: Image.asset(
+                    "assets/images/background_image.png",
+                    height: isportrait ? screenSize.height : null,
+                    width: isportrait ? null : screenSize.width,
+                    fit: isportrait ? BoxFit.fitHeight : BoxFit.fitWidth,
+                  ),
                 ),
               ),
-            ),
 
             //////// The pages that can be scrolled between /////////
             Padding(
