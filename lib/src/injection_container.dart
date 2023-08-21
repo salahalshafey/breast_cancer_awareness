@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'core/network/network_info.dart';
 
 import 'features/account/data/datasources/account_remote_authentication.dart';
+import 'features/account/data/datasources/account_local_data_source.dart';
 import 'features/account/data/datasources/account_remote_data_source.dart';
 import 'features/account/data/datasources/account_remote_storage.dart';
 import 'features/account/data/repositories/account_repository_impl.dart';
@@ -49,6 +50,7 @@ Future<void> init() async {
 
   sl.registerLazySingleton<AccountRepository>(() => AccountRepositoryImpl(
         remoteDataSource: sl(),
+        localDataSource: sl(),
         remoteStorage: sl(),
         remoteAuth: sl(),
         networkInfo: sl(),
@@ -58,6 +60,8 @@ Future<void> init() async {
 
   sl.registerLazySingleton<AccountRemoteDataSource>(
       () => AccountFirestoreImpl());
+  sl.registerLazySingleton<AccountLocalDataSource>(
+      () => AccountSharedPreferencesImpl());
   sl.registerLazySingleton<AccountRemoteStorage>(
       () => AccountFirebaseStorageImpl());
   sl.registerLazySingleton<AccountRemoteAuthentication>(

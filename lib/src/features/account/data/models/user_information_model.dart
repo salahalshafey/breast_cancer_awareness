@@ -33,4 +33,26 @@ class UserInformationModel extends UserInformation {
         'date_of_sign_up': dateOfSignUp,
         'user_type': userType,
       };
+
+  factory UserInformationModel.fromJson(Map<String, dynamic> json) {
+    return UserInformationModel(
+      id: json["id"],
+      firstName: json['first_name'],
+      lastName: json['last_name'],
+      email: json['email'],
+      imageUrl: json['image_url'],
+      dateOfSignUp: DateTime.parse(json['date_of_sign_up']),
+      userType: json['user_type'],
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'first_name': firstName,
+        'last_name': lastName,
+        'email': email,
+        'image_url': imageUrl,
+        'date_of_sign_up': dateOfSignUp.toString(),
+        'user_type': userType,
+      };
 }

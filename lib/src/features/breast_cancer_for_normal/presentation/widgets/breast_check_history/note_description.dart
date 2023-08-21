@@ -10,6 +10,7 @@ class NoteDescription extends StatelessWidget {
     required this.icon,
     required this.title,
     this.description,
+    this.descriptionStyle,
     this.child,
     Key? key,
   }) : super(key: key);
@@ -17,6 +18,9 @@ class NoteDescription extends StatelessWidget {
   final Icon icon;
   final String title;
   final String? description;
+
+  /// if null it will be TextStyle(fontSize: 16, color: Colors.grey.shade600)
+  final TextStyle? descriptionStyle;
   final Widget? child;
 
   @override
@@ -47,10 +51,8 @@ class NoteDescription extends StatelessWidget {
                 ? TextDirection.rtl
                 : TextDirection.ltr,
             textAlign: TextAlign.justify,
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.grey.shade600,
-            ),
+            style: descriptionStyle ??
+                TextStyle(fontSize: 16, color: Colors.grey.shade600),
             linkStyle: const TextStyle(
               fontSize: 16,
               color: Colors.blue,

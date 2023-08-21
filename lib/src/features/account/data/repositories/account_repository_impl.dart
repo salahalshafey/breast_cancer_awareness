@@ -9,18 +9,21 @@ import '../../domain/entities/user_information.dart';
 import '../../domain/repositories/account_repository.dart';
 
 import '../datasources/account_remote_data_source.dart';
+import '../datasources/account_local_data_source.dart';
 import '../datasources/account_remote_storage.dart';
 import '../datasources/account_remote_authentication.dart';
 import '../models/user_information_model.dart';
 
 class AccountRepositoryImpl implements AccountRepository {
   final AccountRemoteDataSource remoteDataSource;
+  final AccountLocalDataSource localDataSource;
   final AccountRemoteStorage remoteStorage;
   final AccountRemoteAuthentication remoteAuth;
   final NetworkInfo networkInfo;
 
   AccountRepositoryImpl({
     required this.remoteDataSource,
+    required this.localDataSource,
     required this.remoteStorage,
     required this.remoteAuth,
     required this.networkInfo,
@@ -28,11 +31,24 @@ class AccountRepositoryImpl implements AccountRepository {
 
   @override
   Future<UserInformation> getUserInformation(String userId) async {
-    if (await networkInfo.isNotConnected) {
-      throw OfflineException();
-    }
+    try {
+      if (await networkInfo.isNotConnected) {
+        final userInfoFromLocal = await localDataSource.getUser(userId);
 
-    return remoteDataSource.getUser(userId);
+        if (userInfoFromLocal == null) {
+          throw OfflineException();
+        }
+
+        return userInfoFromLocal;
+      }
+
+      final userInfoFromRemote = await remoteDataSource.getUser(userId);
+      await localDataSource.addUser(userInfoFromRemote);
+
+      return userInfoFromRemote;
+    } catch (error) {
+      rethrow;
+    }
   }
 
   @override

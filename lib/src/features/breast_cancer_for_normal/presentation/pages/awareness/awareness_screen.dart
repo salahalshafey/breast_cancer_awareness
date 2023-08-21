@@ -1,15 +1,15 @@
-import 'dart:async';
+// ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:observe_internet_connectivity/observe_internet_connectivity.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+import '../../../../../core/network/network_info.dart';
+import '../../../../../core/util/builders/custom_alret_dialoge.dart';
 import '../../../../../core/util/widgets/default_screen.dart';
-import '../../../../../core/util/functions/string_manipulations_and_search.dart';
+import '../../../../account/presentation/widgets/icon_from_asset.dart';
 
-import '../../widgets/awareness/youtube_player.dart';
+import '../../widgets/breast_check_history/note_description.dart';
 import '../home_screen.dart';
+import 'youtube_player_screen.dart';
 
 class AwarenessScreen extends StatefulWidget {
   const AwarenessScreen(this.awarenessInfo, {super.key});
@@ -21,58 +21,65 @@ class AwarenessScreen extends StatefulWidget {
 }
 
 class _AwarenessScreenState extends State<AwarenessScreen> {
-  var _isDeviceConnected = false;
-  late StreamSubscription<bool> _connectivitySubscription;
-  late final YoutubePlayerController _controller = YoutubePlayerController(
-    initialVideoId:
-        YoutubePlayer.convertUrlToId(widget.awarenessInfo.videoLink)!,
-    flags: const YoutubePlayerFlags(
-      autoPlay: false,
-    ),
-  );
-
-  @override
-  void initState() {
-    _connectivitySubscription = InternetConnectivity()
-        .observeInternetConnection
-        .listen((bool hasInternetAccess) {
-      setState(() {
-        _isDeviceConnected = hasInternetAccess;
-      });
+  bool _isLoading = false;
+  void _loadingState(bool state) {
+    setState(() {
+      _isLoading = state;
     });
-
-    super.initState();
   }
 
-  @override
-  void dispose() {
-    _connectivitySubscription.cancel();
+  void _goToYoutubePlayerScreen() async {
+    _loadingState(true);
 
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.portraitUp,
-      // DeviceOrientation.portraitDown,
-    ]);
+    if (await NetworkInfoImpl().isNotConnected) {
+      _loadingState(false);
+      showCustomAlretDialog(
+        context: context,
+        title: "Error",
+        titleColor: Colors.red,
+        content: "You are currently offline.",
+      );
+      return;
+    }
 
-    super.dispose();
+    _loadingState(false);
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) {
+        return YoutubePlayerScreen(
+          widget.awarenessInfo.videoLink,
+        );
+      },
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
     return DefaultScreen(
+      containingBackgroundCancerSympol: false,
       child: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 80),
+        padding: const EdgeInsets.only(
+          left: 20,
+          right: 20,
+          bottom: 10,
+          top: 80,
+        ),
         children: [
-          _isDeviceConnected
-              ? YoutubPlayer(
-                  videoLink: widget.awarenessInfo.videoLink,
-                  controller: _controller,
-                )
-              : SizedBox(
-                  height: 250,
-                  child: Image.asset(widget.awarenessInfo.image),
-                ),
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(widget.awarenessInfo.image, height: 250),
+              _isLoading
+                  ? const CircularProgressIndicator()
+                  : IconButton(
+                      onPressed: _goToYoutubePlayerScreen,
+                      icon: const Icon(
+                        Icons.play_arrow,
+                        size: 70,
+                        color: Color.fromRGBO(199, 40, 107, 1),
+                      ),
+                    ),
+            ],
+          ),
           const SizedBox(height: 20),
           Text(
             widget.awarenessInfo.title,
@@ -84,17 +91,21 @@ class _AwarenessScreenState extends State<AwarenessScreen> {
             ),
           ),
           const SizedBox(height: 30),
-          Text(
-            widget.awarenessInfo.description,
-            textAlign: TextAlign.justify,
-            textDirection: firstCharIsArabic(widget.awarenessInfo.description)
-                ? TextDirection.rtl
-                : TextDirection.ltr,
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+          NoteDescription(
+            icon: const Icon(Icons.info, size: 40),
+            title: "Description",
+            description: widget.awarenessInfo.description,
+            descriptionStyle: TextStyle(
+              fontSize: 20,
+              color: Colors.grey.shade600,
             ),
           ),
+          const SizedBox(height: 30),
+          const IconFromAsset(
+            assetIcon: "assets/images/background_cancer_sympol.png",
+            iconHeight: 150,
+            opacity: 0.62,
+          )
         ],
       ),
     );
