@@ -15,6 +15,11 @@ import '../pages/self_check_and_note_adding/starting_self_check_screen.dart';
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
+@pragma('vm:entry-point')
+void print2(NotificationResponse details) {
+  // print(navigatorKey);
+}
+
 class Noti {
   static Future initialize() async {
     const androidInitialize =
@@ -31,13 +36,15 @@ class Noti {
       onDidReceiveNotificationResponse: (details) {
         final context = navigatorKey.currentContext!;
 
+        // print(navigatorKey);
+
         final provider = Provider.of<MainScreenState>(context, listen: false);
         provider.setAsAlreadyLunchedSelfCheckScreenOnce();
 
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => const StartingSelfCheckScreen()));
       },
-      // onDidReceiveBackgroundNotificationResponse: (details) {},
+      onDidReceiveBackgroundNotificationResponse: print2,
     );
   }
 

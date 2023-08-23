@@ -29,7 +29,7 @@ class MainScreenWithDrawer extends StatelessWidget {
 
       if (didNotificationLaunchApp != null &&
           didNotificationLaunchApp == true &&
-          !provider.didLunchSelfCheckScreenOnce()) {
+          !provider.didLunchSelfCheckScreenOnce) {
         provider.setAsAlreadyLunchedSelfCheckScreenOnce();
 
         Navigator.of(context).push(MaterialPageRoute(

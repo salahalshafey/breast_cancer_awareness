@@ -80,15 +80,18 @@ class BreastCheckHistorytem extends StatelessWidget {
           mainAxisAlignment:
               isportrait ? MainAxisAlignment.start : MainAxisAlignment.center,
           children: [
-            IconFromAsset(
-              assetIcon: note.finding == "All is well"
-                  ? "assets/breast_cancer/all_is_well.png"
-                  : note.finding == "Not sure"
-                      ? "assets/breast_cancer/not_sure.png"
-                      : "assets/breast_cancer/noticed_something.png",
-              iconHeight: 60,
-              opacity:
-                  Theme.of(context).brightness == Brightness.dark ? 0.7 : 1,
+            Hero(
+              tag: note.id,
+              child: IconFromAsset(
+                assetIcon: note.finding == "All is well"
+                    ? "assets/breast_cancer/all_is_well.png"
+                    : note.finding == "Not sure"
+                        ? "assets/breast_cancer/not_sure.png"
+                        : "assets/breast_cancer/noticed_something.png",
+                iconHeight: 60,
+                opacity:
+                    Theme.of(context).brightness == Brightness.dark ? 0.7 : 1,
+              ),
             ),
             const SizedBox(width: 20),
             Text(

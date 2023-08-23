@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AccountRemoteAuthentication {
   Future<String> signInWithEmailAndPassword(String email, String password);
-  Future<String> signUpWithEmailAndPassword(String email, String password);
+  Future<User> signUpWithEmailAndPassword(String email, String password);
 }
 
 class AccountFirebaseAuthenticationImpl implements AccountRemoteAuthentication {
@@ -31,13 +31,12 @@ class AccountFirebaseAuthenticationImpl implements AccountRemoteAuthentication {
   }
 
   @override
-  Future<String> signUpWithEmailAndPassword(
-      String email, String password) async {
+  Future<User> signUpWithEmailAndPassword(String email, String password) async {
     try {
       final credential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
 
-      return credential.user!.uid;
+      return credential.user!;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         throw WeakPasswordException();

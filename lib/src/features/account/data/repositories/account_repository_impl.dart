@@ -76,12 +76,12 @@ class AccountRepositoryImpl implements AccountRepository {
     }
 
     try {
-      final userId = await remoteAuth.signUpWithEmailAndPassword(
+      final currentUser = await remoteAuth.signUpWithEmailAndPassword(
           userInformation.email, password);
 
       userInformation = userInformation.copyWith(
-        id: userId,
-        dateOfSignUp: DateTime.now(),
+        id: currentUser.uid,
+        dateOfSignUp: currentUser.metadata.creationTime,
       );
 
       remoteDataSource.addUser(

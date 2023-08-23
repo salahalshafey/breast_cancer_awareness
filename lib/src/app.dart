@@ -22,18 +22,21 @@ import 'features/breast_cancer_for_normal/presentation/pages/self_check_and_note
 
 import 'features/breast_cancer_detection/presentation/pages/prediction_screen.dart';
 
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+late GlobalKey<NavigatorState> navigatorKey;
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
+    navigatorKey = _navigatorKey;
     final currentThemeMode = Provider.of<ThemeProvider>(context).themeMode;
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      navigatorKey: navigatorKey,
+      navigatorKey: _navigatorKey,
       title: 'Breast Cancer Awareness',
       theme: myLightTheme(),
       darkTheme: myDarkTheme(),
@@ -79,7 +82,7 @@ class LandingPage extends StatelessWidget {
                 .difference(DateTime.now())
                 .inSeconds
                 .abs() <
-            5) {
+            10) {
           return const SecondSignUpScreen();
         }
 

@@ -44,15 +44,18 @@ class _BreastCheckNoteScreenState extends State<BreastCheckNoteScreen>
           return Column(
             children: [
               const SizedBox(height: 60),
-              IconFromAsset(
-                assetIcon: widget.note.finding == "All is well"
-                    ? "assets/breast_cancer/all_is_well.png"
-                    : widget.note.finding == "Not sure"
-                        ? "assets/breast_cancer/not_sure.png"
-                        : "assets/breast_cancer/noticed_something.png",
-                iconHeight: 110,
-                opacity:
-                    Theme.of(context).brightness == Brightness.dark ? 0.7 : 1,
+              Hero(
+                tag: widget.note.id,
+                child: IconFromAsset(
+                  assetIcon: widget.note.finding == "All is well"
+                      ? "assets/breast_cancer/all_is_well.png"
+                      : widget.note.finding == "Not sure"
+                          ? "assets/breast_cancer/not_sure.png"
+                          : "assets/breast_cancer/noticed_something.png",
+                  iconHeight: 110,
+                  opacity:
+                      Theme.of(context).brightness == Brightness.dark ? 0.7 : 1,
+                ),
               ),
               const SizedBox(height: 20),
               Text(

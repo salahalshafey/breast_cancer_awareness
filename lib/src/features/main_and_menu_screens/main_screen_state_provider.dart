@@ -11,7 +11,7 @@ class MainScreenState extends DisposableProvider {
 
   PageController get pageController => _pageController;
 
-  bool didLunchSelfCheckScreenOnce() => _didLunchSelfCheckScreenOnce;
+  bool get didLunchSelfCheckScreenOnce => _didLunchSelfCheckScreenOnce;
 
   void setAsAlreadyLunchedSelfCheckScreenOnce() {
     _didLunchSelfCheckScreenOnce = true;

@@ -35,7 +35,7 @@ void main() async {
         ChangeNotifierProvider(create: (ctx) => MainScreenState()),
         ChangeNotifierProvider(create: (ctx) => ForDoctorScreenState()),
       ],
-      child: const MyApp(),
+      child: MyApp(),
     ),
   );
 }

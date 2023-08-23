@@ -69,13 +69,13 @@ class _ContinueAndskipButtonState extends State<ContinueAndskipButton> {
     _skipButtonLoadingState(true);
     final elapsedTime =
         DateTime.now().difference(_dateTimeFromStartingThePage).inSeconds.abs();
-    if (elapsedTime < 10) {
-      await Future.delayed(Duration(seconds: 10 - elapsedTime));
+    if (elapsedTime < 15) {
+      await Future.delayed(Duration(seconds: 15 - elapsedTime));
     }
 
     // ignore: use_build_context_synchronously
     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
-      return const MyApp();
+      return MyApp();
     }));
   }
 
