@@ -77,8 +77,6 @@ class BreastCheckHistorytem extends StatelessWidget {
           BreastCheckNoteScreen(note),
         ),
         title: Row(
-          mainAxisAlignment:
-              isportrait ? MainAxisAlignment.start : MainAxisAlignment.center,
           children: [
             Hero(
               tag: note.id,
@@ -94,15 +92,17 @@ class BreastCheckHistorytem extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 20),
-            Text(
-              longFormattedDateTime(
-                note.dateOfNote,
-                seperateByLine: isportrait ? true : false,
-              ),
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+            Expanded(
+              child: Text(
+                longFormattedDateTime(
+                  note.dateOfNote,
+                  seperateByLine: isportrait ? true : false,
+                ),
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],
