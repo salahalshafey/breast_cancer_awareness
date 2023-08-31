@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
@@ -130,7 +132,6 @@ class _SignUpFormState extends State<SignUpForm> {
       await account.signUpUsingEmailAndPassword(
           _editedUserInformation, _userPassword);
 
-      // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
     } catch (error) {
       _isLoadingState(false);

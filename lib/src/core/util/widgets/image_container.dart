@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -699,7 +701,6 @@ class _DownloadButtonState extends State<DownloadButton> {
 
     _loadingState(false);
     if (savedToGallery == null || !savedToGallery) {
-      // ignore: use_build_context_synchronously
       showCustomAlretDialog(
         context: context,
         title: "Error",

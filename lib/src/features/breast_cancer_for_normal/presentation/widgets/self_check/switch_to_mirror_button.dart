@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +12,6 @@ void _goToMirrorScreen(BuildContext context) async {
     final cameras = await availableCameras();
     final frontCamera = _getFrontCamera(cameras);
 
-    // ignore: use_build_context_synchronously
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => MirrorScreen(fronCamera: frontCamera),

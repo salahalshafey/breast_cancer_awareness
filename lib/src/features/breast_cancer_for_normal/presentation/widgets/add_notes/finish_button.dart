@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -42,7 +44,6 @@ class _FinishButtonState extends State<FinishButton> {
 
       await notesHistory.addNote(userId, note);
 
-      // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
     } catch (error) {
       setState(() {

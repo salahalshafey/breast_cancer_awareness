@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -73,7 +75,6 @@ class _ContinueAndskipButtonState extends State<ContinueAndskipButton> {
       await Future.delayed(Duration(seconds: 15 - elapsedTime));
     }
 
-    // ignore: use_build_context_synchronously
     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
       return MyApp();
     }));
