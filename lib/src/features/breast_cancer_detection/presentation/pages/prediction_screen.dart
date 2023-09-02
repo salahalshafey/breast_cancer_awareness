@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_ml_model_downloader/firebase_ml_model_downloader.dart';
 import 'package:provider/provider.dart';
-import 'package:tflite/tflite.dart';
+import 'package:flutter_tflite/flutter_tflite.dart';
 
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
@@ -126,7 +126,7 @@ Future<String> _getPrediction(
         androidDeviceIdleRequired: false,
       ),
     );
-    final labelspath = await saveLabelsToFile();
+    final labelspath = await _saveLabelsToFile();
 
     Tflite.close();
     await Tflite.loadModel(
@@ -163,7 +163,7 @@ Future<String> _getPrediction(
   return prediction;
 }
 
-Future<String> saveLabelsToFile() async {
+Future<String> _saveLabelsToFile() async {
   // Load the contents of labels.txt from assets
   String labelsContent = await rootBundle.loadString('assets/labels.txt');
 

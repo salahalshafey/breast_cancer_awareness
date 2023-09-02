@@ -58,7 +58,7 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
     if (status != PermissionStatus.granted) {
       showCustomSnackBar(
         context: context,
-        content: 'We need microphone permission to record a voice note.',
+        content: 'Microphone permission is needed to record a voice note.',
       );
       Navigator.of(context).pop();
       return;
