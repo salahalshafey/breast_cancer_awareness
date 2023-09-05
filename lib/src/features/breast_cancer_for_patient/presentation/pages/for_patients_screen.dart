@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/util/widgets/custom_card.dart';
+
 class ForPatientsScreen extends StatelessWidget {
   const ForPatientsScreen({super.key});
 
@@ -12,51 +14,82 @@ class ForPatientsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: ListView(
-        padding: EdgeInsets.symmetric(
-          vertical: shapeHeight - 5,
+      body: GridView(
+        padding: EdgeInsets.symmetric(vertical: shapeHeight + 10),
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: screenSize.width / (isportrait ? 2 : 3),
+          mainAxisSpacing: isportrait ? 20.0 : 40.0,
+          crossAxisSpacing: isportrait ? 20.0 : 40.0,
+          childAspectRatio: isportrait ? 0.43 : 0.50,
         ),
-        children: const [
-          SizedBox(height: 50),
-          Text(
-            "The Features That Will Be Implemented In This Screen",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              //color: Color.fromRGBO(199, 40, 107, 1),
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
+        children: [
+          //  for (int i = 0; i < 2; i++)
+          ForPatientsItem(
+            image: "assets/breast_cancer/tips.png",
+            title: "TIPS FOR YOUR VISIT TO THE DOCTOR",
+            subTitle:
+                "Tips for things to say & do at your doctor's appointment.",
+            onTap: () {},
           ),
-          SizedBox(height: 50),
-          Text(
-            "- Improve spirits for breast cancer patients.",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              //color: Color.fromRGBO(199, 40, 107, 1),
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+          ForPatientsItem(
+            image: "assets/breast_cancer/other_resources.png",
+            title: "OTHER RESOURCES",
+            subTitle: "Take a look at some other helpful resources.",
+            onTap: () {},
           ),
-          SizedBox(height: 20),
-          Text(
-            "- Healthy life style for patients.",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              //color: Color.fromRGBO(199, 40, 107, 1),
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+        ],
+      ),
+    );
+  }
+}
+
+class ForPatientsItem extends StatelessWidget {
+  const ForPatientsItem({
+    super.key,
+    required this.image,
+    required this.title,
+    required this.subTitle,
+    required this.onTap,
+  });
+
+  final String image;
+  final String title;
+  final String subTitle;
+  final void Function() onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomCard(
+      borderRadius: BorderRadius.circular(10),
+      onTap: onTap,
+      child: Column(
+        children: [
+          Image.asset(image),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(subTitle, textAlign: TextAlign.center),
+                ],
+              ),
             ),
-          ),
-          SizedBox(height: 20),
-          Text(
-            "- Nutrition, Fitness, etc...",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              //color: Color.fromRGBO(199, 40, 107, 1),
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          )
         ],
       ),
     );
