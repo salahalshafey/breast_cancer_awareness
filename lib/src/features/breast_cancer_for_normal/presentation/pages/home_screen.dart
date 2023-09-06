@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../widgets/awareness/awareness_title.dart';
 import '../widgets/awareness/greeting.dart';
 import '../widgets/custom_texts.dart';
-import '../widgets/go_to_screen_with_slide_transition.dart';
+import '../../../../core/util/builders/go_to_screen_with_slide_transition.dart';
 
 import 'breast_check_history/breast_check_history_screen.dart';
 import 'self_check_and_note_adding/starting_self_check_screen.dart';

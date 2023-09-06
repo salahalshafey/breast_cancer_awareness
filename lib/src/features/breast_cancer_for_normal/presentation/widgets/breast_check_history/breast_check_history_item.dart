@@ -13,7 +13,7 @@ import '../../providers/notes.dart';
 import '../../../domain/entities/note.dart';
 
 import '../../pages/breast_check_history/breast_check_note_screen.dart';
-import '../go_to_screen_with_slide_transition.dart';
+import '../../../../../core/util/builders/go_to_screen_with_slide_transition.dart';
 
 class BreastCheckHistorytem extends StatelessWidget {
   const BreastCheckHistorytem(this.note, {super.key});

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../pages/awareness/awareness_screen.dart';
 import '../../pages/home_screen.dart';
 import '../custom_texts.dart';
-import '../go_to_screen_with_slide_transition.dart';
+import '../../../../../core/util/builders/go_to_screen_with_slide_transition.dart';
 
 class AwarenessTitle extends StatelessWidget {
   const AwarenessTitle(this.awarenessInfo, {super.key});
