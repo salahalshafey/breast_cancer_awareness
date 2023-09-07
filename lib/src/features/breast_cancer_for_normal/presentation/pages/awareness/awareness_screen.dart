@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../../core/network/network_info.dart';
 import '../../../../../core/util/builders/custom_alret_dialoge.dart';
@@ -106,7 +107,7 @@ class _AwarenessScreenState extends State<AwarenessScreen> {
             iconHeight: 150,
             opacity: 0.62,
           )
-        ],
+        ].animate(interval: 200.ms).fade().moveX(),
       ),
     );
   }

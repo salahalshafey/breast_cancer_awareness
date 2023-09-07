@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../core/util/widgets/default_screen.dart';
 import '../../../account/presentation/widgets/icon_from_asset.dart';
@@ -42,7 +43,7 @@ class OtherResourcesScreen extends StatelessWidget {
             iconHeight: 150,
             opacity: 0.62,
           ),
-        ],
+        ].animate(interval: 100.ms).fade().moveX(),
       ),
     );
   }

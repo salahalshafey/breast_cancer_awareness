@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../core/util/widgets/default_screen.dart';
 import '../../../../core/util/widgets/bulleted_list.dart';
@@ -50,7 +51,7 @@ class TipsForYourVisit extends StatelessWidget {
             iconHeight: 150,
             opacity: 0.62,
           ),
-        ],
+        ].animate(interval: 100.ms).fade().moveX(),
       ),
     );
   }

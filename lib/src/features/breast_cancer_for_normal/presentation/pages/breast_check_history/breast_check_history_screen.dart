@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/util/widgets/default_screen.dart';
@@ -66,7 +67,10 @@ class BreastCheckHistoryScreen extends StatelessWidget {
                   ),
                   itemCount: notes.length,
                   itemBuilder: (context, index) {
-                    return BreastCheckHistorytem(notes[index]);
+                    return BreastCheckHistorytem(notes[index])
+                        .animate(delay: ((index + 1) * 100).ms)
+                        .fade()
+                        .moveX();
                   },
                 );
               },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../../core/util/widgets/default_screen.dart';
 
@@ -36,7 +37,7 @@ class ShouldLookForScreen extends StatelessWidget {
             iconHeight: 150,
             opacity: 0.62,
           ),
-        ],
+        ].animate(interval: 200.ms).fade().moveX(),
       ),
     );
   }

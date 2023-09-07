@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../core/util/builders/go_to_screen_with_slide_transition.dart';
 
@@ -27,26 +28,28 @@ class ForPatientsScreen extends StatelessWidget {
           childAspectRatio: isportrait ? 0.43 : 0.50,
         ),
         children: [
-          ForPatientsItem(
-            image: "assets/breast_cancer/tips.png",
-            title: "TIPS FOR YOUR VISIT TO THE DOCTOR",
-            subTitle:
-                "Tips for things to say & do at your doctor's appointment.",
-            onTap: () => goToScreenWithSlideTransition(
-              context,
-              const TipsForYourVisit(),
+          for (int i = 0; i < 6; i++) ...[
+            ForPatientsItem(
+              image: "assets/breast_cancer/tips.png",
+              title: "TIPS FOR YOUR VISIT TO THE DOCTOR",
+              subTitle:
+                  "Tips for things to say & do at your doctor's appointment.",
+              onTap: () => goToScreenWithSlideTransition(
+                context,
+                const TipsForYourVisit(),
+              ),
             ),
-          ),
-          ForPatientsItem(
-            image: "assets/breast_cancer/other_resources.png",
-            title: "OTHER RESOURCES",
-            subTitle: "Take a look at some other helpful resources.",
-            onTap: () => goToScreenWithSlideTransition(
-              context,
-              const OtherResourcesScreen(),
-            ),
-          ),
-        ],
+            ForPatientsItem(
+              image: "assets/breast_cancer/other_resources.png",
+              title: "OTHER RESOURCES",
+              subTitle: "Take a look at some other helpful resources.",
+              onTap: () => goToScreenWithSlideTransition(
+                context,
+                const OtherResourcesScreen(),
+              ),
+            )
+          ],
+        ].animate(interval: 300.ms).fade().moveY(),
       ),
     );
   }
