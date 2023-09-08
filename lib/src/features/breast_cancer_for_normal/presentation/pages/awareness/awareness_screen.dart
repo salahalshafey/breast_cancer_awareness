@@ -71,12 +71,19 @@ class _AwarenessScreenState extends State<AwarenessScreen> {
               Image.asset(widget.awarenessInfo.image, height: 250),
               _isLoading
                   ? const CircularProgressIndicator()
-                  : IconButton(
-                      onPressed: _goToYoutubePlayerScreen,
-                      icon: const Icon(
-                        Icons.play_arrow,
-                        size: 70,
-                        color: Color.fromRGBO(199, 40, 107, 1),
+                  : Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: const Color.fromRGBO(199, 40, 107, 1)
+                            .withOpacity(0.2),
+                      ),
+                      child: IconButton(
+                        onPressed: _goToYoutubePlayerScreen,
+                        icon: const Icon(
+                          Icons.play_arrow,
+                          size: 60,
+                          color: Color.fromRGBO(199, 40, 107, 1),
+                        ),
                       ),
                     ),
             ],

@@ -20,15 +20,14 @@ class ForPatientsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: GridView(
-        padding: EdgeInsets.symmetric(vertical: shapeHeight + 10),
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: screenSize.width / (isportrait ? 2 : 3),
-          mainAxisSpacing: isportrait ? 20.0 : 40.0,
-          crossAxisSpacing: isportrait ? 20.0 : 40.0,
-          childAspectRatio: isportrait ? 0.43 : 0.50,
-        ),
-        children: [
-          for (int i = 0; i < 6; i++) ...[
+          padding: EdgeInsets.symmetric(vertical: shapeHeight + 10),
+          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: screenSize.width / (isportrait ? 2 : 3),
+            mainAxisSpacing: isportrait ? 20.0 : 40.0,
+            crossAxisSpacing: isportrait ? 20.0 : 40.0,
+            childAspectRatio: isportrait ? 0.43 : 0.50,
+          ),
+          children: [
             ForPatientsItem(
               image: "assets/breast_cancer/tips.png",
               title: "TIPS FOR YOUR VISIT TO THE DOCTOR",
@@ -47,10 +46,10 @@ class ForPatientsScreen extends StatelessWidget {
                 context,
                 const OtherResourcesScreen(),
               ),
-            )
-          ],
-        ].animate(interval: 300.ms).fade().moveY(),
-      ),
+            ),
+          ].animate(interval: 100.ms).fade().moveY()
+          //.elevation(borderRadius: BorderRadius.circular(25)),
+          ),
     );
   }
 }

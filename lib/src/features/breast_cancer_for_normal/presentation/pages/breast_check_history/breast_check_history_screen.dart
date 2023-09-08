@@ -70,7 +70,7 @@ class BreastCheckHistoryScreen extends StatelessWidget {
                     return BreastCheckHistorytem(notes[index])
                         .animate(delay: ((index + 1) * 100).ms)
                         .fade()
-                        .moveX();
+                        .slideY();
                   },
                 );
               },
