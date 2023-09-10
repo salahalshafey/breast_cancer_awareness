@@ -72,10 +72,10 @@ class _AwarenessScreenState extends State<AwarenessScreen> {
               _isLoading
                   ? const CircularProgressIndicator()
                   : Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: const Color.fromRGBO(199, 40, 107, 1)
-                            .withOpacity(0.2),
+                        color: Color.fromRGBO(199, 40, 107, 0.2),
+                        //.withOpacity(0.2),
                       ),
                       child: IconButton(
                         onPressed: _goToYoutubePlayerScreen,
@@ -84,7 +84,7 @@ class _AwarenessScreenState extends State<AwarenessScreen> {
                           size: 60,
                           color: Color.fromRGBO(199, 40, 107, 1),
                         ),
-                      ),
+                      ).animate(delay: 1500.ms).shake(duration: 1.seconds),
                     ),
             ],
           ),
