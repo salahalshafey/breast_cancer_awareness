@@ -144,6 +144,9 @@ flutter:
     - assets/breast_cancer/tips.png
     - assets/breast_cancer/other_resources_for_page.png
     - assets/breast_cancer/tips_for_page.png
+    - assets/breast_cancer/diet.png
+    - assets/breast_cancer/exercise.png
+    - assets/breast_cancer/search.png
     
     
 

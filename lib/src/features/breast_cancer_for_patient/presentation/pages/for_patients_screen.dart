@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/util/builders/go_to_screen_with_slide_transition.dart';
 
 import '../widgets/for_patients_item.dart';
 import 'other_resources_screen.dart';
+import 'search_screen.dart';
 import 'tips_for_your_visit_screen.dart';
 
 class ForPatientsScreen extends StatelessWidget {
@@ -45,6 +47,44 @@ class ForPatientsScreen extends StatelessWidget {
               onTap: () => goToScreenWithSlideTransition(
                 context,
                 const OtherResourcesScreen(),
+              ),
+            ),
+            ForPatientsItem(
+              image: "assets/breast_cancer/diet.png",
+              title: "CANCER & NUTRITION",
+              subTitle:
+                  "Information and guidelines for maintaining a healthy diet during cancer treatment.",
+              onTap: () {
+                launchUrl(
+                  Uri.parse(
+                      "https://breastcancernow.org/information-support/facing-breast-cancer/living-beyond-breast-cancer/your-body/diet-during-breast-cancer-treatment"),
+                  mode: LaunchMode.inAppWebView,
+                );
+              } /*=> goToScreenWithSlideTransition(
+                context,
+                const OtherResourcesScreen(),
+              )*/
+              ,
+            ),
+            ForPatientsItem(
+              image: "assets/breast_cancer/exercise.png",
+              title: "Exercise & physical activity".toUpperCase(),
+              subTitle:
+                  "Regular exercise and physical activity are essential for maintaining good health.",
+              onTap:
+                  () {} /*=> goToScreenWithSlideTransition(
+                context,
+                const OtherResourcesScreen(),
+              )*/
+              ,
+            ),
+            ForPatientsItem(
+              image: "assets/breast_cancer/search.png",
+              title: "Search for helpful info".toUpperCase(),
+              subTitle: "Search for help OR ask AI for guidance",
+              onTap: () => goToScreenWithSlideTransition(
+                context,
+                const SearchScreen(),
               ),
             ),
           ].animate(interval: 100.ms).fade().moveY()
