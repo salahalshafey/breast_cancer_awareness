@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/util/functions/string_manipulations_and_search.dart';
+
 class SearchField extends StatefulWidget {
   const SearchField({
     super.key,
@@ -16,6 +18,9 @@ class SearchField extends StatefulWidget {
 class _SearchFieldState extends State<SearchField> {
   final _focusNode = FocusNode();
   Color? _focusColor;
+  late TextDirection _textDirection = firstCharIsArabic(widget.controller.text)
+      ? TextDirection.rtl
+      : TextDirection.ltr;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +30,12 @@ class _SearchFieldState extends State<SearchField> {
           child: TextField(
             controller: widget.controller,
             focusNode: _focusNode,
+            autocorrect: false,
+            textCapitalization: TextCapitalization.none,
+            enableSuggestions: false,
+            keyboardType: TextInputType.text,
+            textInputAction: TextInputAction.search,
+            textDirection: _textDirection,
             onTap: () {
               setState(() {
                 _focusColor = Theme.of(context).primaryColor;
@@ -38,17 +49,21 @@ class _SearchFieldState extends State<SearchField> {
             },
             style: const TextStyle(color: Colors.white, fontSize: 20),
             onChanged: (value) {
-              setState(() {});
+              setState(() {
+                _textDirection = firstCharIsArabic(value)
+                    ? TextDirection.rtl
+                    : TextDirection.ltr;
+              });
             },
             onSubmitted: (value) {
               setState(() {
                 _focusColor = null;
               });
 
-              if (widget.controller.text.isEmpty) {
+              if (widget.controller.text.trim().isEmpty) {
                 return;
               }
-              widget.setSearchWord(widget.controller.text);
+              widget.setSearchWord(widget.controller.text.trim());
             },
             decoration: InputDecoration(
               hintText: "Search",
@@ -60,7 +75,7 @@ class _SearchFieldState extends State<SearchField> {
                         setState(() {
                           _focusColor = null;
                         });
-                        widget.setSearchWord(widget.controller.text);
+                        widget.setSearchWord(widget.controller.text.trim());
                       },
                       icon: const Icon(Icons.search),
                     )
@@ -90,7 +105,7 @@ class _SearchFieldState extends State<SearchField> {
           ),
           child: IconButton(
             onPressed: () {
-              widget.setSearchWord("frod");
+              widget.setSearchWord("تابعنا ");
             },
             highlightColor: Colors.white.withOpacity(0.2),
             icon: const Icon(

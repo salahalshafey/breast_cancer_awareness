@@ -72,15 +72,11 @@ class _NoteTextFieldState extends State<NoteTextField> {
               FocusScope.of(context).unfocus();
             },
             onChanged: (value) {
-              if (firstCharIsArabic(value)) {
-                setState(() {
-                  _textDirection = TextDirection.rtl;
-                });
-              } else {
-                setState(() {
-                  _textDirection = TextDirection.ltr;
-                });
-              }
+              setState(() {
+                _textDirection = firstCharIsArabic(value)
+                    ? TextDirection.rtl
+                    : TextDirection.ltr;
+              });
             },
           ),
           Row(

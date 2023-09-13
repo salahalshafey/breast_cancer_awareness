@@ -12,11 +12,13 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   String? _searchWord;
+  // bool _textToSpeech = false;
   final _controller = TextEditingController();
 
-  void _setSearchWord(String searchword) {
+  void _setSearchWord(String searchword, {bool textToSpeech = false}) {
     setState(() {
       _searchWord = searchword;
+      //  _textToSpeech = textToSpeech;
     });
 
     _controller.text = searchword;
