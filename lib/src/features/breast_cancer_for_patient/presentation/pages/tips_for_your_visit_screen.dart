@@ -12,6 +12,7 @@ class TipsForYourVisit extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultScreen(
       containingBackgroundCancerSympol: false,
+      containingBackgroundRightSympol: false,
       child: ListView(
         padding: const EdgeInsets.only(left: 30, right: 30, top: 80),
         children: [

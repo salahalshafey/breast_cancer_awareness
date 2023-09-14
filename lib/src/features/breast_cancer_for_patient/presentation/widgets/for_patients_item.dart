@@ -40,7 +40,7 @@ class ForPatientsItem extends StatelessWidget {
                     title,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

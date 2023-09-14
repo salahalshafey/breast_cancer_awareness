@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 
+import 'speech_to_text.dart';
+
 class SearchField extends StatefulWidget {
   const SearchField({
     super.key,
@@ -9,7 +11,7 @@ class SearchField extends StatefulWidget {
     required this.setSearchWord,
   });
   final TextEditingController controller;
-  final void Function(String searchWord) setSearchWord;
+  final void Function(String searchWord, {bool textToSpeech}) setSearchWord;
 
   @override
   State<SearchField> createState() => _SearchFieldState();
@@ -104,8 +106,14 @@ class _SearchFieldState extends State<SearchField> {
             color: Theme.of(context).primaryColor,
           ),
           child: IconButton(
-            onPressed: () {
-              widget.setSearchWord("تابعنا ");
+            onPressed: () async {
+              final text = await showSpeechToTextDialog(context);
+
+              if (text == null || text.isEmpty) {
+                return;
+              }
+
+              widget.setSearchWord(text, textToSpeech: true);
             },
             highlightColor: Colors.white.withOpacity(0.2),
             icon: const Icon(

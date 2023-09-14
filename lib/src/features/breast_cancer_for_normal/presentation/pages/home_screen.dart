@@ -41,6 +41,7 @@ class HomeScreen extends StatelessWidget {
               ),
               child: const Text(
                 "SELF-CHECK NOW",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -56,6 +57,7 @@ class HomeScreen extends StatelessWidget {
               ),
               child: const Text(
                 "MY BREAST-CHECK HISTORY",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,

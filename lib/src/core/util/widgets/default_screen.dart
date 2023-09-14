@@ -12,12 +12,14 @@ class DefaultScreen extends StatelessWidget {
     this.containingAppBar = true,
     this.appBartitle,
     this.containingBackgroundCancerSympol = true,
+    this.containingBackgroundRightSympol = true,
     required this.child,
   });
 
   final bool containingAppBar;
   final String? appBartitle;
   final bool containingBackgroundCancerSympol;
+  final bool containingBackgroundRightSympol;
   final Widget child;
 
   @override
@@ -46,11 +48,13 @@ class DefaultScreen extends StatelessWidget {
                   )
                 : const SizedBox(),
           ),
-          Positioned(
-            bottom: 40 - keyboardHeight,
-            right: 0,
-            child: const ShapeForProfileScreen(),
-          ),
+          containingBackgroundRightSympol
+              ? Positioned(
+                  bottom: 40 - keyboardHeight,
+                  right: 0,
+                  child: const ShapeForProfileScreen(),
+                )
+              : const SizedBox(),
           Positioned(
             bottom: 0 - keyboardHeight,
             left: 0,

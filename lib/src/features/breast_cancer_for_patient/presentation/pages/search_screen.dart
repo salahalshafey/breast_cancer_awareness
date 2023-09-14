@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/util/widgets/default_screen.dart';
+
+import '../widgets/chat_gpt_search_result.dart';
 import '../widgets/search_field.dart';
+import '../widgets/search_keywords.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -12,13 +15,13 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   String? _searchWord;
-  // bool _textToSpeech = false;
+  bool _textToSpeech = false;
   final _controller = TextEditingController();
 
   void _setSearchWord(String searchword, {bool textToSpeech = false}) {
     setState(() {
       _searchWord = searchword;
-      //  _textToSpeech = textToSpeech;
+      _textToSpeech = textToSpeech;
     });
 
     _controller.text = searchword;
@@ -29,6 +32,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return DefaultScreen(
       containingAppBar: false,
       containingBackgroundCancerSympol: false,
+      containingBackgroundRightSympol: false,
       child: Stack(
         children: [
           Positioned(
@@ -44,53 +48,50 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 70),
+            padding: const EdgeInsets.only(left: 10, right: 10, top: 70),
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 25),
+                  padding: const EdgeInsets.only(left: 35),
                   child: SearchField(
                     controller: _controller,
                     setSearchWord: _setSearchWord,
                   ),
                 ),
-                const SizedBox(height: 20),
-                const Text("some search keyword"),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: ListView(
-                    padding: const EdgeInsets.all(0),
-                    children: [
-                      // SizedBox(height: 20),
-                      _searchWord == null
-                          ? const Text("image for searching")
-                          : Text(
-                              "search results for $_searchWord ..... \n\n" * 20,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: Color.fromRGBO(199, 40, 107, 1),
-                                fontSize: 24,
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
-                    ], //.animate(interval: 100.ms).fade().moveX(),
-                  ),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    Expanded(child: SearchKeyWords(_setSearchWord)),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.filter_list),
+                    ),
+                  ],
                 ),
+                const SizedBox(height: 10),
+                if (_searchWord == null)
+                  Expanded(
+                    child: Center(
+                      child: Opacity(
+                        opacity: Theme.of(context).brightness == Brightness.dark
+                            ? 0.8
+                            : 1,
+                        child: Image.asset("assets/breast_cancer/search_2.png"),
+                      ),
+                    ),
+                  )
+                else
+                  Expanded(
+                    child: ChatGPTSearchResult(
+                      searchWord: _searchWord!,
+                      textToSpeech: _textToSpeech,
+                    ),
+                  ),
               ],
             ),
           ),
         ],
       ),
     );
-  }
-}
-
-extension on String {
-  String operator *(int num) {
-    String res = "";
-    for (int i = 0; i < num; i++) {
-      res += this;
-    }
-    return res;
   }
 }

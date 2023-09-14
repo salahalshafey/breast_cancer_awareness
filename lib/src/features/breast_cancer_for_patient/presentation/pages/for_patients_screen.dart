@@ -69,8 +69,7 @@ class ForPatientsScreen extends StatelessWidget {
             ForPatientsItem(
               image: "assets/breast_cancer/exercise.png",
               title: "Exercise & physical activity".toUpperCase(),
-              subTitle:
-                  "Regular exercise and physical activity are essential for maintaining good health.",
+              subTitle: "Regular exercise and physical activity are essential.",
               onTap:
                   () {} /*=> goToScreenWithSlideTransition(
                 context,
@@ -80,7 +79,7 @@ class ForPatientsScreen extends StatelessWidget {
             ),
             ForPatientsItem(
               image: "assets/breast_cancer/search.png",
-              title: "Search for helpful info".toUpperCase(),
+              title: "Find help".toUpperCase(),
               subTitle: "Search for help OR ask AI for guidance",
               onTap: () => goToScreenWithSlideTransition(
                 context,
