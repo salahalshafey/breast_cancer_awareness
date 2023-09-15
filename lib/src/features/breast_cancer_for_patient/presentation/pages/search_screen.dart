@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 import '../../../../core/util/widgets/default_screen.dart';
 
@@ -17,8 +18,11 @@ class _SearchScreenState extends State<SearchScreen> {
   String? _searchWord;
   bool _textToSpeech = false;
   final _controller = TextEditingController();
+  final FlutterTts _flutterTts = FlutterTts();
 
-  void _setSearchWord(String searchword, {bool textToSpeech = false}) {
+  void _setSearchWord(String searchword, {bool textToSpeech = false}) async {
+    await _flutterTts.stop();
+
     setState(() {
       _searchWord = searchword;
       _textToSpeech = textToSpeech;
@@ -55,6 +59,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   padding: const EdgeInsets.only(left: 35),
                   child: SearchField(
                     controller: _controller,
+                    flutterTts: _flutterTts,
                     setSearchWord: _setSearchWord,
                   ),
                 ),
@@ -85,6 +90,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: ChatGPTSearchResult(
                       searchWord: _searchWord!,
                       textToSpeech: _textToSpeech,
+                      flutterTts: _flutterTts,
                     ),
                   ),
               ],

@@ -1,4 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 
@@ -8,9 +11,12 @@ class SearchField extends StatefulWidget {
   const SearchField({
     super.key,
     required this.controller,
+    required this.flutterTts,
     required this.setSearchWord,
   });
+
   final TextEditingController controller;
+  final FlutterTts flutterTts;
   final void Function(String searchWord, {bool textToSpeech}) setSearchWord;
 
   @override
@@ -107,6 +113,8 @@ class _SearchFieldState extends State<SearchField> {
           ),
           child: IconButton(
             onPressed: () async {
+              await widget.flutterTts.stop();
+
               final text = await showSpeechToTextDialog(context);
 
               if (text == null || text.isEmpty) {

@@ -1,21 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:wakelock/wakelock.dart';
 
 import '../../../../core/util/widgets/custom_error_widget.dart';
 import '../../../../core/util/widgets/dots_loading.dart';
 
-class ChatGPTSearchResult extends StatelessWidget {
+class ChatGPTSearchResult extends StatefulWidget {
   const ChatGPTSearchResult({
     super.key,
     required this.searchWord,
     required this.textToSpeech,
+    required this.flutterTts,
   });
+
   final String searchWord;
   final bool textToSpeech;
+  final FlutterTts flutterTts;
+
+  @override
+  State<ChatGPTSearchResult> createState() => _ChatGPTSearchResultState();
+}
+
+class _ChatGPTSearchResultState extends State<ChatGPTSearchResult> {
+  @override
+  void initState() {
+    widget.flutterTts.setCompletionHandler(() {
+      Wakelock.disable();
+    });
+
+    widget.flutterTts.setCancelHandler(() {
+      Wakelock.disable();
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    widget.flutterTts.stop();
+    Wakelock.disable();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: chatGPT(searchWord),
+      future: chatGPT(widget.searchWord),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Center(
@@ -28,8 +59,9 @@ class ChatGPTSearchResult extends StatelessWidget {
         }
 
         final data = snapshot.data!;
-        if (textToSpeech) {
-          // handleTextToSpeech(date);
+        if (widget.textToSpeech) {
+          widget.flutterTts.speak(data);
+          Wakelock.enable();
         }
 
         return ListView(
@@ -54,7 +86,7 @@ class ChatGPTSearchResult extends StatelessWidget {
 Future<String> chatGPT(String searchWord) => Future.delayed(
       const Duration(seconds: 3),
       () {
-        // throw Error();
+        //throw Error();
         return "search results for $searchWord ..... \n\n" * 20;
       },
     );
