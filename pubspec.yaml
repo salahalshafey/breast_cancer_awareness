@@ -71,6 +71,7 @@ dependencies:
   permission_handler: ^10.4.3
   speech_to_text: ^6.3.0
   flutter_tts: ^3.8.3
+  font_awesome_flutter: ^10.5.0
   #observe_internet_connectivity: ^1.0.2
   #connectivity_plus: ^4.0.2
   
