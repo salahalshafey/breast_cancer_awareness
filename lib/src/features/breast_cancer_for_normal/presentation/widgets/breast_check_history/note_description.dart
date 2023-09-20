@@ -15,7 +15,7 @@ class NoteDescription extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final Icon icon;
+  final Widget icon;
   final String title;
   final String? description;
 

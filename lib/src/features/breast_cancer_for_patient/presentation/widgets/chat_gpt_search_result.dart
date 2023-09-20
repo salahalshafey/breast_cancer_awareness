@@ -4,6 +4,7 @@ import 'package:wakelock/wakelock.dart';
 
 import '../../../../core/util/widgets/custom_error_widget.dart';
 import '../../../../core/util/widgets/dots_loading.dart';
+import '../providers/chat_gpt_test.dart';
 
 class ChatGPTSearchResult extends StatefulWidget {
   const ChatGPTSearchResult({
@@ -21,9 +22,12 @@ class ChatGPTSearchResult extends StatefulWidget {
   State<ChatGPTSearchResult> createState() => _ChatGPTSearchResultState();
 }
 
-class _ChatGPTSearchResultState extends State<ChatGPTSearchResult> {
+class _ChatGPTSearchResultState extends State<ChatGPTSearchResult>
+    with WidgetsBindingObserver {
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
+
     widget.flutterTts.setCompletionHandler(() {
       Wakelock.disable();
     });
@@ -36,7 +40,18 @@ class _ChatGPTSearchResultState extends State<ChatGPTSearchResult> {
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      widget.flutterTts.stop();
+    }
+
+    super.didChangeAppLifecycleState(state);
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+
     widget.flutterTts.stop();
     Wakelock.disable();
 
@@ -46,7 +61,7 @@ class _ChatGPTSearchResultState extends State<ChatGPTSearchResult> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: chatGPT(widget.searchWord),
+      future: chatGPTResponseTest(widget.searchWord),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Center(
@@ -83,7 +98,7 @@ class _ChatGPTSearchResultState extends State<ChatGPTSearchResult> {
   }
 }
 
-Future<String> chatGPT(String searchWord) => Future.delayed(
+/*Future<String> chatGPT(String searchWord) => Future.delayed(
       const Duration(seconds: 3),
       () {
         //throw Error();
@@ -99,4 +114,4 @@ extension on String {
     }
     return res;
   }
-}
+}*/
