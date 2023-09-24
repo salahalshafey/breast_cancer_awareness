@@ -24,6 +24,14 @@ import 'features/breast_cancer_for_normal/domain/usecases/delete_note.dart';
 import 'features/breast_cancer_for_normal/domain/usecases/delete_all_notes.dart';
 import 'features/breast_cancer_for_normal/presentation/providers/notes.dart';
 
+import 'features/breast_cancer_for_patient/data/datasources/ai_chat.dart';
+import 'features/breast_cancer_for_patient/data/datasources/google_search.dart';
+import 'features/breast_cancer_for_patient/data/repositories/search_repositories_impl.dart';
+import 'features/breast_cancer_for_patient/domain/repositories/search_repositories.dart';
+import 'features/breast_cancer_for_patient/domain/usecases/ai_result.dart';
+import 'features/breast_cancer_for_patient/domain/usecases/custom_google_search.dart';
+import 'features/breast_cancer_for_patient/presentation/providers/search.dart';
+
 final sl = GetIt.instance;
 
 Future<void> init() async {
@@ -98,6 +106,34 @@ Future<void> init() async {
   sl.registerLazySingleton<NotesLocalDataSource>(
       () => NotesSharedPreferencesImpl());
   sl.registerLazySingleton<NotesLocalStorage>(() => NotesLocalStorageImpl());
+
+  /////////////////////////////////////////////// !!!! Features - Search !!!! /////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Provider
+
+  sl.registerFactory(() => Search(
+        customGoogleSearchUsecase: sl(),
+        aiResultUsecase: sl(),
+      ));
+
+// Usecases
+
+  sl.registerLazySingleton(() => CustomGoogleSearchUsecase(sl()));
+  sl.registerLazySingleton(() => AIResultUsecase(sl()));
+
+// Repository
+
+  sl.registerLazySingleton<SearchRepository>(() => SearchRepositoryImpl(
+        googleSearch: sl(),
+        aiChat: sl(),
+        networkInfo: sl(),
+      ));
+
+// Datasources
+
+  sl.registerLazySingleton<GoogleSearch>(() => CustomGoogleSearchImpl());
+  sl.registerLazySingleton<AIChat>(() => MakerSuite());
 
 //////////////////////////////////////////////////// !!!! core !!!! ///////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

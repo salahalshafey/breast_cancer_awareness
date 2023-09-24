@@ -60,22 +60,19 @@ class ForPatientsScreen extends StatelessWidget {
                       "https://breastcancernow.org/information-support/facing-breast-cancer/living-beyond-breast-cancer/your-body/diet-during-breast-cancer-treatment"),
                   mode: LaunchMode.inAppWebView,
                 );
-              } /*=> goToScreenWithSlideTransition(
-                context,
-                const OtherResourcesScreen(),
-              )*/
-              ,
+              },
             ),
             ForPatientsItem(
               image: "assets/breast_cancer/exercise.png",
               title: "Exercise & physical activity".toUpperCase(),
               subTitle: "Regular exercise and physical activity are essential.",
-              onTap:
-                  () {} /*=> goToScreenWithSlideTransition(
-                context,
-                const OtherResourcesScreen(),
-              )*/
-              ,
+              onTap: () {
+                launchUrl(
+                  Uri.parse(
+                      "https://breastcancernow.org/information-support/facing-breast-cancer/living-beyond-breast-cancer/your-body/exercise-breast-cancer"),
+                  mode: LaunchMode.inAppWebView,
+                );
+              },
             ),
             ForPatientsItem(
               image: "assets/breast_cancer/search.png",

@@ -7,6 +7,7 @@ import 'firebase_options.dart';
 import 'src/features/settings/providers/theme_provider.dart';
 import 'src/features/account/presentation/providers/account.dart';
 import 'src/features/breast_cancer_for_normal/presentation/providers/notes.dart';
+import 'src/features/breast_cancer_for_patient/presentation/providers/search.dart';
 import 'src/features/main_and_menu_screens/main_screen_state_provider.dart';
 import 'src/features/breast_cancer_detection/presentation/providers/for_doctor_screen_state_provider.dart';
 
@@ -32,6 +33,7 @@ void main() async {
         ChangeNotifierProvider(create: (ctx) => ThemeProvider(currentTheme)),
         ChangeNotifierProvider(create: (ctx) => di.sl<Account>()),
         ChangeNotifierProvider(create: (ctx) => di.sl<Notes>()),
+        ChangeNotifierProvider(create: (ctx) => di.sl<Search>()),
         ChangeNotifierProvider(create: (ctx) => MainScreenState()),
         ChangeNotifierProvider(create: (ctx) => ForDoctorScreenState()),
       ],

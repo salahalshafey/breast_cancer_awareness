@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 class CodeContainer extends StatelessWidget {
@@ -33,17 +34,7 @@ class CodeContainer extends StatelessWidget {
                   languageName,
                   style: const TextStyle(color: Colors.white),
                 ),
-                const Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.copy, color: Colors.white),
-                    SizedBox(width: 7),
-                    Text(
-                      "Copy code",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
+                CopyCode(code: code),
               ],
             ),
           ),
@@ -67,6 +58,57 @@ class CodeContainer extends StatelessWidget {
                     style: const TextStyle(color: Colors.white),
                   ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class CopyCode extends StatefulWidget {
+  const CopyCode({super.key, required this.code});
+
+  final String code;
+
+  @override
+  State<CopyCode> createState() => _CopyCodeState();
+}
+
+class _CopyCodeState extends State<CopyCode> {
+  bool _isCopyed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: _isCopyed
+          ? () {}
+          : () async {
+              await Clipboard.setData(ClipboardData(text: widget.code));
+
+              setState(() {
+                _isCopyed = true;
+              });
+
+              Future.delayed(
+                const Duration(seconds: 3),
+                () {
+                  setState(() {
+                    _isCopyed = false;
+                  });
+                },
+              );
+            },
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _isCopyed
+              ? const Icon(Icons.check, color: Colors.white)
+              : const Icon(Icons.copy, color: Colors.white),
+          const SizedBox(width: 7),
+          Text(
+            _isCopyed ? "Copid!" : "Copy code",
+            style: const TextStyle(color: Colors.white),
+          ),
+          const SizedBox(width: 10),
         ],
       ),
     );

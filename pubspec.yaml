@@ -112,6 +112,9 @@ flutter:
     - assets/images/background_flower.svg
     - assets/images/background_cancer_sympol.png
     - assets/images/background_image.png
+    - assets/images/empty.png
+    - assets/images/ai.png
+    - assets/images/google.png
     - assets/icons/remember_me_icon.svg
     - assets/icons/normal_user_icon.png
     - assets/icons/patient_icon.svg
@@ -142,7 +145,6 @@ flutter:
     - assets/breast_cancer/all_is_well.png
     - assets/breast_cancer/not_sure.png
     - assets/breast_cancer/noticed_something.png
-    - assets/images/empty.png
     - assets/breast_cancer/other_resources.png
     - assets/breast_cancer/tips.png
     - assets/breast_cancer/other_resources_for_page.png

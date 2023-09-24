@@ -10,7 +10,6 @@ class BulletedList extends StatelessWidget {
 
   final Widget? bullet;
   final Widget text;
-
   final EdgeInsetsGeometry bulletMargin;
 
   @override
