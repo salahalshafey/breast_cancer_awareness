@@ -1,8 +1,7 @@
-import 'package:breast_cancer_awareness/src/core/util/builders/custom_alret_dialoge.dart';
-import 'package:breast_cancer_awareness/src/features/breast_cancer_for_patient/presentation/widgets/ai_result_normal_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
+import '../../../../core/util/builders/custom_alret_dialoge.dart';
 import '../../../../core/util/widgets/default_screen.dart';
 
 import '../widgets/ai_result.dart';
@@ -54,55 +53,25 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   @override
-  void didChangeDependencies() {
-    Future.delayed(const Duration(milliseconds: 500), () {
-      showDialog(
-        context: context,
-        builder: (ctx) {
-          final screenSize = MediaQuery.of(context).size;
+  void initState() {
+    Future.delayed(
+      const Duration(milliseconds: 500),
+      () {
+        showCustomAlretDialog(
+          context: context,
+          title: "Caution",
+          content:
+              "This app provides information and assistance related to `medical` topics using `artificial intelligence` and `online resources`. However, it is not a substitute for professional medical advice, diagnosis, or treatment. Please read and consider the following:\n\n"
+              "* **Consult a Healthcare Professional**: If you have a medical condition, symptoms, or concerns about your health, consult a qualified healthcare provider. This app does not replace the expertise of medical professionals.\n"
+              "* **Use as a Supplement**: Use this app as a supplemental tool to gather general information about medical topics. It can provide insights and suggestions but should not be your sole source of healthcare guidance.\n"
+              "* **Not for Emergencies**: In case of a medical emergency, call your local emergency number or seek immediate medical attention. This app is not equipped to handle urgent situations.\n"
+              "* **Verify Information**: Always verify the information you receive in this app with trusted medical sources or professionals. Medical knowledge evolves, and information provided here may not always reflect the latest guidelines.\n"
+              "* **User Responsibility**: Your health is your responsibility. Do not make medical decisions solely based on information obtained from this app.",
+        );
+      },
+    );
 
-          return Container(
-            constraints: BoxConstraints(
-              maxWidth: screenSize.width - 40,
-              maxHeight: screenSize.height - 40,
-            ),
-            child: AlertDialog(
-              title: Row(
-                children: [
-                  Icon(
-                    Icons.warning,
-                    size: 45,
-                    color: Colors.red.shade900,
-                  ),
-                  const SizedBox(width: 20),
-                  Text(
-                    "Caution",
-                    style: TextStyle(color: Colors.red.shade900),
-                  ),
-                ],
-              ),
-              content: const SingleChildScrollView(
-                child: AIResultNormalText(
-                  data:
-                      """This app provides information and assistance related to medical topics using artificial intelligence and online resources. However, it is not a substitute for professional medical advice, diagnosis, or treatment. Please read and consider the following:
-
-* **Consult a Healthcare Professional**: If you have a medical condition, symptoms, or concerns about your health, consult a qualified healthcare provider. This app does not replace the expertise of medical professionals.
-
-* **Use as a Supplement**: Use this app as a supplemental tool to gather general information about medical topics. It can provide insights and suggestions but should not be your sole source of healthcare guidance.
-
-* **Not for Emergencies**: In case of a medical emergency, call your local emergency number or seek immediate medical attention. This app is not equipped to handle urgent situations.
-
-* **Verify Information**: Always verify the information you receive in this app with trusted medical sources or professionals. Medical knowledge evolves, and information provided here may not always reflect the latest guidelines.
-
-* **User Responsibility**: Your health is your responsibility. Do not make medical decisions solely based on information obtained from this app.""",
-                ),
-              ),
-            ),
-          );
-        },
-      );
-    });
-    super.didChangeDependencies();
+    super.initState();
   }
 
   @override

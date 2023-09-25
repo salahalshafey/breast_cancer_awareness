@@ -13,8 +13,8 @@ import '../../../../core/util/widgets/custom_card.dart';
 import '../../../../core/util/widgets/custom_error_widget.dart';
 import '../../../../core/util/widgets/dots_loading.dart';
 
+import '../../../../core/util/widgets/text_well_formatted.dart';
 import '../providers/search.dart';
-import 'ai_result_normal_text.dart';
 
 class AIResult extends StatefulWidget {
   const AIResult({
@@ -138,13 +138,20 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
 
                   if (inlineString.type == StringTypes.bulleted) {
                     return BulletedList(
-                      text: AIResultNormalText(
+                      textDirection: firstCharIsArabic(snapshot.data!)
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
+                      text: TextWellFormattedWitouthBulleted(
                         data: inlineString.string.substring(2),
+                        isSelectableText: true,
                       ),
                     );
                   }
 
-                  return AIResultNormalText(data: inlineString.string);
+                  return TextWellFormattedWitouthBulleted(
+                    data: inlineString.string,
+                    isSelectableText: true,
+                  );
                 }).toList(),
               ),
             ).animate().fade(duration: 200.ms).moveY(duration: 200.ms),

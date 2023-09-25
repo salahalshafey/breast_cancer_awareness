@@ -29,6 +29,7 @@ class DefaultScreen extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
+      //resizeToAvoidBottomInset: false,
       appBar: containingAppBar
           ? AppBar(
               backgroundColor: Colors.transparent,

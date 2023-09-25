@@ -2,17 +2,59 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../core/util/functions/string_manipulations_and_search.dart';
+import '../functions/string_manipulations_and_search.dart';
+import 'bulleted_list.dart';
 
-class AIResultNormalText extends StatelessWidget {
-  const AIResultNormalText({super.key, required this.data});
+class TextWellFormattedWithBulleted extends StatelessWidget {
+  const TextWellFormattedWithBulleted(this.data, {super.key});
 
   final String data;
 
   @override
   Widget build(BuildContext context) {
-    return SelectableText.rich(
-      TextSpan(
+    return Column(
+      children: patternMatcher(
+        data,
+        patterns: [
+          // bulleted
+          RegExp(
+            r"^\* .*",
+            multiLine: true,
+            dotAll: false,
+          ),
+        ],
+        types: [
+          StringTypes.bulleted,
+          StringTypes.normal,
+        ],
+      ).map((inlineString) {
+        if (inlineString.type == StringTypes.bulleted) {
+          return BulletedList(
+            textDirection:
+                firstCharIsArabic(data) ? TextDirection.rtl : TextDirection.ltr,
+            text: TextWellFormattedWitouthBulleted(
+              data: inlineString.string.substring(2),
+            ),
+          );
+        }
+
+        return TextWellFormattedWitouthBulleted(data: inlineString.string);
+      }).toList(),
+    );
+  }
+}
+
+class TextWellFormattedWitouthBulleted extends StatelessWidget {
+  const TextWellFormattedWitouthBulleted({
+    super.key,
+    required this.data,
+    this.isSelectableText = false,
+  });
+
+  final String data;
+  final bool isSelectableText;
+
+  TextSpan _getTextSpan() => TextSpan(
         children: patternMatcher(
           data,
           patterns: [
@@ -112,14 +154,26 @@ class AIResultNormalText extends StatelessWidget {
 
           return TextSpan(text: inlineText.string);
         }).toList(),
-      ),
-      textDirection:
-          firstCharIsArabic(data) ? TextDirection.rtl : TextDirection.ltr,
-    );
+      );
+
+  @override
+  Widget build(BuildContext context) {
+    return isSelectableText
+        ? SelectableText.rich(
+            _getTextSpan(),
+            textDirection:
+                firstCharIsArabic(data) ? TextDirection.rtl : TextDirection.ltr,
+          )
+        : Text.rich(
+            _getTextSpan(),
+            textDirection:
+                firstCharIsArabic(data) ? TextDirection.rtl : TextDirection.ltr,
+          );
   }
 }
 
 enum StringTypes {
+  bulleted,
   url,
   email,
   bold,

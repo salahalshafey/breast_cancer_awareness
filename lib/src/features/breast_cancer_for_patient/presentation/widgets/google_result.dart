@@ -69,8 +69,7 @@ class _GoogleResultState extends State<GoogleResult>
   Widget build(BuildContext context) {
     return FutureBuilder(
       key: UniqueKey(),
-      future: //chatGPT(widget.searchWord),
-          Provider.of<Search>(context, listen: false).customGoogleSearch(
+      future: Provider.of<Search>(context, listen: false).customGoogleSearch(
         widget.searchWord,
         numOfResult: 5,
       ),

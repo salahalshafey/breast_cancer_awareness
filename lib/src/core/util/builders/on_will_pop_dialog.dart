@@ -1,6 +1,38 @@
 import 'package:flutter/material.dart';
+import 'custom_alret_dialoge.dart';
 
 Future<bool> onWillPopWithDialog(BuildContext context) async {
+  return (await showCustomAlretDialog<bool>(
+        context: context,
+        title: "Attention",
+        titleColor: Colors.red,
+        content: "Do you really want to exit?",
+        actions: [
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+              child: const Text(
+                "Yes",
+                style: TextStyle(color: Colors.red),
+              )),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+            child: Text(
+              "No",
+              style: TextStyle(
+                color: Theme.of(context).appBarTheme.titleTextStyle!.color,
+              ),
+            ),
+          ),
+        ],
+      )) ??
+      false;
+}
+
+/*Future<bool> onWillPopWithDialog(BuildContext context) async {
   return (await showDialog<bool?>(
         context: context,
         builder: (context) {
@@ -47,4 +79,4 @@ Future<bool> onWillPopWithDialog(BuildContext context) async {
         },
       )) ??
       false;
-}
+}*/

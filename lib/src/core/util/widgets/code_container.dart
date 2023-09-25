@@ -29,6 +29,7 @@ class CodeContainer extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              textDirection: TextDirection.ltr,
               children: [
                 Text(
                   languageName,
@@ -55,6 +56,7 @@ class CodeContainer extends StatelessWidget {
                   )
                 : SelectableText(
                     code,
+                    textDirection: TextDirection.ltr,
                     style: const TextStyle(color: Colors.white),
                   ),
           ),

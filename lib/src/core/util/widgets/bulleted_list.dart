@@ -6,16 +6,19 @@ class BulletedList extends StatelessWidget {
     this.bullet,
     required this.text,
     this.bulletMargin = const EdgeInsets.only(top: 8, right: 10, left: 20),
+    this.textDirection,
   });
 
   final Widget? bullet;
   final Widget text;
   final EdgeInsetsGeometry bulletMargin;
+  final TextDirection? textDirection;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
+      textDirection: textDirection,
       children: [
         Padding(
           padding: bulletMargin,

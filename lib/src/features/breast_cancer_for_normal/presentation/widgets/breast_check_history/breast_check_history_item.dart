@@ -45,7 +45,6 @@ class BreastCheckHistorytem extends StatelessWidget {
         final delete = await showCustomAlretDialog<bool>(
           context: context,
           title: "Warning",
-          titleColor: Colors.red.shade900,
           content: "Confirm Deletion?",
           actions: [
             TextButton(
