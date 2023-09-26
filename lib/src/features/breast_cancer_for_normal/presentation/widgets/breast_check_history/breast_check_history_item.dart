@@ -46,6 +46,7 @@ class BreastCheckHistorytem extends StatelessWidget {
           context: context,
           title: "Warning",
           content: "Confirm Deletion?",
+          titleColor: Colors.red,
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),

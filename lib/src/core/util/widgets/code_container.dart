@@ -39,26 +39,28 @@ class CodeContainer extends StatelessWidget {
               ],
             ),
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-            child: animateTheCode
-                ? Animate().custom(
-                    duration: (code.length * 10).ms,
-                    begin: 0,
-                    end: code.length.toDouble(),
-                    builder: (_, value, __) {
-                      return SelectableText(
-                        code.substring(0, value.toInt()),
-                        style: const TextStyle(color: Colors.white),
-                      );
-                    },
-                  )
-                : SelectableText(
-                    code,
-                    textDirection: TextDirection.ltr,
-                    style: const TextStyle(color: Colors.white),
-                  ),
+          Scrollbar(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+              child: animateTheCode
+                  ? Animate().custom(
+                      duration: (code.length * 10).ms,
+                      begin: 0,
+                      end: code.length.toDouble(),
+                      builder: (_, value, __) {
+                        return SelectableText(
+                          code.substring(0, value.toInt()),
+                          style: const TextStyle(color: Colors.white),
+                        );
+                      },
+                    )
+                  : SelectableText(
+                      code,
+                      textDirection: TextDirection.ltr,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+            ),
           ),
         ],
       ),

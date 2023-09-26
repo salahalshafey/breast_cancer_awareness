@@ -7,7 +7,7 @@ import '../widgets/text_well_formatted.dart';
 ///
 /// * [icon] if null it will be [Icons.warning] with size 45 and the same color of [titleColor]
 ///
-/// * [action] if null it will be [TextButton] with text "Ok" and the same color of [titleColor]
+/// * [actions] if null it will be [TextButton] with text "Ok" and the same color of [titleColor]
 Future<T?> showCustomAlretDialog<T>({
   required BuildContext context,
   required String title,

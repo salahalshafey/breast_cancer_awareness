@@ -1,5 +1,10 @@
 import '../classes/pair_class.dart';
 
+/// ## This function takes three parameters:
+/// * **string:** A string to be analyzed.
+/// * **patterns:** A list of Pattern objects representing regular expressions or patterns to match in the string.
+/// * **types:** A list of generic type T, which is intended to represent types associated with each pattern.
+
 List<StringWithType<T>> patternMatcher<T>(
   String string, {
   required List<Pattern> patterns,

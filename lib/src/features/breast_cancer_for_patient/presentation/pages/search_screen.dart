@@ -62,11 +62,11 @@ class _SearchScreenState extends State<SearchScreen> {
           title: "Caution",
           content:
               "This app provides information and assistance related to `medical` topics using `artificial intelligence` and `online resources`. However, it is not a substitute for professional medical advice, diagnosis, or treatment. Please read and consider the following:\n\n"
-              "* **Consult a Healthcare Professional**: If you have a medical condition, symptoms, or concerns about your health, consult a qualified healthcare provider. This app does not replace the expertise of medical professionals.\n"
-              "* **Use as a Supplement**: Use this app as a supplemental tool to gather general information about medical topics. It can provide insights and suggestions but should not be your sole source of healthcare guidance.\n"
-              "* **Not for Emergencies**: In case of a medical emergency, call your local emergency number or seek immediate medical attention. This app is not equipped to handle urgent situations.\n"
-              "* **Verify Information**: Always verify the information you receive in this app with trusted medical sources or professionals. Medical knowledge evolves, and information provided here may not always reflect the latest guidelines.\n"
-              "* **User Responsibility**: Your health is your responsibility. Do not make medical decisions solely based on information obtained from this app.",
+              "* **Consult a Healthcare Professional:** If you have a medical condition, symptoms, or concerns about your health, consult a qualified healthcare provider. This app does not replace the expertise of medical professionals.\n"
+              "* **Use as a Supplement:** Use this app as a supplemental tool to gather general information about medical topics. It can provide insights and suggestions but should not be your sole source of healthcare guidance.\n"
+              "* **Not for Emergencies:** In case of a medical emergency, call your local emergency number or seek immediate medical attention. This app is not equipped to handle urgent situations.\n"
+              "* **Verify Information:** Always verify the information you receive in this app with trusted medical sources or professionals. Medical knowledge evolves, and information provided here may not always reflect the latest guidelines.\n"
+              "* **User Responsibility:** Your health is your responsibility. Do not make medical decisions solely based on information obtained from this app.",
         );
       },
     );
