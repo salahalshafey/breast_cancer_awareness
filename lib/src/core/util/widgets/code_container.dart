@@ -107,7 +107,7 @@ class _CopyCodeState extends State<CopyCode> {
           _isCopyed
               ? const Icon(Icons.check, color: Colors.white)
               : const Icon(Icons.copy, color: Colors.white),
-          const SizedBox(width: 7),
+          const Text("  "),
           Text(
             _isCopyed ? "Copid!" : "Copy code",
             style: const TextStyle(color: Colors.white),

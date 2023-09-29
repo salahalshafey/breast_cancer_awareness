@@ -52,6 +52,7 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget>
     with SingleTickerProviderStateMixin {
   final _speechToText = SpeechToText();
   bool _speechEnabled = false;
+  bool _speechStoped = true;
   String _text = "";
 
   @override
@@ -77,7 +78,9 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget>
       pauseFor: 5.seconds,
     );
 
-    setState(() {});
+    setState(() {
+      _speechStoped = false;
+    });
 
     Future.delayed(5.seconds, () {
       if (mounted) {
@@ -89,7 +92,9 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget>
   void _stopListening() async {
     await _speechToText.stop();
 
-    setState(() {});
+    setState(() {
+      _speechStoped = true;
+    });
   }
 
   void _onSpeechResult(SpeechRecognitionResult result) {
@@ -119,11 +124,13 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget>
             flex: 6,
             child: SingleChildScrollView(
               child: Text(
-                _speechToText.isNotListening && _text.isEmpty
-                    ? "Didn't hear that. Try again."
-                    : _text.isEmpty
-                        ? "Listening..."
-                        : _text,
+                _speechStoped
+                    ? "Microphone off. Try again."
+                    : _speechToText.isNotListening && _text.isEmpty
+                        ? "Didn't hear that. Try again."
+                        : _text.isEmpty
+                            ? "Listening..."
+                            : _text,
               ),
             ),
           ),

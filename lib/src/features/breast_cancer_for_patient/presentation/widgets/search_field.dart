@@ -11,11 +11,13 @@ class SearchField extends StatefulWidget {
   const SearchField({
     super.key,
     required this.controller,
+    this.hintText = "Search",
     required this.flutterTts,
     required this.setSearchWord,
   });
 
   final TextEditingController controller;
+  final String hintText;
   final FlutterTts flutterTts;
   final void Function(String searchWord, {bool textToSpeech}) setSearchWord;
 
@@ -74,7 +76,7 @@ class _SearchFieldState extends State<SearchField> {
               widget.setSearchWord(widget.controller.text.trim());
             },
             decoration: InputDecoration(
-              hintText: "Search",
+              hintText: widget.hintText,
               fillColor: _focusColor,
               prefixIcon: widget.controller.text.isNotEmpty
                   ? IconButton(

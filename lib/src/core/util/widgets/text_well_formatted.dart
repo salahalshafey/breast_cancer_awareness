@@ -96,8 +96,8 @@ class TextWellFormattedWitouthBulleted extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 15,
                 color: Colors.blue,
-                decoration: TextDecoration.underline,
-                decorationColor: Colors.blue,
+                // decoration: TextDecoration.underline,
+                //  decorationColor: Colors.blue,
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
@@ -124,8 +124,8 @@ class TextWellFormattedWitouthBulleted extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 15,
                 color: Colors.blue,
-                decoration: TextDecoration.underline,
-                decorationColor: Colors.blue,
+                // decoration: TextDecoration.underline,
+                // decorationColor: Colors.blue,
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {

@@ -31,7 +31,7 @@ class SearchTypeChoices extends StatelessWidget {
                     Image.asset("assets/images/ai.png", height: 20),
                     const SizedBox(width: 20),
                     Text(
-                      "AI Search",
+                      "Ask AI",
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: 18,

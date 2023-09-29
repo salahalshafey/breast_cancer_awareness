@@ -102,6 +102,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   padding: const EdgeInsets.only(left: 35),
                   child: SearchField(
                     controller: _controller,
+                    hintText:
+                        _searchType == SearchTypes.ai ? "Ask AI" : "Search",
                     flutterTts: _flutterTts,
                     setSearchWord: _setSearchWord,
                   ),

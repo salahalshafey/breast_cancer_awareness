@@ -132,7 +132,7 @@ Future<void> init() async {
 
 // Datasources
 
-  sl.registerLazySingleton<GoogleSearch>(() => CustomGoogleSearchImpl());
+  sl.registerLazySingleton<GoogleSearch>(() => GoogleScholarScrappingImpl());
   sl.registerLazySingleton<AIChat>(() => MakerSuite());
 
 //////////////////////////////////////////////////// !!!! core !!!! ///////////////////////////////////////////////////////////////
