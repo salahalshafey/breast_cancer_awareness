@@ -5,6 +5,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../pages/send_password_reset_email_screen.dart';
 import '../providers/account.dart';
 
 import '../pages/first_sign_up_screen.dart';
@@ -67,6 +68,17 @@ class _SignInFormState extends State<SignInForm> {
     });
   }
 
+  void _resetSignInState() {
+    _formKey.currentState!.reset();
+    setState(() {
+      _isPasswordIconShowen = false;
+      _isPasswordShowen = false;
+      _isLoading = false;
+      _apiErrorForEmail = null;
+      _apiErrorForPassword = null;
+    });
+  }
+
   Future<void> _saveForm() async {
     ////////// we are sending new request so, we should setting api errors to null /////////////
     setState(() {
@@ -124,144 +136,169 @@ class _SignInFormState extends State<SignInForm> {
 
     return Form(
       key: _formKey,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+      child: Stack(
         children: [
-          TextFormField(
-            key: const ValueKey('email'),
-            focusNode: _focusNodeForEmail,
-            autocorrect: false,
-            textCapitalization: TextCapitalization.none,
-            enableSuggestions: false,
-            keyboardType: TextInputType.emailAddress,
-            style: const TextStyle(color: Colors.white, fontSize: 20),
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(
-              hintText: 'Email',
-              fillColor: _isEmailFocused ? focusColor : null,
-            ),
-            onTapOutside: (_) {
-              _focusNodeForEmail.unfocus();
-            },
-            onFieldSubmitted: (value) {
-              _focusNodeForPassword.requestFocus();
-            },
-            validator: (value) {
-              if (value == null ||
-                  value.trim().length < 5 ||
-                  !value.contains('@')) {
-                return 'Please enter a valid email address.';
-              }
-              return _apiErrorForEmail;
-            },
-            onSaved: (value) {
-              _userEmail = value!.trim();
-            },
-          ),
-          const SizedBox(height: 20),
-          TextFormField(
-            key: const ValueKey('password'),
-            focusNode: _focusNodeForPassword,
-            obscureText: _isPasswordShowen ? false : true,
-            style: const TextStyle(color: Colors.white, fontSize: 20),
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(
-              hintText: 'Password',
-              fillColor: _isPasswordFocused ? focusColor : null,
-              suffixIconColor: Colors.white,
-              suffixIcon: _isPasswordIconShowen
-                  ? GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _isPasswordShowen = !_isPasswordShowen;
-                        });
-                      },
-                      child: Icon(
-                        _isPasswordShowen
-                            ? Icons.remove_red_eye_outlined
-                            : Icons.remove_red_eye,
-                      ),
-                    )
-                  : null,
-            ),
-            onChanged: (value) {
-              if (value.isNotEmpty) {
-                setState(() {
-                  _isPasswordIconShowen = true;
-                });
-              } else {
-                setState(() {
-                  _isPasswordIconShowen = false;
-                  _isPasswordShowen = false;
-                });
-              }
-            },
-            onTapOutside: (_) {
-              _focusNodeForPassword.unfocus();
-            },
-            onFieldSubmitted: (value) {
-              _saveForm();
-            },
-            validator: (value) {
-              if (value == null || value.trim().length < 8) {
-                return 'Password must be at least 8 characters long.';
-              }
-
-              return _apiErrorForPassword;
-            },
-            onSaved: (value) {
-              _userPassword = value!;
-            },
-          ),
-          const SizedBox(height: 15),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              SvgPicture.asset(
-                "assets/icons/remember_me_icon.svg",
-                height: 15,
-                // ignore: deprecated_member_use
-                color: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.white
-                    : null,
-              ),
-              const SizedBox(width: 10),
-              const Text(
-                "Remember me",
-                style: TextStyle(
-                  color: Color.fromRGBO(143, 39, 83, 1),
-                  fontSize: 16,
+              TextFormField(
+                key: const ValueKey('email'),
+                focusNode: _focusNodeForEmail,
+                autocorrect: false,
+                textCapitalization: TextCapitalization.none,
+                enableSuggestions: false,
+                keyboardType: TextInputType.emailAddress,
+                style: const TextStyle(color: Colors.white, fontSize: 20),
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  hintText: 'Email',
+                  fillColor: _isEmailFocused ? focusColor : null,
                 ),
+                onTapOutside: (_) {
+                  _focusNodeForEmail.unfocus();
+                },
+                onFieldSubmitted: (value) {
+                  _focusNodeForPassword.requestFocus();
+                },
+                validator: (value) {
+                  if (value == null ||
+                      value.trim().length < 5 ||
+                      !value.contains('@')) {
+                    return 'Please enter a valid email address.';
+                  }
+                  return _apiErrorForEmail;
+                },
+                onSaved: (value) {
+                  _userEmail = value!.trim();
+                },
               ),
+              const SizedBox(height: 20),
+              TextFormField(
+                key: const ValueKey('password'),
+                focusNode: _focusNodeForPassword,
+                obscureText: _isPasswordShowen ? false : true,
+                style: const TextStyle(color: Colors.white, fontSize: 20),
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  hintText: 'Password',
+                  fillColor: _isPasswordFocused ? focusColor : null,
+                  suffixIconColor: Colors.white,
+                  suffixIcon: _isPasswordIconShowen
+                      ? GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _isPasswordShowen = !_isPasswordShowen;
+                            });
+                          },
+                          child: Icon(
+                            _isPasswordShowen
+                                ? Icons.remove_red_eye_outlined
+                                : Icons.remove_red_eye,
+                          ),
+                        )
+                      : null,
+                ),
+                onChanged: (value) {
+                  if (value.isNotEmpty) {
+                    setState(() {
+                      _isPasswordIconShowen = true;
+                    });
+                  } else {
+                    setState(() {
+                      _isPasswordIconShowen = false;
+                      _isPasswordShowen = false;
+                    });
+                  }
+                },
+                onTapOutside: (_) {
+                  _focusNodeForPassword.unfocus();
+                },
+                onFieldSubmitted: (value) {
+                  _saveForm();
+                },
+                validator: (value) {
+                  if (value == null || value.trim().length < 8) {
+                    return 'Password must be at least 8 characters long.';
+                  }
+
+                  return _apiErrorForPassword;
+                },
+                onSaved: (value) {
+                  _userPassword = value!;
+                },
+              ),
+              const SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    "assets/icons/remember_me_icon.svg",
+                    height: 15,
+                    // ignore: deprecated_member_use
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : null,
+                  ),
+                  const SizedBox(width: 10),
+                  const Text(
+                    "Remember me",
+                    style: TextStyle(
+                      color: Color.fromRGBO(143, 39, 83, 1),
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 30),
+              _isLoading
+                  ? const Padding(
+                      padding: EdgeInsets.only(bottom: 12),
+                      child: CircularProgressIndicator(),
+                    )
+                  : ElevatedButton(
+                      onPressed: _saveForm,
+                      style: const ButtonStyle(
+                        fixedSize:
+                            MaterialStatePropertyAll(Size.fromWidth(150)),
+                      ),
+                      child: const Text("Sign in"),
+                    ),
+              const SizedBox(height: 55),
+              DontOrAlreadyHaveAccount(
+                text: "Don't have an account ? ",
+                actionText: "Sign Up",
+                onTap: () {
+                  Navigator.of(context).pushNamed(FirstSignUpScreen.routName);
+                  _resetSignInState();
+                },
+              )
+                  .animate(target: _isLoading ? 0 : 1)
+                  .scaleXY(begin: 0, end: 1)
+                  .fade(begin: 0, end: 1),
             ],
           ),
-          const SizedBox(height: 30),
-          _isLoading
-              ? const Padding(
-                  padding: EdgeInsets.only(bottom: 12),
-                  child: CircularProgressIndicator(),
-                )
-              : ElevatedButton(
-                  onPressed: _saveForm,
-                  child: const Text("Sign in"),
+          Positioned(
+            right: 0,
+            top: 110,
+            child: TextButton(
+              onPressed: () {
+                Navigator.of(context)
+                    .pushNamed(SendPasswordResetEmailScreen.routName);
+                _resetSignInState();
+              },
+              child: const Text(
+                "Forgot password?",
+                style: TextStyle(
+                  color: Color.fromRGBO(143, 39, 83, 1),
+                  fontSize: 15,
                 ),
-          const SizedBox(height: 55),
-          DontOrAlreadyHaveAccount(
-            text: "Don't have an account ? ",
-            actionText: "Sign Up",
-            onTap: () {
-              Navigator.of(context).pushNamed(FirstSignUpScreen.routName);
-              _formKey.currentState!.reset();
-              setState(() {
-                _isPasswordIconShowen = false;
-                _isPasswordShowen = false;
-                _isLoading = false;
-              });
-            },
-          )
-              .animate(target: _isLoading ? 0 : 1)
-              .scaleXY(begin: 0, end: 1)
-              .fade(begin: 0, end: 1),
+              ),
+            )
+                .animate(
+                    target: _isLoading || _apiErrorForPassword == null ? 0 : 1)
+                .scaleXY(begin: 0, end: 1)
+                .fade(begin: 0, end: 1),
+          ),
         ],
       ),
     );

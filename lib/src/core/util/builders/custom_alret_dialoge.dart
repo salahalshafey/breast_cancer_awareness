@@ -15,60 +15,68 @@ Future<T?> showCustomAlretDialog<T>({
   Color? titleColor,
   Widget? icon,
   List<Widget>? actions,
+  bool barrierDismissible = true,
+  bool canPopScope = true,
 }) {
   return showDialog(
     context: context,
+    barrierDismissible: barrierDismissible,
     builder: (ctx) {
-      return AlertDialog(
-        contentPadding: const EdgeInsets.all(10),
-        titlePadding: const EdgeInsets.only(
-          left: 20,
-          right: 10,
-          top: 10,
-          bottom: 10,
-        ),
-        actionsPadding: const EdgeInsets.only(
-          left: 10,
-          right: 10,
-          bottom: 10,
-        ),
-        title: Row(
-          children: [
-            icon ??
-                Icon(
-                  Icons.warning,
-                  size: 45,
-                  color: titleColor ?? Colors.red.shade900,
-                ),
-            const SizedBox(width: 20),
-            Text(
-              title,
-              style: TextStyle(color: titleColor ?? Colors.red.shade900),
-            ),
-          ],
-        ),
-        content: SingleChildScrollView(
-          child: TextWellFormattedWithBulleted(content),
-        ),
-        actions: [
-          if (actions == null)
-            TextButton(
-              child: Text(
-                "OK",
-                style: TextStyle(
-                  color: titleColor ?? Colors.red.shade900,
-                ),
+      return WillPopScope(
+        onWillPop: () async {
+          return canPopScope;
+        },
+        child: AlertDialog(
+          contentPadding: const EdgeInsets.all(10),
+          titlePadding: const EdgeInsets.only(
+            left: 20,
+            right: 10,
+            top: 10,
+            bottom: 10,
+          ),
+          actionsPadding: const EdgeInsets.only(
+            left: 10,
+            right: 10,
+            bottom: 10,
+          ),
+          title: Row(
+            children: [
+              icon ??
+                  Icon(
+                    Icons.warning,
+                    size: 45,
+                    color: titleColor ?? Colors.red.shade900,
+                  ),
+              const SizedBox(width: 20),
+              Text(
+                title,
+                style: TextStyle(color: titleColor ?? Colors.red.shade900),
               ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            )
-          else
-            ...actions,
-        ],
-        actionsAlignment: actions == null || actions.length == 1
-            ? null
-            : MainAxisAlignment.spaceAround,
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: TextWellFormattedWithBulleted(content),
+          ),
+          actions: [
+            if (actions == null)
+              TextButton(
+                child: Text(
+                  "OK",
+                  style: TextStyle(
+                    color: titleColor ?? Colors.red.shade900,
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            else
+              ...actions,
+          ],
+          actionsAlignment: actions == null || actions.length == 1
+              ? null
+              : MainAxisAlignment.spaceAround,
+        ),
       );
     },
   );

@@ -41,12 +41,12 @@ class ForPatientsScreen extends StatelessWidget {
               ),
             ),
             ForPatientsItem(
-              image: "assets/breast_cancer/other_resources.png",
-              title: "OTHER RESOURCES",
-              subTitle: "Take a look at some other helpful resources.",
+              image: "assets/breast_cancer/search.png",
+              title: "Search about breast cancer".toUpperCase(),
+              subTitle: "Search for info OR ask AI for guidance",
               onTap: () => goToScreenWithSlideTransition(
                 context,
-                const OtherResourcesScreen(),
+                const SearchScreen(),
               ),
             ),
             ForPatientsItem(
@@ -75,12 +75,12 @@ class ForPatientsScreen extends StatelessWidget {
               },
             ),
             ForPatientsItem(
-              image: "assets/breast_cancer/search.png",
-              title: "Find help".toUpperCase(),
-              subTitle: "Search for help OR ask AI for guidance",
+              image: "assets/breast_cancer/other_resources.png",
+              title: "OTHER RESOURCES",
+              subTitle: "Take a look at some other helpful resources.",
               onTap: () => goToScreenWithSlideTransition(
                 context,
-                const SearchScreen(),
+                const OtherResourcesScreen(),
               ),
             ),
           ].animate(interval: 100.ms).fade().moveY()

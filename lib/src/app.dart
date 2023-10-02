@@ -12,6 +12,7 @@ import 'features/main_and_menu_screens/main_screen_with_menu.dart';
 import 'features/settings/providers/theme_provider.dart';
 
 import 'features/account/presentation/pages/sign_in_screen.dart';
+import 'features/account/presentation/pages/send_password_reset_email_screen.dart';
 import 'features/account/presentation/pages/first_sign_up_screen.dart';
 import 'features/account/presentation/pages/second_sign_up_screen.dart';
 import 'features/account/presentation/pages/profile_screen.dart';
@@ -44,6 +45,8 @@ class MyApp extends StatelessWidget {
       home: const LandingPage(),
       routes: {
         SignInScreen.routName: (ctx) => const SignInScreen(),
+        SendPasswordResetEmailScreen.routName: (ctx) =>
+            const SendPasswordResetEmailScreen(),
         FirstSignUpScreen.routName: (ctx) => const FirstSignUpScreen(),
         SecondSignUpScreen.routName: (ctx) => const SecondSignUpScreen(),
         MainScreen.routName: (ctx) => const MainScreen(),
