@@ -81,7 +81,10 @@ class _GoogleResultState extends State<GoogleResult>
           }
 
           return Center(
-            child: CustomErrorWidget(error: snapshot.error.toString()),
+            child: CustomErrorWidget(
+              iconSize: 50,
+              error: snapshot.error.toString(),
+            ),
           );
         }
 
@@ -95,6 +98,16 @@ class _GoogleResultState extends State<GoogleResult>
           //widget.flutterTts.setLanguage("ar");
           widget.flutterTts.speak(_spokenString(result));
           Wakelock.enable();
+        }
+
+        if (result.isEmpty) {
+          return const Center(
+            child: CustomErrorWidget(
+              iconSize: 50,
+              error: "Your search did not match any articles.\n\n"
+                  "Make sure all words are spelled correctly or Try different keywords.",
+            ),
+          );
         }
 
         return ListView(
@@ -151,7 +164,8 @@ class _GoogleResultState extends State<GoogleResult>
 
 String _spokenString(List<GoogleSearchResult> result) {
   if (result.isEmpty) {
-    return "";
+    return "Your search did not match any articles.\n\n"
+        "Make sure all words are spelled correctly or Try different keywords.";
   }
 
   final instructions = firstCharIsArabic(result.first.title)

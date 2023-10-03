@@ -103,14 +103,16 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
       return;
     }
 
+    _isLoadingState(false);
+
     final titleColor = Theme.of(context).appBarTheme.foregroundColor;
     showCustomAlretDialog(
       context: context,
       barrierDismissible: false,
       canPopScope: false,
       title: 'Follow up',
-      icon: Icon(Icons.info, color: titleColor, size: 45),
       titleColor: titleColor,
+      icon: Icon(Icons.info, color: titleColor, size: 45),
       content:
           "* Check your **inbox** for an email that has just been sent for your $_userEmail.\n"
           "* Follow the **link** and reset your password.\n"

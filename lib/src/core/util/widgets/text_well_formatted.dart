@@ -54,7 +54,7 @@ class TextWellFormattedWitouthBulleted extends StatelessWidget {
   final String data;
   final bool isSelectableText;
 
-  TextSpan _getTextSpan() => TextSpan(
+  TextSpan _getTextSpan(BuildContext context) => TextSpan(
         children: patternMatcher(
           data,
           patterns: [
@@ -139,16 +139,20 @@ class TextWellFormattedWitouthBulleted extends StatelessWidget {
               text:
                   inlineText.string.substring(2, inlineText.string.length - 2),
               style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15,
+                fontWeight: FontWeight.w900,
               ),
             );
           }
 
           if (inlineText.type == StringTypes.highlighted) {
             return TextSpan(
-              text: inlineText.string.replaceAll("`", "  "),
-              style: TextStyle(backgroundColor: Colors.grey.withOpacity(0.3)),
+              text: inlineText.string.replaceAll("`", " "),
+              style: TextStyle(
+                backgroundColor:
+                    Theme.of(context).brightness == Brightness.light
+                        ? Colors.grey.withOpacity(0.3)
+                        : Colors.black,
+              ),
             );
           }
 
@@ -160,12 +164,12 @@ class TextWellFormattedWitouthBulleted extends StatelessWidget {
   Widget build(BuildContext context) {
     return isSelectableText
         ? SelectableText.rich(
-            _getTextSpan(),
+            _getTextSpan(context),
             textDirection:
                 firstCharIsArabic(data) ? TextDirection.rtl : TextDirection.ltr,
           )
         : Text.rich(
-            _getTextSpan(),
+            _getTextSpan(context),
             textDirection:
                 firstCharIsArabic(data) ? TextDirection.rtl : TextDirection.ltr,
           );

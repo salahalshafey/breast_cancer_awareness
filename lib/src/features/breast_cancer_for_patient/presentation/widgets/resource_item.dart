@@ -61,9 +61,7 @@ class _ResourceItemState extends State<ResourceItem> {
                 ..onTap = () {
                   launchUrl(
                     Uri.parse(widget.url),
-                    mode: widget.text == "Support: "
-                        ? LaunchMode.externalApplication
-                        : LaunchMode.inAppWebView,
+                    mode: LaunchMode.externalApplication,
                   );
                 },
             ),

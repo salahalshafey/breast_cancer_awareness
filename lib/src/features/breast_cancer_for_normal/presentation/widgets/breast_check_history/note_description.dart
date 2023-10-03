@@ -10,6 +10,7 @@ class NoteDescription extends StatelessWidget {
     required this.icon,
     required this.title,
     this.description,
+    this.titleStyle,
     this.descriptionStyle,
     this.child,
     Key? key,
@@ -18,6 +19,9 @@ class NoteDescription extends StatelessWidget {
   final Widget icon;
   final String title;
   final String? description;
+
+  /// if null it will be TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
+  final TextStyle? titleStyle;
 
   /// if null it will be TextStyle(fontSize: 16, color: Colors.grey.shade600)
   final TextStyle? descriptionStyle;
@@ -39,7 +43,7 @@ class NoteDescription extends StatelessWidget {
               const SizedBox(width: 10),
               Text(
                 title,
-                style:
+                style: titleStyle ??
                     const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ],
