@@ -82,12 +82,22 @@ class LandingPage extends StatelessWidget {
         if (!userSnapshot.hasData) {
           return const SignInScreen();
         } else if (userSnapshot.data!.metadata.creationTime!
-                .difference(DateTime.now())
-                .inSeconds
-                .abs() <
-            10) {
+                    .difference(DateTime.now())
+                    .inSeconds
+                    .abs() <
+                /*3701865 +*/ 10 &&
+            !userSnapshot.data!.isAnonymous) {
           return const SecondSignUpScreen();
         }
+
+        /* print(
+          userSnapshot.data!.metadata.creationTime!
+              .difference(DateTime.now())
+              .inSeconds
+              .abs(),
+        );
+
+        print(userSnapshot.data!.uid);*/
 
         return const MainScreenWithDrawer();
       },

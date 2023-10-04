@@ -32,6 +32,16 @@ class AccountRepositoryImpl implements AccountRepository {
   @override
   Future<UserInformation> getUserInformation(String userId) async {
     try {
+      if (userId == "guest") {
+        final userInfoFromLocal = await localDataSource.getUser(userId);
+
+        if (userInfoFromLocal == null) {
+          throw EmptyDataException();
+        }
+
+        return userInfoFromLocal;
+      }
+
       if (await networkInfo.isNotConnected) {
         final userInfoFromLocal = await localDataSource.getUser(userId);
 
@@ -46,6 +56,33 @@ class AccountRepositoryImpl implements AccountRepository {
       await localDataSource.addUser(userInfoFromRemote);
 
       return userInfoFromRemote;
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<UserInformation> signInAnonymously() async {
+    if (await networkInfo.isNotConnected) {
+      throw OfflineException();
+    }
+
+    try {
+      await remoteAuth.signInAnonymously();
+
+      final userInfo = UserInformationModel(
+        id: "guest",
+        firstName: "",
+        lastName: "",
+        email: "",
+        imageUrl: null,
+        dateOfSignUp: DateTime.now(),
+        userType: "guest",
+      );
+
+      await localDataSource.addUser(userInfo);
+
+      return userInfo;
     } catch (error) {
       rethrow;
     }

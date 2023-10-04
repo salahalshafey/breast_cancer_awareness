@@ -5,6 +5,8 @@ import '../entities/user_information.dart';
 abstract class AccountRepository {
   Future<UserInformation> getUserInformation(String userId);
 
+  Future<UserInformation> signInAnonymously();
+
   Future<UserInformation> signInWithEmailAndPassword(
       String email, String password);
 

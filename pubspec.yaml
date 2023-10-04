@@ -117,6 +117,8 @@ flutter:
     - assets/images/empty.png
     - assets/images/ai.png
     - assets/images/google.png
+    - assets/images/twitter_x.png
+    - assets/images/facebook.png
     - assets/icons/remember_me_icon.svg
     - assets/icons/normal_user_icon.png
     - assets/icons/patient_icon.svg

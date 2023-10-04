@@ -76,7 +76,7 @@ class _ContinueAndskipButtonState extends State<ContinueAndskipButton> {
     }
 
     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
-      return MyApp();
+      return const LandingPage();
     }));
   }
 

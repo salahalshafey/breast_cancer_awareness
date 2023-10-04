@@ -78,8 +78,11 @@ class ImageWithName extends StatelessWidget {
                 child: ListTile(
                   onTap: () => _goToProfileScreen(context),
                   title: Text(
-                    wellFormatedString(
-                        "${userInfo.firstName} ${userInfo.lastName}"),
+                    userInfo.id == "guest"
+                        ? "Guest"
+                        : wellFormatedString(
+                            "${userInfo.firstName} ${userInfo.lastName}",
+                          ),
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

@@ -5,7 +5,7 @@ import '../widgets/text_well_formatted.dart';
 /// * [titleColor] if null it will be Colors.red.shade900
 /// , this title color will be the color of (title, icon if null, ok button if action null)
 ///
-/// * [icon] if null it will be [Icons.warning] with size 45 and the same color of [titleColor]
+/// * [icon] if null it will be [Icons.warning_rounded] with size 45 and the same color of [titleColor]
 ///
 /// * [actions] if null it will be [TextButton] with text "Ok" and the same color of [titleColor]
 Future<T?> showCustomAlretDialog<T>({
@@ -21,7 +21,7 @@ Future<T?> showCustomAlretDialog<T>({
   return showDialog(
     context: context,
     barrierDismissible: barrierDismissible,
-    builder: (ctx) {
+    builder: (dialogContext) {
       return WillPopScope(
         onWillPop: () async {
           return canPopScope;
@@ -43,7 +43,7 @@ Future<T?> showCustomAlretDialog<T>({
             children: [
               icon ??
                   Icon(
-                    Icons.warning,
+                    Icons.warning_rounded,
                     size: 45,
                     color: titleColor ?? Colors.red.shade900,
                   ),
@@ -67,7 +67,7 @@ Future<T?> showCustomAlretDialog<T>({
                   ),
                 ),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(dialogContext).pop();
                 },
               )
             else

@@ -12,6 +12,7 @@ import '../pages/first_sign_up_screen.dart';
 
 import '../../../../core/util/builders/custom_alret_dialoge.dart';
 import 'dont_or_already_have_accout.dart';
+import 'sign_in_as_guest_button.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -263,9 +264,11 @@ class _SignInFormState extends State<SignInForm> {
                       ),
                       child: const Text("Sign in"),
                     ),
-              const SizedBox(height: 55),
+              const SocialSignIn(),
+              const SignInAsGuestButton(),
+              const SizedBox(height: 80),
               DontOrAlreadyHaveAccount(
-                text: "Don't have an account ? ",
+                text: "Don't have an account? ",
                 actionText: "Sign Up",
                 onTap: () {
                   Navigator.of(context).pushNamed(FirstSignUpScreen.routName);
@@ -301,6 +304,40 @@ class _SignInFormState extends State<SignInForm> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class SocialSignIn extends StatelessWidget {
+  const SocialSignIn({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+          child: IconButton(
+            icon: Image.asset("assets/images/twitter_x.png", height: 40),
+            onPressed: () {},
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          child: IconButton(
+            icon: Image.asset("assets/images/google.png", height: 40),
+            onPressed: () {},
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          child: IconButton(
+            icon: Image.asset("assets/images/facebook.png", height: 40),
+            onPressed: () {},
+          ),
+        ),
+      ],
     );
   }
 }

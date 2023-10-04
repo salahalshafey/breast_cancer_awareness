@@ -104,7 +104,7 @@ class _GoogleResultState extends State<GoogleResult>
           return const Center(
             child: CustomErrorWidget(
               iconSize: 50,
-              error: "Your search did not match any articles.\n\n"
+              error: "Your search did not match any results.\n\n"
                   "Make sure all words are spelled correctly or Try different keywords.",
             ),
           );
@@ -164,7 +164,7 @@ class _GoogleResultState extends State<GoogleResult>
 
 String _spokenString(List<GoogleSearchResult> result) {
   if (result.isEmpty) {
-    return "Your search did not match any articles.\n\n"
+    return "Your search did not match any results.\n\n"
         "Make sure all words are spelled correctly or Try different keywords.";
   }
 

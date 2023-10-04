@@ -54,25 +54,68 @@ class AddAndShowResultButton extends StatelessWidget {
           const Spacer(),
           TextButton(
             onPressed: () async {
-              final user = await Provider.of<Account>(context, listen: false)
-                  .getUserInfo();
-              if (user == null || user.userType != "Doctor") {
+              try {
+                final account = Provider.of<Account>(context, listen: false);
+                final user = await account.getUserInfo();
+
+                if (user == null || user.userType == "guest") {
+                  final color = Theme.of(context).appBarTheme.foregroundColor;
+
+                  showCustomAlretDialog(
+                    context: context,
+                    title: "Log In",
+                    titleColor: color,
+                    content: "You have to Log In to continue!!",
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          account.signOut(context);
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          "Log In",
+                          style: TextStyle(color: color),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          "Later",
+                          style: TextStyle(color: color),
+                        ),
+                      ),
+                    ],
+                  );
+                  return;
+                }
+
+                if (user.userType != "Doctor") {
+                  showCustomAlretDialog(
+                    context: context,
+                    title: "Sorry",
+                    titleColor: Colors.red,
+                    content: "This feature only available to Doctors.",
+                  );
+                  return;
+                }
+
+                final isXray = await selectImageTypeDialog(context);
+                if (isXray == null) {
+                  return;
+                }
+
+                Navigator.of(context)
+                    .pushNamed(PredictionScreen.routName, arguments: isXray);
+              } catch (error) {
                 showCustomAlretDialog(
                   context: context,
-                  title: "Sorry",
+                  title: "Error",
                   titleColor: Colors.red,
-                  content: "This feature only available to Doctors.",
+                  content: error.toString(),
                 );
-                return;
               }
-
-              final isXray = await selectImageTypeDialog(context);
-              if (isXray == null) {
-                return;
-              }
-
-              Navigator.of(context)
-                  .pushNamed(PredictionScreen.routName, arguments: isXray);
             },
             child: const Text(
               "Show Result",

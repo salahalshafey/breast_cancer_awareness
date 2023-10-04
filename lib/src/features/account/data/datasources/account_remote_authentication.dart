@@ -2,11 +2,23 @@ import '../../../../core/error/exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AccountRemoteAuthentication {
+  Future<String> signInAnonymously();
   Future<String> signInWithEmailAndPassword(String email, String password);
   Future<User> signUpWithEmailAndPassword(String email, String password);
 }
 
 class AccountFirebaseAuthenticationImpl implements AccountRemoteAuthentication {
+  @override
+  Future<String> signInAnonymously() async {
+    try {
+      final credential = await FirebaseAuth.instance.signInAnonymously();
+
+      return credential.user!.uid;
+    } catch (error) {
+      throw ServerException();
+    }
+  }
+
   @override
   Future<String> signInWithEmailAndPassword(
       String email, String password) async {

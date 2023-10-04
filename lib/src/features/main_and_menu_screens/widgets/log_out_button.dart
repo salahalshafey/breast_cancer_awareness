@@ -11,17 +11,19 @@ class LogOutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final account = Provider.of<Account>(context, listen: false);
+
     return Align(
       alignment: Alignment.bottomLeft,
       child: OutlinedButton.icon(
-        onPressed: () {
-          Provider.of<Account>(context, listen: false).signOut(context);
+        onPressed: () async {
+          account.signOut(context);
         },
-        label: const Text(
-          "Log out",
-          style: TextStyle(fontWeight: FontWeight.bold),
+        label: Text(
+          account.userId == "guest" ? "Log In" : "Log out",
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        icon: const Icon(Icons.logout),
+        icon: Icon(account.userId == "guest" ? Icons.login : Icons.logout),
         style: const ButtonStyle(
           foregroundColor: MaterialStatePropertyAll(MyColors.tetraryColor),
           side: MaterialStatePropertyAll(

@@ -1,3 +1,4 @@
+import 'package:breast_cancer_awareness/src/features/account/domain/entities/user_information.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,10 +17,11 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final account = Provider.of<Account>(context, listen: false);
+
     return DefaultScreen(
       child: RefreshIndicator(
-        onRefresh:
-            Provider.of<Account>(context, listen: false).updateAndGetUserInfo,
+        onRefresh: account.updateAndGetUserInfo,
         child: FutureBuilder(
           future: Provider.of<Account>(context).getUserInfo(),
           builder: (context, snapshot) {
@@ -45,6 +47,10 @@ class ProfileScreen extends StatelessWidget {
             }
 
             final userInfo = snapshot.data!;
+
+            if (userInfo.id == "guest") {
+              return GuestView(userInfo: userInfo, account: account);
+            }
 
             return ListView(
               padding:
@@ -109,6 +115,65 @@ class ProfileScreen extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+}
+
+class GuestView extends StatelessWidget {
+  const GuestView({
+    super.key,
+    required this.userInfo,
+    required this.account,
+  });
+
+  final UserInformation userInfo;
+  final Account account;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.symmetric(vertical: 150, horizontal: 40),
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: ImageContainer(
+            image: userInfo.imageUrl ?? "assets/images/person_avatar.png",
+            imageSource: userInfo.imageUrl == null ? From.asset : From.network,
+            radius: 60,
+            saveNetworkImageToLocalStorage: kIsWeb ? false : true,
+            shape: BoxShape.circle,
+            border: Border.all(color: const Color.fromRGBO(191, 76, 136, 1)),
+            showHighlight: true,
+            showLoadingIndicator: true,
+            showImageScreen: userInfo.imageUrl == null ? false : true,
+            imageTitle: wellFormatedString(
+                "${userInfo.firstName} ${userInfo.lastName}"),
+          ),
+        ),
+        const SizedBox(height: 20),
+        const Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            "You Are a Guest",
+            style: TextStyle(
+              color: Color.fromRGBO(193, 27, 107, 1),
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        const SizedBox(height: 100),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: ElevatedButton(
+            onPressed: () {
+              account.signOut(context);
+              Navigator.of(context).pop();
+            },
+            child: const Text("Log In"),
+          ),
+        ),
+      ],
     );
   }
 }

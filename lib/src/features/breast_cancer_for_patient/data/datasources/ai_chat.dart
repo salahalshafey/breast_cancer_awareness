@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 
+import 'api_keys.dart';
+
 abstract class AIChat {
   Future<String> chatResult(String message);
 }
@@ -12,7 +14,7 @@ abstract class AIChat {
 class MakerSuite implements AIChat {
   @override
   Future<String> chatResult(String message) async {
-    const apiKey = 'API_KEY';
+    const apiKey = makerSuiteAPIKey;
 
     final breastCancer =
         firstCharIsArabic(message) ? "\"سرطان الثدي\"" : "\"Breast Cancer\"";

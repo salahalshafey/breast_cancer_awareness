@@ -65,7 +65,7 @@ class StringWithType<T> {
 }
 
 String wellFormatedString(String str) {
-  return str.isEmpty
+  return str.trim().isEmpty
       ? str
       : str
           .split(RegExp(r' +'))

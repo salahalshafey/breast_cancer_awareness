@@ -1,9 +1,13 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/util/builders/custom_alret_dialoge.dart';
 import '../../../../core/util/widgets/default_screen.dart';
 
+import '../../../account/presentation/providers/account.dart';
 import '../widgets/ai_result.dart';
 import '../widgets/google_result.dart';
 import '../widgets/search_field.dart';
@@ -25,7 +29,53 @@ class _SearchScreenState extends State<SearchScreen> {
   final _controller = TextEditingController();
   final FlutterTts _flutterTts = FlutterTts();
 
-  void _setSearchWord(String searchword, {bool textToSpeech = false}) {
+  Future<bool> _isGuest() async {
+    final account = Provider.of<Account>(context, listen: false);
+    final user = await account.getUserInfo();
+
+    if (user == null || user.userType == "guest") {
+      final color = Theme.of(context).appBarTheme.foregroundColor;
+
+      showCustomAlretDialog(
+        context: context,
+        title: "Log In",
+        titleColor: color,
+        content: "You have to Log In to continue!!",
+        actions: [
+          TextButton(
+            onPressed: () {
+              account.signOut(context);
+              Navigator.of(context)
+                ..pop()
+                ..pop();
+            },
+            child: Text(
+              "Log In",
+              style: TextStyle(color: color),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(
+              "Later",
+              style: TextStyle(color: color),
+            ),
+          ),
+        ],
+      );
+      return true;
+    }
+
+    return false;
+  }
+
+  void _setSearchWord(String searchword, {bool textToSpeech = false}) async {
+    if (await _isGuest()) {
+      return;
+    }
+
     if (searchword == _searchWord && textToSpeech == _textToSpeech) {
       return;
     }

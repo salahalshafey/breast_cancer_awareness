@@ -11,11 +11,13 @@ import '../../../../dispose_container.dart';
 import '../../domain/entities/user_information.dart';
 import '../../domain/usecases/get_user_information.dart';
 import '../../domain/usecases/send_user_image_and_type.dart';
+import '../../domain/usecases/sign_in_anonymously.dart';
 import '../../domain/usecases/signin_with_email_and_password.dart';
 import '../../domain/usecases/signup_with_email_and_password.dart';
 
 class Account extends DisposableProvider {
   final GetUserInformationUsecase getUserInformationUseCase;
+  final SignInAnonymouslyUsecase signUserInAnonymouslyUseCase;
   final SignInWithEmailAndPasswordUsecase
       signUserInUsingEmailAndPasswordUseCase;
   final SignUpWithEmailAndPasswordUsecase
@@ -24,6 +26,7 @@ class Account extends DisposableProvider {
 
   Account({
     required this.getUserInformationUseCase,
+    required this.signUserInAnonymouslyUseCase,
     required this.signUserInUsingEmailAndPasswordUseCase,
     required this.signUserUpUsingEmailAndPasswordUseCase,
     required this.sendUserImageAndTypeUseCase,
@@ -32,7 +35,9 @@ class Account extends DisposableProvider {
   UserInformation? _userInfo;
   bool _userFetchedFromBackend = false;
 
-  String get userId => FirebaseAuth.instance.currentUser!.uid;
+  String get userId => FirebaseAuth.instance.currentUser!.isAnonymous
+      ? "guest"
+      : FirebaseAuth.instance.currentUser!.uid;
 
   Future<UserInformation?> getUserInfo() async {
     if (!_userFetchedFromBackend) {
@@ -57,6 +62,20 @@ class Account extends DisposableProvider {
       throw Error('Something went wrong, please try again later.');
     } on EmptyDataException {
       throw Error("Error happend, There is no data for that Account");
+    } catch (error) {
+      throw Error('An unexpected error happened.');
+    }
+  }
+
+  Future<void> signInAnonymously() async {
+    try {
+      _userInfo = await signUserInAnonymouslyUseCase.call();
+      _userFetchedFromBackend = true;
+      notifyListeners();
+    } on OfflineException {
+      throw Error('You are currently offline.');
+    } on ServerException {
+      throw Error('Something went wrong, please try again later.');
     } catch (error) {
       throw Error('An unexpected error happened.');
     }

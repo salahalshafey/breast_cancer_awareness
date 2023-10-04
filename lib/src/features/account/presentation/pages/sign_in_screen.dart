@@ -58,8 +58,12 @@ class SignInScreen extends StatelessWidget {
             ),
           ),
           ListView(
-            padding: EdgeInsets.symmetric(
-                horizontal: horizantalPadding, vertical: 60),
+            padding: EdgeInsets.only(
+              left: horizantalPadding,
+              right: horizantalPadding,
+              top: 60,
+              bottom: 10,
+            ),
             children: [
               const SizedBox(height: 10),
               const Text(
@@ -91,6 +95,7 @@ class SignInScreen extends StatelessWidget {
               ).animate(delay: 1.seconds).shimmer(duration: 1.seconds),
               const SizedBox(height: 30),
               const SignInForm(),
+              const SizedBox(height: 30),
             ],
           ),
         ],
