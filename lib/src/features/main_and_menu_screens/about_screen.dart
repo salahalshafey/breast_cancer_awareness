@@ -3,6 +3,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../core/util/widgets/default_screen.dart';
 import '../../core/theme/colors.dart';
+import '../../core/util/widgets/text_well_formatted.dart';
 
 import '../account/presentation/widgets/icon_from_asset.dart';
 
@@ -32,18 +33,40 @@ class AboutScreen extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 40),
-          const SelectableText(
-            "Will Provide a brief overview of the app, including what it does and how it can help users become more aware of breast cancer.\n\n"
-            "Explain why we created the app and the problem it is trying to solve.\n\n"
-            "Describe the target audience for the app, such as women over a certain age or those with a family history of breast cancer.\n\n"
-            "Highlight the key features of the app, such as a breast cancer symptom checker, risk assessment questionnaire, and information about breast cancer screening.\n\n"
-            "Data and Research: Explain the research and data behind the app, including how it was developed and what research studies or medical professionals contributed to its creation.\n\n"
-            "Provide information on how users can contact us or find support if they have questions about the app or breast cancer.",
-            textAlign: TextAlign.justify,
-            style: TextStyle(
-              color: MyColors.tetraryColor,
-              fontSize: 18,
+          const SizedBox(height: 20),
+          const TextWellFormattedWithBulleted(
+            data:
+                "* **Breast Cancer Awareness app** is a comprehensive tool designed to raise awareness and promote early detection of breast cancer. "
+                "It addresses four key aspects: providing `information and awareness`, facilitating `self-examination` through a symptom checker, assisting doctors with `deep learning models` for detection, and offering support `resources` and `guidance` for patients.\n"
+                "* **Purpose:** The app was created with the primary goal of empowering individuals to take charge of their breast health. "
+                "By amalgamating information, self-examination tools, advanced detection models, and supportive resources, we aim to contribute to the early detection and management of breast cancer.\n"
+                "* **Target Audience:** Our target audience spans a wide range, including individuals of all genders interested in breast health awareness, those performing self-examinations, medical professionals seeking advanced diagnostic tools, and patients in need of support and guidance.\n\n"
+                "**Key Features**\n"
+                "* **Information Hub:** Accessible `information` on breast cancer, its symptoms, risk factors, and preventive measures.\n"
+                "* **Symptom Checker:** An interactive `self-examination` tool guiding users through the detection of potential symptoms.\n"
+                "* **Deep Learning Models:** Advanced AI models for doctors, aiding in the detection of breast cancer from `mammogram` and `histopathology` images.\n"
+                "* **Patient Support:** Nutrition, diet, and exercise `guidance`, along with a `chatbot` providing answers and guidance through `text-to-speech` and `speech-to-text` capabilities.\n\n"
+                "**Data and Research**\n"
+                "* **The Breast Cancer Awareness app** is built on a foundation of thorough research and collaboration with medical professionals. We've incorporated insights from reputable studies and partnered with experts in the field to develop the deep learning models. The app's content is curated based on evidence-based information to ensure accuracy and reliability.\n\n"
+                "**Contact and App Privacy**",
+          ),
+          const TextWellFormattedWithBulleted(
+            isSelectableText: true,
+            data: ///////// change this email //////////
+                "* **Contact us** through this email: salahalshafey@gmail.com",
+          ),
+          Align(
+            child: TextButton(
+              onPressed: () {
+                /*   launchUrl(
+                  Uri.parse("https://example.com/btbtht"),
+                  mode: LaunchMode.externalApplication,
+                );*/
+              },
+              child: const Text(
+                "Privacy Policy",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
           ),
           const SizedBox(height: 40),

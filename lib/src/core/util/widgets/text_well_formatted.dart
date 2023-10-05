@@ -6,9 +6,14 @@ import '../functions/string_manipulations_and_search.dart';
 import 'bulleted_list.dart';
 
 class TextWellFormattedWithBulleted extends StatelessWidget {
-  const TextWellFormattedWithBulleted(this.data, {super.key});
+  const TextWellFormattedWithBulleted({
+    super.key,
+    required this.data,
+    this.isSelectableText = false,
+  });
 
   final String data;
+  final bool isSelectableText;
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +39,15 @@ class TextWellFormattedWithBulleted extends StatelessWidget {
                 firstCharIsArabic(data) ? TextDirection.rtl : TextDirection.ltr,
             text: TextWellFormattedWitouthBulleted(
               data: inlineString.string.substring(2),
+              isSelectableText: isSelectableText,
             ),
           );
         }
 
-        return TextWellFormattedWitouthBulleted(data: inlineString.string);
+        return TextWellFormattedWitouthBulleted(
+          data: inlineString.string,
+          isSelectableText: isSelectableText,
+        );
       }).toList(),
     );
   }

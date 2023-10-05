@@ -20,7 +20,7 @@ class LogOutButton extends StatelessWidget {
           account.signOut(context);
         },
         label: Text(
-          account.userId == "guest" ? "Log In" : "Log out",
+          account.userId == "guest" ? "Sign In" : "Log out",
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         icon: Icon(account.userId == "guest" ? Icons.login : Icons.logout),

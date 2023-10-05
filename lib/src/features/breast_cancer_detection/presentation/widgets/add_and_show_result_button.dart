@@ -63,9 +63,9 @@ class AddAndShowResultButton extends StatelessWidget {
 
                   showCustomAlretDialog(
                     context: context,
-                    title: "Log In",
+                    title: "Sign In",
                     titleColor: color,
-                    content: "You have to Log In to continue!!",
+                    content: "You have to Sign In to continue!!",
                     actions: [
                       TextButton(
                         onPressed: () {
@@ -73,7 +73,7 @@ class AddAndShowResultButton extends StatelessWidget {
                           Navigator.of(context).pop();
                         },
                         child: Text(
-                          "Log In",
+                          "Sign In",
                           style: TextStyle(color: color),
                         ),
                       ),

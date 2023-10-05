@@ -38,9 +38,9 @@ class _SearchScreenState extends State<SearchScreen> {
 
       showCustomAlretDialog(
         context: context,
-        title: "Log In",
+        title: "Sign In",
         titleColor: color,
-        content: "You have to Log In to continue!!",
+        content: "You have to Sign In to continue!!",
         actions: [
           TextButton(
             onPressed: () {
@@ -50,7 +50,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ..pop();
             },
             child: Text(
-              "Log In",
+              "Sign In",
               style: TextStyle(color: color),
             ),
           ),

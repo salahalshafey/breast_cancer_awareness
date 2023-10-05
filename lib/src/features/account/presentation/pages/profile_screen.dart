@@ -137,17 +137,12 @@ class GuestView extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: ImageContainer(
-            image: userInfo.imageUrl ?? "assets/images/person_avatar.png",
-            imageSource: userInfo.imageUrl == null ? From.asset : From.network,
+            image: "assets/images/person_avatar.png",
+            imageSource: From.asset,
             radius: 60,
-            saveNetworkImageToLocalStorage: kIsWeb ? false : true,
             shape: BoxShape.circle,
             border: Border.all(color: const Color.fromRGBO(191, 76, 136, 1)),
             showHighlight: true,
-            showLoadingIndicator: true,
-            showImageScreen: userInfo.imageUrl == null ? false : true,
-            imageTitle: wellFormatedString(
-                "${userInfo.firstName} ${userInfo.lastName}"),
           ),
         ),
         const SizedBox(height: 20),
@@ -170,7 +165,7 @@ class GuestView extends StatelessWidget {
               account.signOut(context);
               Navigator.of(context).pop();
             },
-            child: const Text("Log In"),
+            child: const Text("Sign In"),
           ),
         ),
       ],

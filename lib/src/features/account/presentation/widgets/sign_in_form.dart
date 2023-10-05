@@ -264,6 +264,9 @@ class _SignInFormState extends State<SignInForm> {
                       ),
                       child: const Text("Sign in"),
                     ),
+              const SizedBox(height: 30),
+              const OrDivider(),
+              const SizedBox(height: 10),
               const SocialSignIn(),
               const SignInAsGuestButton(),
               const SizedBox(height: 80),
@@ -314,27 +317,52 @@ class SocialSignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-          child: IconButton(
-            icon: Image.asset("assets/images/twitter_x.png", height: 40),
-            onPressed: () {},
+        IconButton(
+          icon: Image.asset("assets/images/facebook.png", height: 40),
+          onPressed: () {},
+        ),
+        IconButton(
+          icon: Image.asset("assets/images/google.png", height: 40),
+          onPressed: () {},
+        ),
+        IconButton(
+          icon: Image.asset("assets/images/twitter_x.png", height: 40),
+          onPressed: () {},
+        ),
+      ],
+    );
+  }
+}
+
+class OrDivider extends StatelessWidget {
+  const OrDivider({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Expanded(
+          child: Divider(
+            thickness: 1,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-          child: IconButton(
-            icon: Image.asset("assets/images/google.png", height: 40),
-            onPressed: () {},
+        const SizedBox(width: 10),
+        Text(
+          "Or",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).primaryColor,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-          child: IconButton(
-            icon: Image.asset("assets/images/facebook.png", height: 40),
-            onPressed: () {},
+        const SizedBox(width: 10),
+        const Expanded(
+          child: Divider(
+            thickness: 1,
           ),
         ),
       ],

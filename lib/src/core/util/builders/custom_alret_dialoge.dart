@@ -55,7 +55,7 @@ Future<T?> showCustomAlretDialog<T>({
             ],
           ),
           content: SingleChildScrollView(
-            child: TextWellFormattedWithBulleted(content),
+            child: TextWellFormattedWithBulleted(data: content),
           ),
           actions: [
             if (actions == null)
