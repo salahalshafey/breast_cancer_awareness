@@ -26,7 +26,7 @@ class MainScreen extends StatelessWidget {
     "For Patients"
   ];
 
-  static const List<Widget> _screenOptions = <Widget>[
+  static const _screenOptions = <Widget>[
     HomeScreen(key: PageStorageKey('HomeScreen')),
     ForDoctorsScreen(key: PageStorageKey('ForDoctorsScreen')),
     ForPatientsScreen(key: PageStorageKey('ForPatientsScreen')),
