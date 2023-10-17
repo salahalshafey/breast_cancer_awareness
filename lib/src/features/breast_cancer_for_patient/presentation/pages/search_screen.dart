@@ -109,7 +109,7 @@ class _SearchScreenState extends State<SearchScreen> {
       () {
         showCustomAlretDialog(
           context: context,
-          title: "Caution",
+          title: "Warning",
           content:
               "This app provides information and assistance related to `medical` topics using `artificial intelligence` and `online resources`. However, it is not a substitute for professional medical advice, diagnosis, or treatment. Please read and consider the following:\n\n"
               "* **Consult a Healthcare Professional:** If you have a medical condition, symptoms, or concerns about your health, consult a qualified healthcare provider. This app does not replace the expertise of medical professionals.\n"

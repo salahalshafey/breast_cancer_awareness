@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+import '../../core/util/widgets/bulleted_list.dart';
 import '../../core/util/widgets/default_screen.dart';
 import '../../core/theme/colors.dart';
 import '../../core/util/widgets/text_well_formatted.dart';
 
+import '../../core/util/widgets/text_with_action_text.dart';
 import '../account/presentation/widgets/icon_from_asset.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -36,7 +38,7 @@ class AboutScreen extends StatelessWidget {
           const SizedBox(height: 20),
           const TextWellFormattedWithBulleted(
             data:
-                "* **Breast Cancer Awareness app** is a comprehensive tool designed to raise awareness and promote early detection of breast cancer. "
+                "**Breast Cancer Awareness app** is a comprehensive tool designed to raise awareness and promote early detection of breast cancer. "
                 "It addresses four key aspects: providing `information and awareness`, facilitating `self-examination` through a symptom checker, assisting doctors with `deep learning models` for detection, and offering support `resources` and `guidance` for patients.\n"
                 "* **Purpose:** The app was created with the primary goal of empowering individuals to take charge of their breast health. "
                 "By amalgamating information, self-examination tools, advanced detection models, and supportive resources, we aim to contribute to the early detection and management of breast cancer.\n"
@@ -55,21 +57,20 @@ class AboutScreen extends StatelessWidget {
             data: ///////// change this email //////////
                 "* **Contact us** through this email: salahalshafey@gmail.com",
           ),
-          Align(
-            child: TextButton(
-              onPressed: () {
+          BulletedList(
+            text: TextWithActionText(
+              text: "App Privacy ",
+              actionText: "Privacy Policy",
+              actionTextStyle: const TextStyle(color: Colors.blue),
+              onActionTextTap: () {
                 /*   launchUrl(
                   Uri.parse("https://example.com/btbtht"),
                   mode: LaunchMode.externalApplication,
                 );*/
               },
-              child: const Text(
-                "Privacy Policy",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
             ),
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: 100),
           FutureBuilder(
             future: PackageInfo.fromPlatform(),
             builder: (context, snapshot) {
