@@ -184,6 +184,7 @@ class _SignUpFormState extends State<SignUpForm> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
                 width: widthOfNameForm,
@@ -191,6 +192,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   key: const ValueKey('first name'),
                   focusNode: _focusNodeForFirstName,
                   autocorrect: false,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   textCapitalization: TextCapitalization.none,
                   enableSuggestions: false,
                   keyboardType: TextInputType.name,
@@ -207,9 +209,13 @@ class _SignUpFormState extends State<SignUpForm> {
                     _focusNodeForLastName.requestFocus();
                   },
                   validator: (value) {
-                    if (value == null || value.trim().length < 2) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Please enter the first name.';
+                    }
+                    if (value.trim().length < 2) {
                       return 'Please enter a valid name.';
                     }
+
                     return null;
                   },
                   onSaved: (value) {
@@ -217,16 +223,17 @@ class _SignUpFormState extends State<SignUpForm> {
                         value!.trim().split(RegExp(r' +')).join(' ');
 
                     _editedUserInformation = _editedUserInformation.copyWith(
-                        firstName: enhancedValue);
+                      firstName: enhancedValue,
+                    );
                   },
                 ),
               ),
-              const SizedBox(width: 15),
               SizedBox(
                 width: widthOfNameForm,
                 child: TextFormField(
                   key: const ValueKey('last name'),
                   focusNode: _focusNodeForLastName,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   autocorrect: false,
                   textCapitalization: TextCapitalization.none,
                   enableSuggestions: false,
@@ -244,16 +251,21 @@ class _SignUpFormState extends State<SignUpForm> {
                     _focusNodeForEmail.requestFocus();
                   },
                   validator: (value) {
-                    if (value == null || value.trim().length < 2) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Please enter the last name.';
+                    }
+                    if (value.trim().length < 2) {
                       return 'Please enter a valid name.';
                     }
+
                     return null;
                   },
                   onSaved: (value) {
                     final enhancedValue =
                         value!.trim().split(RegExp(r' +')).join(' ');
                     _editedUserInformation = _editedUserInformation.copyWith(
-                        lastName: enhancedValue);
+                      lastName: enhancedValue,
+                    );
                   },
                 ),
               ),
@@ -263,6 +275,7 @@ class _SignUpFormState extends State<SignUpForm> {
           TextFormField(
             key: const ValueKey('email'),
             focusNode: _focusNodeForEmail,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             autocorrect: false,
             textCapitalization: TextCapitalization.none,
             enableSuggestions: false,
@@ -279,11 +292,11 @@ class _SignUpFormState extends State<SignUpForm> {
               _focusNodeForPassword.requestFocus();
             },
             validator: (value) {
-              if (value == null ||
-                  value.trim().length < 5 ||
-                  !value.contains('@')) {
+              final emailMatcher = RegExp(r"[a-z0-9]+@[a-z]+\.[a-z]{2,3}");
+              if (value == null || !emailMatcher.hasMatch(value)) {
                 return 'Please enter a valid email address.';
               }
+
               return _apiErrorForEmail;
             },
             onSaved: (value) {
@@ -295,6 +308,7 @@ class _SignUpFormState extends State<SignUpForm> {
           TextFormField(
             key: const ValueKey('password'),
             focusNode: _focusNodeForPassword,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             obscureText: _isPasswordShowen ? false : true,
             style: const TextStyle(color: Colors.white, fontSize: 20),
             decoration: InputDecoration(
@@ -339,11 +353,11 @@ class _SignUpFormState extends State<SignUpForm> {
             },
             validator: (value) {
               final validation = validatPassword3(value);
-              if (validation == null) {
-                return _apiErrorForPassword;
+              if (validation != null) {
+                return validation;
               }
 
-              return validation;
+              return _apiErrorForPassword;
             },
             onSaved: (value) {
               _userPassword = value!;
@@ -354,6 +368,7 @@ class _SignUpFormState extends State<SignUpForm> {
             key: const ValueKey('confirm password'),
             controller: _confirmPasswordController,
             focusNode: _focusNodeForConfirmPassword,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             obscureText: _isPasswordShowen ? false : true,
             style: const TextStyle(color: Colors.white, fontSize: 20),
             decoration: InputDecoration(
@@ -400,8 +415,8 @@ class _SignUpFormState extends State<SignUpForm> {
               }
 
               if (value != _userPassword) {
-                _confirmPasswordController.clear();
-                _focusNodeForConfirmPassword.requestFocus();
+                //  _confirmPasswordController.clear();
+                // _focusNodeForConfirmPassword.requestFocus();
                 return "Those passwords didn't match. Try again.";
               }
 
