@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_ml_model_downloader/firebase_ml_model_downloader.dart';
@@ -35,7 +37,6 @@ class _PredictionScreenState extends State<PredictionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
     final provider = Provider.of<ForDoctorScreenState>(context, listen: false);
     final isXray = ModalRoute.of(context)!.settings.arguments as bool;
 
@@ -51,13 +52,17 @@ class _PredictionScreenState extends State<PredictionScreen> {
                   const CircularProgressIndicator(),
                   const SizedBox(height: 10),
                   Center(
-                    child: Text(
-                      "it may take a while, the model is getting downloaded or updated.",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Theme.of(context).brightness == Brightness.light
-                            ? Colors.black54
-                            : Colors.grey,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "it may take a while, the model is getting downloaded or updated.",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? Colors.black54
+                                  : Colors.grey,
+                        ),
                       ),
                     ),
                   )
@@ -75,6 +80,9 @@ class _PredictionScreenState extends State<PredictionScreen> {
             );
           }
 
+          final screenSize = MediaQuery.of(context).size;
+          final imageWidth = min(screenSize.width, screenSize.height) * 0.5;
+
           final imageType = isXray ? "an X-Ray" : "a Histology";
           final prediction = snapshot.data!;
           return ListView(
@@ -88,7 +96,7 @@ class _PredictionScreenState extends State<PredictionScreen> {
                     : provider.networkImage!,
                 imageSource:
                     provider.fileImage != null ? From.file : From.network,
-                radius: screenSize.width * 0.5,
+                radius: imageWidth,
                 borderRadius: BorderRadius.circular(10),
                 fit: BoxFit.cover,
                 showHighlight: true,

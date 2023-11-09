@@ -32,6 +32,9 @@ migrate_working_dir/
 .pub/
 /build/
 **/api_keys.*
+/lib/firebase_options.dart
+firebase-tools-instant-win.exe
+save_changes_and_push_it_to_github.cmd
 
 # Symbolication related
 app.*.symbols

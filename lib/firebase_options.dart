@@ -48,16 +48,17 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyBX2NLQ5wt1wfoteZYrfE6zG84w8ePEHrs',
-    appId: '1:996856719448:web:b2656dd51ddb5e662dc22d',
+    appId: '1:996856719448:web:6af69f15bc5730562dc22d',
     messagingSenderId: '996856719448',
     projectId: 'breast-cancer-awareness-bf348',
     authDomain: 'breast-cancer-awareness-bf348.firebaseapp.com',
     storageBucket: 'breast-cancer-awareness-bf348.appspot.com',
+    measurementId: 'G-X6PP6NBK2C',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAWMPvnC_mKXomXZnouDeC7ayC5pnKp5Jw',
-    appId: '1:996856719448:android:1c274d5cc968bf682dc22d',
+    appId: '1:996856719448:android:7798c22d3e83a5f02dc22d',
     messagingSenderId: '996856719448',
     projectId: 'breast-cancer-awareness-bf348',
     storageBucket: 'breast-cancer-awareness-bf348.appspot.com',
@@ -65,11 +66,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCPy2aC8RvspQ3zg0BpbHkuk3mSF3hBOWs',
-    appId: '1:996856719448:ios:e5091c7e84a824642dc22d',
+    appId: '1:996856719448:ios:aac2f3ad5ef166bc2dc22d',
     messagingSenderId: '996856719448',
     projectId: 'breast-cancer-awareness-bf348',
     storageBucket: 'breast-cancer-awareness-bf348.appspot.com',
-    iosClientId: '996856719448-3k49ii8qfhpe5bie8kgp5in3h4k4l71v.apps.googleusercontent.com',
-    iosBundleId: 'com.example.breastCancerAwareness',
+    iosBundleId: 'com.salahalshafey.breastcancerawareness',
   );
 }

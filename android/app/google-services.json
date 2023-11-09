@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:996856719448:android:1c274d5cc968bf682dc22d",
+        "mobilesdk_app_id": "1:996856719448:android:7798c22d3e83a5f02dc22d",
         "android_client_info": {
-          "package_name": "com.example.breast_cancer_awareness"
+          "package_name": "com.salahalshafey.breastcancerawareness"
         }
       },
       "oauth_client": [
@@ -29,6 +29,13 @@
             {
               "client_id": "996856719448-g9kr3549bpt2qv3npgi34dc1n9r15g8l.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "996856719448-3k49ii8qfhpe5bie8kgp5in3h4k4l71v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.breastCancerAwareness"
+              }
             }
           ]
         }
