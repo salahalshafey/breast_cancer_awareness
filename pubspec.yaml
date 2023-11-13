@@ -43,7 +43,7 @@ dependencies:
   firebase_auth: ^4.2.6
   cloud_firestore: ^4.3.2
   firebase_storage: ^11.0.11
-  #firebase_app_check: ^0.1.5+2
+  firebase_app_check: ^0.2.1+4
   firebase_ml_model_downloader: ^0.2.3+3
   flutter_tflite: ^1.0.1
   #tflite: ^1.1.2
@@ -110,54 +110,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/labels.txt
-    - assets/images/person_avatar.png
-    - assets/images/background_flower.svg
-    - assets/images/background_cancer_sympol.png
-    - assets/images/background_image.png
-    - assets/images/empty.png
-    - assets/images/ai.png
-    - assets/images/google.png
-    - assets/images/twitter_x.png
-    - assets/images/facebook.png
-    - assets/icons/remember_me_icon.svg
-    - assets/icons/normal_user_icon.png
-    - assets/icons/patient_icon.svg
-    - assets/icons/sign_up_icon.png
-    - assets/icons/doctor_icon.png
-    - assets/icons/home_icon.svg
-    - assets/icons/drawer_icon.png
-    - assets/icons/settings_icon.png
-    - assets/icons/share_icon.png
-    - assets/icons/about_icon.png
-    - assets/breast_cancer/awareness_1.jpeg
-    - assets/breast_cancer/awareness_2.jpg
-    - assets/breast_cancer/awareness_3.jpg
-    - assets/breast_cancer/awareness_4.jpg
-    - assets/breast_cancer/awareness_5.jpg
-    - assets/breast_cancer/examination_1.jpeg
-    - assets/breast_cancer/examination_2.jpeg
-    - assets/breast_cancer/examination_3.jpeg
-    - assets/breast_cancer/examination_4.jpeg
-    - assets/breast_cancer/examination_5.jpg
-    - assets/breast_cancer/examination_6.jpeg
-    - assets/breast_cancer/examination_7.jpeg
-    - assets/breast_cancer/examination_8.jpeg
-    - assets/breast_cancer/look_for_1.jpeg
-    - assets/breast_cancer/look_for_2.jpeg
-    - assets/breast_cancer/look_for_3.jpeg
-    - assets/breast_cancer/look_for_4.jpeg
-    - assets/breast_cancer/all_is_well.png
-    - assets/breast_cancer/not_sure.png
-    - assets/breast_cancer/noticed_something.png
-    - assets/breast_cancer/other_resources.png
-    - assets/breast_cancer/tips.png
-    - assets/breast_cancer/other_resources_for_page.png
-    - assets/breast_cancer/tips_for_page.png
-    - assets/breast_cancer/diet.png
-    - assets/breast_cancer/exercise.png
-    - assets/breast_cancer/search.png
-    - assets/breast_cancer/search_2.png
-    
+    - assets/images/
+    - assets/icons/
+    - assets/breast_cancer/
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

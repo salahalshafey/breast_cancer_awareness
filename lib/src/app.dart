@@ -85,19 +85,19 @@ class LandingPage extends StatelessWidget {
                     .difference(DateTime.now())
                     .inSeconds
                     .abs() <
-                /*3701865 +*/ 10 &&
+                23383997 + 10 &&
             !userSnapshot.data!.isAnonymous) {
           return const SecondSignUpScreen();
         }
 
-        /* print(
+        print(
           userSnapshot.data!.metadata.creationTime!
               .difference(DateTime.now())
               .inSeconds
               .abs(),
         );
 
-        print(userSnapshot.data!.uid);*/
+        print(userSnapshot.data!.uid);
 
         return const MainScreenWithDrawer();
       },

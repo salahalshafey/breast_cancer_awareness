@@ -36,7 +36,7 @@ CameraDescription _getFrontCamera(List<CameraDescription> cameras) =>
 List<Widget> switchToMirrorButton(BuildContext context) {
   return [
     Positioned(
-      top: 15,
+      top: 30,
       left: 50,
       child: GestureDetector(
         onTap: () => _goToMirrorScreen(context),
@@ -57,7 +57,7 @@ List<Widget> switchToMirrorButton(BuildContext context) {
       ),
     ),
     Positioned(
-      top: 5,
+      top: 20,
       left: 5,
       child: GestureDetector(
         onTap: () => _goToMirrorScreen(context),
@@ -68,7 +68,7 @@ List<Widget> switchToMirrorButton(BuildContext context) {
       ),
     ),
     Positioned(
-      top: 40,
+      top: 55,
       left: 10,
       child: GestureDetector(
         onTap: () => _goToMirrorScreen(context),

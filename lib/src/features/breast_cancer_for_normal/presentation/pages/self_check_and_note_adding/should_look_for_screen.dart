@@ -61,7 +61,7 @@ class ShouldLookForItem extends StatelessWidget {
       children: [
         TextTitle(data: title, fontSize: 24),
         const SizedBox(height: 20),
-        Image.asset(image, height: 200),
+        Image.asset(image),
         const SizedBox(height: 20),
         TextNormal(data: description, fontSize: 22),
         const SizedBox(height: 40),

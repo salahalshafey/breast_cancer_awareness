@@ -33,6 +33,14 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
           ))
       .toList();
 
+  void _goToPageIndex(int pageIndex) {
+    if (pageIndex >= _selfCheckSteps.length || pageIndex < 0) {
+      return;
+    }
+
+    _pageController.jumpToPage(pageIndex);
+  }
+
   void _goToNextPage() {
     if (_currentPageIndex == _selfCheckSteps.length - 1) {
       Navigator.of(context).pushReplacementNamed(FindingsScreen.routName);
@@ -118,6 +126,7 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
             currentPageIndex: _currentPageIndex,
             colorOfDots: Colors.grey,
             colorOfCurrentDot: const Color.fromRGBO(199, 40, 107, 1),
+            gotToPageIndex: _goToPageIndex,
           ),
         ],
       ),
@@ -134,23 +143,20 @@ class SelfCheckItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final orientation = MediaQuery.of(context).orientation;
-    final screenSize = MediaQuery.of(context).size;
-
-    final double imageWidth = (orientation == Orientation.portrait)
-        ? screenSize.width - 60
-        : screenSize.height;
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         TextTitle(data: title, fontSize: 24),
         TextNormal(data: description, fontSize: 20),
-        Stack(
-          children: [
-            Image.asset(image, width: imageWidth),
-            ...switchToMirrorButton(context),
-          ],
+        Expanded(
+          child: Center(
+            child: Stack(
+              children: [
+                Image.asset(image),
+                ...switchToMirrorButton(context),
+              ],
+            ),
+          ),
         ),
       ],
     ).animate().fadeIn(duration: 1.seconds);

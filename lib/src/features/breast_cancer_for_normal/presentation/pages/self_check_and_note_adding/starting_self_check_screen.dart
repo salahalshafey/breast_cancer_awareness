@@ -55,6 +55,7 @@ class StartingSelfCheckScreen extends StatelessWidget {
               ),
               child: const Text(
                 "START SELF-CHECK",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -70,6 +71,7 @@ class StartingSelfCheckScreen extends StatelessWidget {
               ),
               child: const Text(
                 "WHAT SHOULD I LOOK FOR?",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,

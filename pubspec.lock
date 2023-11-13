@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: _flutterfire_internals
-      sha256: "5dadadeecceac19d6a63c9d2e037bb8df58ddd4aedb94e8a056af2f39ee50f9d"
+      sha256: "8942974ee5dc932427704ede5e0db8b5f2b8f22172964544b56e6bd37f6c3634"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.3.11"
+    version: "1.3.12"
   archive:
     dependency: transitive
     description:
@@ -265,6 +265,30 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.9.3+1"
+  firebase_app_check:
+    dependency: "direct main"
+    description:
+      name: firebase_app_check
+      sha256: "5895a494e3f07d896455f978152a505517edda0aec961e93007c9efc2a05d889"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.2.1+4"
+  firebase_app_check_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_app_check_platform_interface
+      sha256: "7ed0f8ddafb8be4d0f4b4df86fb8fb925f4c52b15c6da83862b662df88cbe0bb"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.0+6"
+  firebase_app_check_web:
+    dependency: transitive
+    description:
+      name: firebase_app_check_web
+      sha256: "1009588dbee991caf218d4ef992d9472758472870b13726da826fb7856919cfb"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.0+6"
   firebase_auth:
     dependency: "direct main"
     description:
@@ -293,10 +317,10 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_core
-      sha256: "7706f4ade6cc2698c70074083bc262586a185047f6bfdd53938dcc35d35cbb9e"
+      sha256: "45f3f9babfc6f56fb94c3cd11584cf3c9672868228373b699b94427010e01dc3"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.21.0"
+    version: "2.22.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
