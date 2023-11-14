@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/util/widgets/bulleted_list.dart';
 import '../../core/util/widgets/default_screen.dart';
@@ -55,7 +56,7 @@ class AboutScreen extends StatelessWidget {
           const TextWellFormattedWithBulleted(
             isSelectableText: true,
             data: ///////// change this email //////////
-                "* **Contact us** through this email: salahalshafey@gmail.com",
+                "* **Contact us** through this email: salahforgraduationproject@gmail.com",
           ),
           BulletedList(
             text: TextWithActionText(
@@ -63,10 +64,11 @@ class AboutScreen extends StatelessWidget {
               actionText: "Privacy Policy",
               actionTextStyle: const TextStyle(color: Colors.blue),
               onActionTextTap: () {
-                /*   launchUrl(
-                  Uri.parse("https://example.com/btbtht"),
-                  mode: LaunchMode.externalApplication,
-                );*/
+                launchUrl(
+                  Uri.parse(
+                      "https://github.com/salahalshafey/breast-cancer-awareness-privacy/blob/main/privacy-policy.md"),
+                  mode: LaunchMode.inAppWebView,
+                );
               },
             ),
           ),

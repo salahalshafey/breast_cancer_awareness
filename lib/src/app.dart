@@ -85,7 +85,7 @@ class LandingPage extends StatelessWidget {
                     .difference(DateTime.now())
                     .inSeconds
                     .abs() <
-                23383997 + 10 &&
+                23400870 + 10 &&
             !userSnapshot.data!.isAnonymous) {
           return const SecondSignUpScreen();
         }

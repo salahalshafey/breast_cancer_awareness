@@ -24,20 +24,17 @@ class DotsNavigator extends StatelessWidget {
         for (int i = 0; i < numOfDots; i++)
           GestureDetector(
             onTap: () => gotToPageIndex(i),
-            child: Row(
-              children: [
-                const Text(" "),
-                Container(
-                  width: 14,
-                  height: 14,
-                  decoration: BoxDecoration(
-                    color:
-                        i == currentPageIndex ? colorOfCurrentDot : colorOfDots,
-                    shape: BoxShape.circle,
-                  ),
+            child: Material(
+              child: Container(
+                width: 14,
+                height: 14,
+                margin: const EdgeInsets.all(7.0),
+                decoration: BoxDecoration(
+                  color:
+                      i == currentPageIndex ? colorOfCurrentDot : colorOfDots,
+                  shape: BoxShape.circle,
                 ),
-                const Text(" "),
-              ],
+              ),
             ),
           ),
       ],

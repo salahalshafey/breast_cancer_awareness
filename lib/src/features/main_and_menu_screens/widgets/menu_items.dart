@@ -64,15 +64,10 @@ class MenuItems extends StatelessWidget {
           iconHeight: 40,
           onTap: () {
             Share.share(
-              "          \"Breast Cancer Awareness App\"\n"
-              "\n"
-              "This App is a Graduation Project for the team: \n"
-              " 1. Salah Alshafey.\n"
-              " 2.Yasser Nabil.\n"
-              " 3. Mahmoud Elmasry.\n"
-              " 4.Mohmed Shawky.\n"
-              " 5. Mostafa Tareq.\n"
-              " 6.Abelrahman Mahmoud.\n",
+              "          \"Breast Cancer Awareness App\"\n\n"
+              "Empowering individuals to take charge of their breast health.\n\n"
+              "You can download this app from Google Play, by following this link: \n"
+              "https://play.google.com/store/apps/details?id=com.salahalshafey.breastcancerawareness",
             );
           },
         ),

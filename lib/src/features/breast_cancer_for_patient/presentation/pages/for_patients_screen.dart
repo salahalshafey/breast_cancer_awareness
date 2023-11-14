@@ -58,7 +58,7 @@ class ForPatientsScreen extends StatelessWidget {
                 launchUrl(
                   Uri.parse(
                       "https://breastcancernow.org/information-support/facing-breast-cancer/living-beyond-breast-cancer/your-body/diet-during-breast-cancer-treatment"),
-                  mode: LaunchMode.inAppWebView,
+                  mode: LaunchMode.externalApplication,
                 );
               },
             ),
@@ -70,7 +70,7 @@ class ForPatientsScreen extends StatelessWidget {
                 launchUrl(
                   Uri.parse(
                       "https://breastcancernow.org/information-support/facing-breast-cancer/living-beyond-breast-cancer/your-body/exercise-breast-cancer"),
-                  mode: LaunchMode.inAppWebView,
+                  mode: LaunchMode.externalApplication,
                 );
               },
             ),
