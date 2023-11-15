@@ -25,10 +25,11 @@ class DotsNavigator extends StatelessWidget {
           GestureDetector(
             onTap: () => gotToPageIndex(i),
             child: Material(
+              color: Colors.transparent,
               child: Container(
-                width: 14,
-                height: 14,
-                margin: const EdgeInsets.all(7.0),
+                width: i == currentPageIndex ? 15 : 12,
+                height: i == currentPageIndex ? 15 : 12,
+                margin: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
                   color:
                       i == currentPageIndex ? colorOfCurrentDot : colorOfDots,

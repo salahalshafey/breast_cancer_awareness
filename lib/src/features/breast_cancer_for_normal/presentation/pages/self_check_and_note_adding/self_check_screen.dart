@@ -128,6 +128,19 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
             colorOfCurrentDot: const Color.fromRGBO(199, 40, 107, 1),
             gotToPageIndex: _goToPageIndex,
           ),
+          if (_currentPageIndex == _selfCheckSteps.length - 1)
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Align(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(FindingsScreen.routName);
+                  },
+                  child: const Text("CONTINUE"),
+                ),
+              ),
+            ),
         ],
       ),
     );

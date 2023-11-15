@@ -9,13 +9,14 @@ Future<bool> onWillPopWithDialog(BuildContext context) async {
         content: "Do you really want to exit?",
         actions: [
           TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(true);
-              },
-              child: const Text(
-                "Yes",
-                style: TextStyle(color: Colors.red),
-              )),
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+            child: const Text(
+              "Yes",
+              style: TextStyle(color: Colors.red),
+            ),
+          ),
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(false);

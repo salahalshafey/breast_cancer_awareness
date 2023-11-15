@@ -5,7 +5,7 @@ import 'package:dotted_border/dotted_border.dart';
 
 import '../../../../core/util/widgets/text_well_formatted.dart';
 
-import '../../../breast_cancer_for_normal/presentation/widgets/breast_check_history/note_description.dart';
+import '../../../../core/util/widgets/note_description.dart';
 import '../widgets/box_content.dart';
 import '../widgets/image.dart';
 import '../widgets/add_and_show_result_button.dart';

@@ -8,7 +8,7 @@ import '../../../../../core/util/builders/custom_alret_dialoge.dart';
 import '../../../../../core/util/widgets/default_screen.dart';
 import '../../../../account/presentation/widgets/icon_from_asset.dart';
 
-import '../../widgets/breast_check_history/note_description.dart';
+import '../../../../../core/util/widgets/note_description.dart';
 import '../home_screen.dart';
 import 'youtube_player_screen.dart';
 

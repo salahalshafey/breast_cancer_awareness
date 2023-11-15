@@ -6,7 +6,7 @@ import '../../../../../core/util/widgets/image_container.dart';
 import '../../../../account/presentation/widgets/icon_from_asset.dart';
 
 import '../../../domain/entities/note.dart';
-import '../../widgets/breast_check_history/note_description.dart';
+import '../../../../../core/util/widgets/note_description.dart';
 import '../../widgets/audio_player.dart';
 
 class BreastCheckNoteScreen extends StatefulWidget {
