@@ -22,6 +22,7 @@ class SelfCheckScreen extends StatefulWidget {
 }
 
 class _SelfCheckScreenState extends State<SelfCheckScreen> {
+  final ScrollController _scrollController = ScrollController();
   final PageController _pageController = PageController();
   int _currentPageIndex = 0;
 
@@ -66,6 +67,22 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
     );
   }
 
+  void _onPageChanged(int pageindex) async {
+    setState(() {
+      _currentPageIndex = pageindex;
+    });
+
+    if (_currentPageIndex == _selfCheckSteps.length - 1) {
+      await Future.delayed(1.seconds);
+      // _scrollController.jumpTo(100);
+      _scrollController.animateTo(
+        100,
+        duration: 500.ms,
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
   @override
   void initState() {
     // Hide status and navigation bars (full screen)
@@ -99,6 +116,7 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
       containingAppBar: false,
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+        controller: _scrollController,
         children: [
           SelfCheckPageNavigator(
             numOfPages: _selfCheckSteps.length,
@@ -112,11 +130,7 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
             height: 600,
             child: PageView(
               controller: _pageController,
-              onPageChanged: (pageindex) {
-                setState(() {
-                  _currentPageIndex = pageindex;
-                });
-              },
+              onPageChanged: _onPageChanged,
               children: _screenOptions,
             ),
           ),

@@ -104,9 +104,10 @@ class _CopyCodeState extends State<CopyCode> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _isCopyed
-              ? const Icon(Icons.check, color: Colors.white)
-              : const Icon(Icons.copy, color: Colors.white),
+          Icon(
+            _isCopyed ? Icons.check : Icons.copy,
+            color: Colors.white,
+          ),
           const Text("  "),
           Text(
             _isCopyed ? "Copid!" : "Copy code",

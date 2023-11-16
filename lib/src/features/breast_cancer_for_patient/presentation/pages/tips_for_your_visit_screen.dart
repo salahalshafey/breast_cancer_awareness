@@ -58,8 +58,8 @@ class TipsForYourVisit extends StatelessWidget {
   }
 }
 
-List<String> tips = const [
-  "Have your app handy to reference your notes at the doctor's office. It's always good to have information written down, that way you don't forget anything important.Have your app handy to reference your notes at the doctor's office. It's always good to have information written down, that way you don't forget anything important.\n",
+const tips = <String>[
+  "Have your app handy to reference your notes at the doctor's office. It's always good to have information written down, that way you don't forget anything important.\n",
   "Bring someone with you to take notes or ask your doctor if you can record your discussion so you have all the information. Having someone there can help ensure all your questions are answered, or help advocate for you, if necessary.\n",
   "Ask for pamphlets and for their notes to be printed out or emailed to you, if this is not done automatically. Get as much information as you can.\n",
   "Be empowered to get a second opinion. There are lots of reasons this is a good idea. You need to be comfortable with the person you're working with, their diagnosis, and treatment - if there is something to be treated. Your doctor may even be able to refer you to someone else for a second opinion.\n",
