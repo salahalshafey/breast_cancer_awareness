@@ -34,6 +34,8 @@ class AccountFirebaseAuthenticationImpl implements AccountRemoteAuthentication {
         throw WrongPasswordException();
       } else if (e.code == 'invalid-email') {
         throw EmailNotValidException();
+      } else if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
+        throw UserNotFoundOrWrongPasswordException();
       } else {
         throw ServerException();
       }

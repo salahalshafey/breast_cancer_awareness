@@ -47,29 +47,28 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBX2NLQ5wt1wfoteZYrfE6zG84w8ePEHrs',
-    appId: '1:996856719448:web:6af69f15bc5730562dc22d',
-    messagingSenderId: '996856719448',
-    projectId: 'breast-cancer-awareness-bf348',
-    authDomain: 'breast-cancer-awareness-bf348.firebaseapp.com',
-    storageBucket: 'breast-cancer-awareness-bf348.appspot.com',
-    measurementId: 'G-X6PP6NBK2C',
+    apiKey: 'AIzaSyCIZc3u2t2N5jeRXXIV6bmYFMYuzAr_6Bo',
+    appId: '1:583240425126:web:658f000a39ae9a7dec5e67',
+    messagingSenderId: '583240425126',
+    projectId: 'breast-cancer-awareness-9b69e',
+    authDomain: 'breast-cancer-awareness-9b69e.firebaseapp.com',
+    storageBucket: 'breast-cancer-awareness-9b69e.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAWMPvnC_mKXomXZnouDeC7ayC5pnKp5Jw',
-    appId: '1:996856719448:android:7798c22d3e83a5f02dc22d',
-    messagingSenderId: '996856719448',
-    projectId: 'breast-cancer-awareness-bf348',
-    storageBucket: 'breast-cancer-awareness-bf348.appspot.com',
+    apiKey: 'AIzaSyD8gFD8mNat8OmASthgiFm9bdmc9aE2Y0Q',
+    appId: '1:583240425126:android:5d811900f0c937c2ec5e67',
+    messagingSenderId: '583240425126',
+    projectId: 'breast-cancer-awareness-9b69e',
+    storageBucket: 'breast-cancer-awareness-9b69e.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCPy2aC8RvspQ3zg0BpbHkuk3mSF3hBOWs',
-    appId: '1:996856719448:ios:aac2f3ad5ef166bc2dc22d',
-    messagingSenderId: '996856719448',
-    projectId: 'breast-cancer-awareness-bf348',
-    storageBucket: 'breast-cancer-awareness-bf348.appspot.com',
+    apiKey: 'AIzaSyCYrfaqJc8OH4ytuyayt4V8pYXNK9972uA',
+    appId: '1:583240425126:ios:6915548a4b69aea0ec5e67',
+    messagingSenderId: '583240425126',
+    projectId: 'breast-cancer-awareness-9b69e',
+    storageBucket: 'breast-cancer-awareness-9b69e.appspot.com',
     iosBundleId: 'com.salahalshafey.breastcancerawareness',
   );
 }

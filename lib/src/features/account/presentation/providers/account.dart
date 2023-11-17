@@ -100,6 +100,9 @@ class Account extends DisposableProvider {
       throw Error("Email Not Valid.");
     } on WrongPasswordException {
       throw Error("The password is wrong.");
+    } on UserNotFoundOrWrongPasswordException {
+      throw Error(
+          "The User is not found for that email OR The password is wrong.");
     } catch (error) {
       throw Error('An unexpected error happened.');
     }

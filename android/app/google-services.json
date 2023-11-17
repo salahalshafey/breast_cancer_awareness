@@ -1,43 +1,26 @@
 {
   "project_info": {
-    "project_number": "996856719448",
-    "project_id": "breast-cancer-awareness-bf348",
-    "storage_bucket": "breast-cancer-awareness-bf348.appspot.com"
+    "project_number": "583240425126",
+    "project_id": "breast-cancer-awareness-9b69e",
+    "storage_bucket": "breast-cancer-awareness-9b69e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:996856719448:android:7798c22d3e83a5f02dc22d",
+        "mobilesdk_app_id": "1:583240425126:android:5d811900f0c937c2ec5e67",
         "android_client_info": {
           "package_name": "com.salahalshafey.breastcancerawareness"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "996856719448-g9kr3549bpt2qv3npgi34dc1n9r15g8l.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAWMPvnC_mKXomXZnouDeC7ayC5pnKp5Jw"
+          "current_key": "AIzaSyD8gFD8mNat8OmASthgiFm9bdmc9aE2Y0Q"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "996856719448-g9kr3549bpt2qv3npgi34dc1n9r15g8l.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "996856719448-3k49ii8qfhpe5bie8kgp5in3h4k4l71v.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.breastCancerAwareness"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

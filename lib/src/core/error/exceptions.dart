@@ -28,3 +28,5 @@ class UserNotFoundException implements Exception {}
 class WrongPasswordException implements Exception {}
 
 class EmailNotValidException implements Exception {}
+
+class UserNotFoundOrWrongPasswordException implements Exception {}
