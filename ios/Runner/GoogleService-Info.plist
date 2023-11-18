@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>996856719448-3k49ii8qfhpe5bie8kgp5in3h4k4l71v.apps.googleusercontent.com</string>
+	<string>583240425126-mabb54ima8akqh75vkgc854cuo9fukaf.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.996856719448-3k49ii8qfhpe5bie8kgp5in3h4k4l71v</string>
+	<string>com.googleusercontent.apps.583240425126-mabb54ima8akqh75vkgc854cuo9fukaf</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>583240425126-7l6b1ra7q3fum61j83cegp7s60jn8h3v.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCPy2aC8RvspQ3zg0BpbHkuk3mSF3hBOWs</string>
+	<string>AIzaSyCYrfaqJc8OH4ytuyayt4V8pYXNK9972uA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>996856719448</string>
+	<string>583240425126</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.breastCancerAwareness</string>
+	<string>com.salahalshafey.breastcancerawareness</string>
 	<key>PROJECT_ID</key>
-	<string>breast-cancer-awareness-bf348</string>
+	<string>breast-cancer-awareness-9b69e</string>
 	<key>STORAGE_BUCKET</key>
-	<string>breast-cancer-awareness-bf348.appspot.com</string>
+	<string>breast-cancer-awareness-9b69e.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:996856719448:ios:e5091c7e84a824642dc22d</string>
+	<string>1:583240425126:ios:6915548a4b69aea0ec5e67</string>
 </dict>
 </plist>

@@ -85,12 +85,58 @@ class LandingPage extends StatelessWidget {
                     .difference(DateTime.now())
                     .inSeconds
                     .abs() <
-                /*23548868 +*/ 10 &&
+                /*1246 +*/ 10 &&
             !userSnapshot.data!.isAnonymous) {
           return const SecondSignUpScreen();
         }
 
-        /* print(
+        // print(FirebaseAuth.instance.currentUser!.providerData.first.providerId);
+
+        /*  FacebookAuth.instance.getUserData().then((data) {
+          print(data);
+        });*/
+
+        /*print(userSnapshot.data!.displayName);
+        print(userSnapshot.data!.email);
+        print(userSnapshot.data!.emailVerified);
+        print(userSnapshot.data!.photoURL);
+        print(userSnapshot.data!.providerData.first);*/
+
+        /*  UserInfo(
+          displayName: "Lio Rofakoko",
+          email: "liorofakoko@gmail.com",
+          phoneNumber: null,
+          photoURL:
+              "https://lh3.googleusercontent.com/a/ACg8ocL0P2ObSOWOLo_BniRlw7yI8c-mFrVfqxDzHqpm0i64=s96-c",
+          providerId: "google.com",
+          uid: "114805642639197595127",
+        );*/
+
+        /* UserInfo(
+          displayName: "Salah Alshafey",
+          email: "salahalshafey@gmail.com",
+          phoneNumber: null,
+          photoURL: "https://graph.facebook.com/6965357660190426/picture",
+          providerId: "facebook.com",
+          uid: "6965357660190426",
+        );
+        
+        final facebookMap = {
+          "name": "Salah Alshafey",
+          "email": "salahalshafey@gmail.com",
+          "picture": {
+            "data": {
+              "height": 200,
+              "is_silhouette": false,
+              "url":
+                  "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=6965357660190426&width=200&ext=1702912119&hash=AeSxdoI3pjLrN07qLaM",
+              "width": 200
+            }
+          },
+          "id": 6965357660190426
+        };*/
+
+        /*  print(
           userSnapshot.data!.metadata.creationTime!
               .difference(DateTime.now())
               .inSeconds

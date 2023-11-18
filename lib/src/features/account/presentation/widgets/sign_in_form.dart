@@ -1,7 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -321,11 +324,15 @@ class SocialSignIn extends StatelessWidget {
       children: [
         IconButton(
           icon: Image.asset("assets/images/facebook.png", height: 40),
-          onPressed: () {},
+          onPressed: () {
+            signInWithFacebook();
+          },
         ),
         IconButton(
           icon: Image.asset("assets/images/google.png", height: 40),
-          onPressed: () {},
+          onPressed: () {
+            signInWithGoogle();
+          },
         ),
         IconButton(
           icon: Image.asset("assets/images/twitter_x.png", height: 40),
@@ -334,6 +341,36 @@ class SocialSignIn extends StatelessWidget {
       ],
     );
   }
+}
+
+Future<UserCredential> signInWithGoogle() async {
+  // Trigger the authentication flow
+  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+  // Obtain the auth details from the request
+  final GoogleSignInAuthentication? googleAuth =
+      await googleUser?.authentication;
+
+  // Create a new credential
+  final credential = GoogleAuthProvider.credential(
+    accessToken: googleAuth?.accessToken,
+    idToken: googleAuth?.idToken,
+  );
+
+  // Once signed in, return the UserCredential
+  return await FirebaseAuth.instance.signInWithCredential(credential);
+}
+
+Future<UserCredential> signInWithFacebook() async {
+  // Trigger the sign-in flow
+  final LoginResult loginResult = await FacebookAuth.instance.login();
+
+  // Create a credential from the access token
+  final OAuthCredential facebookAuthCredential =
+      FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+  // Once signed in, return the UserCredential
+  return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
 }
 
 class OrDivider extends StatelessWidget {

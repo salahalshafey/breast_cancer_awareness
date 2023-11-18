@@ -4,6 +4,8 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../core/error/exceptions.dart';
 
@@ -155,7 +157,28 @@ class Account extends DisposableProvider {
   }
 
   void signOut(BuildContext context) {
-    FirebaseAuth.instance.signOut();
+    final providerData = FirebaseAuth.instance.currentUser!.providerData;
+    if (providerData.isEmpty) {
+      FirebaseAuth.instance.signOut(); // facebook.com
+
+      AppProviders.disposeAllDisposableProviders(context);
+
+      return;
+    }
+
+    final providerId = providerData.first.providerId;
+
+    if (providerId == "google.com") {
+      GoogleSignIn().disconnect();
+      GoogleSignIn().signOut();
+    } else if (providerId == "facebook.com") {
+      FacebookAuth.instance.logOut();
+    } /*else if (providerId == "twitter.com") {
+      TwitterLogin.logOut(); // or something like that
+    }*/
+
+    FirebaseAuth.instance.signOut(); // facebook.com
+
     AppProviders.disposeAllDisposableProviders(context);
   }
 

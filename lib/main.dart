@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:wakelock/wakelock.dart';
 //import 'package:firebase_app_check/firebase_app_check.dart';
 import 'firebase_options.dart';
 
@@ -24,6 +25,8 @@ void main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
+  //FirebaseAuth.instance.setSettings(appVerificationDisabledForTesting: true);
+
   /*await FirebaseAppCheck.instance.activate(
     webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
   );*/
@@ -31,6 +34,8 @@ void main() async {
   await di.init();
 
   final currentTheme = await initializeCurrentTheme();
+
+  //Wakelock.enable();
 
   runApp(
     MultiProvider(

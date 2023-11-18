@@ -12,7 +12,20 @@
           "package_name": "com.salahalshafey.breastcancerawareness"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "583240425126-7l6b1ra7q3fum61j83cegp7s60jn8h3v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.salahalshafey.breastcancerawareness",
+            "certificate_hash": "e839d1a242f08ef15a62d8df98dec7ae8dd0dff5"
+          }
+        },
+        {
+          "client_id": "583240425126-4miu2cvjdc9j7k0hhn8uo1asj99pjhb8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyD8gFD8mNat8OmASthgiFm9bdmc9aE2Y0Q"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "583240425126-4miu2cvjdc9j7k0hhn8uo1asj99pjhb8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "583240425126-mabb54ima8akqh75vkgc854cuo9fukaf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.salahalshafey.breastcancerawareness"
+              }
+            }
+          ]
         }
       }
     }

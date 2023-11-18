@@ -73,10 +73,15 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
     });
 
     if (_currentPageIndex == _selfCheckSteps.length - 1) {
+      final screenHeight = MediaQuery.of(context).size.height;
+
+      // all screen widgets height = 875, if you want to animate to the end
+      final offsetToNearlyEndOfScreen = 845 - screenHeight;
+
       await Future.delayed(1.seconds);
-      // _scrollController.jumpTo(100);
+      // _scrollController.jumpTo(offset);
       _scrollController.animateTo(
-        100,
+        offsetToNearlyEndOfScreen > 0 ? offsetToNearlyEndOfScreen : 0,
         duration: 500.ms,
         curve: Curves.easeInOut,
       );
