@@ -1,10 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -16,6 +14,7 @@ import '../pages/first_sign_up_screen.dart';
 import '../../../../core/util/builders/custom_alret_dialoge.dart';
 import 'dont_or_already_have_accout.dart';
 import 'sign_in_as_guest_button.dart';
+import 'social_sign_in.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -314,64 +313,9 @@ class _SignInFormState extends State<SignInForm> {
   }
 }
 
-class SocialSignIn extends StatelessWidget {
-  const SocialSignIn({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        IconButton(
-          icon: Image.asset("assets/images/facebook.png", height: 40),
-          onPressed: () {
-            signInWithFacebook();
-          },
-        ),
-        IconButton(
-          icon: Image.asset("assets/images/google.png", height: 40),
-          onPressed: () {
-            signInWithGoogle();
-          },
-        ),
-        IconButton(
-          icon: Image.asset("assets/images/twitter_x.png", height: 40),
-          onPressed: () {},
-        ),
-      ],
-    );
-  }
-}
-
-Future<UserCredential> signInWithGoogle() async {
-  // Trigger the authentication flow
-  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-  // Obtain the auth details from the request
-  final GoogleSignInAuthentication? googleAuth =
-      await googleUser?.authentication;
-
-  // Create a new credential
-  final credential = GoogleAuthProvider.credential(
-    accessToken: googleAuth?.accessToken,
-    idToken: googleAuth?.idToken,
-  );
-
-  // Once signed in, return the UserCredential
-  return await FirebaseAuth.instance.signInWithCredential(credential);
-}
-
-Future<UserCredential> signInWithFacebook() async {
-  // Trigger the sign-in flow
-  final LoginResult loginResult = await FacebookAuth.instance.login();
-
-  // Create a credential from the access token
-  final OAuthCredential facebookAuthCredential =
-      FacebookAuthProvider.credential(loginResult.accessToken!.token);
-
-  // Once signed in, return the UserCredential
-  return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
-}
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 class OrDivider extends StatelessWidget {
   const OrDivider({
