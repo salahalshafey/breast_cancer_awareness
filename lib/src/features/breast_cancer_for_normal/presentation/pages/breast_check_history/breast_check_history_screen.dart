@@ -18,10 +18,6 @@ class BreastCheckHistoryScreen extends StatelessWidget {
     final userId = Provider.of<Account>(context, listen: false).userId;
     final notesHistory = Provider.of<Notes>(context, listen: false);
 
-    final screenWidth = MediaQuery.of(context).size.width;
-    final double horizontalPadding =
-        screenWidth > 500 ? (screenWidth - 500) / 2 + 20 : 20;
-
     return DefaultScreen(
       containingBackgroundCancerSympol: false,
       child: Column(
@@ -59,6 +55,10 @@ class BreastCheckHistoryScreen extends StatelessWidget {
                     child: EmptyShape(),
                   );
                 }
+
+                final screenWidth = MediaQuery.of(context).size.width;
+                final double horizontalPadding =
+                    screenWidth > 500 ? (screenWidth - 500) / 2 + 20 : 20;
 
                 return ListView.builder(
                   padding: EdgeInsets.symmetric(

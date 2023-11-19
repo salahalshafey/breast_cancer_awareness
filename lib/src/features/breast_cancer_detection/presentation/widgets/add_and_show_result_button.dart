@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+import 'package:breast_cancer_awareness/src/core/error/exceptions.dart';
 import '../../../../core/util/builders/custom_alret_dialoge.dart';
 import '../../../account/presentation/providers/account.dart';
 
@@ -17,6 +18,75 @@ class AddAndShowResultButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<ForDoctorScreenState>(context);
     final leftPadding = (MediaQuery.of(context).size.width - 40 - 70) / 2;
+
+    void showResult() async {
+      try {
+        final account = Provider.of<Account>(context, listen: false);
+        final user = await account.getUserInfo();
+
+        if (provider.networkImage == null && provider.fileImage == null) {
+          throw Error("You didn't provide an image!!!");
+        }
+
+        if (user == null || user.userType == "guest") {
+          final color = Theme.of(context).appBarTheme.foregroundColor;
+
+          showCustomAlretDialog(
+            context: context,
+            title: "Sign In",
+            titleColor: color,
+            content: "You have to Sign In to continue!!",
+            actions: [
+              TextButton(
+                onPressed: () {
+                  account.signOut(context);
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  "Sign In",
+                  style: TextStyle(color: color),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  "Later",
+                  style: TextStyle(color: color),
+                ),
+              ),
+            ],
+          );
+          return;
+        }
+
+        if (user.userType != "Doctor") {
+          showCustomAlretDialog(
+            context: context,
+            title: "Sorry",
+            titleColor: Colors.red,
+            content: "This feature only available to Doctors.",
+          );
+          return;
+        }
+
+        final isXray = await selectImageTypeDialog(context);
+        if (isXray == null) {
+          return;
+        }
+
+        Navigator.of(context)
+            .pushNamed(PredictionScreen.routName, arguments: isXray);
+      } catch (error) {
+        showCustomAlretDialog(
+          context: context,
+          title: "Error",
+          titleColor: Colors.red,
+          content: error.toString(),
+        );
+      }
+    }
 
     return Align(
       child: Row(
@@ -53,70 +123,7 @@ class AddAndShowResultButton extends StatelessWidget {
           ),
           const Spacer(),
           TextButton(
-            onPressed: () async {
-              try {
-                final account = Provider.of<Account>(context, listen: false);
-                final user = await account.getUserInfo();
-
-                if (user == null || user.userType == "guest") {
-                  final color = Theme.of(context).appBarTheme.foregroundColor;
-
-                  showCustomAlretDialog(
-                    context: context,
-                    title: "Sign In",
-                    titleColor: color,
-                    content: "You have to Sign In to continue!!",
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          account.signOut(context);
-                          Navigator.of(context).pop();
-                        },
-                        child: Text(
-                          "Sign In",
-                          style: TextStyle(color: color),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text(
-                          "Later",
-                          style: TextStyle(color: color),
-                        ),
-                      ),
-                    ],
-                  );
-                  return;
-                }
-
-                if (user.userType != "Doctor") {
-                  showCustomAlretDialog(
-                    context: context,
-                    title: "Sorry",
-                    titleColor: Colors.red,
-                    content: "This feature only available to Doctors.",
-                  );
-                  return;
-                }
-
-                final isXray = await selectImageTypeDialog(context);
-                if (isXray == null) {
-                  return;
-                }
-
-                Navigator.of(context)
-                    .pushNamed(PredictionScreen.routName, arguments: isXray);
-              } catch (error) {
-                showCustomAlretDialog(
-                  context: context,
-                  title: "Error",
-                  titleColor: Colors.red,
-                  content: error.toString(),
-                );
-              }
-            },
+            onPressed: showResult,
             child: const Text(
               "Show Result",
               style: TextStyle(
@@ -147,7 +154,7 @@ class AddIcon extends StatelessWidget {
     return const Stack(
       alignment: Alignment.center,
       children: [
-        CustomLine(),
+        CustomLine(isHorizantal: true),
         CustomLine(isHorizantal: false),
       ],
     );

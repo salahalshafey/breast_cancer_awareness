@@ -5,6 +5,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../core/util/builders/custom_snack_bar.dart';
 import '../../../../core/util/widgets/default_screen.dart';
 
 import '../../../account/presentation/providers/account.dart';
@@ -30,45 +31,54 @@ class _SearchScreenState extends State<SearchScreen> {
   final FlutterTts _flutterTts = FlutterTts();
 
   Future<bool> _isGuest() async {
-    final account = Provider.of<Account>(context, listen: false);
-    final user = await account.getUserInfo();
+    try {
+      final account = Provider.of<Account>(context, listen: false);
+      final user = await account.getUserInfo();
 
-    if (user == null || user.userType == "guest") {
-      final color = Theme.of(context).appBarTheme.foregroundColor;
+      if (user == null || user.userType == "guest") {
+        final color = Theme.of(context).appBarTheme.foregroundColor;
 
-      showCustomAlretDialog(
+        showCustomAlretDialog(
+          context: context,
+          title: "Sign In",
+          titleColor: color,
+          content: "You have to Sign In to continue!!",
+          actions: [
+            TextButton(
+              onPressed: () {
+                account.signOut(context);
+                Navigator.of(context)
+                  ..pop()
+                  ..pop();
+              },
+              child: Text(
+                "Sign In",
+                style: TextStyle(color: color),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                "Later",
+                style: TextStyle(color: color),
+              ),
+            ),
+          ],
+        );
+        return true;
+      }
+
+      return false;
+    } catch (error) {
+      showCustomSnackBar(
         context: context,
-        title: "Sign In",
-        titleColor: color,
-        content: "You have to Sign In to continue!!",
-        actions: [
-          TextButton(
-            onPressed: () {
-              account.signOut(context);
-              Navigator.of(context)
-                ..pop()
-                ..pop();
-            },
-            child: Text(
-              "Sign In",
-              style: TextStyle(color: color),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text(
-              "Later",
-              style: TextStyle(color: color),
-            ),
-          ),
-        ],
+        content: error.toString(),
       );
-      return true;
-    }
 
-    return false;
+      return false;
+    }
   }
 
   void _setSearchWord(String searchword, {bool textToSpeech = false}) async {

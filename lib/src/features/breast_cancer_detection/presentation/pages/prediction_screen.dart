@@ -134,22 +134,22 @@ Future<String> _getPrediction(
         androidDeviceIdleRequired: false,
       ),
     );
-    final labelspath = await _saveLabelsToFile();
+    final labelsPath = await _saveLabelsToFile();
 
     Tflite.close();
     await Tflite.loadModel(
-        model: model.file.path, // "assets/xray_model_for_deployment.tflite",
-        labels: labelspath, //"assets/labels.txt",
-        numThreads: 1, // defaults to 1
-        isAsset:
-            false, // defaults to true, set to false to load resources outside assets
-        useGpuDelegate:
-            false // defaults to false, set to true to use GPU delegate
-        );
+      model: model.file.path, // "assets/xray_model_for_deployment.tflite",
+      labels: labelsPath, //"assets/labels.txt",
+      numThreads: 1, // defaults to 1
+      isAsset:
+          false, // defaults to true, set to false to load resources outside assets
+      useGpuDelegate:
+          false, // defaults to false, set to true to use GPU delegate
+    );
 
     final filepath = provider.fileImage != null
         ? provider.fileImage!.path
-        : await _getNetworkImageToFile(provider.networkImage!);
+        : await _getNetworkImageToFile(provider.networkImage);
 
     final recognitions = await Tflite.runModelOnImage(
         path: filepath, // required
@@ -188,7 +188,11 @@ Future<String> _saveLabelsToFile() async {
   return filePath;
 }
 
-Future<String> _getNetworkImageToFile(String imageUrl) async {
+Future<String> _getNetworkImageToFile(String? imageUrl) async {
+  if (imageUrl == null) {
+    throw Error("You didn't provide an image!!!");
+  }
+
   final tempDir = await getTemporaryDirectory();
   String path = '${tempDir.path}/${imageUrl.hashCode}.jpeg';
   await Dio().download(imageUrl, path);
