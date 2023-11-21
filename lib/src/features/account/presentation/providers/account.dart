@@ -2,21 +2,24 @@
 
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:twitter_login/twitter_login.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/network_info.dart';
 
 import '../../../../dispose_container.dart';
+
 import '../../domain/entities/user_information.dart';
 import '../../domain/usecases/get_user_information.dart';
 import '../../domain/usecases/send_user_image_and_type.dart';
 import '../../domain/usecases/sign_in_anonymously.dart';
 import '../../domain/usecases/signin_with_email_and_password.dart';
 import '../../domain/usecases/signup_with_email_and_password.dart';
+import 'api_keys.dart';
 
 class Account extends DisposableProvider {
   final GetUserInformationUsecase getUserInformationUseCase;
@@ -161,8 +164,14 @@ class Account extends DisposableProvider {
       idToken: googleAuth.idToken,
     );
 
-    // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    try {
+      // Once signed in, return the UserCredential
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    } on FirebaseAuthException {
+      throw Error('Something went wrong, please try again later.');
+    } catch (error) {
+      throw Error('An unexpected error happened.');
+    }
   }
 
   Future<UserCredential> signInWithFacebook() async {
@@ -181,26 +190,34 @@ class Account extends DisposableProvider {
     final OAuthCredential facebookAuthCredential =
         FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
-    // Once signed in, return the UserCredential
-    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+    try {
+      // Once signed in, return the UserCredential
+      return await FirebaseAuth.instance
+          .signInWithCredential(facebookAuthCredential);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "account-exists-with-different-credential") {
+        throw Error(
+            "An account already exists with the same email address as your Facebook account.\n"
+            "Sign in using the account that is associated with this email address.");
+      }
+
+      throw Error('Something went wrong, please try again later.');
+    } catch (error) {
+      throw Error('An unexpected error happened.');
+    }
   }
 
-  //signInWithTwitter
-
   Future<UserCredential> signInWithTwitter() async {
-    await Future.delayed(const Duration(seconds: 1));
-
-    throw UnimplementedError("X login didn't implemented yet");
-
-    /*  if (await NetworkInfoImpl().isNotConnected) {
+    if (await NetworkInfoImpl().isNotConnected) {
       throw Error('You are currently offline.');
     }
 
     // Create a TwitterLogin instance
-    final twitterLogin = new TwitterLogin(
-        apiKey: '<your consumer key>',
-        apiSecretKey: ' <your consumer secret>',
-        redirectURI: '<your_scheme>://');
+    final twitterLogin = TwitterLogin(
+      apiKey: TwitterConfig.apiKey,
+      apiSecretKey: TwitterConfig.apiSecretKey,
+      redirectURI: "breast-cancer-awareness-9b69e://",
+    );
 
     // Trigger the sign-in flow
     final authResult = await twitterLogin.login();
@@ -215,9 +232,21 @@ class Account extends DisposableProvider {
       secret: authResult.authTokenSecret!,
     );
 
-    // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance
-        .signInWithCredential(twitterAuthCredential);*/
+    try {
+      // Once signed in, return the UserCredential
+      return await FirebaseAuth.instance
+          .signInWithCredential(twitterAuthCredential);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "account-exists-with-different-credential") {
+        throw Error(
+            "An account already exists with the same email address as your X account.\n"
+            "Sign in using the account that is associated with this email address.");
+      }
+
+      throw Error('Something went wrong, please try again later.');
+    } catch (error) {
+      throw Error('An unexpected error happened.');
+    }
   }
 
   Future<void> sendUserImageAndType(File? image, String userType) async {
@@ -255,9 +284,7 @@ class Account extends DisposableProvider {
       GoogleSignIn().signOut();
     } else if (providerId == "facebook.com") {
       FacebookAuth.instance.logOut();
-    } /*else if (providerId == "twitter.com") {
-      TwitterLogin.logOut(); // or something like that
-    }*/
+    }
 
     FirebaseAuth.instance.signOut(); // facebook.com
 

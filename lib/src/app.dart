@@ -90,13 +90,13 @@ class LandingPage extends StatelessWidget {
           return const SecondSignUpScreen();
         }
 
-        // print(FirebaseAuth.instance.currentUser!.providerData.first.providerId);
+        //  print(FirebaseAuth.instance.currentUser!.providerData.first.providerId);
 
         /*  FacebookAuth.instance.getUserData().then((data) {
           print(data);
         });*/
 
-        /*print(userSnapshot.data!.displayName);
+        /* print(userSnapshot.data!.displayName);
         print(userSnapshot.data!.email);
         print(userSnapshot.data!.emailVerified);
         print(userSnapshot.data!.photoURL);
@@ -135,6 +135,16 @@ class LandingPage extends StatelessWidget {
           },
           "id": 6965357660190426
         };*/
+
+        /* UserInfo(
+          displayName: "eslam alshafey",
+          email: "eslamalshafey1321@gmail.com",
+          phoneNumber: null,
+          photoURL:
+              "https://pbs.twimg.com/profile_images/1726740842088476672/WA64l-s7_normal.jpg",
+          providerId: "twitter.com",
+          uid: "1600606062025052278",
+        );*/
 
         /*  print(
           userSnapshot.data!.metadata.creationTime!

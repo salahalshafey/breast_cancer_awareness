@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/util/builders/custom_alret_dialoge.dart';
 import '../../../../core/util/builders/custom_snack_bar.dart';
+
 import '../providers/account.dart';
 
 class SocialSignIn extends StatefulWidget {
@@ -30,11 +32,18 @@ class _SocialSignInState extends State<SocialSignIn> {
     } catch (error) {
       _setLoadingState(false);
 
-      showCustomSnackBar(
-        context: context,
-        content: error.toString(),
-        durationInSec: 3,
-      );
+      error.toString().contains("was selected!!!")
+          ? showCustomSnackBar(
+              context: context,
+              content: error.toString(),
+              durationInSec: 3,
+            )
+          : showCustomAlretDialog(
+              context: context,
+              title: "Error",
+              content: error.toString(),
+              titleColor: Colors.red,
+            );
     }
   }
 
