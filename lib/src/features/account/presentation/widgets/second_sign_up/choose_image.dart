@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../../../core/util/builders/image_picker.dart';
-import '../../../../core/util/widgets/image_container.dart';
-import '../providers/image_and_user_type.dart';
+import '../../../../../core/util/builders/image_picker.dart';
+import '../../../../../core/util/widgets/image_container.dart';
+import '../../providers/image_and_user_type_provider.dart';
 
 class ChooseImage extends StatefulWidget {
   const ChooseImage({super.key});
@@ -20,7 +20,7 @@ class _ChooseImageState extends State<ChooseImage> {
   File? _currentImage;
   File? _previousImage;
 
-  Future<void> _chooseImage(ImageAndUserType provider) async {
+  Future<void> _chooseImage(ImageAndUserTypeProvider provider) async {
     final imageXFile = await myImagePicker(context);
     if (imageXFile == null) {
       return;
@@ -36,7 +36,8 @@ class _ChooseImageState extends State<ChooseImage> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ImageAndUserType>(context, listen: false);
+    final provider =
+        Provider.of<ImageAndUserTypeProvider>(context, listen: false);
 
     return Column(
       children: [

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-class ImageAndUserType with ChangeNotifier {
+class ImageAndUserTypeProvider with ChangeNotifier {
   File? _previousImage;
   File? _currentImage;
   String _userType = "";

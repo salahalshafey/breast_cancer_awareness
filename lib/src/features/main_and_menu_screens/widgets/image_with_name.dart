@@ -36,8 +36,11 @@ class ImageWithName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final account = Provider.of<Account>(context);
+
     return FutureBuilder<UserInformation?>(
-      future: Provider.of<Account>(context).getUserInfo(),
+      key: UniqueKey(),
+      future: account.getUserInfo(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());

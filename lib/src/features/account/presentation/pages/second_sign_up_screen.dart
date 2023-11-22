@@ -3,12 +3,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/image_and_user_type.dart';
+import '../providers/image_and_user_type_provider.dart';
 
 import '../widgets/backgroud_shapes/second_sign_up_screen_shapes.dart';
-import '../widgets/choose_image.dart';
-import '../widgets/continue_and_skip_button.dart';
-import '../widgets/select_user_type.dart';
+import '../widgets/second_sign_up/choose_image.dart';
+import '../widgets/second_sign_up/continue_and_skip_button.dart';
+import '../widgets/second_sign_up/select_user_type.dart';
 
 class SecondSignUpScreen extends StatelessWidget {
   static const routName = '/sign-up2';
@@ -28,8 +28,8 @@ class SecondSignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ChangeNotifierProvider<ImageAndUserType>(
-        create: (context) => ImageAndUserType(),
+      body: ChangeNotifierProvider<ImageAndUserTypeProvider>(
+        create: (context) => ImageAndUserTypeProvider(),
         child: Stack(
           alignment: Alignment.center,
           children: [

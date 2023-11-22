@@ -1,10 +1,13 @@
 import '../../../../core/error/exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../domain/entities/user_information.dart';
+
 abstract class AccountRemoteAuthentication {
   Future<String> signInAnonymously();
   Future<String> signInWithEmailAndPassword(String email, String password);
   Future<User> signUpWithEmailAndPassword(String email, String password);
+  UserInformation getCurrentUserAuthInfo();
 }
 
 class AccountFirebaseAuthenticationImpl implements AccountRemoteAuthentication {
@@ -64,5 +67,50 @@ class AccountFirebaseAuthenticationImpl implements AccountRemoteAuthentication {
     } catch (error) {
       throw ServerException();
     }
+  }
+
+  @override
+  UserInformation getCurrentUserAuthInfo() {
+    final currentUser = FirebaseAuth.instance.currentUser!;
+
+    if (currentUser.providerData.isNotEmpty) {
+      final authUserInfo = currentUser.providerData.first;
+
+      return UserInformation(
+        id: currentUser.uid,
+        firstName: _getFirstName(authUserInfo.displayName),
+        lastName: _getLastName(authUserInfo.displayName),
+        email: authUserInfo.email ?? "",
+        imageUrl: authUserInfo.photoURL,
+        dateOfSignUp: currentUser.metadata.creationTime!,
+        userType: "Normal",
+      );
+    }
+
+    return UserInformation(
+      id: currentUser.uid,
+      firstName: _getFirstName(currentUser.displayName),
+      lastName: _getLastName(currentUser.displayName),
+      email: currentUser.email ?? "",
+      imageUrl: currentUser.photoURL,
+      dateOfSignUp: currentUser.metadata.creationTime!,
+      userType: "Normal",
+    );
+  }
+
+  String _getFirstName(String? displayName) {
+    if (displayName == null || displayName.isEmpty) {
+      return "";
+    }
+
+    return displayName.split(RegExp(r" +")).first;
+  }
+
+  String _getLastName(String? displayName) {
+    if (displayName == null || displayName.isEmpty) {
+      return "";
+    }
+
+    return displayName.split(RegExp(r" +")).sublist(1).join(" ");
   }
 }

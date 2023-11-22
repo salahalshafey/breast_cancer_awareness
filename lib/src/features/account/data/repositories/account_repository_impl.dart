@@ -45,17 +45,15 @@ class AccountRepositoryImpl implements AccountRepository {
       if (await networkInfo.isNotConnected) {
         final userInfoFromLocal = await localDataSource.getUser(userId);
 
-        if (userInfoFromLocal == null) {
-          throw OfflineException();
-        }
-
-        return userInfoFromLocal;
+        return userInfoFromLocal ?? remoteAuth.getCurrentUserAuthInfo();
       }
 
       final userInfoFromRemote = await remoteDataSource.getUser(userId);
       await localDataSource.addUser(userInfoFromRemote);
 
       return userInfoFromRemote;
+    } on EmptyDataException {
+      return remoteAuth.getCurrentUserAuthInfo();
     } catch (error) {
       rethrow;
     }
@@ -165,6 +163,33 @@ class AccountRepositoryImpl implements AccountRepository {
       );
 
       return downloadUrl;
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<UserInformation> addOrApdateUserData(
+      UserInformation userInformation, File? image) async {
+    if (await networkInfo.isNotConnected) {
+      throw OfflineException();
+    }
+
+    try {
+      final userId = FirebaseAuth.instance.currentUser!.uid;
+      String? downloadUrl;
+
+      if (image != null) {
+        downloadUrl = await remoteStorage.upload(userId, image);
+      }
+
+      userInformation = userInformation.copyWith(imageUrl: downloadUrl);
+
+      remoteDataSource.addUser(userInformation.toModel());
+
+      await localDataSource.addUser(userInformation.toModel());
+
+      return userInformation;
     } catch (error) {
       rethrow;
     }

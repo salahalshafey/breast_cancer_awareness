@@ -8,17 +8,20 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:twitter_login/twitter_login.dart';
 
+import '../../../../dispose_container.dart';
+
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/network_info.dart';
 
-import '../../../../dispose_container.dart';
-
 import '../../domain/entities/user_information.dart';
+
+import '../../domain/usecases/add_or_apdate_user_data.dart';
 import '../../domain/usecases/get_user_information.dart';
 import '../../domain/usecases/send_user_image_and_type.dart';
 import '../../domain/usecases/sign_in_anonymously.dart';
 import '../../domain/usecases/signin_with_email_and_password.dart';
 import '../../domain/usecases/signup_with_email_and_password.dart';
+
 import 'api_keys.dart';
 
 class Account extends DisposableProvider {
@@ -29,6 +32,7 @@ class Account extends DisposableProvider {
   final SignUpWithEmailAndPasswordUsecase
       signUserUpUsingEmailAndPasswordUseCase;
   final SendUserImageAndTypeUseCase sendUserImageAndTypeUseCase;
+  final AddOrApdateUserDataUsecase addOrApdateUserDataUsecase;
 
   Account({
     required this.getUserInformationUseCase,
@@ -36,6 +40,7 @@ class Account extends DisposableProvider {
     required this.signUserInUsingEmailAndPasswordUseCase,
     required this.signUserUpUsingEmailAndPasswordUseCase,
     required this.sendUserImageAndTypeUseCase,
+    required this.addOrApdateUserDataUsecase,
   });
 
   UserInformation? _userInfo;
@@ -92,8 +97,8 @@ class Account extends DisposableProvider {
     try {
       _userInfo =
           await signUserInUsingEmailAndPasswordUseCase.call(email, password);
-      notifyListeners();
       _userFetchedFromBackend = true;
+      notifyListeners();
     } on OfflineException {
       throw Error('You are currently offline.');
     } on ServerException {
@@ -121,7 +126,7 @@ class Account extends DisposableProvider {
     try {
       _userInfo = await signUserUpUsingEmailAndPasswordUseCase.call(
           userInformation, password);
-      _userFetchedFromBackend = true;
+
       notifyListeners();
     } on OfflineException {
       throw Error('You are currently offline.');
@@ -267,8 +272,27 @@ class Account extends DisposableProvider {
     }
   }
 
+  Future<void> addOrApdateUserData(
+      UserInformation userInformation, File? image) async {
+    try {
+      _userInfo = await addOrApdateUserDataUsecase.call(userInformation, image);
+      _userFetchedFromBackend = true;
+
+      notifyListeners();
+    } on OfflineException {
+      throw Error('You are currently offline.');
+    } on ServerException {
+      throw Error('Something went wrong, please try again later.');
+    } on EmptyDataException {
+      throw Error("Error happend, There is no data for that user");
+    } catch (error) {
+      throw Error('An unexpected error happened.');
+    }
+  }
+
   void signOut(BuildContext context) {
     final providerData = FirebaseAuth.instance.currentUser!.providerData;
+
     if (providerData.isEmpty) {
       FirebaseAuth.instance.signOut(); // facebook.com
 

@@ -3,10 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/util/builders/custom_alret_dialoge.dart';
-import '../../../../core/util/builders/custom_snack_bar.dart';
+import '../../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../../core/util/builders/custom_snack_bar.dart';
 
-import '../providers/account.dart';
+import '../../providers/account.dart';
 
 class SocialSignIn extends StatefulWidget {
   const SocialSignIn({super.key});

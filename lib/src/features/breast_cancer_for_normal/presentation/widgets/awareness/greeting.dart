@@ -1,6 +1,8 @@
+import 'package:breast_cancer_awareness/src/features/account/presentation/pages/second_sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../../account/presentation/providers/account.dart';
 
 import '../custom_texts.dart';
@@ -19,9 +21,16 @@ class Greeting extends StatelessWidget {
               return const TextTitle(data: "Hello", fontSize: 24);
             }
 
-            final userName = snapshot.data!.firstName;
+            final userName = wellFormatedString(snapshot.data!.firstName);
             return TextTitle(data: "Hello $userName", fontSize: 24);
           },
+        ),
+        const SizedBox(height: 30),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed(SecondSignUpScreen.routName);
+          },
+          child: Text("Go"),
         ),
         const SizedBox(height: 30),
         const TextNormal(

@@ -3,11 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../../core/util/builders/custom_alret_dialoge.dart';
 
-import '../providers/account.dart';
+import '../../providers/account.dart';
 
-import 'dont_or_already_have_accout.dart';
+import '../dont_or_already_have_accout.dart';
 
 class SignInAsGuestButton extends StatefulWidget {
   const SignInAsGuestButton({super.key});

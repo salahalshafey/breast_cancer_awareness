@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../../../core/util/widgets/custom_card.dart';
-import '../providers/image_and_user_type.dart';
-import 'icon_from_asset.dart';
+import '../../../../../core/util/widgets/custom_card.dart';
+import '../../providers/image_and_user_type_provider.dart';
+import '../icon_from_asset.dart';
 
 class SellectUserType extends StatelessWidget {
   const SellectUserType({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ImageAndUserType>(context);
+    final provider = Provider.of<ImageAndUserTypeProvider>(context);
     final userType = provider.userType;
 
     return Row(

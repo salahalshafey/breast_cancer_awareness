@@ -1,3 +1,5 @@
+import '../../data/models/user_information_model.dart';
+
 class UserInformation {
   final String id;
   final String firstName;
@@ -36,6 +38,16 @@ class UserInformation {
       userType: userType ?? this.userType,
     );
   }
+
+  UserInformationModel toModel() => UserInformationModel(
+        id: id,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        imageUrl: imageUrl,
+        dateOfSignUp: dateOfSignUp,
+        userType: userType,
+      );
 
   @override
   String toString() {

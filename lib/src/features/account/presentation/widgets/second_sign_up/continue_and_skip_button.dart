@@ -3,11 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../app.dart';
-import '../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../../app.dart';
+import '../../../../../core/util/builders/custom_alret_dialoge.dart';
 
-import '../providers/account.dart';
-import '../providers/image_and_user_type.dart';
+import '../../providers/account.dart';
+import '../../providers/image_and_user_type_provider.dart';
 
 class ContinueAndskipButton extends StatefulWidget {
   const ContinueAndskipButton({super.key});
@@ -42,7 +42,8 @@ class _ContinueAndskipButtonState extends State<ContinueAndskipButton> {
   }
 
   void _sendUserImageAndType() async {
-    final provider = Provider.of<ImageAndUserType>(context, listen: false);
+    final provider =
+        Provider.of<ImageAndUserTypeProvider>(context, listen: false);
 
     final account = Provider.of<Account>(context, listen: false);
     try {
