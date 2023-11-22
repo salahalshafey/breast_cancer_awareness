@@ -1,4 +1,3 @@
-import 'package:breast_cancer_awareness/src/features/account/presentation/pages/second_sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +14,7 @@ class Greeting extends StatelessWidget {
     return Column(
       children: [
         FutureBuilder(
-          future: Provider.of<Account>(context, listen: false).getUserInfo(),
+          future: Provider.of<Account>(context).getUserInfo(),
           builder: (context, snapshot) {
             if (snapshot.hasError || snapshot.data == null) {
               return const TextTitle(data: "Hello", fontSize: 24);
@@ -26,13 +25,13 @@ class Greeting extends StatelessWidget {
           },
         ),
         const SizedBox(height: 30),
-        ElevatedButton(
+        /*  ElevatedButton(
           onPressed: () {
             Navigator.of(context).pushNamed(SecondSignUpScreen.routName);
           },
           child: Text("Go"),
         ),
-        const SizedBox(height: 30),
+        const SizedBox(height: 30),*/
         const TextNormal(
           data:
               "You understand that every day counts when it comes to early breast cancer detection."

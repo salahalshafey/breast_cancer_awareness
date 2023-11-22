@@ -8,7 +8,7 @@ import 'features/account/data/datasources/account_remote_data_source.dart';
 import 'features/account/data/datasources/account_remote_storage.dart';
 import 'features/account/data/repositories/account_repository_impl.dart';
 import 'features/account/domain/repositories/account_repository.dart';
-import 'features/account/domain/usecases/add_or_apdate_user_data.dart';
+import 'features/account/domain/usecases/add_or_update_user_data.dart';
 import 'features/account/domain/usecases/get_user_information.dart';
 import 'features/account/domain/usecases/sign_in_anonymously.dart';
 import 'features/account/domain/usecases/signin_with_email_and_password.dart';
@@ -58,7 +58,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SignInWithEmailAndPasswordUsecase(sl()));
   sl.registerLazySingleton(() => SignUpWithEmailAndPasswordUsecase(sl()));
   sl.registerLazySingleton(() => SendUserImageAndTypeUseCase(sl()));
-  sl.registerLazySingleton(() => AddOrApdateUserDataUsecase(sl()));
+  sl.registerLazySingleton(() => AddOrUpdateUserDataUsecase(sl()));
 
 // Repository
 

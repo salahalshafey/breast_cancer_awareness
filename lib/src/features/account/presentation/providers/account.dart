@@ -15,7 +15,7 @@ import '../../../../core/network/network_info.dart';
 
 import '../../domain/entities/user_information.dart';
 
-import '../../domain/usecases/add_or_apdate_user_data.dart';
+import '../../domain/usecases/add_or_update_user_data.dart';
 import '../../domain/usecases/get_user_information.dart';
 import '../../domain/usecases/send_user_image_and_type.dart';
 import '../../domain/usecases/sign_in_anonymously.dart';
@@ -32,7 +32,7 @@ class Account extends DisposableProvider {
   final SignUpWithEmailAndPasswordUsecase
       signUserUpUsingEmailAndPasswordUseCase;
   final SendUserImageAndTypeUseCase sendUserImageAndTypeUseCase;
-  final AddOrApdateUserDataUsecase addOrApdateUserDataUsecase;
+  final AddOrUpdateUserDataUsecase addOrApdateUserDataUsecase;
 
   Account({
     required this.getUserInformationUseCase,
@@ -272,7 +272,7 @@ class Account extends DisposableProvider {
     }
   }
 
-  Future<void> addOrApdateUserData(
+  Future<void> addOrUpdateUserData(
       UserInformation userInformation, File? image) async {
     try {
       _userInfo = await addOrApdateUserDataUsecase.call(userInformation, image);

@@ -15,6 +15,6 @@ abstract class AccountRepository {
 
   Future<String?> sendUserImageAndType(File? image, String userType);
 
-  Future<UserInformation> addOrApdateUserData(
+  Future<UserInformation> addOrUpdateUserData(
       UserInformation userInformation, File? image);
 }

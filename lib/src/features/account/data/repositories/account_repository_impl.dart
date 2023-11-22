@@ -169,7 +169,7 @@ class AccountRepositoryImpl implements AccountRepository {
   }
 
   @override
-  Future<UserInformation> addOrApdateUserData(
+  Future<UserInformation> addOrUpdateUserData(
       UserInformation userInformation, File? image) async {
     if (await networkInfo.isNotConnected) {
       throw OfflineException();

@@ -1,11 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../app.dart';
 import '../../../../../core/util/builders/custom_alret_dialoge.dart';
 
+import '../../../data/datasources/account_remote_authentication.dart';
 import '../../providers/account.dart';
 import '../../providers/image_and_user_type_provider.dart';
 
@@ -42,14 +44,9 @@ class _ContinueAndskipButtonState extends State<ContinueAndskipButton> {
   }
 
   void _sendUserImageAndType() async {
-    final provider =
-        Provider.of<ImageAndUserTypeProvider>(context, listen: false);
-
-    final account = Provider.of<Account>(context, listen: false);
     try {
       _continueButtonLoadingState(true);
-      await account.sendUserImageAndType(
-          provider.currentImage, provider.userType);
+      await _sendUpdate();
 
       await _goToMainScreen();
     } catch (error) {
@@ -66,6 +63,26 @@ class _ContinueAndskipButtonState extends State<ContinueAndskipButton> {
         content: '$error',
       );
     }
+  }
+
+  Future<void> _sendUpdate() async {
+    final provider =
+        Provider.of<ImageAndUserTypeProvider>(context, listen: false);
+    final account = Provider.of<Account>(context, listen: false);
+    final providerData = FirebaseAuth.instance.currentUser!.providerData;
+
+    if (providerData.isEmpty || providerData.first.providerId == "password") {
+      await account.sendUserImageAndType(
+          provider.currentImage, provider.userType);
+
+      return;
+    }
+
+    var userAuthInfo =
+        AccountFirebaseAuthenticationImpl().getCurrentUserAuthInfo();
+    userAuthInfo = userAuthInfo.copyWith(userType: provider.userType);
+
+    await account.addOrUpdateUserData(userAuthInfo, provider.currentImage);
   }
 
   Future<void> _goToMainScreen() async {

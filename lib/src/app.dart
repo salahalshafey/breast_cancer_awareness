@@ -96,7 +96,7 @@ class LandingPage extends StatelessWidget {
           print(data);
         });*/
 
-        /* print(userSnapshot.data!.displayName);
+        /*  print(userSnapshot.data!.displayName);
         print(userSnapshot.data!.email);
         print(userSnapshot.data!.emailVerified);
         print(userSnapshot.data!.photoURL);
