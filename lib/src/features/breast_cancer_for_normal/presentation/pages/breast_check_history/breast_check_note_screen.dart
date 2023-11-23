@@ -59,7 +59,7 @@ class _BreastCheckNoteScreenState extends State<BreastCheckNoteScreen>
               ),
               const SizedBox(height: 20),
               Text(
-                longFormattedDateTime(
+                wellFormattedDateTimeLong(
                   widget.note.dateOfNote,
                   seperateByLine: isportrait ? true : false,
                 ),

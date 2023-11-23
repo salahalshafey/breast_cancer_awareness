@@ -30,6 +30,7 @@ class _SignUpFormState extends State<SignUpForm> {
     firstName: "",
     lastName: "",
     email: "",
+    phoneNumber: null,
     imageUrl: null,
     dateOfSignUp: DateTime.now(),
     userType: "Normal",

@@ -73,6 +73,7 @@ class AccountRepositoryImpl implements AccountRepository {
         firstName: "",
         lastName: "",
         email: "",
+        phoneNumber: null,
         imageUrl: null,
         dateOfSignUp: DateTime.now(),
         userType: "guest",
@@ -119,17 +120,7 @@ class AccountRepositoryImpl implements AccountRepository {
         dateOfSignUp: currentUser.metadata.creationTime,
       );
 
-      remoteDataSource.addUser(
-        UserInformationModel(
-          id: userInformation.id,
-          firstName: userInformation.firstName,
-          lastName: userInformation.lastName,
-          email: userInformation.email,
-          imageUrl: userInformation.imageUrl,
-          dateOfSignUp: userInformation.dateOfSignUp,
-          userType: userInformation.userType,
-        ),
-      );
+      remoteDataSource.addUser(userInformation.toModel());
 
       return userInformation;
     } catch (error) {

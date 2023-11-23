@@ -5,6 +5,7 @@ class UserInformation {
   final String firstName;
   final String lastName;
   final String email;
+  final String? phoneNumber;
   final String? imageUrl;
   final DateTime dateOfSignUp;
   final String userType;
@@ -14,6 +15,7 @@ class UserInformation {
     required this.firstName,
     required this.lastName,
     required this.email,
+    required this.phoneNumber,
     required this.imageUrl,
     required this.dateOfSignUp,
     required this.userType,
@@ -24,6 +26,7 @@ class UserInformation {
     String? firstName,
     String? lastName,
     String? email,
+    String? phoneNumber,
     String? imageUrl,
     DateTime? dateOfSignUp,
     String? userType,
@@ -33,6 +36,7 @@ class UserInformation {
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       email: email ?? this.email,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
       imageUrl: imageUrl ?? this.imageUrl,
       dateOfSignUp: dateOfSignUp ?? this.dateOfSignUp,
       userType: userType ?? this.userType,
@@ -44,6 +48,7 @@ class UserInformation {
         firstName: firstName,
         lastName: lastName,
         email: email,
+        phoneNumber: phoneNumber,
         imageUrl: imageUrl,
         dateOfSignUp: dateOfSignUp,
         userType: userType,
@@ -52,9 +57,10 @@ class UserInformation {
   @override
   String toString() {
     return "id = $id, \n"
-        "first Name = $firstName, \n"
+        "firstName = $firstName, \n"
         "lastName = $lastName, \n"
         "email = $email, \n"
+        "phoneNmber = $phoneNumber, \n"
         "imageUrl = $imageUrl, \n"
         "dateOfSignUp = $dateOfSignUp, \n"
         "userType = $userType \n";

@@ -74,7 +74,7 @@ class _NotesAndReminderScreenState extends State<NotesAndReminderScreen> {
               ),
               if (finding == "All is well" || _reminderSeted)
                 TextTitle(
-                  data: longFormattedDateTime(
+                  data: wellFormattedDateTimeLong(
                     DateTime.now().add(const Duration(days: 14)),
                     seperateByLine: true,
                   ),

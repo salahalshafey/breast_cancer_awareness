@@ -48,16 +48,28 @@ class BreastCheckHistorytem extends StatelessWidget {
           content: "Confirm Deletion?",
           titleColor: Colors.red,
           actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: const Text("Yes"),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+              style: const ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(Colors.red),
+              ),
+              child: const Text("  Yes "),
             ),
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: const Text("No"),
+            OutlinedButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              style: const ButtonStyle(
+                foregroundColor: MaterialStatePropertyAll(Colors.red),
+                side: MaterialStatePropertyAll(BorderSide(color: Colors.red)),
+              ),
+              child: const Text("Cancel"),
             ),
           ],
         );
+
         return delete;
       },
       onDismissed: (direction) async {
@@ -96,7 +108,7 @@ class BreastCheckHistorytem extends StatelessWidget {
             const SizedBox(width: 20),
             Expanded(
               child: Text(
-                longFormattedDateTime(
+                wellFormattedDateTimeLong(
                   note.dateOfNote,
                   seperateByLine: isportrait ? true : false,
                 ),

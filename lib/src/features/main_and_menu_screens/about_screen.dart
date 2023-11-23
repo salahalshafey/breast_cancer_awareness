@@ -59,20 +59,36 @@ class AboutScreen extends StatelessWidget {
                 "* **Contact us** through this email: salahforgraduationproject@gmail.com",
           ),
           BulletedList(
-            text: TextWithActionText(
-              text: "App Privacy ",
-              actionText: "Privacy Policy",
-              actionTextStyle: const TextStyle(color: Colors.blue),
-              onActionTextTap: () {
-                launchUrl(
-                  Uri.parse(
-                      "https://github.com/salahalshafey/breast-cancer-awareness-privacy/blob/main/privacy-policy.md"),
-                  mode: LaunchMode.inAppWebView,
-                );
-              },
+            text: Row(
+              children: [
+                TextWithActionText(
+                  text: "App ",
+                  actionText: "Privacy Policy",
+                  actionTextStyle: const TextStyle(color: Colors.blue),
+                  onActionTextTap: () {
+                    launchUrl(
+                      Uri.parse(
+                          "https://github.com/salahalshafey/breast-cancer-awareness-privacy/blob/main/privacy-policy.md"),
+                      mode: LaunchMode.inAppWebView,
+                    );
+                  },
+                ),
+                TextWithActionText(
+                  text: " and ",
+                  actionText: "Terms of service",
+                  actionTextStyle: const TextStyle(color: Colors.blue),
+                  onActionTextTap: () {
+                    launchUrl(
+                      Uri.parse(
+                          "https://www.termsofservicegenerator.net/live.php?token=M3aKHZofongPLLgEgkZxRU0Pv1jq6G71"),
+                      mode: LaunchMode.inAppWebView,
+                    );
+                  },
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 100),
+          const SizedBox(height: 50),
           FutureBuilder(
             future: PackageInfo.fromPlatform(),
             builder: (context, snapshot) {

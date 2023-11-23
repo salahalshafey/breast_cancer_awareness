@@ -49,7 +49,8 @@ String formatedDuration(Duration time) {
 
 /// * example of returning string: Sunday, August 8, 2023 02:30 PM
 /// * if seperateByLine = true, the time 02:30 PM will be in new line
-String longFormattedDateTime(DateTime dateTime, {bool seperateByLine = false}) {
+String wellFormattedDateTimeLong(DateTime dateTime,
+    {bool seperateByLine = false}) {
   const List<String> months = [
     "January",
     "February",
@@ -82,6 +83,25 @@ String longFormattedDateTime(DateTime dateTime, {bool seperateByLine = false}) {
   return date +
       (seperateByLine ? '\n' : ' ') +
       time24To12HoursFormat(dateTime.hour, dateTime.minute);
+}
+
+String wellFormattedDateWithoutDay(DateTime dateTime) {
+  const List<String> months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  return "${months[dateTime.month - 1]} ${dateTime.year}";
 }
 
 DateTime getCurrentDateTimeremovedMinutesAndSeconds() =>

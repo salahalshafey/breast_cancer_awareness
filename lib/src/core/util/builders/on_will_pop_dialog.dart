@@ -8,7 +8,7 @@ Future<bool> onWillPopWithDialog(BuildContext context) async {
         titleColor: Colors.red,
         content: "Do you really want to exit?",
         actions: [
-          TextButton(
+          /* TextButton(
             onPressed: () {
               Navigator.of(context).pop(true);
             },
@@ -27,6 +27,25 @@ Future<bool> onWillPopWithDialog(BuildContext context) async {
                 color: Theme.of(context).appBarTheme.titleTextStyle!.color,
               ),
             ),
+          ),*/
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+            style: const ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll(Colors.red),
+            ),
+            child: const Text("  Yes "),
+          ),
+          OutlinedButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+            style: const ButtonStyle(
+              foregroundColor: MaterialStatePropertyAll(Colors.red),
+              side: MaterialStatePropertyAll(BorderSide(color: Colors.red)),
+            ),
+            child: const Text("Cancel"),
           ),
         ],
       )) ??
