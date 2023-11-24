@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/theme/colors.dart';
+import '../../../../core/util/extensions/list_seperator.dart';
 import '../../../../core/util/widgets/default_screen.dart';
 import '../../../../core/util/widgets/image_container.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
@@ -11,6 +12,7 @@ import '../../../../core/util/functions/date_time_and_duration.dart';
 
 import '../providers/account.dart';
 
+import '../widgets/icon_from_asset.dart';
 import '../widgets/profile/delete_account_button.dart';
 import '../widgets/profile/guest_view.dart';
 import '../widgets/profile/info_with_icon.dart';
@@ -65,18 +67,7 @@ class ProfileScreen extends StatelessWidget {
                   const EdgeInsets.symmetric(vertical: 120, horizontal: 20),
               children: [
                 Align(
-                  child: Text(
-                    wellFormatedString(
-                        "${userInfo.firstName} ${userInfo.lastName}"),
-                    style: const TextStyle(
-                      color: Color.fromRGBO(193, 27, 107, 1),
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Align(
+                  alignment: Alignment.centerLeft,
                   child: ImageContainer(
                     image:
                         userInfo.imageUrl ?? "assets/images/person_avatar.png",
@@ -94,12 +85,26 @@ class ProfileScreen extends StatelessWidget {
                         "${userInfo.firstName} ${userInfo.lastName}"),
                   ),
                 ),
-                const SizedBox(height: 40),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    wellFormatedString(
+                        "${userInfo.firstName} ${userInfo.lastName}"),
+                    style: const TextStyle(
+                      color: Color.fromRGBO(193, 27, 107, 1),
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(),
                 InfoWithIcon(
                   icon: ProviderIcon(providerId),
                   info: userInfo.email,
+                  tooltip: providerId == "password"
+                      ? "Email"
+                      : "Email of Your ${wellFormatedString(providerId.split(".").first)} Account",
                 ),
-                const SizedBox(height: 20),
                 InfoWithIcon(
                   icon: const Icon(
                     Icons.account_circle_outlined,
@@ -107,9 +112,8 @@ class ProfileScreen extends StatelessWidget {
                     color: MyColors.primaryColor,
                   ),
                   info: "${userInfo.firstName} ${userInfo.lastName}",
-                  tooltip: "full name",
+                  tooltip: "Full Name",
                 ),
-                const SizedBox(height: 20),
                 InfoWithIcon(
                   icon: Icon(
                     userInfo.phoneNumber == null
@@ -119,19 +123,13 @@ class ProfileScreen extends StatelessWidget {
                     color: MyColors.primaryColor,
                   ),
                   info: userInfo.phoneNumber ?? "No phone number provided",
-                  tooltip: "phone number",
+                  tooltip: "Phone Number",
                 ),
-                const SizedBox(height: 20),
                 InfoWithIcon(
-                  icon: const Icon(
-                    Icons.work_outline,
-                    size: 30,
-                    color: MyColors.primaryColor,
-                  ),
-                  info: userInfo.userType,
-                  tooltip: "user type",
+                  icon: UserTypeIcon(userInfo.userType),
+                  info: "${userInfo.userType} User",
+                  tooltip: "User Type",
                 ),
-                const SizedBox(height: 20),
                 InfoWithIcon(
                   icon: const Icon(
                     Icons.date_range,
@@ -146,7 +144,7 @@ class ProfileScreen extends StatelessWidget {
                     seperateByLine: true,
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(),
                 Align(
                   child: OutlinedButton.icon(
                     onPressed: () {},
@@ -158,13 +156,30 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
                 const DeleteAccountButton(),
-              ],
+              ].verticalSeperateBy(const SizedBox(height: 20)),
             );
           },
         ),
       ),
+    );
+  }
+}
+
+class UserTypeIcon extends StatelessWidget {
+  const UserTypeIcon(this.userType, {super.key});
+
+  final String userType;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconFromAsset(
+      assetIcon: userType == "Doctor"
+          ? "assets/icons/doctor_icon.png"
+          : userType == "Normal"
+              ? "assets/icons/normal_user_icon.png"
+              : "assets/icons/patient_icon.svg",
+      iconHeight: 30,
     );
   }
 }

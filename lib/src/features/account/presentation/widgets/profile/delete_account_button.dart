@@ -89,9 +89,12 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
         label: Stack(
           alignment: Alignment.center,
           children: [
-            _isLoading
-                ? const Text("                           ")
-                : const Text("Delete Account"),
+            Text(
+              "Delete Account",
+              style: _isLoading
+                  ? const TextStyle(color: Colors.transparent)
+                  : null,
+            ),
             if (_isLoading)
               const SizedBox(
                 width: 20,
@@ -104,7 +107,7 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
           ],
         ),
         style: ButtonStyle(
-          fixedSize: const MaterialStatePropertyAll(Size.fromWidth(260)),
+          fixedSize: const MaterialStatePropertyAll(Size.fromWidth(270)),
           padding: const MaterialStatePropertyAll(EdgeInsets.zero),
           backgroundColor: MaterialStatePropertyAll(Colors.red.shade900),
         ),

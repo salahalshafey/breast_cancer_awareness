@@ -8,10 +8,13 @@ import '../widgets/text_well_formatted.dart';
 /// * [icon] if null it will be [Icons.warning_rounded] with size 45 and the same color of [titleColor]
 ///
 /// * [actions] if null it will be [TextButton] with text "Ok" and the same color of [titleColor]
+///
+/// * [contentWidget] this widget will be showen below the [content]
 Future<T?> showCustomAlretDialog<T>({
   required BuildContext context,
   required String title,
   required String content,
+  Widget? contentWidget,
   Color? titleColor,
   Widget? icon,
   List<Widget>? actions,
@@ -34,11 +37,7 @@ Future<T?> showCustomAlretDialog<T>({
             top: 10,
             bottom: 10,
           ),
-          actionsPadding: const EdgeInsets.only(
-            left: 10,
-            right: 10,
-            bottom: 10,
-          ),
+          actionsPadding: const EdgeInsets.all(10),
           title: Row(
             children: [
               icon ??
@@ -48,14 +47,24 @@ Future<T?> showCustomAlretDialog<T>({
                     color: titleColor ?? Colors.red.shade900,
                   ),
               const SizedBox(width: 20),
-              Text(
-                title,
-                style: TextStyle(color: titleColor ?? Colors.red.shade900),
+              Expanded(
+                child: Text(
+                  title,
+                  style: TextStyle(color: titleColor ?? Colors.red.shade900),
+                ),
               ),
             ],
           ),
           content: SingleChildScrollView(
-            child: TextWellFormattedWithBulleted(data: content),
+            child: Column(
+              children: [
+                TextWellFormattedWithBulleted(data: content),
+                if (contentWidget != null) ...[
+                  const SizedBox(height: 10),
+                  contentWidget,
+                ],
+              ],
+            ),
           ),
           actions: [
             if (actions == null)

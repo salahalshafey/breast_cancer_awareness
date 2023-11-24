@@ -11,6 +11,7 @@ class DefaultScreen extends StatelessWidget {
     super.key,
     this.containingAppBar = true,
     this.appBartitle,
+    this.actions,
     this.containingBackgroundCancerSympol = true,
     this.containingBackgroundRightSympol = true,
     required this.child,
@@ -18,6 +19,7 @@ class DefaultScreen extends StatelessWidget {
 
   final bool containingAppBar;
   final String? appBartitle;
+  final List<Widget>? actions;
   final bool containingBackgroundCancerSympol;
   final bool containingBackgroundRightSympol;
   final Widget child;
@@ -34,6 +36,7 @@ class DefaultScreen extends StatelessWidget {
           ? AppBar(
               backgroundColor: Colors.transparent,
               title: appBartitle == null ? null : Text(appBartitle!),
+              actions: actions,
             )
           : null,
       body: Stack(

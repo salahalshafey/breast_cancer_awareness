@@ -2,17 +2,45 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../core/util/widgets/default_screen.dart';
+import '../../../../core/util/builders/custom_alret_dialoge.dart';
+
 import '../../../account/presentation/widgets/icon_from_asset.dart';
 import '../widgets/resource_item.dart';
 
 class OtherResourcesScreen extends StatelessWidget {
   const OtherResourcesScreen({super.key});
 
+  void showTipDialog(BuildContext context) {
+    showCustomAlretDialog(
+      context: context,
+      title: "Tip for translation",
+      content: "Tip for translating the web pages",
+      titleColor: Theme.of(context).appBarTheme.foregroundColor,
+      contentWidget: Center(
+        child: Image.asset("assets/breast_cancer/other_resources_for_page.png"),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultScreen(
       containingBackgroundCancerSympol: false,
       containingBackgroundRightSympol: false,
+      actions: [
+        IconButton(
+          onPressed: () => showTipDialog(context),
+          tooltip: "Show Tip",
+          icon: const Icon(Icons.tips_and_updates)
+              .animate(
+                onPlay: (controller) {
+                  controller.loop(count: 10, reverse: true);
+                },
+                delay: 1400.ms,
+              )
+              .scaleXY(begin: 1, end: 1.3, duration: 500.ms),
+        ),
+      ],
       child: ListView(
         padding: const EdgeInsets.only(left: 30, right: 30, top: 80),
         children: [
