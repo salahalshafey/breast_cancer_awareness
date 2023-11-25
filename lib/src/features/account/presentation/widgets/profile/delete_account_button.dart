@@ -22,7 +22,7 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
     });
   }
 
-  Future<bool?> _showDeletionDialog() {
+  Future<bool?> _showConfirmDeletionDialog() {
     return showCustomAlretDialog<bool>(
       context: context,
       title: "Dangerous area",
@@ -54,7 +54,7 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
   }
 
   void deleteTheAccount() async {
-    final delete = await _showDeletionDialog();
+    final delete = await _showConfirmDeletionDialog();
 
     if (delete == null || delete == false) {
       return;

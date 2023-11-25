@@ -26,55 +26,44 @@ class LinkifyText extends StatefulWidget {
 }
 
 class _LinkifyTextState extends State<LinkifyText> {
-  bool _isUrlEntered = false;
-  bool _isEmailEntered = false;
-  bool _isPhoneNumberEntered = false;
+  int? _enteredSpanIndex;
 
-  void _settingUrlEnteredState(bool state) {
-    setState(() {
-      _isUrlEntered = state;
-    });
-  }
-
-  void _settingEmailEnteredState(bool state) {
-    setState(() {
-      _isEmailEntered = state;
-    });
-  }
-
-  void _settingPhoneNumberEnteredState(bool state) {
-    setState(() {
-      _isPhoneNumberEntered = state;
-    });
-  }
-
-  TapGestureRecognizer _customTapGestureRecognizerOf(
-      void Function(bool state) settingEnteredState) {
+  TapGestureRecognizer _customTapGestureRecognizerOf(int enteredSpanIndex) {
     return TapGestureRecognizer()
       ..onTapDown = (details) {
-        settingEnteredState(true);
+        setState(() {
+          _enteredSpanIndex = enteredSpanIndex;
+        });
       }
       ..onTapCancel = () {
-        settingEnteredState(false);
+        setState(() {
+          _enteredSpanIndex = null;
+        });
       }
       ..onTapUp = (_) {
-        settingEnteredState(false);
+        setState(() {
+          _enteredSpanIndex = null;
+        });
       };
   }
 
   @override
   Widget build(BuildContext context) {
+    int i = 0;
+
     return Text.rich(
       TextSpan(
         children: getLinksInText(widget.text).map((inlineText) {
+          final currentSpanIndex = i++;
+
           if (inlineText.second == TextType.url) {
             return TextSpan(
-              recognizer: _customTapGestureRecognizerOf(_settingUrlEnteredState)
+              recognizer: _customTapGestureRecognizerOf(currentSpanIndex)
                 ..onTap =
                     () => widget.onOpen(inlineText.first, inlineText.second),
               text: inlineText.first,
               style: widget.linkStyle.copyWith(
-                backgroundColor: _isUrlEntered
+                backgroundColor: _enteredSpanIndex == currentSpanIndex
                     ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
                     : null,
               ),
@@ -83,13 +72,12 @@ class _LinkifyTextState extends State<LinkifyText> {
 
           if (inlineText.second == TextType.email) {
             return TextSpan(
-              recognizer:
-                  _customTapGestureRecognizerOf(_settingEmailEnteredState)
-                    ..onTap = () =>
-                        widget.onOpen(inlineText.first, inlineText.second),
+              recognizer: _customTapGestureRecognizerOf(currentSpanIndex)
+                ..onTap =
+                    () => widget.onOpen(inlineText.first, inlineText.second),
               text: inlineText.first,
               style: widget.linkStyle.copyWith(
-                backgroundColor: _isEmailEntered
+                backgroundColor: _enteredSpanIndex == currentSpanIndex
                     ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
                     : null,
               ),
@@ -98,13 +86,12 @@ class _LinkifyTextState extends State<LinkifyText> {
 
           if (inlineText.second == TextType.phoneNumber) {
             return TextSpan(
-              recognizer:
-                  _customTapGestureRecognizerOf(_settingPhoneNumberEnteredState)
-                    ..onTap = () =>
-                        widget.onOpen(inlineText.first, inlineText.second),
+              recognizer: _customTapGestureRecognizerOf(currentSpanIndex)
+                ..onTap =
+                    () => widget.onOpen(inlineText.first, inlineText.second),
               text: inlineText.first,
               style: widget.linkStyle.copyWith(
-                backgroundColor: _isPhoneNumberEntered
+                backgroundColor: _enteredSpanIndex == currentSpanIndex
                     ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
                     : null,
               ),
@@ -146,55 +133,44 @@ class SelectableLinkifyText extends StatefulWidget {
 }
 
 class _SelectableLinkifyTextState extends State<SelectableLinkifyText> {
-  bool _isUrlEntered = false;
-  bool _isEmailEntered = false;
-  bool _isPhoneNumberEntered = false;
+  int? _enteredSpanIndex;
 
-  void _settingUrlEnteredState(bool state) {
-    setState(() {
-      _isUrlEntered = state;
-    });
-  }
-
-  void _settingEmailEnteredState(bool state) {
-    setState(() {
-      _isEmailEntered = state;
-    });
-  }
-
-  void _settingPhoneNumberEnteredState(bool state) {
-    setState(() {
-      _isPhoneNumberEntered = state;
-    });
-  }
-
-  TapGestureRecognizer _customTapGestureRecognizerOf(
-      void Function(bool state) settingEnteredState) {
+  TapGestureRecognizer _customTapGestureRecognizerOf(int enteredSpanIndex) {
     return TapGestureRecognizer()
       ..onTapDown = (details) {
-        settingEnteredState(true);
+        setState(() {
+          _enteredSpanIndex = enteredSpanIndex;
+        });
       }
       ..onTapCancel = () {
-        settingEnteredState(false);
+        setState(() {
+          _enteredSpanIndex = null;
+        });
       }
       ..onTapUp = (_) {
-        settingEnteredState(false);
+        setState(() {
+          _enteredSpanIndex = null;
+        });
       };
   }
 
   @override
   Widget build(BuildContext context) {
+    int i = 0;
+
     return SelectableText.rich(
       TextSpan(
         children: getLinksInText(widget.text).map((inlineText) {
+          final currentSpanIndex = i++;
+
           if (inlineText.second == TextType.url) {
             return TextSpan(
-              recognizer: _customTapGestureRecognizerOf(_settingUrlEnteredState)
+              recognizer: _customTapGestureRecognizerOf(currentSpanIndex)
                 ..onTap =
                     () => widget.onOpen(inlineText.first, inlineText.second),
               text: inlineText.first,
               style: widget.linkStyle.copyWith(
-                backgroundColor: _isUrlEntered
+                backgroundColor: _enteredSpanIndex == currentSpanIndex
                     ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
                     : null,
               ),
@@ -203,13 +179,12 @@ class _SelectableLinkifyTextState extends State<SelectableLinkifyText> {
 
           if (inlineText.second == TextType.email) {
             return TextSpan(
-              recognizer:
-                  _customTapGestureRecognizerOf(_settingEmailEnteredState)
-                    ..onTap = () =>
-                        widget.onOpen(inlineText.first, inlineText.second),
+              recognizer: _customTapGestureRecognizerOf(currentSpanIndex)
+                ..onTap =
+                    () => widget.onOpen(inlineText.first, inlineText.second),
               text: inlineText.first,
               style: widget.linkStyle.copyWith(
-                backgroundColor: _isEmailEntered
+                backgroundColor: _enteredSpanIndex == currentSpanIndex
                     ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
                     : null,
               ),
@@ -218,13 +193,12 @@ class _SelectableLinkifyTextState extends State<SelectableLinkifyText> {
 
           if (inlineText.second == TextType.phoneNumber) {
             return TextSpan(
-              recognizer:
-                  _customTapGestureRecognizerOf(_settingPhoneNumberEnteredState)
-                    ..onTap = () =>
-                        widget.onOpen(inlineText.first, inlineText.second),
+              recognizer: _customTapGestureRecognizerOf(currentSpanIndex)
+                ..onTap =
+                    () => widget.onOpen(inlineText.first, inlineText.second),
               text: inlineText.first,
               style: widget.linkStyle.copyWith(
-                backgroundColor: _isPhoneNumberEntered
+                backgroundColor: _enteredSpanIndex == currentSpanIndex
                     ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
                     : null,
               ),
@@ -249,7 +223,7 @@ List<Pair<String, TextType>> getLinksInText(String text) {
   final emailMatcher =
       RegExp(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}");
   final egyptPhoneNumberMatcher = RegExp(
-      r"01[0125][0-9]{8}|(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}");
+      r"01[0125][0-9]{8}|(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$");
 
   List<Pair<Match, TextType>> allMatches = [];
   String myText = text;

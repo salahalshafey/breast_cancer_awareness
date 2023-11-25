@@ -1,21 +1,19 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:dio/dio.dart';
 
-import '../../../../core/theme/colors.dart';
 import '../../../../core/util/builders/image_picker.dart';
 import '../../../../core/util/extensions/list_seperator.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../../core/util/widgets/default_screen.dart';
-import '../../../../core/util/widgets/image_container.dart';
 
 import '../../domain/entities/user_information.dart';
 
 import '../widgets/profile/choose_user_type.dart';
 import '../widgets/profile/edit_profile_form.dart';
+import '../widgets/profile/edit_profile_image.dart';
 import '../widgets/profile/save_edit_button.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -61,12 +59,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   void _chooseImage() async {
     final imageXFile = await myImagePicker(context);
+
     if (imageXFile == null) {
       return;
     }
 
     setState(() {
       _fileImagePath = imageXFile.path;
+    });
+  }
+
+  void _clearTheImage() {
+    setState(() {
+      _fileImagePath = null;
     });
   }
 
@@ -122,59 +127,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         padding:
             EdgeInsets.symmetric(vertical: 120, horizontal: horizantalPadding),
         children: [
-          Align(
-            //alignment: Alignment.centerLeft,
-            child: Stack(
-              children: [
-                ImageContainer(
-                  image: _fileImagePath ?? "assets/images/person_avatar.png",
-                  imageSource: _fileImagePath == null ? From.asset : From.file,
-                  radius: 60,
-                  saveNetworkImageToLocalStorage: kIsWeb ? false : true,
-                  shape: BoxShape.circle,
-                  border:
-                      Border.all(color: const Color.fromRGBO(191, 76, 136, 1)),
-                  showHighlight: true,
-                  showLoadingIndicator: true,
-                  showImageScreen: _fileImagePath == null ? false : true,
-                  imageTitle: wellFormatedString(
-                      "${_firstNameController.text} ${_lastNameController.text}"),
-                  imageCaption: _phoneNumberController.text.isEmpty
-                      ? null
-                      : _phoneNumberController.text,
-                ),
-                Positioned(
-                  top: -10,
-                  right: -10,
-                  child: IconButton(
-                    tooltip: "Choose Image",
-                    onPressed: _chooseImage,
-                    icon: const Icon(
-                      Icons.camera_alt_rounded,
-                      size: 30,
-                      color: MyColors.primaryColor,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: -10,
-                  left: 37,
-                  child: IconButton(
-                    tooltip: "Clear The Image",
-                    onPressed: () {
-                      setState(() {
-                        _fileImagePath = null;
-                      });
-                    },
-                    icon: const Icon(
-                      Icons.close,
-                      size: 30,
-                      color: MyColors.primaryColor,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          EditProfileImage(
+            fileImagePath: _fileImagePath,
+            imageTitle: wellFormatedString(
+                "${_firstNameController.text} ${_lastNameController.text}"),
+            imageCaption: _phoneNumberController.text.trim().isEmpty
+                ? null
+                : _phoneNumberController.text,
+            chooseImage: _chooseImage,
+            clearTheImage: _clearTheImage,
           ),
           EditProfileForm(
             firstNameController: _firstNameController,
