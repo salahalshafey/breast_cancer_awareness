@@ -161,22 +161,25 @@ class AccountRepositoryImpl implements AccountRepository {
 
   @override
   Future<UserInformation> addOrUpdateUserData(
-      UserInformation userInformation, File? image) async {
+    UserInformation userInformation,
+    File? image, {
+    bool imageUpdated = true,
+  }) async {
     if (await networkInfo.isNotConnected) {
       throw OfflineException();
     }
 
     try {
       final userId = FirebaseAuth.instance.currentUser!.uid;
-      String? downloadUrl;
+      var downloadUrl = image == null ? null : userInformation.imageUrl;
 
-      if (image != null) {
+      if (image != null && imageUpdated) {
         downloadUrl = await remoteStorage.upload(userId, image);
       }
 
-      userInformation = userInformation.copyWith(imageUrl: downloadUrl);
+      userInformation = userInformation.copyWithImageUrl(downloadUrl);
 
-      remoteDataSource.addUser(userInformation.toModel());
+      await remoteDataSource.addUser(userInformation.toModel());
 
       await localDataSource.addUser(userInformation.toModel());
 

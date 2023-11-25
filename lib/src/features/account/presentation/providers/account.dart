@@ -273,9 +273,16 @@ class Account extends DisposableProvider {
   }
 
   Future<void> addOrUpdateUserData(
-      UserInformation userInformation, File? image) async {
+    UserInformation userInformation,
+    File? image, {
+    bool imageUpdated = true,
+  }) async {
     try {
-      _userInfo = await addOrApdateUserDataUsecase.call(userInformation, image);
+      _userInfo = await addOrApdateUserDataUsecase.call(
+        userInformation,
+        image,
+        imageUpdated: imageUpdated,
+      );
       _userFetchedFromBackend = true;
 
       notifyListeners();

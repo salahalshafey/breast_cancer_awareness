@@ -24,6 +24,12 @@ class TextWithActionText extends StatefulWidget {
 class _TextWithActionTextState extends State<TextWithActionText> {
   bool _isEntered = false;
 
+  void _setEnteredState(bool state) {
+    setState(() {
+      _isEntered = state;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -44,19 +50,13 @@ class _TextWithActionTextState extends State<TextWithActionText> {
               ),
               recognizer: TapGestureRecognizer()
                 ..onTapDown = (details) {
-                  setState(() {
-                    _isEntered = true;
-                  });
+                  _setEnteredState(true);
                 }
                 ..onTapCancel = () {
-                  setState(() {
-                    _isEntered = false;
-                  });
+                  _setEnteredState(false);
                 }
                 ..onTapUp = (_) {
-                  setState(() {
-                    _isEntered = false;
-                  });
+                  _setEnteredState(false);
                 }
                 ..onTap = widget.onActionTextTap,
             ),

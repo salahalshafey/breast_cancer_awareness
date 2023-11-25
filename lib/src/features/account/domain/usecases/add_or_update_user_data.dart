@@ -10,7 +10,12 @@ class AddOrUpdateUserDataUsecase {
 
   Future<UserInformation> call(
     UserInformation userInformation,
-    File? image,
-  ) =>
-      repository.addOrUpdateUserData(userInformation, image);
+    File? image, {
+    bool imageUpdated = true,
+  }) =>
+      repository.addOrUpdateUserData(
+        userInformation,
+        image,
+        imageUpdated: imageUpdated,
+      );
 }

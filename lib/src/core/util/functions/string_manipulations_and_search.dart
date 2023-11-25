@@ -68,6 +68,7 @@ String wellFormatedString(String str) {
   return str.trim().isEmpty
       ? str
       : str
+          .trim()
           .split(RegExp(r' +'))
           .map(
             (word) =>

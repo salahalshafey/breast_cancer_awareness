@@ -4,6 +4,8 @@ void goToScreenWithSlideTransition(
   BuildContext context,
   Widget screen, {
   Offset beginOffset = const Offset(1, 0),
+  Duration transitionDuration = const Duration(milliseconds: 300),
+  Duration reverseTransitionDuration = const Duration(milliseconds: 300),
 }) {
   Navigator.push(
     context,
@@ -18,6 +20,8 @@ void goToScreenWithSlideTransition(
           child: child,
         );
       },
+      transitionDuration: transitionDuration,
+      reverseTransitionDuration: reverseTransitionDuration,
     ),
   );
 }

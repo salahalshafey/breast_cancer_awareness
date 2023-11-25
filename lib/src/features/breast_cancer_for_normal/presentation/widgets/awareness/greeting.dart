@@ -25,13 +25,6 @@ class Greeting extends StatelessWidget {
           },
         ),
         const SizedBox(height: 30),
-        /*  ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pushNamed(SecondSignUpScreen.routName);
-          },
-          child: Text("Go"),
-        ),
-        const SizedBox(height: 30),*/
         const TextNormal(
           data:
               "You understand that every day counts when it comes to early breast cancer detection."

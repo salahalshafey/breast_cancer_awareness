@@ -53,7 +53,7 @@ class TextWellFormattedWithBulleted extends StatelessWidget {
   }
 }
 
-class TextWellFormattedWitouthBulleted extends StatelessWidget {
+class TextWellFormattedWitouthBulleted extends StatefulWidget {
   const TextWellFormattedWitouthBulleted({
     super.key,
     required this.data,
@@ -63,9 +63,58 @@ class TextWellFormattedWitouthBulleted extends StatelessWidget {
   final String data;
   final bool isSelectableText;
 
+  @override
+  State<TextWellFormattedWitouthBulleted> createState() =>
+      _TextWellFormattedWitouthBulletedState();
+}
+
+class _TextWellFormattedWitouthBulletedState
+    extends State<TextWellFormattedWitouthBulleted> {
+  bool _isUrlEntered = false;
+  bool _isEmailEntered = false;
+  bool _isPhoneNumberEntered = false;
+
+  void _settingUrlEnteredState(bool state) {
+    // if (!widget.isSelectableText) {
+    setState(() {
+      _isUrlEntered = state;
+    });
+    // }
+  }
+
+  void _settingEmailEnteredState(bool state) {
+    //  if (!widget.isSelectableText) {
+    setState(() {
+      _isEmailEntered = state;
+    });
+    //  }
+  }
+
+  void _settingPhoneNumberEnteredState(bool state) {
+    //  if (!widget.isSelectableText) {
+    setState(() {
+      _isPhoneNumberEntered = state;
+    });
+    // }
+  }
+
+  TapGestureRecognizer _customTapGestureRecognizerOf(
+      void Function(bool state) settingEnteredState) {
+    return TapGestureRecognizer()
+      ..onTapDown = (details) {
+        settingEnteredState(true);
+      }
+      ..onTapCancel = () {
+        settingEnteredState(false);
+      }
+      ..onTapUp = (_) {
+        settingEnteredState(false);
+      };
+  }
+
   TextSpan _getTextSpan(BuildContext context) => TextSpan(
         children: patternMatcher(
-          data,
+          widget.data,
           patterns: [
             // url
             RegExp(
@@ -74,7 +123,7 @@ class TextWellFormattedWitouthBulleted extends StatelessWidget {
 
             // email
             RegExp(
-              r"[a-z0-9]+@[a-z]+\.[a-z]{2,3}",
+              r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}",
             ),
 
             // bold
@@ -82,6 +131,11 @@ class TextWellFormattedWitouthBulleted extends StatelessWidget {
               r"\*\*.*?\*\*",
               multiLine: true,
               dotAll: true,
+            ),
+
+            // phone number (Egypt or global)
+            RegExp(
+              r"01[0125][0-9]{8}|(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}",
             ),
 
             // highlighted
@@ -95,6 +149,7 @@ class TextWellFormattedWitouthBulleted extends StatelessWidget {
             StringTypes.url,
             StringTypes.email,
             StringTypes.bold,
+            StringTypes.phoneNumber,
             StringTypes.highlighted,
             StringTypes.normal,
           ],
@@ -102,13 +157,16 @@ class TextWellFormattedWitouthBulleted extends StatelessWidget {
           if (inlineText.type == StringTypes.url) {
             return TextSpan(
               text: inlineText.string,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 15,
                 color: Colors.blue,
+                backgroundColor: _isUrlEntered
+                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                    : null,
                 // decoration: TextDecoration.underline,
                 //  decorationColor: Colors.blue,
               ),
-              recognizer: TapGestureRecognizer()
+              recognizer: _customTapGestureRecognizerOf(_settingUrlEnteredState)
                 ..onTap = () {
                   final link = inlineText.string;
 
@@ -130,16 +188,20 @@ class TextWellFormattedWitouthBulleted extends StatelessWidget {
           if (inlineText.type == StringTypes.email) {
             return TextSpan(
               text: inlineText.string,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 15,
                 color: Colors.blue,
+                backgroundColor: _isEmailEntered
+                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                    : null,
                 // decoration: TextDecoration.underline,
                 // decorationColor: Colors.blue,
               ),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  launchUrl(Uri.parse('mailto:${inlineText.string}'));
-                },
+              recognizer:
+                  _customTapGestureRecognizerOf(_settingEmailEnteredState)
+                    ..onTap = () {
+                      launchUrl(Uri.parse('mailto:${inlineText.string}'));
+                    },
             );
           }
 
@@ -150,6 +212,24 @@ class TextWellFormattedWitouthBulleted extends StatelessWidget {
               style: const TextStyle(
                 fontWeight: FontWeight.w900,
               ),
+            );
+          }
+
+          if (inlineText.type == StringTypes.phoneNumber) {
+            return TextSpan(
+              text: inlineText.string,
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.blue,
+                backgroundColor: _isPhoneNumberEntered
+                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                    : null,
+              ),
+              recognizer:
+                  _customTapGestureRecognizerOf(_settingPhoneNumberEnteredState)
+                    ..onTap = () {
+                      launchUrl(Uri.parse('tel:${inlineText.string}'));
+                    },
             );
           }
 
@@ -171,16 +251,18 @@ class TextWellFormattedWitouthBulleted extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return isSelectableText
+    return widget.isSelectableText
         ? SelectableText.rich(
             _getTextSpan(context),
-            textDirection:
-                firstCharIsArabic(data) ? TextDirection.rtl : TextDirection.ltr,
+            textDirection: firstCharIsArabic(widget.data)
+                ? TextDirection.rtl
+                : TextDirection.ltr,
           )
         : Text.rich(
             _getTextSpan(context),
-            textDirection:
-                firstCharIsArabic(data) ? TextDirection.rtl : TextDirection.ltr,
+            textDirection: firstCharIsArabic(widget.data)
+                ? TextDirection.rtl
+                : TextDirection.ltr,
           );
   }
 }
@@ -190,6 +272,7 @@ enum StringTypes {
   url,
   email,
   bold,
+  phoneNumber,
   highlighted,
   normal,
 }

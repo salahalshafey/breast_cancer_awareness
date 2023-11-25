@@ -43,6 +43,32 @@ class UserInformation {
     );
   }
 
+  UserInformation copyWithImageUrl(String? imageUrl) {
+    return UserInformation(
+      id: id,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phoneNumber: phoneNumber,
+      imageUrl: imageUrl,
+      dateOfSignUp: dateOfSignUp,
+      userType: userType,
+    );
+  }
+
+  UserInformation copyWithPhoneNumber(String? phoneNumber) {
+    return UserInformation(
+      id: id,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phoneNumber: phoneNumber,
+      imageUrl: imageUrl,
+      dateOfSignUp: dateOfSignUp,
+      userType: userType,
+    );
+  }
+
   UserInformationModel toModel() => UserInformationModel(
         id: id,
         firstName: firstName,

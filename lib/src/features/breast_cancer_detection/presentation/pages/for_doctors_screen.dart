@@ -93,7 +93,7 @@ class ForDoctorsScreen extends StatelessWidget {
             ),
             child: const TextWellFormattedWithBulleted(
               data:
-                  "This `AI models` are tools for assisting medical professionals and should only be used by `trained specialists`. "
+                  "This `AI models` are 01010630524 tools for assisting medical professionals and should only be used by `trained specialists`. "
                   "It is `not a substitute` for expert medical judgment, diagnosis, or treatment. \n"
                   "* **Please be aware** that the predictions made by this models are not 100 percent accurate, and they should not be solely relied upon for making medical decisions. "
                   "Always consult with a qualified healthcare provider or breast cancer specialist for a comprehensive evaluation and diagnosis. \n"

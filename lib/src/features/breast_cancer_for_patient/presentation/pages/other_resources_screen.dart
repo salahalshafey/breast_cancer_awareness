@@ -27,7 +27,7 @@ class OtherResourcesScreen extends StatelessWidget {
     return DefaultScreen(
       containingBackgroundCancerSympol: false,
       containingBackgroundRightSympol: false,
-      actions: [
+      appBarActions: [
         IconButton(
           onPressed: () => showTipDialog(context),
           tooltip: "Show Tip",

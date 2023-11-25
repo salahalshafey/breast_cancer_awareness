@@ -617,7 +617,7 @@ class _ImageScreenState extends State<ImageScreen> {
                   linkStyle: const TextStyle(
                     color: Colors.blue,
                     fontSize: 18,
-                    decoration: TextDecoration.underline,
+                    // decoration: TextDecoration.underline,
                   ),
                   onOpen: (link, linkType) {
                     if (linkType == TextType.phoneNumber) {

@@ -60,7 +60,7 @@ class NoteDescription extends StatelessWidget {
             linkStyle: const TextStyle(
               fontSize: 16,
               color: Colors.blue,
-              decoration: TextDecoration.underline,
+              //decoration: TextDecoration.underline,
             ),
             onOpen: (link, linkType) {
               if (linkType == TextType.phoneNumber) {

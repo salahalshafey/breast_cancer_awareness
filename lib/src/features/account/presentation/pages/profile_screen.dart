@@ -9,9 +9,11 @@ import '../../../../core/util/widgets/default_screen.dart';
 import '../../../../core/util/widgets/image_container.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../../core/util/functions/date_time_and_duration.dart';
+import '../../../../core/util/builders/go_to_screen_with_slide_transition.dart';
 
 import '../providers/account.dart';
 
+import 'edit_profile_screen.dart';
 import '../widgets/icon_from_asset.dart';
 import '../widgets/profile/delete_account_button.dart';
 import '../widgets/profile/guest_view.dart';
@@ -27,6 +29,7 @@ class ProfileScreen extends StatelessWidget {
     final account = Provider.of<Account>(context, listen: false);
 
     return DefaultScreen(
+      containingBackgroundRightSympol: false,
       child: RefreshIndicator(
         onRefresh: account.updateAndGetUserInfo,
         child: FutureBuilder(
@@ -122,7 +125,10 @@ class ProfileScreen extends StatelessWidget {
                     size: 30,
                     color: MyColors.primaryColor,
                   ),
-                  info: userInfo.phoneNumber ?? "No phone number provided",
+                  info: userInfo.phoneNumber == null ||
+                          userInfo.phoneNumber!.trim().isEmpty
+                      ? "No phone number provided"
+                      : userInfo.phoneNumber!,
                   tooltip: "Phone Number",
                 ),
                 InfoWithIcon(
@@ -147,7 +153,15 @@ class ProfileScreen extends StatelessWidget {
                 const SizedBox(),
                 Align(
                   child: OutlinedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      goToScreenWithSlideTransition(
+                        context,
+                        EditProfileScreen(userInfo),
+                        beginOffset: const Offset(0, 0),
+                        transitionDuration: Duration.zero,
+                        reverseTransitionDuration: Duration.zero,
+                      );
+                    },
                     icon: const Icon(Icons.edit),
                     label: const Text("    Edit Profile    "),
                     style: const ButtonStyle(

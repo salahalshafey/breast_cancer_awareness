@@ -164,11 +164,13 @@ class _SignInFormState extends State<SignInForm> {
                   _focusNodeForPassword.requestFocus();
                 },
                 validator: (value) {
-                  if (value == null ||
-                      value.trim().length < 5 ||
-                      !value.contains('@')) {
+                  // if all the value is email
+                  final emailMatcher = RegExp(
+                      r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$");
+                  if (value == null || !emailMatcher.hasMatch(value)) {
                     return 'Please enter a valid email address.';
                   }
+
                   return _apiErrorForEmail;
                 },
                 onSaved: (value) {

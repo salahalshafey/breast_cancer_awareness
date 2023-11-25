@@ -293,7 +293,9 @@ class _SignUpFormState extends State<SignUpForm> {
               _focusNodeForPassword.requestFocus();
             },
             validator: (value) {
-              final emailMatcher = RegExp(r"[a-z0-9]+@[a-z]+\.[a-z]{2,3}");
+              // if all the value is email
+              final emailMatcher =
+                  RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$");
               if (value == null || !emailMatcher.hasMatch(value)) {
                 return 'Please enter a valid email address.';
               }
