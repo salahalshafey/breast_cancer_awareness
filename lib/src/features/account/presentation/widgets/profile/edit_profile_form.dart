@@ -187,7 +187,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
             validator: (value) {
               // if all the value is phone number
               final phoneNumberMatcher = RegExp(
-                  r"^(?:01[0125][0-9]{8}|(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4})$");
+                  r"^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{2,3}\)?[\s.-]?\d{3,4}[\s.-]?\d{3,5}$");
               if (value != null &&
                   value.isNotEmpty &&
                   !phoneNumberMatcher.hasMatch(value)) {

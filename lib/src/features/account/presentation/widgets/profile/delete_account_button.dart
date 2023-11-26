@@ -26,8 +26,8 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
     return showCustomAlretDialog<bool>(
       context: context,
       title: "Dangerous area",
-      content: "Are you sure of **Deleting your account**? All the data "
-          "and information will be deleted. That can't be undone.",
+      content: "Are you sure of **Deleting your account?** \nAll the data "
+          "and information will be deleted. \n**That can't be undone.**",
       actions: [
         ElevatedButton(
           onPressed: () {

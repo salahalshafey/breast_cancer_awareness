@@ -223,7 +223,7 @@ List<Pair<String, TextType>> getLinksInText(String text) {
   final emailMatcher =
       RegExp(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}");
   final egyptPhoneNumberMatcher = RegExp(
-      r"01[0125][0-9]{8}|(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$");
+      r"(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{2,3}\)?[\s.-]?\d{3,4}[\s.-]?\d{3,5}");
 
   List<Pair<Match, TextType>> allMatches = [];
   String myText = text;

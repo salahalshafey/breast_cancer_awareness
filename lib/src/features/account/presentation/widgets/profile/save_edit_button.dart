@@ -110,7 +110,7 @@ class _SaveEditButtonState extends State<SaveEditButton> {
 extension on String {
   bool get isValidPhoneNumber {
     final phoneNumberMatcher = RegExp(
-        r"^(?:01[0125][0-9]{8}|(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4})$");
+        r"^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{2,3}\)?[\s.-]?\d{3,4}[\s.-]?\d{3,5}$");
 
     return phoneNumberMatcher.hasMatch(this);
   }

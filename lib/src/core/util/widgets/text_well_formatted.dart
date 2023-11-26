@@ -98,6 +98,20 @@ class _TextWellFormattedWitouthBulletedState
       children: patternMatcher(
         widget.data,
         patterns: [
+          // bold
+          RegExp(
+            r"\*\*.*?\*\*",
+            multiLine: true,
+            dotAll: true,
+          ),
+
+          // highlighted
+          RegExp(
+            r"`.+?`",
+            multiLine: true,
+            dotAll: true,
+          ),
+
           // url
           RegExp(
             r"(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})",
@@ -108,31 +122,17 @@ class _TextWellFormattedWitouthBulletedState
             r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}",
           ),
 
-          // bold
-          RegExp(
-            r"\*\*.*?\*\*",
-            multiLine: true,
-            dotAll: true,
-          ),
-
           // phone number (Egypt or global)
           RegExp(
-            r"01[0125][0-9]{8}|(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$",
-          ),
-
-          // highlighted
-          RegExp(
-            r"`.+?`",
-            multiLine: true,
-            dotAll: true,
+            r"(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{2,3}\)?[\s.-]?\d{3,4}[\s.-]?\d{3,5}", // (01[0125][0-9]{8})|
           ),
         ],
         types: [
+          StringTypes.bold,
+          StringTypes.highlighted,
           StringTypes.url,
           StringTypes.email,
-          StringTypes.bold,
           StringTypes.phoneNumber,
-          StringTypes.highlighted,
           StringTypes.normal,
         ],
       ).map((inlineText) {
