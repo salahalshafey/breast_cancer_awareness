@@ -20,4 +20,6 @@ abstract class AccountRepository {
     File? image, {
     bool imageUpdated = true,
   });
+
+  Future<void> deleteEveryThingToCurrentUser();
 }

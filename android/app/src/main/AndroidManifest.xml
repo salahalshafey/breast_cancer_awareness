@@ -1,7 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.breast_cancer_awareness">
-    <!-- Provide required visibility configuration for API level 30 and above -->
+    <!-- Provide required visibility configuration for API level 30 and above (Android 11+) -->
     <queries>
+        <provider android:authorities="com.facebook.katana.provider.PlatformProvider" /> <!-- allows app to access Facebook app features -->
+        <provider android:authorities="com.facebook.orca.provider.PlatformProvider" /> <!-- allows sharing to Messenger app -->
         <!-- Place inside the <queries> element. -->
         <intent>
           <action android:name="android.intent.action.VIEW" />

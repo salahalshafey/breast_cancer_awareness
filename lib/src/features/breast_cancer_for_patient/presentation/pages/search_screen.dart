@@ -43,11 +43,11 @@ class _SearchScreenState extends State<SearchScreen> {
           title: "Sign In",
           titleColor: color,
           content: "You have to Sign In to continue!!",
-          actions: [
+          actionsBuilder: (dialogContext) => [
             TextButton(
               onPressed: () {
-                account.signOut(context);
-                Navigator.of(context)
+                account.signOut(dialogContext);
+                Navigator.of(dialogContext)
                   ..pop()
                   ..pop();
               },
@@ -58,7 +58,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(dialogContext).pop();
               },
               child: Text(
                 "Later",

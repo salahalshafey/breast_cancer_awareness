@@ -16,6 +16,7 @@ import '../../../../core/network/network_info.dart';
 import '../../domain/entities/user_information.dart';
 
 import '../../domain/usecases/add_or_update_user_data.dart';
+import '../../domain/usecases/delete_every_thing_to_current_user_use_case.dart';
 import '../../domain/usecases/get_user_information.dart';
 import '../../domain/usecases/send_user_image_and_type.dart';
 import '../../domain/usecases/sign_in_anonymously.dart';
@@ -33,6 +34,8 @@ class Account extends DisposableProvider {
       signUserUpUsingEmailAndPasswordUseCase;
   final SendUserImageAndTypeUseCase sendUserImageAndTypeUseCase;
   final AddOrUpdateUserDataUsecase addOrApdateUserDataUsecase;
+  final DeleteEveryThingToCurrentUserUsecase
+      deleteEveryThingToCurrentUserUsecase;
 
   Account({
     required this.getUserInformationUseCase,
@@ -41,10 +44,12 @@ class Account extends DisposableProvider {
     required this.signUserUpUsingEmailAndPasswordUseCase,
     required this.sendUserImageAndTypeUseCase,
     required this.addOrApdateUserDataUsecase,
+    required this.deleteEveryThingToCurrentUserUsecase,
   });
 
   UserInformation? _userInfo;
   bool _userFetchedFromBackend = false;
+  String? _providerId;
 
   String get userId => FirebaseAuth.instance.currentUser!.isAnonymous
       ? "guest"
@@ -67,6 +72,11 @@ class Account extends DisposableProvider {
       _userInfo = await getUserInformationUseCase.call(userId);
       _userFetchedFromBackend = true;
       notifyListeners();
+
+      final providerData = FirebaseAuth.instance.currentUser!.providerData;
+      if (providerData.isNotEmpty) {
+        _providerId = providerData.first.providerId;
+      }
     } on OfflineException {
       throw Error('You are currently offline.');
     } on ServerException {
@@ -297,27 +307,35 @@ class Account extends DisposableProvider {
     }
   }
 
-  void signOut(BuildContext context) {
-    final providerData = FirebaseAuth.instance.currentUser!.providerData;
+  Future<void> deleteEveryThingToCurrentUser() async {
+    try {
+      await deleteEveryThingToCurrentUserUsecase.call();
+    } on OfflineException {
+      throw Error('You are currently offline.');
+    } on ServerException {
+      throw Error('Something went wrong, please try again later.');
+    } catch (error) {
+      throw Error('An unexpected error happened.');
+    }
+  }
 
-    if (providerData.isEmpty) {
-      FirebaseAuth.instance.signOut(); // facebook.com
+  void signOut(BuildContext context) {
+    if (_providerId == null) {
+      FirebaseAuth.instance.signOut();
 
       AppProviders.disposeAllDisposableProviders(context);
 
       return;
     }
 
-    final providerId = providerData.first.providerId;
-
-    if (providerId == "google.com") {
+    if (_providerId == "google.com") {
       GoogleSignIn().disconnect();
       GoogleSignIn().signOut();
-    } else if (providerId == "facebook.com") {
+    } else if (_providerId == "facebook.com") {
       FacebookAuth.instance.logOut();
     }
 
-    FirebaseAuth.instance.signOut(); // facebook.com
+    FirebaseAuth.instance.signOut();
 
     AppProviders.disposeAllDisposableProviders(context);
   }

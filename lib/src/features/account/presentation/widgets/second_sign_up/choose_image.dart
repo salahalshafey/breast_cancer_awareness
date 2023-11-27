@@ -26,15 +26,19 @@ class _ChooseImageState extends State<ChooseImage> {
     provider.changeImage(imageXFile.path);
   }
 
-  @override
-  void initState() {
-    final socialPhoto = FirebaseAuth.instance.currentUser!.photoURL;
+  void _getCurrentUserSocialPhotoIfExists() async {
+    final socialPhoto = FirebaseAuth.instance.currentUser?.photoURL;
 
     if (socialPhoto != null) {
       _getNetworkImageToFile(socialPhoto).then((imagePath) =>
           Provider.of<ImageAndUserTypeProvider>(context, listen: false)
               .changeImage(imagePath));
     }
+  }
+
+  @override
+  void initState() {
+    _getCurrentUserSocialPhotoIfExists();
 
     super.initState();
   }

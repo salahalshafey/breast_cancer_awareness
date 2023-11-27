@@ -9,6 +9,8 @@ abstract class AccountRemoteDataSource {
 
   Future<void> storeUserImageAndType(
       String userId, String? imageUrl, String userType);
+
+  Future<void> deleteUserData(String userId);
 }
 
 class AccountFirestoreImpl implements AccountRemoteDataSource {
@@ -56,6 +58,15 @@ class AccountFirestoreImpl implements AccountRemoteDataSource {
           'user_type': userType,
         },
       );
+    } catch (error) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<void> deleteUserData(String userId) async {
+    try {
+      await FirebaseFirestore.instance.collection('users').doc(userId).delete();
     } catch (error) {
       throw ServerException();
     }

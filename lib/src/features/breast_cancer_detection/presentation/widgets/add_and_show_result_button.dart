@@ -36,11 +36,11 @@ class AddAndShowResultButton extends StatelessWidget {
             title: "Sign In",
             titleColor: color,
             content: "You have to Sign In to continue!!",
-            actions: [
+            actionsBuilder: (dialogContext) => [
               TextButton(
                 onPressed: () {
-                  account.signOut(context);
-                  Navigator.of(context).pop();
+                  account.signOut(dialogContext);
+                  Navigator.of(dialogContext).pop();
                 },
                 child: Text(
                   "Sign In",
@@ -49,7 +49,7 @@ class AddAndShowResultButton extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(dialogContext).pop();
                 },
                 child: Text(
                   "Later",

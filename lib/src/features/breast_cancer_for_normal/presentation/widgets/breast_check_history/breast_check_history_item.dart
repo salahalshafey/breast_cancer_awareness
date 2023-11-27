@@ -47,10 +47,10 @@ class BreastCheckHistorytem extends StatelessWidget {
           title: "Warning",
           content: "Confirm Deletion?",
           titleColor: Colors.red,
-          actions: [
+          actionsBuilder: (dialogContext) => [
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop(true);
+                Navigator.of(dialogContext).pop(true);
               },
               style: const ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(Colors.red),
@@ -59,7 +59,7 @@ class BreastCheckHistorytem extends StatelessWidget {
             ),
             OutlinedButton(
               onPressed: () {
-                Navigator.of(context).pop(false);
+                Navigator.of(dialogContext).pop(false);
               },
               style: const ButtonStyle(
                 foregroundColor: MaterialStatePropertyAll(Colors.red),

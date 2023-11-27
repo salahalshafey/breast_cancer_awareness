@@ -1,8 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../providers/account.dart';
 
 class DeleteAccountButton extends StatefulWidget {
   const DeleteAccountButton({
@@ -25,13 +27,15 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
   Future<bool?> _showConfirmDeletionDialog() {
     return showCustomAlretDialog<bool>(
       context: context,
+      maxWidth: 300,
       title: "Dangerous area",
-      content: "Are you sure of **Deleting your account?** \nAll the data "
-          "and information will be deleted. \n**That can't be undone.**",
-      actions: [
+      content: "* Are you sure of **Deleting your account?** "
+          "All the data and information will be deleted. **That can't be undone.**\n"
+          "* You will be asked to confirm your credentials to ensure it is you.",
+      actionsBuilder: (dialogContext) => [
         ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pop(true);
+            Navigator.of(dialogContext).pop(true);
           },
           style: ButtonStyle(
             backgroundColor: MaterialStatePropertyAll(Colors.red.shade900),
@@ -40,7 +44,7 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
         ),
         OutlinedButton(
           onPressed: () {
-            Navigator.of(context).pop(false);
+            Navigator.of(dialogContext).pop(false);
           },
           style: ButtonStyle(
             foregroundColor: MaterialStatePropertyAll(Colors.red.shade900),
@@ -49,7 +53,7 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
           ),
           child: const Text("Cancel"),
         ),
-      ],
+      ], /*,*/
     );
   }
 
@@ -60,14 +64,23 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
       return;
     }
 
+    // if provider is password show dialog to enter password and pop(credentials)
+    // then , use the credentials to reauthenticate:
+    // await user?.reauthenticateWithCredential(credential);
+
     try {
+      // if provider is social show dialog to confirm to resign in
+      // then get credentials by sign in with social
+      // await user?.reauthenticateWithCredential(credential);
+
       _setLoadingState(true);
 
-      await Future.delayed(const Duration(seconds: 2), () {
-        throw ErrorDescription("no waaaaaaaaaaaay");
-      }); /////  handle deletion
-      /////  sign out
-      /////  Navigator.of(context).pop();
+      final account = Provider.of<Account>(context, listen: false);
+
+      await account.deleteEveryThingToCurrentUser();
+      account.signOut(context);
+
+      Navigator.of(context).pop();
     } catch (error) {
       _setLoadingState(false);
 

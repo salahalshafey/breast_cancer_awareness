@@ -3,8 +3,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../../../core/util/builders/custom_alret_dialoge.dart';
 
@@ -99,13 +100,19 @@ class _SaveEditButtonState extends State<SaveEditButton> {
               )
             : IconButton(
                 onPressed: isProfileUpdated ? _saveTheEdit : null,
-                icon: const Icon(Icons.check, size: 40),
+                icon: const Icon(Icons.check, size: 40)
+                    .animate(target: isProfileUpdated ? 1 : 0)
+                    .scaleXY(begin: 1, end: 1.12, duration: 150.ms),
                 tooltip: "Save",
               );
       },
     );
   }
 }
+
+///////////////////////////////////////////////////////////////////////////
+///
+///
 
 extension on String {
   bool get isValidPhoneNumber {
@@ -117,10 +124,6 @@ extension on String {
 
   bool get isNotValidPhoneNumber => !isValidPhoneNumber;
 }
-
-///////////////////////////////////////////////////////////////////////////
-///
-///
 
 Future<bool> _isProfileUpdated(
   UserInformation currentUser,

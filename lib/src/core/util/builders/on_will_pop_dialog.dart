@@ -7,7 +7,7 @@ Future<bool> onWillPopWithDialog(BuildContext context) async {
         title: "Attention",
         titleColor: Colors.red,
         content: "Do you really want to exit?",
-        actions: [
+        actionsBuilder: (dialogContext) => [
           /* TextButton(
             onPressed: () {
               Navigator.of(context).pop(true);
@@ -30,7 +30,7 @@ Future<bool> onWillPopWithDialog(BuildContext context) async {
           ),*/
           ElevatedButton(
             onPressed: () {
-              Navigator.of(context).pop(true);
+              Navigator.of(dialogContext).pop(true);
             },
             style: const ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(Colors.red),
@@ -39,7 +39,7 @@ Future<bool> onWillPopWithDialog(BuildContext context) async {
           ),
           OutlinedButton(
             onPressed: () {
-              Navigator.of(context).pop(false);
+              Navigator.of(dialogContext).pop(false);
             },
             style: const ButtonStyle(
               foregroundColor: MaterialStatePropertyAll(Colors.red),

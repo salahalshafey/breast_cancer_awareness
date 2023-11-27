@@ -188,4 +188,23 @@ class AccountRepositoryImpl implements AccountRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<void> deleteEveryThingToCurrentUser() async {
+    if (await networkInfo.isNotConnected) {
+      throw OfflineException();
+    }
+
+    try {
+      final userId = FirebaseAuth.instance.currentUser!.uid;
+
+      await remoteDataSource.deleteUserData(userId);
+
+      await remoteStorage.delete(userId);
+
+      await FirebaseAuth.instance.currentUser!.delete();
+    } catch (error) {
+      rethrow;
+    }
+  }
 }

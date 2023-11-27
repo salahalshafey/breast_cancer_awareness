@@ -31,6 +31,12 @@ class AccountFirebaseStorageImpl implements AccountRemoteStorage {
           .ref()
           .child('$folderName/$fileName')
           .delete();
+    } on FirebaseException catch (error) {
+      if (error.code == "object-not-found") {
+        return;
+      }
+
+      throw ServerException();
     } catch (error) {
       throw ServerException();
     }

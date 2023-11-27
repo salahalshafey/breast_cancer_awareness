@@ -117,11 +117,11 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
           "* Check your **inbox** for an email that has just been sent for your $_userEmail.\n"
           "* Follow the **link** and reset your password.\n"
           "* When you **finish**, return to the app and sign in with the new password.",
-      actions: [
+      actionsBuilder: (dialogContext) => [
         TextButton(
           onPressed: (() {
-            Navigator.of(context).pop();
-            Navigator.of(context).pop();
+            Navigator.of(dialogContext).pop();
+            Navigator.of(dialogContext).pop();
           }),
           child: Text(
             "Finished resetting",

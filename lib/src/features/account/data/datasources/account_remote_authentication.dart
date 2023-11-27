@@ -81,7 +81,10 @@ class AccountFirebaseAuthenticationImpl implements AccountRemoteAuthentication {
         firstName: _getFirstName(authUserInfo.displayName),
         lastName: _getLastName(authUserInfo.displayName),
         email: authUserInfo.email ?? "",
-        phoneNumber: authUserInfo.phoneNumber,
+        phoneNumber: authUserInfo.phoneNumber == null ||
+                authUserInfo.phoneNumber!.isEmpty
+            ? null
+            : authUserInfo.phoneNumber,
         imageUrl: authUserInfo.photoURL,
         dateOfSignUp: currentUser.metadata.creationTime!,
         userType: "Normal",
@@ -93,7 +96,10 @@ class AccountFirebaseAuthenticationImpl implements AccountRemoteAuthentication {
       firstName: _getFirstName(currentUser.displayName),
       lastName: _getLastName(currentUser.displayName),
       email: currentUser.email ?? "",
-      phoneNumber: currentUser.phoneNumber,
+      phoneNumber:
+          currentUser.phoneNumber == null || currentUser.phoneNumber!.isEmpty
+              ? null
+              : currentUser.phoneNumber,
       imageUrl: currentUser.photoURL,
       dateOfSignUp: currentUser.metadata.creationTime!,
       userType: "Normal",

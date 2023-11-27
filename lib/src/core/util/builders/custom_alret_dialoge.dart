@@ -7,7 +7,7 @@ import '../widgets/text_well_formatted.dart';
 ///
 /// * [icon] if null it will be [Icons.warning_rounded] with size 45 and the same color of [titleColor]
 ///
-/// * [actions] if null it will be [TextButton] with text "Ok" and the same color of [titleColor]
+/// * [actionsBuilder] if null it will be [TextButton] with text "Ok" and the same color of [titleColor]
 ///
 /// * [contentWidget] this widget will be showen below the [content]
 Future<T?> showCustomAlretDialog<T>({
@@ -17,7 +17,9 @@ Future<T?> showCustomAlretDialog<T>({
   Widget? contentWidget,
   Color? titleColor,
   Widget? icon,
-  List<Widget>? actions,
+  List<Widget> Function(BuildContext dialogContext)? actionsBuilder,
+  double maxWidth = double.infinity,
+  double maxHeight = double.infinity,
   bool barrierDismissible = true,
   bool canPopScope = true,
 }) {
@@ -55,19 +57,25 @@ Future<T?> showCustomAlretDialog<T>({
               ),
             ],
           ),
-          content: SingleChildScrollView(
-            child: Column(
-              children: [
-                TextWellFormattedWithBulleted(data: content),
-                if (contentWidget != null) ...[
-                  const SizedBox(height: 10),
-                  contentWidget,
+          content: Container(
+            constraints: BoxConstraints(
+              maxWidth: maxWidth,
+              maxHeight: maxHeight,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  TextWellFormattedWithBulleted(data: content),
+                  if (contentWidget != null) ...[
+                    const SizedBox(height: 10),
+                    contentWidget,
+                  ],
                 ],
-              ],
+              ),
             ),
           ),
           actions: [
-            if (actions == null)
+            if (actionsBuilder == null)
               TextButton(
                 child: Text(
                   "OK",
@@ -80,9 +88,10 @@ Future<T?> showCustomAlretDialog<T>({
                 },
               )
             else
-              ...actions,
+              ...actionsBuilder(dialogContext),
           ],
-          actionsAlignment: actions == null || actions.length == 1
+          actionsAlignment: actionsBuilder == null ||
+                  actionsBuilder(dialogContext).length == 1
               ? null
               : MainAxisAlignment.spaceAround,
         ),

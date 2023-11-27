@@ -119,7 +119,8 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 InfoWithIcon(
                   icon: Icon(
-                    userInfo.phoneNumber == null
+                    userInfo.phoneNumber == null ||
+                            userInfo.phoneNumber!.trim().isEmpty
                         ? Icons.phonelink_erase_rounded
                         : Icons.phone_android,
                     size: 30,

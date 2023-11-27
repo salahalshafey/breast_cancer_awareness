@@ -9,6 +9,7 @@ import 'features/account/data/datasources/account_remote_storage.dart';
 import 'features/account/data/repositories/account_repository_impl.dart';
 import 'features/account/domain/repositories/account_repository.dart';
 import 'features/account/domain/usecases/add_or_update_user_data.dart';
+import 'features/account/domain/usecases/delete_every_thing_to_current_user_use_case.dart';
 import 'features/account/domain/usecases/get_user_information.dart';
 import 'features/account/domain/usecases/sign_in_anonymously.dart';
 import 'features/account/domain/usecases/signin_with_email_and_password.dart';
@@ -49,6 +50,7 @@ Future<void> init() async {
         signUserUpUsingEmailAndPasswordUseCase: sl(),
         sendUserImageAndTypeUseCase: sl(),
         addOrApdateUserDataUsecase: sl(),
+        deleteEveryThingToCurrentUserUsecase: sl(),
       ));
 
 // Usecases
@@ -59,6 +61,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SignUpWithEmailAndPasswordUsecase(sl()));
   sl.registerLazySingleton(() => SendUserImageAndTypeUseCase(sl()));
   sl.registerLazySingleton(() => AddOrUpdateUserDataUsecase(sl()));
+  sl.registerLazySingleton(() => DeleteEveryThingToCurrentUserUsecase(sl()));
 
 // Repository
 
