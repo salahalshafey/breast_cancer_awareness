@@ -27,7 +27,7 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
   Future<bool?> _showConfirmDeletionDialog() {
     return showCustomAlretDialog<bool>(
       context: context,
-      maxWidth: 300,
+      maxWidth: 500,
       title: "Dangerous area",
       content: "* Are you sure of **Deleting your account?** "
           "All the data and information will be deleted. **That can't be undone.**\n"

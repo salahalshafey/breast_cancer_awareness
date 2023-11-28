@@ -9,10 +9,12 @@ class TextWellFormattedWithBulleted extends StatelessWidget {
   const TextWellFormattedWithBulleted({
     super.key,
     required this.data,
+    this.fontSize,
     this.isSelectableText = false,
   });
 
   final String data;
+  final double? fontSize;
   final bool isSelectableText;
 
   @override
@@ -39,6 +41,7 @@ class TextWellFormattedWithBulleted extends StatelessWidget {
                 firstCharIsArabic(data) ? TextDirection.rtl : TextDirection.ltr,
             text: TextWellFormattedWitouthBulleted(
               data: inlineString.string.substring(2),
+              fontSize: fontSize,
               isSelectableText: isSelectableText,
             ),
           );
@@ -46,6 +49,7 @@ class TextWellFormattedWithBulleted extends StatelessWidget {
 
         return TextWellFormattedWitouthBulleted(
           data: inlineString.string,
+          fontSize: fontSize,
           isSelectableText: isSelectableText,
         );
       }).toList(),
@@ -57,10 +61,12 @@ class TextWellFormattedWitouthBulleted extends StatefulWidget {
   const TextWellFormattedWitouthBulleted({
     super.key,
     required this.data,
+    this.fontSize,
     this.isSelectableText = false,
   });
 
   final String data;
+  final double? fontSize;
   final bool isSelectableText;
 
   @override
@@ -95,6 +101,7 @@ class _TextWellFormattedWitouthBulletedState
     int i = 0;
 
     return TextSpan(
+      style: TextStyle(fontSize: widget.fontSize),
       children: patternMatcher(
         widget.data,
         patterns: [
@@ -142,7 +149,7 @@ class _TextWellFormattedWitouthBulletedState
           return TextSpan(
             text: inlineText.string,
             style: TextStyle(
-              fontSize: 15,
+              fontSize: widget.fontSize?.plusOne ?? 15,
               color: Colors.blue,
               backgroundColor: _enteredSpanIndex == currentSpanIndex
                   ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
@@ -166,7 +173,7 @@ class _TextWellFormattedWitouthBulletedState
           return TextSpan(
             text: inlineText.string,
             style: TextStyle(
-              fontSize: 15,
+              fontSize: widget.fontSize?.plusOne ?? 15,
               color: Colors.blue,
               backgroundColor: _enteredSpanIndex == currentSpanIndex
                   ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
@@ -184,7 +191,8 @@ class _TextWellFormattedWitouthBulletedState
         if (inlineText.type == StringTypes.bold) {
           return TextSpan(
             text: inlineText.string.substring(2, inlineText.string.length - 2),
-            style: const TextStyle(
+            style: TextStyle(
+              fontSize: widget.fontSize?.plusOne ?? 15,
               fontWeight: FontWeight.w900,
             ),
           );
@@ -194,7 +202,7 @@ class _TextWellFormattedWitouthBulletedState
           return TextSpan(
             text: inlineText.string,
             style: TextStyle(
-              fontSize: 15,
+              fontSize: widget.fontSize?.plusOne ?? 15,
               color: Colors.blue,
               backgroundColor: _enteredSpanIndex == currentSpanIndex
                   ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
@@ -211,6 +219,7 @@ class _TextWellFormattedWitouthBulletedState
           return TextSpan(
             text: inlineText.string.replaceAll("`", " "),
             style: TextStyle(
+              fontSize: widget.fontSize?.plusOne ?? 15,
               backgroundColor: Theme.of(context).brightness == Brightness.light
                   ? Colors.grey.withOpacity(0.3)
                   : Colors.black,
@@ -249,4 +258,8 @@ enum StringTypes {
   phoneNumber,
   highlighted,
   normal,
+}
+
+extension on double {
+  double get plusOne => this + 1;
 }

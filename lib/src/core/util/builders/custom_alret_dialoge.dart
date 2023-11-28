@@ -14,6 +14,7 @@ Future<T?> showCustomAlretDialog<T>({
   required BuildContext context,
   required String title,
   required String content,
+  double contentFontSize = 16,
   Widget? contentWidget,
   Color? titleColor,
   Widget? icon,
@@ -65,7 +66,10 @@ Future<T?> showCustomAlretDialog<T>({
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  TextWellFormattedWithBulleted(data: content),
+                  TextWellFormattedWithBulleted(
+                    data: content,
+                    fontSize: contentFontSize,
+                  ),
                   if (contentWidget != null) ...[
                     const SizedBox(height: 10),
                     contentWidget,

@@ -108,6 +108,7 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
     final titleColor = Theme.of(context).appBarTheme.foregroundColor;
     showCustomAlretDialog(
       context: context,
+      maxWidth: 500,
       barrierDismissible: false,
       canPopScope: false,
       title: 'Follow up',

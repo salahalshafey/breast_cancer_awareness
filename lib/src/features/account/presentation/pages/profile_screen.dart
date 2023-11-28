@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/theme/colors.dart';
@@ -66,114 +67,118 @@ class ProfileScreen extends StatelessWidget {
                 .instance.currentUser!.providerData.first.providerId;
 
             return ListView(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 120, horizontal: 20),
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: ImageContainer(
-                    image:
-                        userInfo.imageUrl ?? "assets/images/person_avatar.png",
-                    imageSource:
-                        userInfo.imageUrl == null ? From.asset : From.network,
-                    radius: 60,
-                    saveNetworkImageToLocalStorage: kIsWeb ? false : true,
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                        color: const Color.fromRGBO(191, 76, 136, 1)),
-                    showHighlight: true,
-                    showLoadingIndicator: true,
-                    showImageScreen: userInfo.imageUrl == null ? false : true,
-                    imageTitle: wellFormatedString(
-                        "${userInfo.firstName} ${userInfo.lastName}"),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    wellFormatedString(
-                        "${userInfo.firstName} ${userInfo.lastName}"),
-                    style: const TextStyle(
-                      color: Color.fromRGBO(193, 27, 107, 1),
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 120, horizontal: 20),
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: ImageContainer(
+                      image: userInfo.imageUrl ??
+                          "assets/images/person_avatar.png",
+                      imageSource:
+                          userInfo.imageUrl == null ? From.asset : From.network,
+                      radius: 60,
+                      saveNetworkImageToLocalStorage: kIsWeb ? false : true,
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                          color: const Color.fromRGBO(191, 76, 136, 1)),
+                      showHighlight: true,
+                      showLoadingIndicator: true,
+                      showImageScreen: userInfo.imageUrl == null ? false : true,
+                      imageTitle: wellFormatedString(
+                          "${userInfo.firstName} ${userInfo.lastName}"),
                     ),
                   ),
-                ),
-                const SizedBox(),
-                InfoWithIcon(
-                  icon: ProviderIcon(providerId),
-                  info: userInfo.email,
-                  tooltip: providerId == "password"
-                      ? "Email"
-                      : "Email of Your ${wellFormatedString(providerId.split(".").first)} Account",
-                ),
-                InfoWithIcon(
-                  icon: const Icon(
-                    Icons.account_circle_outlined,
-                    size: 30,
-                    color: MyColors.primaryColor,
-                  ),
-                  info: "${userInfo.firstName} ${userInfo.lastName}",
-                  tooltip: "Full Name",
-                ),
-                InfoWithIcon(
-                  icon: Icon(
-                    userInfo.phoneNumber == null ||
-                            userInfo.phoneNumber!.trim().isEmpty
-                        ? Icons.phonelink_erase_rounded
-                        : Icons.phone_android,
-                    size: 30,
-                    color: MyColors.primaryColor,
-                  ),
-                  info: userInfo.phoneNumber == null ||
-                          userInfo.phoneNumber!.trim().isEmpty
-                      ? "No phone number provided"
-                      : userInfo.phoneNumber!,
-                  tooltip: "Phone Number",
-                ),
-                InfoWithIcon(
-                  icon: UserTypeIcon(userInfo.userType),
-                  info: "${userInfo.userType} User",
-                  tooltip: "User Type",
-                ),
-                InfoWithIcon(
-                  icon: const Icon(
-                    Icons.date_range,
-                    size: 30,
-                    color: MyColors.primaryColor,
-                  ),
-                  info:
-                      "Joined ${wellFormattedDateWithoutDay(userInfo.dateOfSignUp)}",
-                  textAlign: TextAlign.center,
-                  tooltip: wellFormattedDateTimeLong(
-                    userInfo.dateOfSignUp,
-                    seperateByLine: true,
-                  ),
-                ),
-                const SizedBox(),
-                Align(
-                  child: OutlinedButton.icon(
-                    onPressed: () {
-                      goToScreenWithSlideTransition(
-                        context,
-                        EditProfileScreen(userInfo),
-                        beginOffset: const Offset(0, 0),
-                        transitionDuration: Duration.zero,
-                        reverseTransitionDuration: Duration.zero,
-                      );
-                    },
-                    icon: const Icon(Icons.edit),
-                    label: const Text("    Edit Profile    "),
-                    style: const ButtonStyle(
-                      fixedSize: MaterialStatePropertyAll(Size.fromWidth(260)),
-                      padding: MaterialStatePropertyAll(EdgeInsets.zero),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      wellFormatedString(
+                          "${userInfo.firstName} ${userInfo.lastName}"),
+                      style: const TextStyle(
+                        color: Color.fromRGBO(193, 27, 107, 1),
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                const DeleteAccountButton(),
-              ].verticalSeperateBy(const SizedBox(height: 20)),
-            );
+                  const SizedBox(),
+                  ...[
+                    InfoWithIcon(
+                      icon: ProviderIcon(providerId),
+                      info: userInfo.email,
+                      tooltip: providerId == "password"
+                          ? "Email"
+                          : "Email of Your ${wellFormatedString(providerId.split(".").first)} Account",
+                    ),
+                    InfoWithIcon(
+                      icon: const Icon(
+                        Icons.account_circle_outlined,
+                        size: 30,
+                        color: MyColors.primaryColor,
+                      ),
+                      info: "${userInfo.firstName} ${userInfo.lastName}",
+                      tooltip: "Full Name",
+                    ),
+                    InfoWithIcon(
+                      icon: Icon(
+                        userInfo.phoneNumber == null ||
+                                userInfo.phoneNumber!.trim().isEmpty
+                            ? Icons.phonelink_erase_rounded
+                            : Icons.phone_android,
+                        size: 30,
+                        color: MyColors.primaryColor,
+                      ),
+                      info: userInfo.phoneNumber == null ||
+                              userInfo.phoneNumber!.trim().isEmpty
+                          ? "No phone number provided"
+                          : userInfo.phoneNumber!,
+                      tooltip: "Phone Number",
+                    ),
+                    InfoWithIcon(
+                      icon: UserTypeIcon(userInfo.userType),
+                      info: "${userInfo.userType} User",
+                      tooltip: "User Type",
+                    ),
+                    InfoWithIcon(
+                      icon: const Icon(
+                        Icons.date_range,
+                        size: 30,
+                        color: MyColors.primaryColor,
+                      ),
+                      info:
+                          "Joined ${wellFormattedDateWithoutDay(userInfo.dateOfSignUp)}",
+                      textAlign: TextAlign.center,
+                      tooltip: wellFormattedDateTimeLong(
+                        userInfo.dateOfSignUp,
+                        seperateByLine: true,
+                      ),
+                    ),
+                  ]
+                      .animate(delay: 300.ms, interval: 100.ms)
+                      .fadeIn(duration: 200.ms),
+                  const SizedBox(),
+                  Align(
+                    child: OutlinedButton.icon(
+                      onPressed: () {
+                        goToScreenWithSlideTransition(
+                          context,
+                          EditProfileScreen(userInfo),
+                          beginOffset: const Offset(0, 0),
+                          transitionDuration: Duration.zero,
+                          reverseTransitionDuration: Duration.zero,
+                        );
+                      },
+                      icon: const Icon(Icons.edit),
+                      label: const Text("    Edit Profile    "),
+                      style: const ButtonStyle(
+                        fixedSize:
+                            MaterialStatePropertyAll(Size.fromWidth(260)),
+                        padding: MaterialStatePropertyAll(EdgeInsets.zero),
+                      ),
+                    ),
+                  ),
+                  const DeleteAccountButton(),
+                ].verticalSeperateBy(const SizedBox(height: 20)));
           },
         ),
       ),

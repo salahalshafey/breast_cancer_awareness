@@ -133,4 +133,67 @@ When you run the **app**, you will see a button that says "Listen". When you cli
 * `Emial` is salahalshafey@gmail.com is valid.
 
 Flutter Speech to Text is a powerful tool that can be used to add speech recognition to your Flutter apps. It is easy to use and supports a variety of languages.
+""";
+
+const testString2 =
+    """فلاتر Speech to Text هو **مكون إضافي** يسمح لك بدمج `التعرف على الكلام` بسهولة في تطبيقات Flutter. ويستخدم Google Cloud Speech-to-Text API لتحويل الصوت إلى نص، ويدعم مجموعة متنوعة من اللغات.
+
+لاستخدام `Flutter Speech to Text`، تحتاج أولاً إلى إنشاء مشروع في Google Cloud Platform Console. بمجرد إنشاء مشروع، تحتاج إلى تمكين Google Cloud Speech-to-Text API.
+
+بعد تمكين واجهة برمجة التطبيقات (API)، يتعين عليك إنشاء حساب خدمة وتنزيل ملف مفتاح JSON. سوف تحتاج إلى تقديم ملف مفتاح JSON إلى البرنامج المساعد Flutter Speech to Text.
+
+**لتثبيت** المكون الإضافي Flutter Speech to Text، يمكنك استخدام الأمر التالي:
+
+```
+حانة إضافة Flutter_Speech_to_text
+```
+
+بمجرد تثبيت المكون الإضافي، يمكنك استخدامه في تطبيق Flutter. يوضح مقتطف الكود التالي كيفية استخدام البرنامج المساعد Flutter Speech to Text لتحويل الصوت إلى نص:
+
+```
+import 'package:flutter/material.dart';
+import 'package:flutter_speech_to_text/flutter_speech_to_text.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Speech to Text',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Flutter Speech to Text'),
+        ),
+        body: Center(
+          child: RaisedButton(
+            onPressed: () async {
+              // Create a SpeechToText object.
+              final speechToText = SpeechToText();
+
+              // Set the language code.
+              speechToText.setLanguageCode('en-US');
+
+              // Start listening for speech.
+              final result = await speechToText.listen();
+
+              // Print the result.
+              print(result.text);
+            },
+            child: Text('Listen'),
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+عند تشغيل **التطبيق**، سترى زرًا مكتوبًا عليه "استمع". عند النقر على الزر، سيبدأ التطبيق في الاستماع للكلام. سيتم تحويل النص المنطوق إلى نص وطباعته على "وحدة التحكم".
+
+* هذا رجل رائع، أنت ** عظيم ** إذا كنت تعتقد ذلك
+* **أنت** يمكنك زيارة الرابط www.google.com للتحقق من كل شيء وhttps://www.hyth.com
+* و`Emial` هو salahalshafey@gmail.com صالح.
+
+يعد Flutter Speech to Text أداة قوية يمكن استخدامها لإضافة ميزة التعرف على الكلام إلى تطبيقات Flutter. إنه سهل الاستخدام ويدعم مجموعة متنوعة من اللغات.
 """;*/
