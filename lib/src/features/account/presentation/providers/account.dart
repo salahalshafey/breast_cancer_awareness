@@ -51,14 +51,22 @@ class Account extends DisposableProvider {
   bool _userFetchedFromBackend = false;
   String? _providerId;
 
+  ////////////////////////// get OR refresh user data ////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+
   String get userId => FirebaseAuth.instance.currentUser!.isAnonymous
       ? "guest"
       : FirebaseAuth.instance.currentUser!.uid;
 
   Future<UserInformation?> getUserInfo() async {
+    final providerData = FirebaseAuth.instance.currentUser!.providerData;
+    if (providerData.isNotEmpty) {
+      _providerId = providerData.first.providerId;
+    }
+
     if (!_userFetchedFromBackend) {
       try {
-        await updateAndGetUserInfo();
+        await refreshAndGetUserInfo();
       } catch (error) {
         rethrow;
       }
@@ -67,16 +75,11 @@ class Account extends DisposableProvider {
     return _userInfo;
   }
 
-  Future<void> updateAndGetUserInfo() async {
+  Future<void> refreshAndGetUserInfo() async {
     try {
       _userInfo = await getUserInformationUseCase.call(userId);
       _userFetchedFromBackend = true;
       notifyListeners();
-
-      final providerData = FirebaseAuth.instance.currentUser!.providerData;
-      if (providerData.isNotEmpty) {
-        _providerId = providerData.first.providerId;
-      }
     } on OfflineException {
       throw Error('You are currently offline.');
     } on ServerException {
@@ -87,6 +90,9 @@ class Account extends DisposableProvider {
       throw Error('An unexpected error happened.');
     }
   }
+
+  ////////////////////////// Sign In/Up/Anonymously ///////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////
 
   Future<void> signInAnonymously() async {
     try {
@@ -157,7 +163,10 @@ class Account extends DisposableProvider {
     }
   }
 
-  Future<UserCredential> signInWithGoogle() async {
+  ///////////////////////// Google Login //////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////
+
+  Future<OAuthCredential> _getGoogleCredential() async {
     if (await NetworkInfoImpl().isNotConnected) {
       throw Error('You are currently offline.');
     }
@@ -179,6 +188,12 @@ class Account extends DisposableProvider {
       idToken: googleAuth.idToken,
     );
 
+    return credential;
+  }
+
+  Future<UserCredential> signInWithGoogle() async {
+    final credential = await _getGoogleCredential();
+
     try {
       // Once signed in, return the UserCredential
       return await FirebaseAuth.instance.signInWithCredential(credential);
@@ -189,7 +204,10 @@ class Account extends DisposableProvider {
     }
   }
 
-  Future<UserCredential> signInWithFacebook() async {
+  ///////////////////////// Facebook Login ////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////
+
+  Future<OAuthCredential> _getFacebookCredential() async {
     if (await NetworkInfoImpl().isNotConnected) {
       throw Error('You are currently offline.');
     }
@@ -205,6 +223,12 @@ class Account extends DisposableProvider {
     final OAuthCredential facebookAuthCredential =
         FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
+    return facebookAuthCredential;
+  }
+
+  Future<UserCredential> signInWithFacebook() async {
+    final facebookAuthCredential = await _getFacebookCredential();
+
     try {
       // Once signed in, return the UserCredential
       return await FirebaseAuth.instance
@@ -212,7 +236,7 @@ class Account extends DisposableProvider {
     } on FirebaseAuthException catch (e) {
       if (e.code == "account-exists-with-different-credential") {
         throw Error(
-            "An account already exists with the same email address as your Facebook account.\n"
+            "An account already exists with the same email address as your **Facebook** account.\n"
             "Sign in using the account that is associated with this email address.");
       }
 
@@ -222,7 +246,10 @@ class Account extends DisposableProvider {
     }
   }
 
-  Future<UserCredential> signInWithTwitter() async {
+  ///////////////////////// Twitter Login /////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////
+
+  Future<OAuthCredential> _getTwitterCredential() async {
     if (await NetworkInfoImpl().isNotConnected) {
       throw Error('You are currently offline.');
     }
@@ -247,6 +274,12 @@ class Account extends DisposableProvider {
       secret: authResult.authTokenSecret!,
     );
 
+    return twitterAuthCredential;
+  }
+
+  Future<UserCredential> signInWithTwitter() async {
+    final twitterAuthCredential = await _getTwitterCredential();
+
     try {
       // Once signed in, return the UserCredential
       return await FirebaseAuth.instance
@@ -254,7 +287,7 @@ class Account extends DisposableProvider {
     } on FirebaseAuthException catch (e) {
       if (e.code == "account-exists-with-different-credential") {
         throw Error(
-            "An account already exists with the same email address as your X account.\n"
+            "An account already exists with the same email address as your **X** account.\n"
             "Sign in using the account that is associated with this email address.");
       }
 
@@ -263,6 +296,71 @@ class Account extends DisposableProvider {
       throw Error('An unexpected error happened.');
     }
   }
+
+  //////////////// reauthenticate With Password OR Social /////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////
+
+  Future<void> reauthenticateWithPasswordCredential(String password) async {
+    if (await NetworkInfoImpl().isNotConnected) {
+      throw Error('You are currently offline.');
+    }
+
+    try {
+      final currentUser = FirebaseAuth.instance.currentUser!;
+      await currentUser.reauthenticateWithCredential(
+        EmailAuthProvider.credential(
+          email: currentUser.providerData.first.email!,
+          password: password,
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "wrong-password") {
+        throw Error("The password is wrong.");
+      }
+
+      throw Error('Something went wrong, please try again later.');
+    } catch (error) {
+      throw Error('An unexpected error happened.');
+    }
+  }
+
+  Future<void> reauthenticateWithSocialCredential(String providerId) async {
+    final providerName = providerId == "google.com"
+        ? "Google"
+        : providerId == "facebook.com"
+            ? "Facebook"
+            : "X";
+
+    late OAuthCredential socialAuthCredential;
+
+    if (providerId == "google.com") {
+      socialAuthCredential = await _getGoogleCredential();
+    } else if (providerId == "facebook.com") {
+      socialAuthCredential = await _getFacebookCredential();
+    } else {
+      socialAuthCredential = await _getTwitterCredential();
+    }
+
+    try {
+      await FirebaseAuth.instance.currentUser!
+          .reauthenticateWithCredential(socialAuthCredential);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "user-mismatch" || e.code == "user-not-found") {
+        throw Error(
+          "You selected a different **$providerName** Account.\n"
+          "select the **$providerName** Account that you logged in with the App. "
+          "OR re-sign into the app instead.",
+        );
+      }
+
+      throw Error('Something went wrong, please try again later.');
+    } catch (error) {
+      throw Error('An unexpected error happened.');
+    }
+  }
+
+  //////////////////// User add/update/delete/signOut /////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////
 
   Future<void> sendUserImageAndType(File? image, String userType) async {
     try {

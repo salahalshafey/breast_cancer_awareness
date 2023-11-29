@@ -19,6 +19,7 @@ Future<T?> showCustomAlretDialog<T>({
   Color? titleColor,
   Widget? icon,
   List<Widget> Function(BuildContext dialogContext)? actionsBuilder,
+  double actionsPaddingAll = 10.0,
   double maxWidth = double.infinity,
   double maxHeight = double.infinity,
   bool barrierDismissible = true,
@@ -40,7 +41,7 @@ Future<T?> showCustomAlretDialog<T>({
             top: 10,
             bottom: 10,
           ),
-          actionsPadding: const EdgeInsets.all(10),
+          actionsPadding: EdgeInsets.all(actionsPaddingAll),
           title: Row(
             children: [
               icon ??

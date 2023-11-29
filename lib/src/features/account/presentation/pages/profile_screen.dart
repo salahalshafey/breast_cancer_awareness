@@ -32,7 +32,7 @@ class ProfileScreen extends StatelessWidget {
     return DefaultScreen(
       containingBackgroundRightSympol: false,
       child: RefreshIndicator(
-        onRefresh: account.updateAndGetUserInfo,
+        onRefresh: account.refreshAndGetUserInfo,
         child: FutureBuilder(
           future: Provider.of<Account>(context).getUserInfo(),
           builder: (context, snapshot) {
@@ -146,10 +146,10 @@ class ProfileScreen extends StatelessWidget {
                         color: MyColors.primaryColor,
                       ),
                       info:
-                          "Joined ${wellFormattedDateWithoutDay(userInfo.dateOfSignUp)}",
+                          "Joined ${wellFormattedDateWithoutDay(userInfo.dateOfSignUp.toLocal())}",
                       textAlign: TextAlign.center,
                       tooltip: wellFormattedDateTimeLong(
-                        userInfo.dateOfSignUp,
+                        userInfo.dateOfSignUp.toLocal(),
                         seperateByLine: true,
                       ),
                     ),

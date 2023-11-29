@@ -1,10 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/util/builders/custom_alret_dialoge.dart';
 import '../../providers/account.dart';
+import 'password_text_field_to_delete_account.dart';
 
 class DeleteAccountButton extends StatefulWidget {
   const DeleteAccountButton({
@@ -31,7 +34,7 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
       title: "Dangerous area",
       content: "* Are you sure of **Deleting your account?** "
           "All the data and information will be deleted. **That can't be undone.**\n"
-          "* You will be asked to confirm your credentials to ensure it is you.",
+          "* You may be asked to **confirm** your credentials to ensure it is you.",
       actionsBuilder: (dialogContext) => [
         ElevatedButton(
           onPressed: () {
@@ -53,8 +56,31 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
           ),
           child: const Text("Cancel"),
         ),
-      ], /*,*/
+      ],
     );
+  }
+
+  Future<bool?> _showConfirmPasswordDialog() async {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+
+    final passwordConfirmed = await showCustomAlretDialog<bool>(
+      context: context,
+      title: "Delete Account",
+      content: "Please enter your password to confirm deleting your account.",
+      contentWidget: const PasswordTextFieldToDeleteAccount(),
+      actionsBuilder: (dialogContext) => [const SizedBox()],
+      actionsPaddingAll: 0,
+    );
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.portraitUp,
+    ]);
+
+    return passwordConfirmed;
   }
 
   void deleteTheAccount() async {
@@ -64,18 +90,26 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
       return;
     }
 
-    // if provider is password show dialog to enter password and pop(credentials)
-    // then , use the credentials to reauthenticate:
-    // await user?.reauthenticateWithCredential(credential);
+    final providerId =
+        FirebaseAuth.instance.currentUser!.providerData.first.providerId;
+
+    if (providerId == "password") {
+      final passwordConfirmed = await _showConfirmPasswordDialog();
+
+      if (passwordConfirmed == null || passwordConfirmed == false) {
+        return;
+      }
+    }
 
     try {
-      // if provider is social show dialog to confirm to resign in
-      // then get credentials by sign in with social
-      // await user?.reauthenticateWithCredential(credential);
-
       _setLoadingState(true);
 
       final account = Provider.of<Account>(context, listen: false);
+
+      // if providerId is social
+      if (providerId != "password") {
+        await account.reauthenticateWithSocialCredential(providerId);
+      }
 
       await account.deleteEveryThingToCurrentUser();
       account.signOut(context);
@@ -86,6 +120,7 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
 
       showCustomAlretDialog(
         context: context,
+        maxWidth: 400,
         title: "Error",
         content: error.toString(),
         titleColor: Colors.red,
