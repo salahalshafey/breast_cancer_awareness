@@ -1,6 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:breast_cancer_awareness/src/core/util/functions/string_manipulations_and_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 
@@ -56,6 +58,9 @@ class _SignUpFormState extends State<SignUpForm> {
   bool _isPasswordShowen = false;
 
   bool _isLoading = false;
+
+  TextDirection _firstNameTextDirection = TextDirection.ltr;
+  TextDirection _lastNameTextDirection = TextDirection.ltr;
 
   void _isLoadingState(bool state) {
     setState(() {
@@ -193,16 +198,25 @@ class _SignUpFormState extends State<SignUpForm> {
                   key: const ValueKey('first name'),
                   focusNode: _focusNodeForFirstName,
                   autocorrect: false,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  textCapitalization: TextCapitalization.none,
                   enableSuggestions: false,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  textCapitalization: TextCapitalization.words,
                   keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
+                  textDirection: _firstNameTextDirection,
                   style: const TextStyle(color: Colors.white, fontSize: 16),
                   decoration: InputDecoration(
                     hintText: 'First name',
                     fillColor: _isFirstNameFocused ? focusColor : null,
                     errorMaxLines: 2,
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      _firstNameTextDirection = firstCharIsArabic(value)
+                          ? TextDirection.rtl
+                          : TextDirection.ltr;
+                    });
+                  },
                   onTapOutside: (_) {
                     _focusNodeForFirstName.unfocus();
                   },
@@ -234,17 +248,26 @@ class _SignUpFormState extends State<SignUpForm> {
                 child: TextFormField(
                   key: const ValueKey('last name'),
                   focusNode: _focusNodeForLastName,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   autocorrect: false,
-                  textCapitalization: TextCapitalization.none,
                   enableSuggestions: false,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  textCapitalization: TextCapitalization.words,
                   keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
+                  textDirection: _lastNameTextDirection,
                   style: const TextStyle(color: Colors.white, fontSize: 16),
                   decoration: InputDecoration(
                     hintText: 'Last name',
                     fillColor: _isLastNameFocused ? focusColor : null,
                     errorMaxLines: 2,
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      _lastNameTextDirection = firstCharIsArabic(value)
+                          ? TextDirection.rtl
+                          : TextDirection.ltr;
+                    });
+                  },
                   onTapOutside: (_) {
                     _focusNodeForLastName.unfocus();
                   },
@@ -278,9 +301,11 @@ class _SignUpFormState extends State<SignUpForm> {
             focusNode: _focusNodeForEmail,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             autocorrect: false,
-            textCapitalization: TextCapitalization.none,
             enableSuggestions: false,
+            textCapitalization: TextCapitalization.none,
+            inputFormatters: [FilteringTextInputFormatter.deny(" ")],
             keyboardType: TextInputType.emailAddress,
+            textInputAction: TextInputAction.next,
             style: const TextStyle(color: Colors.white, fontSize: 20),
             decoration: InputDecoration(
                 hintText: 'Email',
@@ -314,6 +339,8 @@ class _SignUpFormState extends State<SignUpForm> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             obscureText: _isPasswordShowen ? false : true,
             style: const TextStyle(color: Colors.white, fontSize: 20),
+            keyboardType: TextInputType.visiblePassword,
+            textInputAction: TextInputAction.next,
             decoration: InputDecoration(
               hintText: 'Password',
               errorMaxLines: 3,
@@ -373,6 +400,8 @@ class _SignUpFormState extends State<SignUpForm> {
             focusNode: _focusNodeForConfirmPassword,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             obscureText: _isPasswordShowen ? false : true,
+            keyboardType: TextInputType.visiblePassword,
+            textInputAction: TextInputAction.done,
             style: const TextStyle(color: Colors.white, fontSize: 20),
             decoration: InputDecoration(
               hintText: 'Confirm Password',

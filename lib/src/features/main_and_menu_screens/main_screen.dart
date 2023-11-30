@@ -48,7 +48,8 @@ class MainScreen extends StatelessWidget {
           provider.animateToPage(0);
           return false;
         }
-        return onWillPopWithDialog(context);
+
+        return exitWillPopDialog(context);
       },
       child: Scaffold(
         body: Stack(

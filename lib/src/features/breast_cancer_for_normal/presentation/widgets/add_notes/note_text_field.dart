@@ -34,25 +34,28 @@ class _NoteTextFieldState extends State<NoteTextField> {
           TextField(
             controller: _controller,
             textDirection: _textDirection,
+            textCapitalization: TextCapitalization.sentences,
             keyboardType: TextInputType.multiline,
+            textInputAction: TextInputAction.newline,
             autocorrect: false,
             minLines: 6,
             maxLines: 6,
             autofocus: true,
             style: const TextStyle(
-              color: Colors.black,
               fontSize: 18,
             ),
             decoration: InputDecoration(
               contentPadding:
                   const EdgeInsets.only(left: 20, right: 5, top: 5, bottom: 5),
               hintText: 'Enter a text',
-              hintStyle: const TextStyle(
-                color: Color.fromRGBO(112, 112, 112, 0.85),
-              ),
+              hintStyle: const TextStyle(),
               isDense: true,
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide.none,
+                borderSide: const BorderSide(
+                  color: Colors.black26,
+                  width: 1,
+                  strokeAlign: BorderSide.strokeAlignOutside,
+                ),
                 borderRadius: BorderRadius.circular(22),
               ),
               focusedBorder: OutlineInputBorder(
@@ -63,10 +66,8 @@ class _NoteTextFieldState extends State<NoteTextField> {
                 ),
                 borderRadius: BorderRadius.circular(22),
               ),
-              filled: true,
-              fillColor: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.white70
-                  : Colors.white,
+              // filled: true,
+              fillColor: Colors.transparent,
             ),
             onTapOutside: (_) {
               FocusScope.of(context).unfocus();

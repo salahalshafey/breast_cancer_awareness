@@ -1,35 +1,29 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../../../core/util/builders/custom_alret_dialoge.dart';
+
+import '../../../../breast_cancer_for_normal/presentation/providers/notes.dart';
 import '../../providers/account.dart';
+import '../../providers/delete_account_state_provider.dart';
+
 import 'password_text_field_to_delete_account.dart';
 
-class DeleteAccountButton extends StatefulWidget {
-  const DeleteAccountButton({
+class DeleteAccountButton extends StatelessWidget {
+  const DeleteAccountButton(
+    this.profileScreenContext, {
     super.key,
   });
 
-  @override
-  State<DeleteAccountButton> createState() => _DeleteAccountButtonState();
-}
-
-class _DeleteAccountButtonState extends State<DeleteAccountButton> {
-  bool _isLoading = false;
-
-  void _setLoadingState(bool state) {
-    setState(() {
-      _isLoading = state;
-    });
-  }
+  final BuildContext profileScreenContext;
 
   Future<bool?> _showConfirmDeletionDialog() {
     return showCustomAlretDialog<bool>(
-      context: context,
+      context: profileScreenContext,
       maxWidth: 500,
       title: "Dangerous area",
       content: "* Are you sure of **Deleting your account?** "
@@ -66,7 +60,7 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
     ]);
 
     final passwordConfirmed = await showCustomAlretDialog<bool>(
-      context: context,
+      context: profileScreenContext,
       title: "Delete Account",
       content: "Please enter your password to confirm deleting your account.",
       contentWidget: const PasswordTextFieldToDeleteAccount(),
@@ -101,10 +95,15 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
       }
     }
 
-    try {
-      _setLoadingState(true);
+    final provider =
+        Provider.of<DeleteAccountState>(profileScreenContext, listen: false);
 
-      final account = Provider.of<Account>(context, listen: false);
+    try {
+      provider.setLoadingState(true);
+
+      final account = Provider.of<Account>(profileScreenContext, listen: false);
+      final notes = Provider.of<Notes>(profileScreenContext, listen: false);
+      final userId = account.userId;
 
       // if providerId is social
       if (providerId != "password") {
@@ -112,14 +111,15 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
       }
 
       await account.deleteEveryThingToCurrentUser();
-      account.signOut(context);
+      notes.deleteAllNotes(userId);
 
-      Navigator.of(context).pop();
+      account.signOut(profileScreenContext);
+      Navigator.of(profileScreenContext).pop();
     } catch (error) {
-      _setLoadingState(false);
+      provider.setLoadingState(false);
 
       showCustomAlretDialog(
-        context: context,
+        context: profileScreenContext,
         maxWidth: 400,
         title: "Error",
         content: error.toString(),
@@ -130,20 +130,22 @@ class _DeleteAccountButtonState extends State<DeleteAccountButton> {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<DeleteAccountState>(profileScreenContext);
+
     return Align(
       child: ElevatedButton.icon(
-        onPressed: _isLoading ? null : deleteTheAccount,
+        onPressed: provider.isLoading ? null : deleteTheAccount,
         icon: const Icon(Icons.delete),
         label: Stack(
           alignment: Alignment.center,
           children: [
             Text(
               "Delete Account",
-              style: _isLoading
+              style: provider.isLoading
                   ? const TextStyle(color: Colors.transparent)
                   : null,
             ),
-            if (_isLoading)
+            if (provider.isLoading)
               const SizedBox(
                 width: 20,
                 height: 20,

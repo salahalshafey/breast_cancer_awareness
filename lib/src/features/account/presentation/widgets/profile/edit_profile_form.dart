@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../../../../../core/util/functions/string_manipulations_and_search.dart';
 
 class EditProfileForm extends StatefulWidget {
   const EditProfileForm({
@@ -28,6 +31,15 @@ class _EditProfileFormState extends State<EditProfileForm> {
   bool _isFirstNameFocused = false;
   bool _isLastNameFocused = false;
   bool _isPhoneFocused = false;
+
+  late TextDirection _textDirectionForFirstName =
+      firstCharIsArabic(widget.firstNameController.text)
+          ? TextDirection.rtl
+          : TextDirection.ltr;
+  late TextDirection _textDirectionForLastName =
+      firstCharIsArabic(widget.lastNameController.text)
+          ? TextDirection.rtl
+          : TextDirection.ltr;
 
   @override
   void initState() {
@@ -88,11 +100,13 @@ class _EditProfileFormState extends State<EditProfileForm> {
                   key: const ValueKey('first name'),
                   controller: widget.firstNameController,
                   focusNode: _focusNodeForFirstName,
+                  textDirection: _textDirectionForFirstName,
                   autocorrect: false,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  textCapitalization: TextCapitalization.none,
                   enableSuggestions: false,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  textCapitalization: TextCapitalization.words,
                   keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
                   style: const TextStyle(color: Colors.white, fontSize: 16),
                   decoration: InputDecoration(
                     hintText: 'First name',
@@ -109,14 +123,17 @@ class _EditProfileFormState extends State<EditProfileForm> {
                     if (value == null || value.trim().isEmpty) {
                       return 'Please enter the first name.';
                     }
-                    /* if (value.trim().length < 2) {
-                      return 'Please enter a valid name.';
-                    }*/
 
                     return null;
                   },
                   onChanged: (value) {
                     widget.renderState();
+
+                    setState(() {
+                      _textDirectionForFirstName = firstCharIsArabic(value)
+                          ? TextDirection.rtl
+                          : TextDirection.ltr;
+                    });
                   },
                 ),
               ),
@@ -128,9 +145,11 @@ class _EditProfileFormState extends State<EditProfileForm> {
                   focusNode: _focusNodeForLastName,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   autocorrect: false,
-                  textCapitalization: TextCapitalization.none,
                   enableSuggestions: false,
+                  textCapitalization: TextCapitalization.words,
                   keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
+                  textDirection: _textDirectionForLastName,
                   style: const TextStyle(color: Colors.white, fontSize: 16),
                   decoration: InputDecoration(
                     hintText: 'Last name',
@@ -147,14 +166,17 @@ class _EditProfileFormState extends State<EditProfileForm> {
                     if (value == null || value.trim().isEmpty) {
                       return 'Please enter the last name.';
                     }
-                    /*   if (value.trim().length < 2) {
-                      return 'Please enter a valid name.';
-                    }*/
 
                     return null;
                   },
                   onChanged: (value) {
                     widget.renderState();
+
+                    setState(() {
+                      _textDirectionForLastName = firstCharIsArabic(value)
+                          ? TextDirection.rtl
+                          : TextDirection.ltr;
+                    });
                   },
                 ),
               ),
@@ -165,11 +187,15 @@ class _EditProfileFormState extends State<EditProfileForm> {
             key: const ValueKey('phoneNumber'),
             controller: widget.phoneNumberController,
             focusNode: _focusNodeForPhoneNumber,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
+            enableSuggestions: false,
             autocorrect: false,
             textCapitalization: TextCapitalization.none,
-            enableSuggestions: false,
-            keyboardType: TextInputType.phone, //////
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r"[0-9()+\-\. ]"))
+            ],
+            keyboardType: TextInputType.phone,
+            textInputAction: TextInputAction.done,
             style: const TextStyle(color: Colors.white, fontSize: 20),
             decoration: InputDecoration(
               hintText: 'Phone Number',

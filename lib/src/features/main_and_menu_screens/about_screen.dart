@@ -131,7 +131,7 @@ class AboutScreen extends StatelessWidget {
                 );
               },
             ),
-          ].animate(delay: 300.ms).fadeIn(duration: 200.ms),
+          ].animate(delay: 300.ms).fadeIn(duration: 1000.ms),
         ],
       ),
     );

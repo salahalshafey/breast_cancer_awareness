@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../core/error/exceptions.dart';
 
@@ -146,9 +147,10 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
             key: const ValueKey('email'),
             focusNode: _focusNodeForEmail,
             autocorrect: false,
-            textCapitalization: TextCapitalization.none,
             enableSuggestions: false,
+            textCapitalization: TextCapitalization.none,
             keyboardType: TextInputType.emailAddress,
+            inputFormatters: [FilteringTextInputFormatter.deny(" ")],
             style: const TextStyle(color: Colors.white, fontSize: 20),
             textAlign: TextAlign.center,
             decoration: InputDecoration(
@@ -162,11 +164,13 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
               _sendResetRequest();
             },
             validator: (value) {
-              if (value == null ||
-                  value.trim().length < 5 ||
-                  !value.contains('@')) {
+              // if all the value is email
+              final emailMatcher =
+                  RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$");
+              if (value == null || !emailMatcher.hasMatch(value)) {
                 return 'Please enter a valid email address.';
               }
+
               return _apiErrorForEmail;
             },
             onSaved: (value) {

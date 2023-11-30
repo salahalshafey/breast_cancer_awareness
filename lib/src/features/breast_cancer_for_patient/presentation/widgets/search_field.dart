@@ -27,10 +27,29 @@ class SearchField extends StatefulWidget {
 
 class _SearchFieldState extends State<SearchField> {
   final _focusNode = FocusNode();
-  Color? _focusColor;
+  bool _hasFocus = false;
+
   late TextDirection _textDirection = firstCharIsArabic(widget.controller.text)
       ? TextDirection.rtl
       : TextDirection.ltr;
+
+  @override
+  void initState() {
+    _focusNode.addListener(() {
+      setState(() {
+        _hasFocus = _focusNode.hasFocus;
+      });
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,52 +58,26 @@ class _SearchFieldState extends State<SearchField> {
         Expanded(
           child: TextField(
             controller: widget.controller,
+            key: const ValueKey('search'),
             focusNode: _focusNode,
             autocorrect: false,
-            textCapitalization: TextCapitalization.none,
             enableSuggestions: false,
+            textCapitalization: TextCapitalization.sentences,
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.search,
             textDirection: _textDirection,
-            onTap: () {
-              setState(() {
-                _focusColor = Theme.of(context).primaryColor;
-              });
-            },
-            onTapOutside: (event) {
-              _focusNode.unfocus();
-              setState(() {
-                _focusColor = null;
-              });
-            },
-            style: const TextStyle(color: Colors.white, fontSize: 20),
-            onChanged: (value) {
-              setState(() {
-                _textDirection = firstCharIsArabic(value)
-                    ? TextDirection.rtl
-                    : TextDirection.ltr;
-              });
-            },
-            onSubmitted: (value) {
-              setState(() {
-                _focusColor = null;
-              });
-
-              if (widget.controller.text.trim().isEmpty) {
-                return;
-              }
-              widget.setSearchWord(widget.controller.text.trim());
-            },
             decoration: InputDecoration(
               hintText: widget.hintText,
-              fillColor: _focusColor,
+              fillColor: _hasFocus ? Theme.of(context).primaryColor : null,
               prefixIcon: widget.controller.text.isNotEmpty
                   ? IconButton(
                       onPressed: () {
+                        if (widget.controller.text.trim().isEmpty) {
+                          return;
+                        }
+
                         _focusNode.unfocus();
-                        setState(() {
-                          _focusColor = null;
-                        });
+
                         widget.setSearchWord(widget.controller.text.trim());
                       },
                       icon: const Icon(Icons.search),
@@ -96,15 +89,31 @@ class _SearchFieldState extends State<SearchField> {
                       onPressed: () {
                         widget.controller.clear();
                         _focusNode.requestFocus();
-                        setState(() {
-                          _focusColor = Theme.of(context).primaryColor;
-                        });
                       },
                       icon: const Icon(Icons.close),
                     )
                   : null,
               suffixIconColor: Colors.white,
             ),
+            onTapOutside: (event) {
+              _focusNode.unfocus();
+            },
+            style: const TextStyle(color: Colors.white, fontSize: 20),
+            onChanged: (value) {
+              setState(() {
+                _textDirection = firstCharIsArabic(value)
+                    ? TextDirection.rtl
+                    : TextDirection.ltr;
+              });
+            },
+            onSubmitted: (value) {
+              if (widget.controller.text.trim().isEmpty) {
+                _focusNode.requestFocus();
+                return;
+              }
+
+              widget.setSearchWord(widget.controller.text.trim());
+            },
           ),
         ),
         const SizedBox(width: 20),

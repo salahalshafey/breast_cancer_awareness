@@ -5,7 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import '../../../../core/error/exceptions.dart';
 
 abstract class NotesLocalStorage {
-  Future<String> save(String tempFilePath, String fileName);
+  Future<String> save(String tempFilePath, String newFilePath);
 
   Future<void> delete(String filePath);
 
@@ -14,12 +14,12 @@ abstract class NotesLocalStorage {
 
 class NotesLocalStorageImpl implements NotesLocalStorage {
   @override
-  Future<String> save(String tempFilePath, String fileName) async {
+  Future<String> save(String tempFilePath, String newFilePath) async {
     try {
       final appDocumentsDir = await getApplicationDocumentsDirectory();
 
       final sourceFile = File(tempFilePath);
-      final destinationFile = File("${appDocumentsDir.path}/$fileName");
+      final destinationFile = File("${appDocumentsDir.path}/$newFilePath");
 
       await destinationFile.create(recursive: true);
       await sourceFile.copy(destinationFile.path);
@@ -43,6 +43,8 @@ class NotesLocalStorageImpl implements NotesLocalStorage {
   Future<void> deleteAllDir(String dirPath) async {
     try {
       await File(dirPath).delete(recursive: true);
+    } on PathNotFoundException {
+      return;
     } catch (error) {
       throw LocalStorageException();
     }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/util/functions/general_functions.dart';
@@ -28,6 +29,9 @@ class _LinkFormState extends State<LinkForm> {
           color: Colors.black,
           fontSize: 15,
         ),
+        inputFormatters: [
+          FilteringTextInputFormatter.deny(" "),
+        ],
         decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.only(left: 20, right: 5, top: 5, bottom: 5),
@@ -106,9 +110,9 @@ class _LinkFormState extends State<LinkForm> {
             forDoctorScreenState.setTextFieldIconShowen(true);
           }
 
-          forDoctorScreenState.setTextFieldLading(true);
+          forDoctorScreenState.setTextFieldLoading(true);
           final error = await validateImageLink(value);
-          forDoctorScreenState.setTextFieldLading(false);
+          forDoctorScreenState.setTextFieldLoading(false);
 
           if (forDoctorScreenState.isBoxResetted) {
             return;

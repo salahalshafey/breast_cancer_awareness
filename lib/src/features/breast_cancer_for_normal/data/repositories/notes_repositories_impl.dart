@@ -29,14 +29,14 @@ class NotesRepositoryImpl implements NotesRepository {
       if (note.imageFilePath != null) {
         newImagePath = await localStorage.save(
           note.imageFilePath!,
-          _getFileName(note, isImage: true),
+          _getFileNewPath(note, isImage: true),
         );
       }
 
       if (note.recorderFilePath != null) {
         newRecorderPath = await localStorage.save(
           note.recorderFilePath!,
-          _getFileName(note, isImage: false),
+          _getFileNewPath(note, isImage: false),
         );
       }
 
@@ -75,7 +75,7 @@ class NotesRepositoryImpl implements NotesRepository {
     await localStorage.deleteAllDir(dirPath);
   }
 
-  String _getFileName(Note note, {required bool isImage}) {
+  String _getFileNewPath(Note note, {required bool isImage}) {
     final folderName = isImage ? "notes/images" : "notes/sounds";
 
     final fileName = note.id;

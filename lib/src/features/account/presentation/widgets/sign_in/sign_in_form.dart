@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:provider/provider.dart';
@@ -148,9 +149,11 @@ class _SignInFormState extends State<SignInForm> {
                 key: const ValueKey('email'),
                 focusNode: _focusNodeForEmail,
                 autocorrect: false,
-                textCapitalization: TextCapitalization.none,
                 enableSuggestions: false,
+                textCapitalization: TextCapitalization.none,
+                inputFormatters: [FilteringTextInputFormatter.deny(" ")],
                 keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
                 style: const TextStyle(color: Colors.white, fontSize: 20),
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
@@ -184,6 +187,8 @@ class _SignInFormState extends State<SignInForm> {
                 obscureText: _isPasswordShowen ? false : true,
                 style: const TextStyle(color: Colors.white, fontSize: 20),
                 textAlign: TextAlign.center,
+                keyboardType: TextInputType.visiblePassword,
+                textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
                   hintText: 'Password',
                   fillColor: _isPasswordFocused ? focusColor : null,

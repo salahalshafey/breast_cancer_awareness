@@ -54,7 +54,7 @@ class ForDoctorScreenState extends DisposableProvider {
     notifyListeners();
   }
 
-  void setTextFieldLading(bool state) {
+  void setTextFieldLoading(bool state) {
     _isTextFieldLaodinShowen = state;
     notifyListeners();
   }

@@ -17,35 +17,14 @@ class PasswordTextFieldToDeleteAccount extends StatefulWidget {
 class _PasswordTextFieldToDeleteAccountState
     extends State<PasswordTextFieldToDeleteAccount> {
   final _formKey = GlobalKey<FormState>();
+  final _focusNodeForPassword = FocusNode();
 
   var _userPassword = '';
-
   String? _apiErrorForPassword;
-
   bool _isLoading = false;
-
-  final _focusNodeForPassword = FocusNode();
-  bool _isPasswordFocused = false;
 
   bool _isPasswordIconShowen = false;
   bool _isPasswordShowen = false;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _focusNodeForPassword.addListener(() {
-      setState(() {
-        _isPasswordFocused = _focusNodeForPassword.hasFocus;
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _focusNodeForPassword.dispose();
-    super.dispose();
-  }
 
   void _setLoadingState(bool state) {
     setState(() {
@@ -53,7 +32,7 @@ class _PasswordTextFieldToDeleteAccountState
     });
   }
 
-  Future<void> _saveForm() async {
+  Future<void> _saveFormAndReauthenticate() async {
     ////////// we are sending new request so, we should setting api errors to null /////////////
     setState(() {
       _apiErrorForPassword = null;
@@ -101,7 +80,7 @@ class _PasswordTextFieldToDeleteAccountState
 
   @override
   Widget build(BuildContext context) {
-    final focusColor = Theme.of(context).primaryColor;
+    const borderColor = Colors.red;
 
     return Form(
       key: _formKey,
@@ -112,15 +91,14 @@ class _PasswordTextFieldToDeleteAccountState
             key: const ValueKey('password'),
             focusNode: _focusNodeForPassword,
             obscureText: _isPasswordShowen ? false : true,
-            style: const TextStyle(color: Colors.white, fontSize: 20),
-            // textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 20),
             autofocus: true,
             keyboardType: TextInputType.visiblePassword,
             decoration: InputDecoration(
               hintText: 'Password',
+              hintStyle: const TextStyle(),
               errorMaxLines: 2,
-              fillColor: _isPasswordFocused ? focusColor : null,
-              suffixIconColor: Colors.white,
+              fillColor: Colors.transparent,
               suffixIcon: _isPasswordIconShowen
                   ? GestureDetector(
                       onTap: () {
@@ -135,6 +113,14 @@ class _PasswordTextFieldToDeleteAccountState
                       ),
                     )
                   : null,
+              enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: borderColor),
+                borderRadius: BorderRadius.circular(22),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: borderColor),
+                borderRadius: BorderRadius.circular(22),
+              ),
             ),
             onChanged: (value) {
               if (value.isNotEmpty) {
@@ -148,11 +134,8 @@ class _PasswordTextFieldToDeleteAccountState
                 });
               }
             },
-            onTapOutside: (_) {
-              _focusNodeForPassword.unfocus();
-            },
             onFieldSubmitted: (value) {
-              _saveForm();
+              _saveFormAndReauthenticate();
             },
             validator: (value) {
               if (value == null || value.trim().length < 8) {
@@ -170,7 +153,7 @@ class _PasswordTextFieldToDeleteAccountState
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ElevatedButton(
-                onPressed: _isLoading ? null : _saveForm,
+                onPressed: _isLoading ? null : _saveFormAndReauthenticate,
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStatePropertyAll(Colors.red.shade900),

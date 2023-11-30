@@ -106,14 +106,15 @@ void showNoteDialog(BuildContext context, {required Widget child}) async {
 
 void showBottomSheet(BuildContext context, {required Widget child}) async {
   Wakelock.enable();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
 
   await showModalBottomSheet(
     context: context,
     isDismissible: false,
-    shape: const BeveledRectangleBorder(),
+    shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(25),
+      topRight: Radius.circular(25),
+    )),
     enableDrag: false,
     builder: (context) {
       return SizedBox(height: 170, child: child);
@@ -121,9 +122,4 @@ void showBottomSheet(BuildContext context, {required Widget child}) async {
   );
 
   Wakelock.disable();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.landscapeLeft,
-    DeviceOrientation.landscapeRight,
-    DeviceOrientation.portraitUp,
-  ]);
 }

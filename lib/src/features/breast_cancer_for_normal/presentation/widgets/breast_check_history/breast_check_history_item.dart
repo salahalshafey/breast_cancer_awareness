@@ -20,14 +20,54 @@ class BreastCheckHistorytem extends StatelessWidget {
 
   final Note note;
 
-  @override
-  Widget build(BuildContext context) {
-    final isportrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
+  Future<bool?> _confirmDeleteNoteDialog(BuildContext context) {
+    return showCustomAlretDialog<bool>(
+      context: context,
+      title: "Are you sure?",
+      content: "Confirm Deletion?",
+      titleColor: Colors.red,
+      actionsBuilder: (dialogContext) => [
+        ElevatedButton(
+          onPressed: () {
+            Navigator.of(dialogContext).pop(true);
+          },
+          style: const ButtonStyle(
+            backgroundColor: MaterialStatePropertyAll(Colors.red),
+          ),
+          child: const Text("Delete"),
+        ),
+        OutlinedButton(
+          onPressed: () {
+            Navigator.of(dialogContext).pop(false);
+          },
+          style: const ButtonStyle(
+            foregroundColor: MaterialStatePropertyAll(Colors.red),
+            side: MaterialStatePropertyAll(BorderSide(color: Colors.red)),
+          ),
+          child: const Text("Cancel"),
+        ),
+      ],
+    );
+  }
 
+  Future<void> _deleteNote(BuildContext context) async {
     final userId = Provider.of<Account>(context, listen: false).userId;
     final notesHistory = Provider.of<Notes>(context, listen: false);
 
+    try {
+      await notesHistory.deleteNote(userId, note.id);
+    } catch (error) {
+      showCustomAlretDialog(
+        context: context,
+        title: "Error",
+        titleColor: Colors.red.shade900,
+        content: error.toString(),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Dismissible(
       key: Key(note.id),
       direction: DismissDirection.startToEnd,
@@ -41,49 +81,8 @@ class BreastCheckHistorytem extends StatelessWidget {
           color: MyColors.appBarForGroundColor,
         ),
       ),
-      confirmDismiss: (direction) async {
-        final delete = await showCustomAlretDialog<bool>(
-          context: context,
-          title: "Warning",
-          content: "Confirm Deletion?",
-          titleColor: Colors.red,
-          actionsBuilder: (dialogContext) => [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(dialogContext).pop(true);
-              },
-              style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.red),
-              ),
-              child: const Text("  Yes "),
-            ),
-            OutlinedButton(
-              onPressed: () {
-                Navigator.of(dialogContext).pop(false);
-              },
-              style: const ButtonStyle(
-                foregroundColor: MaterialStatePropertyAll(Colors.red),
-                side: MaterialStatePropertyAll(BorderSide(color: Colors.red)),
-              ),
-              child: const Text("Cancel"),
-            ),
-          ],
-        );
-
-        return delete;
-      },
-      onDismissed: (direction) async {
-        try {
-          await notesHistory.deleteNote(userId, note.id);
-        } catch (error) {
-          showCustomAlretDialog(
-            context: context,
-            title: "Error",
-            titleColor: Colors.red.shade900,
-            content: error.toString(),
-          );
-        }
-      },
+      confirmDismiss: (direction) => _confirmDeleteNoteDialog(context),
+      onDismissed: (direction) => _deleteNote(context),
       child: ListTile(
         contentPadding: const EdgeInsets.all(8),
         onTap: () => goToScreenWithSlideTransition(
@@ -110,7 +109,7 @@ class BreastCheckHistorytem extends StatelessWidget {
               child: Text(
                 wellFormattedDateTimeLong(
                   note.dateOfNote,
-                  seperateByLine: isportrait ? true : false,
+                  seperateByLine: true,
                 ),
                 textAlign: TextAlign.center,
                 style: const TextStyle(

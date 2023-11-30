@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'custom_alret_dialoge.dart';
 
-Future<bool> onWillPopWithDialog(BuildContext context) async {
+Future<bool> exitWillPopDialog(BuildContext context) async {
   return (await showCustomAlretDialog<bool>(
         context: context,
         title: "Attention",
@@ -35,7 +35,7 @@ Future<bool> onWillPopWithDialog(BuildContext context) async {
             style: const ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(Colors.red),
             ),
-            child: const Text("  Yes "),
+            child: const Text("  Exit  "),
           ),
           OutlinedButton(
             onPressed: () {

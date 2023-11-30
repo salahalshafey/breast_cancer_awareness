@@ -14,6 +14,7 @@ import '../../../../core/util/builders/go_to_screen_with_slide_transition.dart';
 
 import '../providers/account.dart';
 
+import '../providers/delete_account_state_provider.dart';
 import 'edit_profile_screen.dart';
 import '../widgets/icon_from_asset.dart';
 import '../widgets/profile/delete_account_button.dart';
@@ -31,42 +32,45 @@ class ProfileScreen extends StatelessWidget {
 
     return DefaultScreen(
       containingBackgroundRightSympol: false,
-      child: RefreshIndicator(
-        onRefresh: account.refreshAndGetUserInfo,
-        child: FutureBuilder(
-          future: Provider.of<Account>(context).getUserInfo(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
+      child: ChangeNotifierProvider<DeleteAccountState>(
+        create: (ctx) => DeleteAccountState(),
+        child: RefreshIndicator(
+          onRefresh: account.refreshAndGetUserInfo,
+          child: FutureBuilder(
+            future: Provider.of<Account>(context).getUserInfo(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
 
-            // if error or no internet connection
-            else if (snapshot.hasError || snapshot.data == null) {
-              final topPadding = (MediaQuery.of(context).size.height - 20) / 2;
+              // if error or no internet connection
+              else if (snapshot.hasError || snapshot.data == null) {
+                final topPadding =
+                    (MediaQuery.of(context).size.height - 20) / 2;
+
+                return ListView(
+                  padding: EdgeInsets.only(top: topPadding),
+                  children: [
+                    Text(
+                      snapshot.error == null
+                          ? "Something went wrong!!"
+                          : "${snapshot.error}",
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                );
+              }
+
+              final userInfo = snapshot.data!;
+
+              if (userInfo.id == "guest") {
+                return GuestView(userInfo: userInfo, account: account);
+              }
+
+              final providerId = FirebaseAuth
+                  .instance.currentUser!.providerData.first.providerId;
 
               return ListView(
-                padding: EdgeInsets.only(top: topPadding),
-                children: [
-                  Text(
-                    snapshot.error == null
-                        ? "Something went wrong!!"
-                        : "${snapshot.error}",
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              );
-            }
-
-            final userInfo = snapshot.data!;
-
-            if (userInfo.id == "guest") {
-              return GuestView(userInfo: userInfo, account: account);
-            }
-
-            final providerId = FirebaseAuth
-                .instance.currentUser!.providerData.first.providerId;
-
-            return ListView(
                 padding:
                     const EdgeInsets.symmetric(vertical: 120, horizontal: 20),
                 children: [
@@ -177,9 +181,11 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const DeleteAccountButton(),
-                ].verticalSeperateBy(const SizedBox(height: 20)));
-          },
+                  DeleteAccountButton(context),
+                ].verticalSeperateBy(const SizedBox(height: 20)),
+              );
+            },
+          ),
         ),
       ),
     );
