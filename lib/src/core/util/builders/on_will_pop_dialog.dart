@@ -4,30 +4,13 @@ import 'custom_alret_dialoge.dart';
 Future<bool> exitWillPopDialog(BuildContext context) async {
   return (await showCustomAlretDialog<bool>(
         context: context,
+        canPopScope: false,
+        barrierDismissible: false,
+        dialogDismissedAfter: const Duration(seconds: 5),
         title: "Attention",
         titleColor: Colors.red,
         content: "Do you really want to exit?",
         actionsBuilder: (dialogContext) => [
-          /* TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(true);
-            },
-            child: const Text(
-              "Yes",
-              style: TextStyle(color: Colors.red),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(false);
-            },
-            child: Text(
-              "No",
-              style: TextStyle(
-                color: Theme.of(context).appBarTheme.titleTextStyle!.color,
-              ),
-            ),
-          ),*/
           ElevatedButton(
             onPressed: () {
               Navigator.of(dialogContext).pop(true);

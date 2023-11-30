@@ -119,7 +119,7 @@ class _SearchScreenState extends State<SearchScreen> {
       () {
         showCustomAlretDialog(
           context: context,
-          maxWidth: 600,
+          constraints: const BoxConstraints(maxWidth: 600),
           title: "Warning",
           contentFontSize: 14,
           content:

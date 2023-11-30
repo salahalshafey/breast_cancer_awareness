@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
@@ -42,14 +43,20 @@ class MainScreen extends StatelessWidget {
 
     final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (_) async {
         if (provider.currentPageIndex != 0) {
           provider.animateToPage(0);
-          return false;
+          return;
         }
 
-        return exitWillPopDialog(context);
+        // final navigator = Navigator.of(context);
+        final shouldPop = await exitWillPopDialog(context);
+        if (shouldPop) {
+          SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+          // navigator.pop();
+        }
       },
       child: Scaffold(
         body: Stack(

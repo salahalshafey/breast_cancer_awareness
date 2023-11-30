@@ -111,7 +111,7 @@ class BreastCheckHistoryScreen extends StatelessWidget {
 Future<bool?> _showConfirmDeletionDialog(BuildContext context) {
   return showCustomAlretDialog<bool>(
     context: context,
-    maxWidth: 500,
+    constraints: const BoxConstraints(maxWidth: 500),
     title: "Warning",
     content: "* Are you sure of **Deleting all your Self-Checks?** "
         "All the data and notes information will be deleted.\n"

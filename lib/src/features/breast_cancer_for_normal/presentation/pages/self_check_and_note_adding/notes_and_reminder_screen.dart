@@ -42,10 +42,8 @@ class _NotesAndReminderScreenState extends State<NotesAndReminderScreen> {
       _setLocalNotificationEveryTwoWeeks();
     }
 
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
-      },
+    return PopScope(
+      canPop: false,
       child: ChangeNotifierProvider<AddNotesStateProvider>(
         create: (context) => AddNotesStateProvider(),
         child: DefaultScreen(

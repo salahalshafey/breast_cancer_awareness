@@ -24,7 +24,7 @@ class DeleteAccountButton extends StatelessWidget {
   Future<bool?> _showConfirmDeletionDialog() {
     return showCustomAlretDialog<bool>(
       context: profileScreenContext,
-      maxWidth: 500,
+      constraints: const BoxConstraints(maxWidth: 500),
       title: "Dangerous area",
       content: "* Are you sure of **Deleting your account?** "
           "All the data and information will be deleted. **That can't be undone.**\n"
@@ -64,7 +64,7 @@ class DeleteAccountButton extends StatelessWidget {
       title: "Delete Account",
       content: "Please enter your password to confirm deleting your account.",
       contentWidget: const PasswordTextFieldToDeleteAccount(),
-      actionsBuilder: (dialogContext) => [const SizedBox()],
+      actionsBuilder: (dialogContext) => [],
       actionsPaddingAll: 0,
     );
 
@@ -120,7 +120,7 @@ class DeleteAccountButton extends StatelessWidget {
 
       showCustomAlretDialog(
         context: profileScreenContext,
-        maxWidth: 400,
+        constraints: const BoxConstraints(maxWidth: 400),
         title: "Error",
         content: error.toString(),
         titleColor: Colors.red,

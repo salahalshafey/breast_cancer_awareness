@@ -479,13 +479,8 @@ class _SignUpFormState extends State<SignUpForm> {
             ],
           ),
           const SizedBox(height: 30),
-          WillPopScope(
-            onWillPop: () async {
-              if (_isLoading) {
-                return false;
-              }
-              return true;
-            },
+          PopScope(
+            canPop: !_isLoading, // if loading don't pop
             child: DontOrAlreadyHaveAccount(
               text: "Already have an account ? ",
               actionText: "Sign In",

@@ -3,36 +3,45 @@ import 'package:flutter/material.dart';
 import '../widgets/text_well_formatted.dart';
 
 /// * [titleColor] if null it will be Colors.red.shade900
-/// , this title color will be the color of (title, icon if null, ok button if action null)
+/// , this title color will be the color of (title, icon if null, ok button if action null).
 ///
-/// * [icon] if null it will be [Icons.warning_rounded] with size 45 and the same color of [titleColor]
+/// * [icon] if null it will be [Icons.warning_rounded] with size 45 and the same color of [titleColor].
 ///
-/// * [actionsBuilder] if null it will be [TextButton] with text "Ok" and the same color of [titleColor]
+/// * [actionsBuilder] if null it will be [TextButton] with text "Ok" and the same color of [titleColor].
 ///
-/// * [contentWidget] this widget will be showen below the [content]
+/// * [contentWidget] this widget will be showen below the [content].
+///
+/// * [dialogDismissedAfter] if not null the dialog will be popped (Dismissed) after the given [Duration].
+///
 Future<T?> showCustomAlretDialog<T>({
   required BuildContext context,
   required String title,
   required String content,
-  double contentFontSize = 16,
+  double contentFontSize = 16.0,
   Widget? contentWidget,
   Color? titleColor,
   Widget? icon,
   List<Widget> Function(BuildContext dialogContext)? actionsBuilder,
   double actionsPaddingAll = 10.0,
-  double maxWidth = double.infinity,
-  double maxHeight = double.infinity,
+  BoxConstraints? constraints,
   bool barrierDismissible = true,
   bool canPopScope = true,
+  Duration? dialogDismissedAfter,
 }) {
   return showDialog(
     context: context,
     barrierDismissible: barrierDismissible,
     builder: (dialogContext) {
-      return WillPopScope(
-        onWillPop: () async {
-          return canPopScope;
-        },
+      if (dialogDismissedAfter != null) {
+        Future.delayed(dialogDismissedAfter, () {
+          if (dialogContext.mounted) {
+            Navigator.of(dialogContext).pop();
+          }
+        });
+      }
+
+      return PopScope(
+        canPop: canPopScope,
         child: AlertDialog(
           contentPadding: const EdgeInsets.all(10),
           titlePadding: const EdgeInsets.only(
@@ -60,10 +69,7 @@ Future<T?> showCustomAlretDialog<T>({
             ],
           ),
           content: Container(
-            constraints: BoxConstraints(
-              maxWidth: maxWidth,
-              maxHeight: maxHeight,
-            ),
+            constraints: constraints,
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -104,38 +110,3 @@ Future<T?> showCustomAlretDialog<T>({
     },
   );
 }
-
-/*Future<T?> showCustomAlretDialog<T>({
-  required BuildContext context,
-  required String title,
-  required String content,
-  Color? titleColor,
-  Color? contentColor,
-  List<Widget>? actions,
-}) =>
-    showDialog<T>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(title, style: TextStyle(color: titleColor)),
-          content: Text(
-            content,
-            style: TextStyle(color: contentColor, fontSize: 18),
-          ),
-          actions: <Widget>[
-            if (actions == null)
-              TextButton(
-                child: const Text("OK"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              )
-            else
-              ...actions,
-          ],
-          actionsAlignment: actions == null || actions.length == 1
-              ? null
-              : MainAxisAlignment.spaceAround,
-        );
-      },
-    );*/
