@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:breast_cancer_awareness/src/core/util/functions/string_manipulations_and_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -12,6 +11,8 @@ import '../providers/account.dart';
 
 import '../../../../core/util/builders/custom_alret_dialoge.dart';
 import '../../../../core/util/functions/password_validation.dart';
+import '../../../../core/util/functions/string_manipulations_and_search.dart';
+
 import 'dont_or_already_have_accout.dart';
 
 class SignUpForm extends StatefulWidget {
