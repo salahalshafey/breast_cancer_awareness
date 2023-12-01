@@ -35,6 +35,7 @@ migrate_working_dir/
 /lib/firebase_options.dart
 firebase-tools-instant-win.exe
 save_changes_and_push_it_to_github.cmd
+very important notes for breast_cancer_awareness app.txt
 
 # Symbolication related
 app.*.symbols

@@ -65,7 +65,7 @@ class _LinkFormState extends State<LinkForm> {
               ? Colors.white70
               : Colors.white,
           prefixIconConstraints: const BoxConstraints(maxWidth: 30),
-          prefixIcon: forDoctorScreenState.isTextFieldLaodinShowen
+          prefixIcon: forDoctorScreenState.isTextFieldLoadinShowen
               ? const Center(
                   child: SizedBox(
                     height: 15,

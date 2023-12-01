@@ -13,8 +13,8 @@ class NoteDescription extends StatelessWidget {
     this.titleStyle,
     this.descriptionStyle,
     this.child,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Widget icon;
   final String title;

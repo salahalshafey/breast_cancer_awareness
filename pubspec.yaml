@@ -51,7 +51,7 @@ dependencies:
   image_picker: ^0.8.6+1
   url_launcher: ^6.1.9
   gallery_saver: ^2.3.2
-  dio: ^4.0.6
+  dio: ^5.4.0
   path_provider: ^2.0.12
   package_info_plus: ^3.1.2
   share_plus: ^6.3.0
@@ -65,10 +65,10 @@ dependencies:
   youtube_player_flutter: ^8.1.2
   wakelock: ^0.6.2
   camera: ^0.10.5+2
-  flutter_local_notifications: ^15.1.0+1
+  flutter_local_notifications: ^16.2.0
   flutter_timezone: ^1.0.7
   flutter_sound: ^9.2.13
-  permission_handler: ^10.4.3
+  permission_handler: ^11.1.0
   speech_to_text: ^6.3.0
   flutter_tts: ^3.8.3
   html: ^0.15.4
@@ -84,7 +84,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
   flutter_launcher_icons: "^0.11.0"
 
 flutter_icons:

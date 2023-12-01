@@ -151,7 +151,6 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       info:
                           "Joined ${wellFormattedDateWithoutDay(userInfo.dateOfSignUp.toLocal())}",
-                      textAlign: TextAlign.center,
                       tooltip: wellFormattedDateTimeLong(
                         userInfo.dateOfSignUp.toLocal(),
                         seperateByLine: true,

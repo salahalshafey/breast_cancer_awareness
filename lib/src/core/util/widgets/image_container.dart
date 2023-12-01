@@ -41,8 +41,8 @@ class ImageContainer extends StatefulWidget {
     this.loadingIndicatorType = LoadingIndicator.circle,
     this.errorBuilder,
     this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   ///  * [image] will represent a url if imageSource is [From.network],
   ///
@@ -230,8 +230,8 @@ class _ImageContainer extends StatefulWidget {
     this.loadingIndicatorType = LoadingIndicator.circle,
     this.errorBuilder,
     this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String image;
   final From imageSource;
@@ -518,8 +518,8 @@ class ImageScreen extends StatefulWidget {
     this.title,
     this.caption,
     this.errorBuilder, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String image;
   final From imageSource;
@@ -646,8 +646,7 @@ class _ImageScreenState extends State<ImageScreen> {
 }
 
 class DownloadButton extends StatefulWidget {
-  const DownloadButton(this.image, this.imageSource, {Key? key})
-      : super(key: key);
+  const DownloadButton(this.image, this.imageSource, {super.key});
 
   final String image;
   final From imageSource;
@@ -738,8 +737,7 @@ class _ShareButton extends StatefulWidget {
     required this.imageSource,
     this.title,
     this.caption,
-    Key? key,
-  }) : super(key: key);
+  });
 
   final String image;
   final From imageSource;

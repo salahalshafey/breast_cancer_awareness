@@ -19,26 +19,30 @@ class InfoWithIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.centerLeft,
-      child: Tooltip(
-        message: tooltip ?? "",
-        textAlign: TextAlign.center,
-        showDuration: const Duration(seconds: 3),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            icon,
-            const SizedBox(width: 20),
-            Text(
-              info,
-              textAlign: textAlign,
-              style: const TextStyle(
-                color: MyColors.tetraryColor,
-                fontSize: 18,
+      alignment: AlignmentDirectional.centerStart,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          icon,
+          const SizedBox(width: 20),
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Tooltip(
+                message: tooltip ?? "",
+                textAlign: TextAlign.center,
+                child: Text(
+                  info,
+                  textAlign: textAlign,
+                  style: const TextStyle(
+                    color: MyColors.tetraryColor,
+                    fontSize: 18,
+                  ),
+                ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

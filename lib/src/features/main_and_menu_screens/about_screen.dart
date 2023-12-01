@@ -63,6 +63,7 @@ class AboutScreen extends StatelessWidget {
             ),
             BulletedList(
               text: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextWithActionText(
                     text: "App ",
@@ -71,22 +72,24 @@ class AboutScreen extends StatelessWidget {
                     onActionTextTap: () {
                       launchUrl(
                         Uri.parse(
-                            "https://github.com/salahalshafey/breast-cancer-awareness-privacy/blob/main/privacy-policy.md"),
+                            "https://breastcancerawareness-privacypolicy.tiiny.site/"),
                         mode: LaunchMode.inAppWebView,
                       );
                     },
                   ),
-                  TextWithActionText(
-                    text: " and ",
-                    actionText: "Terms of service",
-                    actionTextStyle: const TextStyle(color: Colors.blue),
-                    onActionTextTap: () {
-                      launchUrl(
-                        Uri.parse(
-                            "https://www.termsofservicegenerator.net/live.php?token=M3aKHZofongPLLgEgkZxRU0Pv1jq6G71"),
-                        mode: LaunchMode.inAppWebView,
-                      );
-                    },
+                  Expanded(
+                    child: TextWithActionText(
+                      text: " and ",
+                      actionText: "Terms of service",
+                      actionTextStyle: const TextStyle(color: Colors.blue),
+                      onActionTextTap: () {
+                        launchUrl(
+                          Uri.parse(
+                              "https://breastcancerawareness-termsofservice.tiiny.site/"),
+                          mode: LaunchMode.inAppWebView,
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

@@ -11,8 +11,8 @@ class LinkifyText extends StatefulWidget {
     required this.textDirection,
     required this.linkStyle,
     required this.onOpen,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String text;
   final TextStyle style;
@@ -118,8 +118,8 @@ class SelectableLinkifyText extends StatefulWidget {
     required this.textDirection,
     required this.linkStyle,
     required this.onOpen,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String text;
   final TextStyle style;

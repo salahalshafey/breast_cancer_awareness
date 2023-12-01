@@ -61,7 +61,7 @@ class _SearchFieldState extends State<SearchField> {
             key: const ValueKey('search'),
             focusNode: _focusNode,
             autocorrect: false,
-            enableSuggestions: false,
+            enableSuggestions: true,
             textCapitalization: TextCapitalization.sentences,
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.search,
@@ -89,6 +89,7 @@ class _SearchFieldState extends State<SearchField> {
                       onPressed: () {
                         widget.controller.clear();
                         _focusNode.requestFocus();
+                        setState(() {});
                       },
                       icon: const Icon(Icons.close),
                     )

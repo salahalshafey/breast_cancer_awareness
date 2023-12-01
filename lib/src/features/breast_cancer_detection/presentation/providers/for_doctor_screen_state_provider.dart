@@ -10,7 +10,7 @@ class ForDoctorScreenState extends DisposableProvider {
   File? _fileImage;
   String? _networkImage;
 
-  final _formKey = GlobalKey<FormState>();
+  var _formKey = GlobalKey<FormState>();
   bool _isTextFieldIconShowen = false;
   bool _isTextFieldLaodinShowen = false;
 
@@ -26,12 +26,15 @@ class ForDoctorScreenState extends DisposableProvider {
 
   bool get isTextFieldIconShowen => _isTextFieldIconShowen;
 
-  bool get isTextFieldLaodinShowen => _isTextFieldLaodinShowen;
+  bool get isTextFieldLoadinShowen => _isTextFieldLaodinShowen;
 
   void togoleBoxShown() {
-    _isBoxShown = !_isBoxShown;
+    if (_isBoxShown) {
+      resetBox();
+    }
 
-    resetBox();
+    _isBoxShown = !_isBoxShown;
+    notifyListeners();
   }
 
   void setBoxNotRestted() {
@@ -60,8 +63,10 @@ class ForDoctorScreenState extends DisposableProvider {
   }
 
   void resetBox() {
+    _formKey = GlobalKey<FormState>();
+
     if (_fileImage == null && _networkImage == null) {
-      _formKey.currentState!.reset();
+      _formKey.currentState?.reset();
     }
     _fileImage = null;
     _networkImage = null;

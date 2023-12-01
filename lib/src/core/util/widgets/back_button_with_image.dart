@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class BackButtonWithImage extends StatelessWidget {
   /// if it will be used in the [AppBar.leading] you have to set [leadingWidth] = 80
-  const BackButtonWithImage({required this.networkImage, Key? key})
-      : super(key: key);
+  ///
+  const BackButtonWithImage({required this.networkImage, super.key});
   final String networkImage;
 
   @override
