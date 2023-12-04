@@ -550,6 +550,8 @@ class _ImageScreenState extends State<ImageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final captionMaxHeight = MediaQuery.of(context).size.height * 0.6;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -600,9 +602,12 @@ class _ImageScreenState extends State<ImageScreen> {
                 color: Colors.black54,
                 padding: const EdgeInsets.all(10),
                 width: MediaQuery.of(context).size.width,
-                height: widget.caption!.length > 700
-                    ? MediaQuery.of(context).size.height * 0.7
+                height: widget.caption!.textHeight(context) > captionMaxHeight
+                    ? captionMaxHeight
                     : null,
+                /*  height: widget.caption!.length > 700
+                    ? MediaQuery.of(context).size.height * 0.6
+                    : null,*/
                 alignment: Alignment.center,
                 child: SelectableLinkifyText(
                   text: widget.caption!,
@@ -839,6 +844,57 @@ extension on Border {
         width: width ?? top.width,
         style: style ?? top.style,
       );
+}
+
+///
+/// this extension used to calculate the the acual height of the text
+/// above the image screen (caption)
+///
+extension on String {
+  Size get textSize {
+    // text style that used inside SelectableLinkifyText
+    TextStyle textStyle = const TextStyle(
+      color: Colors.white,
+      fontSize: 18,
+    );
+
+    // Create a TextPainter
+    TextPainter textPainter = TextPainter(
+      text: TextSpan(text: this, style: textStyle),
+      textAlign: TextAlign.justify,
+      textDirection:
+          firstCharIsArabic(this) ? TextDirection.rtl : TextDirection.ltr,
+    );
+
+    // Layout constraints, if any
+    textPainter.layout();
+
+    return Size(textPainter.width, textPainter.height);
+  }
+
+  /// calculate the the acual height of the text
+  ///
+  double textHeight(BuildContext context) {
+    // 20 is the padding arround the text
+    const padding = 20;
+
+    final availableWidth = MediaQuery.of(context).size.width - padding;
+    final lines = split("\n")..add("\n");
+
+    double totalHeight = 0.0;
+    for (final line in lines) {
+      final lineSize = line.textSize;
+      var actualLineCountNumbers = (lineSize.width / availableWidth).ceil();
+
+      if (actualLineCountNumbers == 0) {
+        actualLineCountNumbers = 1;
+      }
+
+      totalHeight += actualLineCountNumbers * lineSize.height;
+    }
+
+    return totalHeight + padding;
+  }
 }
 
 enum From {

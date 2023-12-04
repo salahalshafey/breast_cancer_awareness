@@ -1,11 +1,14 @@
+import 'package:breast_cancer_awareness/src/core/util/functions/string_manipulations_and_search.dart';
 import 'package:flutter/material.dart';
 
 class SearchKeyWords extends StatelessWidget {
   const SearchKeyWords(
+    this.searchWord,
     this.setSearchWord, {
     super.key,
   });
 
+  final String? searchWord;
   final void Function(String searchWord, {bool textToSpeech}) setSearchWord;
 
   final _keyWords = const [
@@ -43,9 +46,15 @@ class SearchKeyWords extends StatelessWidget {
             padding: const EdgeInsets.only(right: 10),
             child: ElevatedButton(
               onPressed: () => setSearchWord(_keyWords[index]),
-              style: const ButtonStyle(
-                textStyle: MaterialStatePropertyAll(TextStyle(fontSize: 16)),
-                padding: MaterialStatePropertyAll(EdgeInsets.all(8.0)),
+              style: ButtonStyle(
+                textStyle:
+                    const MaterialStatePropertyAll(TextStyle(fontSize: 16)),
+                padding: const MaterialStatePropertyAll(EdgeInsets.all(8.0)),
+                backgroundColor: MaterialStatePropertyAll(
+                  _keyWords[index].isTheSameAS(searchWord)
+                      ? const Color.fromRGBO(181, 11, 99, 1)
+                      : null,
+                ),
               ),
               child: Text(_keyWords[index]),
             ),
@@ -54,4 +63,9 @@ class SearchKeyWords extends StatelessWidget {
       ),
     );
   }
+}
+
+extension on String {
+  bool isTheSameAS(String? other) =>
+      wellFormatedString(this) == wellFormatedString(other ?? "");
 }

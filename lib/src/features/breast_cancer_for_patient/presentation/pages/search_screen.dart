@@ -173,7 +173,9 @@ class _SearchScreenState extends State<SearchScreen> {
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    Expanded(child: SearchKeyWords(_setSearchWord)),
+                    Expanded(
+                      child: SearchKeyWords(_searchWord, _setSearchWord),
+                    ),
                     SearchTypeChoices(
                       searchType: _searchType,
                       setSearchType: _setSearchType,
