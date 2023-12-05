@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,7 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 //import 'package:firebase_app_check/firebase_app_check.dart';
 import 'firebase_options.dart';
 
-import 'src/features/settings/providers/theme_provider.dart';
+import 'src/features/settings/providers/settings_provider.dart';
 import 'src/features/account/presentation/providers/account.dart';
 import 'src/features/breast_cancer_for_normal/presentation/providers/notes.dart';
 import 'src/features/breast_cancer_for_patient/presentation/providers/search.dart';
@@ -33,14 +35,14 @@ void main() async {
 
   await di.init();
 
-  final currentTheme = await initializeCurrentTheme();
+  final settings = await initializeSettings();
 
   //Wakelock.enable();
 
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (ctx) => ThemeProvider(currentTheme)),
+        ChangeNotifierProvider(create: (ctx) => SettingsProvider(settings)),
         ChangeNotifierProvider(create: (ctx) => di.sl<Account>()),
         ChangeNotifierProvider(create: (ctx) => di.sl<Notes>()),
         ChangeNotifierProvider(create: (ctx) => di.sl<Search>()),
@@ -52,8 +54,14 @@ void main() async {
   );
 }
 
-Future<String> initializeCurrentTheme() async {
+Future<Settings> initializeSettings() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  return prefs.getString('theme') ?? 'system';
+  final settingsString = prefs.getString('settings');
+
+  if (settingsString == null) {
+    return Settings.defaultValues();
+  }
+
+  return Settings.fromJson(jsonDecode(settingsString));
 }

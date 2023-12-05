@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/theme_provider.dart';
+import '../providers/settings_provider.dart';
 
 class ToggleThemeButton extends StatelessWidget {
   const ToggleThemeButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ThemeProvider>(context);
+    final provider = Provider.of<SettingsProvider>(context);
 
     return IconButton(
       onPressed: () => provider.toggleThemeMode(context),

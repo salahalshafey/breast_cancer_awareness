@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/util/widgets/default_screen.dart';
 
+import '../widgets/set_notifications_mode.dart';
 import '../widgets/set_theme_mode.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -28,13 +29,7 @@ class SettingsScreen extends StatelessWidget {
             ),
           ),
           SizedBox(height: 30),
-          Text(
-            "Notifications",
-            style: TextStyle(
-              color: MyColors.tetraryColor,
-              fontSize: 18,
-            ),
-          ),
+          SetNotificationsMode(),
           SizedBox(height: 30),
           Text(
             "Search Engine",

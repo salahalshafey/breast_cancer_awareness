@@ -6,6 +6,7 @@ import '../../../../../core/util/widgets/default_screen.dart';
 
 import '../../providers/add_notes_state_provider.dart';
 import '../../providers/notification.dart';
+import '../../../../settings/providers/settings_provider.dart';
 
 import '../../widgets/add_notes/add_notes.dart';
 import '../../widgets/custom_texts.dart';
@@ -31,7 +32,10 @@ class _NotesAndReminderScreenState extends State<NotesAndReminderScreen> {
     Noti.showBigTextNotification(
       title: "Self-Check",
       body: "Your next self-check is due.",
-    );
+    ).then((_) {
+      Provider.of<SettingsProvider>(context, listen: false)
+          .changeNotification(true);
+    });
   }
 
   @override

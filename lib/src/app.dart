@@ -9,7 +9,7 @@ import 'core/theme/light_theme.dart';
 
 import 'features/main_and_menu_screens/main_screen.dart';
 import 'features/main_and_menu_screens/main_screen_with_menu.dart';
-import 'features/settings/providers/theme_provider.dart';
+import 'features/settings/providers/settings_provider.dart';
 
 import 'features/account/presentation/pages/sign_in_screen.dart';
 import 'features/account/presentation/pages/send_password_reset_email_screen.dart';
@@ -33,7 +33,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     navigatorKey = _navigatorKey;
-    final currentThemeMode = Provider.of<ThemeProvider>(context).themeMode;
+    final settingsProvider = Provider.of<SettingsProvider>(context);
+    final currentThemeMode = settingsProvider.themeMode;
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

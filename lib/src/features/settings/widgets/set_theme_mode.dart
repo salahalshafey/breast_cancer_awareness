@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/theme/colors.dart';
-import '../providers/theme_provider.dart';
+
+import '../providers/settings_provider.dart';
 
 class SetThemeMode extends StatelessWidget {
   const SetThemeMode({super.key});
@@ -20,7 +21,7 @@ class SetThemeMode extends StatelessWidget {
               fontSize: 20,
             ),
           ),
-          Consumer<ThemeProvider>(
+          Consumer<SettingsProvider>(
             builder: (context, provider, child) {
               return DropdownButton<String>(
                 value: provider.currentTheme,

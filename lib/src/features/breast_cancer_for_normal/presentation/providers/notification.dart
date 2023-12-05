@@ -21,7 +21,7 @@ void print2(NotificationResponse details) {
 }
 
 class Noti {
-  static Future initialize() async {
+  static Future<void> initialize() async {
     const androidInitialize =
         AndroidInitializationSettings('mipmap/ic_launcher');
     const iOSInitialize = DarwinInitializationSettings();
@@ -48,14 +48,14 @@ class Noti {
     );
   }
 
-  static Future showBigTextNotification({
+  static Future<void> showBigTextNotification({
     int id = 0,
     required String title,
     required String body,
     var payload,
   }) async {
     const androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'you_can_name_it_whatever2',
+      'you_can_name_it_whatever5',
       'channel_name',
       playSound: true,
       sound: RawResourceAndroidNotificationSound('notification'),
@@ -77,6 +77,7 @@ class Noti {
     // in the file 'FlutterLocalNotificationsPlugin.java' line 744
     // C:\Users\salah alaa\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_local_notifications-15.1.0+1\ios\Classes
     // in the file 'FlutterLocalNotificationsPlugin.m' line 745
+
     flutterLocalNotificationsPlugin.periodicallyShow(
       id,
       title,
@@ -84,6 +85,10 @@ class Noti {
       RepeatInterval.weekly, // it will be every 2 weeks
       notificationDetails,
     );
+  }
+
+  static Future<void> cancelNotification() async {
+    await flutterLocalNotificationsPlugin.cancel(0);
   }
 }
 
