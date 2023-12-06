@@ -6,15 +6,21 @@ class MainScreenState extends DisposableProvider {
   final PageController _pageController = PageController();
   int _currentPageIndex = 0;
   bool _didLunchSelfCheckScreenOnce = false;
+  bool _appCheckedForUpdate = false;
 
   int get currentPageIndex => _currentPageIndex;
-
   PageController get pageController => _pageController;
 
   bool get didLunchSelfCheckScreenOnce => _didLunchSelfCheckScreenOnce;
+  bool get appCheckedForUpdate => _appCheckedForUpdate;
 
   void setAsAlreadyLunchedSelfCheckScreenOnce() {
     _didLunchSelfCheckScreenOnce = true;
+    // notifyListeners();
+  }
+
+  void setAsAlreadyCheckedForUpdate() {
+    _appCheckedForUpdate = true;
     // notifyListeners();
   }
 
@@ -55,5 +61,6 @@ class MainScreenState extends DisposableProvider {
   void disposeValues() {
     // _pageController.dispose();
     _currentPageIndex = 0;
+    _appCheckedForUpdate = false;
   }
 }
