@@ -86,7 +86,7 @@ class _SearchScreenState extends State<SearchScreen> {
       return;
     }
 
-    if (searchword == _searchWord && textToSpeech == _textToSpeech) {
+    if (searchword.isTheSameAS(_searchWord) && textToSpeech == _textToSpeech) {
       return;
     }
 

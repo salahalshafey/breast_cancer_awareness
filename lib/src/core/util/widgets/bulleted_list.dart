@@ -17,7 +17,7 @@ class BulletedList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double charHeight = 7;
+    double charHeight = 14;
     if (text is TextWellFormattedWitouthBulleted) {
       final fontSize = (text as TextWellFormattedWitouthBulleted).fontSize;
       charHeight = "C".charHeight(fontSize);

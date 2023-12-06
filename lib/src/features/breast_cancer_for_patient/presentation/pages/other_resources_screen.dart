@@ -13,11 +13,30 @@ class OtherResourcesScreen extends StatelessWidget {
   void showTipDialog(BuildContext context) {
     showCustomAlretDialog(
       context: context,
-      title: "Tip for translation",
-      content: "Tip for translating the web pages",
+      constraints: const BoxConstraints(maxWidth: 500),
       titleColor: Theme.of(context).appBarTheme.foregroundColor,
+      title: "Tips for translation",
+      content:
+          "* **Access Chrome Menu:** In the top-right corner, you'll find three dots (Menu). Tap on them to open the menu.\n"
+          "* **Select \"Translate\":** Look for the \"Translate\" option in the menu. Tap on it.\n"
+          "* **Enable Translation:** Toggle the switch to enable translation for the website. Chrome will automatically detect the language of the web page and ask if you want to translate it.\n"
+          "* **Confirm Translation:** A pop-up will appear asking if you want to translate the page. Tap on \"Translate\" to confirm.",
       contentWidget: Center(
-        child: Image.asset("assets/breast_cancer/other_resources_for_page.png"),
+        child: Image.network(
+          "https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/c0f0593c-0d91-4e96-b74e-1915a18c5493",
+          loadingBuilder: ((ctx, child, loadingProgress) {
+            if (loadingProgress == null) {
+              return Center(child: child);
+            }
+
+            return Center(
+              child: CircularProgressIndicator(
+                value: loadingProgress.cumulativeBytesLoaded /
+                    loadingProgress.expectedTotalBytes!,
+              ),
+            );
+          }),
+        ),
       ),
     );
   }
@@ -30,7 +49,7 @@ class OtherResourcesScreen extends StatelessWidget {
       appBarActions: [
         IconButton(
           onPressed: () => showTipDialog(context),
-          tooltip: "Show Tip",
+          tooltip: "Show Tips",
           icon: const Icon(Icons.tips_and_updates)
               .animate(
                 onPlay: (controller) {

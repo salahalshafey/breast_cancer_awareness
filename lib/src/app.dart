@@ -1,11 +1,18 @@
+import 'dart:math';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import 'core/network/network_info.dart';
 import 'core/theme/colors.dart';
 import 'core/theme/dark_theme.dart';
 import 'core/theme/light_theme.dart';
+import 'core/util/builders/custom_alret_dialoge.dart';
 
 import 'features/main_and_menu_screens/main_screen.dart';
 import 'features/main_and_menu_screens/main_screen_with_menu.dart';
@@ -25,6 +32,8 @@ import 'features/breast_cancer_detection/presentation/pages/prediction_screen.da
 
 late GlobalKey<NavigatorState> navigatorKey;
 
+bool appCheckedForUpdate = false;
+
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
@@ -43,7 +52,9 @@ class MyApp extends StatelessWidget {
       theme: myLightTheme(),
       darkTheme: myDarkTheme(),
       themeMode: currentThemeMode,
-      home: const LandingPage(),
+      home: appCheckedForUpdate
+          ? const LandingPage()
+          : const LandingPageWithUpdateChecking(),
       routes: {
         SignInScreen.routName: (ctx) => const SignInScreen(),
         SendPasswordResetEmailScreen.routName: (ctx) =>
@@ -57,6 +68,101 @@ class MyApp extends StatelessWidget {
         FindingsScreen.routName: (ctx) => const FindingsScreen(),
         NotesAndReminderScreen.routName: (ctx) =>
             const NotesAndReminderScreen(),
+      },
+    );
+  }
+}
+
+class LandingPageWithUpdateChecking extends StatelessWidget {
+  const LandingPageWithUpdateChecking({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    appCheckedForUpdate = true;
+
+    return FutureBuilder(
+      future: checkForUpdates(),
+      builder: (ctx, snapshot) {
+        if (snapshot.data == null ||
+            snapshot.connectionState == ConnectionState.waiting) {
+          return const LandingPage();
+        }
+
+        final updatesInfo = snapshot.data!;
+        final currentAppVersion = updatesInfo["current_version"] as String;
+        final latestAppVersion = updatesInfo["latest_version"] as String;
+        final forceUpdate = updatesInfo["force_update"] as bool;
+
+        if (currentAppVersion < latestAppVersion && forceUpdate) {
+          Future.delayed(Durations.short2, () {
+            showCustomAlretDialog(
+              context: ctx,
+              constraints: const BoxConstraints(maxWidth: 500),
+              canPopScope: false,
+              barrierDismissible: false,
+              title: "Need Update",
+              content:
+                  "App current version isn't supported enymore, You have to update "
+                  "to the latest version.",
+              actionsBuilder: (dialogeContext) => [
+                ElevatedButton(
+                  onPressed: () {
+                    launchUrl(
+                      Uri.parse(
+                          "https://play.google.com/store/apps/details?id=com.salahalshafey.breastcancerawareness"),
+                      mode: LaunchMode.externalApplication,
+                    );
+                  },
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStatePropertyAll(Colors.red.shade900)),
+                  child: const Text("Update"),
+                ),
+              ],
+            );
+          });
+        } else if (currentAppVersion < latestAppVersion) {
+          final titleColor = Theme.of(context).appBarTheme.foregroundColor;
+
+          Future.delayed(Durations.short2, () {
+            showCustomAlretDialog(
+              context: ctx,
+              constraints: const BoxConstraints(maxWidth: 500),
+              titleColor: titleColor,
+              title: "Update App?",
+              content: "A new version of Breast Cancer Awareness is available! "
+                  "Version $latestAppVersion is now available-you have $currentAppVersion.\n\n"
+                  "Would you like to update it now?",
+              actionsBuilder: (dialogeContext) => [
+                OutlinedButton(
+                  onPressed: () {
+                    Navigator.of(dialogeContext).pop();
+                  },
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStatePropertyAll(titleColor),
+                    side: MaterialStatePropertyAll(
+                        BorderSide(color: titleColor!)),
+                  ),
+                  child: const Text("Later"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    launchUrl(
+                      Uri.parse(
+                          "https://play.google.com/store/apps/details?id=com.salahalshafey.breastcancerawareness"),
+                      mode: LaunchMode.externalApplication,
+                    );
+                  },
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(titleColor)),
+                  child: const Text("Update"),
+                ),
+              ],
+            );
+          });
+        }
+
+        return const LandingPage();
       },
     );
   }
@@ -91,73 +197,56 @@ class LandingPage extends StatelessWidget {
           return const SecondSignUpScreen();
         }
 
-        //  print(FirebaseAuth.instance.currentUser!.providerData.first.providerId);
-
-        /*  FacebookAuth.instance.getUserData().then((data) {
-          print(data);
-        });*/
-
-        /*  print(userSnapshot.data!.displayName);
-        print(userSnapshot.data!.email);
-        print(userSnapshot.data!.emailVerified);
-        print(userSnapshot.data!.photoURL);
-        print(userSnapshot.data!.providerData.first);*/
-
-        /*  UserInfo(
-          displayName: "Lio Rofakoko",
-          email: "liorofakoko@gmail.com",
-          phoneNumber: null,
-          photoURL:
-              "https://lh3.googleusercontent.com/a/ACg8ocL0P2ObSOWOLo_BniRlw7yI8c-mFrVfqxDzHqpm0i64=s96-c",
-          providerId: "google.com",
-          uid: "114805642639197595127",
-        );*/
-
-        /* UserInfo(
-          displayName: "Salah Alshafey",
-          email: "salahalshafey@gmail.com",
-          phoneNumber: null,
-          photoURL: "https://graph.facebook.com/6965357660190426/picture",
-          providerId: "facebook.com",
-          uid: "6965357660190426",
-        );
-        
-        final facebookMap = {
-          "name": "Salah Alshafey",
-          "email": "salahalshafey@gmail.com",
-          "picture": {
-            "data": {
-              "height": 200,
-              "is_silhouette": false,
-              "url":
-                  "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=6965357660190426&width=200&ext=1702912119&hash=AeSxdoI3pjLrN07qLaM",
-              "width": 200
-            }
-          },
-          "id": 6965357660190426
-        };*/
-
-        /* UserInfo(
-          displayName: "eslam alshafey",
-          email: "eslamalshafey1321@gmail.com",
-          phoneNumber: null,
-          photoURL:
-              "https://pbs.twimg.com/profile_images/1726740842088476672/WA64l-s7_normal.jpg",
-          providerId: "twitter.com",
-          uid: "1600606062025052278",
-        );*/
-
-        /*  print(
-          userSnapshot.data!.metadata.creationTime!
-              .difference(DateTime.now())
-              .inSeconds
-              .abs(),
-        );
-
-        print(userSnapshot.data!.uid);*/
-
         return const MainScreenWithDrawer();
       },
     );
+  }
+}
+
+//////////// used above /////////////////////////////
+////////////////
+
+Future<Map<String, dynamic>?> checkForUpdates() async {
+  if (await NetworkInfoImpl().isNotConnected) {
+    return null;
+  }
+
+  try {
+    final document = await FirebaseFirestore.instance
+        .collection('app_update')
+        .doc('check_for_updates')
+        .get();
+
+    if (document.data() == null) {
+      return null;
+    }
+
+    final currentAppVersion = (await PackageInfo.fromPlatform()).version;
+
+    final updatesInfo = document.data()!
+      ..addAll({"current_version": currentAppVersion});
+
+    return updatesInfo;
+  } catch (error) {
+    return null;
+  }
+}
+
+extension on String {
+  bool operator <(String other) {
+    final thisVersionNums =
+        split(".").map((versionNum) => int.parse(versionNum));
+    final otherVersionNums =
+        other.split(".").map((versionNum) => int.parse(versionNum));
+
+    final numOfIteration = min(thisVersionNums.length, otherVersionNums.length);
+
+    for (int i = 0; i < numOfIteration; i++) {
+      if (thisVersionNums.elementAt(i) < otherVersionNums.elementAt(i)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

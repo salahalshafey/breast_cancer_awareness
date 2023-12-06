@@ -65,7 +65,7 @@ class SearchKeyWords extends StatelessWidget {
   }
 }
 
-extension on String {
+extension IsThesameAs on String {
   bool isTheSameAS(String? other) =>
       wellFormatedString(this) == wellFormatedString(other ?? "");
 }
