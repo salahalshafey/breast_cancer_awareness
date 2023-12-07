@@ -37,24 +37,24 @@ class AddAndShowResultButton extends StatelessWidget {
             titleColor: color,
             content: "You have to Sign In to continue!!",
             actionsBuilder: (dialogContext) => [
-              TextButton(
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.of(dialogContext).pop();
+                },
+                style: ButtonStyle(
+                  foregroundColor: MaterialStatePropertyAll(color),
+                  side: MaterialStatePropertyAll(BorderSide(color: color!)),
+                ),
+                child: const Text("Later"),
+              ),
+              ElevatedButton(
                 onPressed: () {
                   account.signOut(dialogContext);
                   Navigator.of(dialogContext).pop();
                 },
-                child: Text(
-                  "Sign In",
-                  style: TextStyle(color: color),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(dialogContext).pop();
-                },
-                child: Text(
-                  "Later",
-                  style: TextStyle(color: color),
-                ),
+                style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(color)),
+                child: const Text("Sign In"),
               ),
             ],
           );

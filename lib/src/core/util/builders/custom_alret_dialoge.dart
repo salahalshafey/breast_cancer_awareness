@@ -18,6 +18,7 @@ Future<T?> showCustomAlretDialog<T>({
   required String title,
   required String content,
   double contentFontSize = 16.0,
+  EdgeInsetsGeometry contentPadding = const EdgeInsets.all(10),
   Widget? contentWidget,
   Color? titleColor,
   Widget? icon,
@@ -43,7 +44,7 @@ Future<T?> showCustomAlretDialog<T>({
       return PopScope(
         canPop: canPopScope,
         child: AlertDialog(
-          contentPadding: const EdgeInsets.all(10),
+          contentPadding: contentPadding,
           titlePadding: const EdgeInsets.only(
             left: 20,
             right: 10,

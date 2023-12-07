@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:ntp/ntp.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -18,84 +21,140 @@ void checkForUpdate(BuildContext context) async {
     return;
   }
 
-  checkForAnyUpdates().then((updatesInfo) {
-    if (updatesInfo == null) {
-      return;
-    }
+  final updatesInfo = await checkForAnyUpdates();
+  if (updatesInfo == null) {
+    return;
+  }
 
-    provider.setAsAlreadyCheckedForUpdate();
+  provider.setAsAlreadyCheckedForUpdate();
 
-    final currentAppVersion = updatesInfo["current_version"] as String;
-    final latestAppVersion = updatesInfo["latest_version"] as String;
-    final forceUpdate = updatesInfo["force_update"] as bool;
+  final currentAppVersion = updatesInfo["current_version"] as String;
+  final latestAppVersion = updatesInfo["latest_version"] as String;
+  final versionToForceUpdateIfBelow =
+      updatesInfo["force_update_versions_below"] as String;
 
-    if (currentAppVersion < latestAppVersion && forceUpdate) {
-      showCustomAlretDialog(
-        context: context,
-        constraints: const BoxConstraints(maxWidth: 500),
-        canPopScope: false,
-        barrierDismissible: false,
-        title: "Need Update",
-        content:
-            "App current version isn't supported enymore, You have to update "
-            "to the latest version.",
-        actionsBuilder: (dialogeContext) => [
-          ElevatedButton(
-            onPressed: () {
-              launchUrl(
-                Uri.parse(
-                    "https://play.google.com/store/apps/details?id=com.salahalshafey.breastcancerawareness"),
-                mode: LaunchMode.externalApplication,
-              );
-            },
-            style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.red.shade900)),
-            child: const Text("Update"),
+  final forceUpdateAfter =
+      (updatesInfo["force_update_after"] as Timestamp).toDate();
+  final currentDateTime = await getCurrentNetworkTime();
+
+  if (currentAppVersion < versionToForceUpdateIfBelow &&
+      currentDateTime.isAfter(forceUpdateAfter)) {
+    showCustomAlretDialog(
+      context: context,
+      constraints: const BoxConstraints(maxWidth: 500),
+      canPopScope: false,
+      barrierDismissible: false,
+      title: "Need Update",
+      contentPadding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
+      content:
+          "App current version isn't supported enymore, You have to update "
+          "to the latest version.",
+      actionsBuilder: (dialogContext) => [
+        ElevatedButton(
+          onPressed: () {
+            launchUrl(
+              Uri.parse(
+                  "https://play.google.com/store/apps/details?id=com.salahalshafey.breastcancerawareness"),
+              mode: LaunchMode.externalApplication,
+            );
+          },
+          style: ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll(Colors.red.shade900)),
+          child: const Text("Update"),
+        ),
+      ],
+    );
+  } else if (currentAppVersion < versionToForceUpdateIfBelow) {
+    const titleColor = Colors.red;
+
+    final daysToUpdate = forceUpdateAfter.difference(currentDateTime).inDays;
+    final daysToUpdateString =
+        daysToUpdate == 0 || daysToUpdate == 1 ? "1 day" : "$daysToUpdate days";
+
+    showCustomAlretDialog(
+      context: context,
+      constraints: const BoxConstraints(maxWidth: 500),
+      titleColor: titleColor,
+      title: "Need Update",
+      contentPadding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
+      content: "This version of Breast Cancer Awareness needs "
+          "to be **updated in $daysToUpdateString**.\n\n"
+          "Update to the latest version?",
+      actionsBuilder: (dialogContext) => [
+        OutlinedButton(
+          onPressed: () {
+            Navigator.of(dialogContext).pop();
+          },
+          style: const ButtonStyle(
+            foregroundColor: MaterialStatePropertyAll(titleColor),
+            side: MaterialStatePropertyAll(BorderSide(color: titleColor)),
           ),
-        ],
-      );
-    } else if (currentAppVersion < latestAppVersion) {
-      final titleColor = Theme.of(context).appBarTheme.foregroundColor;
+          child: const Text("Later"),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            launchUrl(
+              Uri.parse(
+                  "https://play.google.com/store/apps/details?id=com.salahalshafey.breastcancerawareness"),
+              mode: LaunchMode.externalApplication,
+            );
+          },
+          style: const ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll(titleColor)),
+          child: const Text("Update"),
+        ),
+      ],
+    );
+  } else if (currentAppVersion < latestAppVersion) {
+    final titleColor = Theme.of(context).appBarTheme.foregroundColor;
 
-      showCustomAlretDialog(
-        context: context,
-        constraints: const BoxConstraints(maxWidth: 500),
-        titleColor: titleColor,
-        title: "Update App?",
-        content: "A new version of Breast Cancer Awareness is available! "
-            "Version $latestAppVersion is now available-you have $currentAppVersion.\n\n"
-            "Would you like to update it now?",
-        actionsBuilder: (dialogeContext) => [
-          OutlinedButton(
-            onPressed: () {
-              Navigator.of(dialogeContext).pop();
-            },
-            style: ButtonStyle(
-              foregroundColor: MaterialStatePropertyAll(titleColor),
-              side: MaterialStatePropertyAll(BorderSide(color: titleColor!)),
-            ),
-            child: const Text("Later"),
+    showCustomAlretDialog(
+      context: context,
+      constraints: const BoxConstraints(maxWidth: 500),
+      titleColor: titleColor,
+      title: "Update App?",
+      contentPadding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
+      content: "A new version of Breast Cancer Awareness is available! "
+          "Version $latestAppVersion is now available-you have $currentAppVersion.\n\n"
+          "Would you like to update it now?",
+      actionsBuilder: (dialogContext) => [
+        OutlinedButton(
+          onPressed: () {
+            Navigator.of(dialogContext).pop();
+          },
+          style: ButtonStyle(
+            foregroundColor: MaterialStatePropertyAll(titleColor),
+            side: MaterialStatePropertyAll(BorderSide(color: titleColor!)),
           ),
-          ElevatedButton(
-            onPressed: () {
-              launchUrl(
-                Uri.parse(
-                    "https://play.google.com/store/apps/details?id=com.salahalshafey.breastcancerawareness"),
-                mode: LaunchMode.externalApplication,
-              );
-            },
-            style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(titleColor)),
-            child: const Text("Update"),
-          ),
-        ],
-      );
-    }
-  });
+          child: const Text("Later"),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            launchUrl(
+              Uri.parse(
+                  "https://play.google.com/store/apps/details?id=com.salahalshafey.breastcancerawareness"),
+              mode: LaunchMode.externalApplication,
+            );
+          },
+          style: ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll(titleColor)),
+          child: const Text("Update"),
+        ),
+      ],
+    );
+  }
 }
 
 //////////// used above /////////////////////////////
 ////////////////
+
+Future<DateTime> getCurrentNetworkTime() async {
+  try {
+    return await NTP.now();
+  } catch (error) {
+    return DateTime.now();
+  }
+}
 
 Future<Map<String, dynamic>?> checkForAnyUpdates() async {
   if (await NetworkInfoImpl().isNotConnected) {

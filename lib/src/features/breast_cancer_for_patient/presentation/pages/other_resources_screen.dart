@@ -21,23 +21,7 @@ class OtherResourcesScreen extends StatelessWidget {
           "* **Select \"Translate\":** Look for the \"Translate\" option in the menu. Tap on it.\n"
           "* **Enable Translation:** Toggle the switch to enable translation for the website. Chrome will automatically detect the language of the web page and ask if you want to translate it.\n"
           "* **Confirm Translation:** A pop-up will appear asking if you want to translate the page. Tap on \"Translate\" to confirm.",
-      contentWidget: Center(
-        child: Image.network(
-          "https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/c0f0593c-0d91-4e96-b74e-1915a18c5493",
-          loadingBuilder: ((ctx, child, loadingProgress) {
-            if (loadingProgress == null) {
-              return Center(child: child);
-            }
-
-            return Center(
-              child: CircularProgressIndicator(
-                value: loadingProgress.cumulativeBytesLoaded /
-                    loadingProgress.expectedTotalBytes!,
-              ),
-            );
-          }),
-        ),
-      ),
+      contentWidget: const GifWithLoading(),
     );
   }
 
@@ -144,3 +128,92 @@ List<Resource> resources = const [
     url: "https://www.cancer.gov/types/breast/patient/breast-screening-pdq",
   ),
 ];
+
+/////////////////////////////////////////////////////////
+/////////////////////////////////
+/////////////////
+
+class GifWithLoading extends StatefulWidget {
+  const GifWithLoading({
+    super.key,
+  });
+
+  @override
+  State<GifWithLoading> createState() => _GifWithLoadingState();
+}
+
+class _GifWithLoadingState extends State<GifWithLoading> {
+  bool _showLoading = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          "GIF to explain the above",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Theme.of(context).brightness == Brightness.light
+                ? Colors.black54
+                : Colors.grey,
+          ),
+        ),
+        const SizedBox(height: 10),
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            if (_showLoading)
+              const Center(
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+            Center(
+              child: Image.network(
+                "https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/c0f0593c-0d91-4e96-b74e-1915a18c5493",
+                loadingBuilder: (ctx, child, loadingProgress) {
+                  if (loadingProgress == null) {
+                    return child;
+                  }
+
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    setState(() => _showLoading = false);
+                  });
+
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes!,
+                      ),
+                    ),
+                  );
+                },
+                errorBuilder: (ctx, error, stk) {
+                  /*  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    setState(() => _showLoading = false);
+                  });*/
+
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 10, top: 70),
+                    child: Text(
+                      "error happend, couldn't load the GIF",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? Colors.black54
+                            : Colors.grey,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}

@@ -120,15 +120,14 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
           "* Follow the **link** and reset your password.\n"
           "* When you **finish**, return to the app and sign in with the new password.",
       actionsBuilder: (dialogContext) => [
-        TextButton(
-          onPressed: (() {
+        ElevatedButton(
+          onPressed: () {
             Navigator.of(dialogContext).pop();
             Navigator.of(dialogContext).pop();
-          }),
-          child: Text(
-            "Finished resetting",
-            style: TextStyle(color: titleColor),
-          ),
+          },
+          style: ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll(titleColor)),
+          child: const Text("Finished resetting"),
         ),
       ],
     );
