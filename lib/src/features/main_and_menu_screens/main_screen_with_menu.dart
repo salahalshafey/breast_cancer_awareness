@@ -4,7 +4,6 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'main_screen.dart';
 import 'menu_screen.dart';
 
-import 'widgets/check_for_update.dart';
 import 'widgets/opened_from_notification.dart';
 
 class MainScreenWithDrawer extends StatelessWidget {
@@ -14,10 +13,6 @@ class MainScreenWithDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     Future.delayed(Durations.short1, () {
       ifTheAppOpenedFromNotificationOpenSelfCheckScreen(context);
-    });
-
-    Future.delayed(Durations.short1, () {
-      checkForUpdate(context);
     });
 
     return ZoomDrawer(

@@ -199,7 +199,7 @@ class _GifWithLoadingState extends State<GifWithLoading> {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 10, top: 70),
                     child: Text(
-                      "error happend, couldn't load the GIF",
+                      "error happened, couldn't load the GIF",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Theme.of(context).brightness == Brightness.light

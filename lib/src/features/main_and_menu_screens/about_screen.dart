@@ -1,9 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../core/util/builders/custom_alret_dialoge.dart';
 import '../../core/util/widgets/bulleted_list.dart';
 import '../../core/util/widgets/default_screen.dart';
 import '../../core/theme/colors.dart';
@@ -11,6 +14,7 @@ import '../../core/util/widgets/text_well_formatted.dart';
 
 import '../../core/util/widgets/text_with_action_text.dart';
 import '../account/presentation/widgets/icon_from_asset.dart';
+import 'widgets/check_for_update.dart';
 
 class AboutScreen extends StatelessWidget {
   static const routName = '/profile';
@@ -21,6 +25,7 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultScreen(
       containingBackgroundCancerSympol: false,
+      appBarActions: const [CheckForUpdatesButton()],
       child: ListView(
         padding: const EdgeInsets.only(
           right: 25,
@@ -137,6 +142,43 @@ class AboutScreen extends StatelessWidget {
           ].animate(delay: 300.ms).fadeIn(duration: 1000.ms),
         ],
       ),
+    );
+  }
+}
+
+class CheckForUpdatesButton extends StatelessWidget {
+  const CheckForUpdatesButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      tooltip: "Check for updates",
+      icon: const Icon(Icons.update),
+      onPressed: () async {
+        final updatesFound = await checkForUpdateWithDialog(context);
+
+        if (updatesFound == null) {
+          showCustomAlretDialog(
+            context: context,
+            title: "Error",
+            content: "error happend while checking for updates!!",
+            titleColor: Colors.red,
+          );
+          return;
+        }
+
+        if (!updatesFound) {
+          showCustomAlretDialog(
+            context: context,
+            title: "No Updates",
+            content:
+                "You have the latest version of Breast Cancer Awareness 👍👍",
+            titleColor: Theme.of(context).appBarTheme.foregroundColor,
+          );
+        }
+      },
     );
   }
 }

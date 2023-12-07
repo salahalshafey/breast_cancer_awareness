@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 //import 'package:firebase_app_check/firebase_app_check.dart';
 import 'firebase_options.dart';
 
+import 'src/features/main_and_menu_screens/widgets/check_for_update.dart';
 import 'src/features/settings/providers/settings_provider.dart';
 import 'src/features/account/presentation/providers/account.dart';
 import 'src/features/breast_cancer_for_normal/presentation/providers/notes.dart';
@@ -37,16 +38,18 @@ void main() async {
 
   final settings = await initializeSettings();
 
+  final updatesInfo = await checkForAnyUpdates();
+
   //Wakelock.enable();
 
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (ctx) => SettingsProvider(settings)),
+        ChangeNotifierProvider(create: (ctx) => MainScreenState(updatesInfo)),
         ChangeNotifierProvider(create: (ctx) => di.sl<Account>()),
         ChangeNotifierProvider(create: (ctx) => di.sl<Notes>()),
         ChangeNotifierProvider(create: (ctx) => di.sl<Search>()),
-        ChangeNotifierProvider(create: (ctx) => MainScreenState()),
         ChangeNotifierProvider(create: (ctx) => ForDoctorScreenState()),
       ],
       child: MyApp(),

@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import '../../dispose_container.dart';
 
 class MainScreenState extends DisposableProvider {
+  MainScreenState(this.updatesInfo);
+
+  final Map<String, dynamic>? updatesInfo;
+
   final PageController _pageController = PageController();
   int _currentPageIndex = 0;
   bool _didLunchSelfCheckScreenOnce = false;
@@ -61,6 +65,5 @@ class MainScreenState extends DisposableProvider {
   void disposeValues() {
     // _pageController.dispose();
     _currentPageIndex = 0;
-    _appCheckedForUpdate = false;
   }
 }
