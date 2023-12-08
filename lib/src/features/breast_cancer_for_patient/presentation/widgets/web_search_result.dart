@@ -76,7 +76,7 @@ class _WebSearchResultState extends State<WebSearchResult>
       future: Provider.of<Search>(context, listen: false).customWebSearch(
         widget.searchWord,
         searchType: widget.searchType,
-        numOfResult: 5,
+        numOfResult: 7,
       ),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
@@ -114,7 +114,7 @@ class _WebSearchResultState extends State<WebSearchResult>
               padding: EdgeInsets.all(10.0),
               child: CustomErrorWidget(
                 iconSize: 50,
-                error: "**Your search did not match any results results**\n\n"
+                error: "**Your search did not match any results**\n\n"
                     "* Make sure all words are spelled correctly or Try different keywords.\n"
                     "* Or maybe you are using a **language** that is not supported yet.",
               ),
@@ -124,50 +124,63 @@ class _WebSearchResultState extends State<WebSearchResult>
 
         return ListView(
           padding: const EdgeInsets.only(bottom: 10),
-          children: result
-              .map(
-                (googleSearchResult) => CustomCard(
-                  padding: const EdgeInsets.all(10),
-                  margin: const EdgeInsets.only(bottom: 15),
-                  borderRadius: BorderRadius.circular(15),
-                  elevation: 5,
-                  onTap: () {
-                    launchUrl(
-                      Uri.parse(googleSearchResult.link),
-                      mode: LaunchMode.externalApplication,
-                    );
-                  },
+          children: [
+            Stack(
+              alignment: Alignment.topCenter,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 40),
                   child: Column(
                     children: [
-                      Text(
-                        googleSearchResult.title,
-                        textAlign: TextAlign.center,
-                        textDirection:
-                            firstCharIsArabic(googleSearchResult.title)
-                                ? TextDirection.rtl
-                                : TextDirection.ltr,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                      ...result.map(
+                        (googleSearchResult) => CustomCard(
+                          padding: const EdgeInsets.all(10),
+                          margin: const EdgeInsets.only(bottom: 15),
+                          borderRadius: BorderRadius.circular(15),
+                          elevation: 5,
+                          onTap: () {
+                            launchUrl(
+                              Uri.parse(googleSearchResult.link),
+                              mode: LaunchMode.externalApplication,
+                            );
+                          },
+                          child: Column(
+                            children: [
+                              Text(
+                                googleSearchResult.title,
+                                textAlign: TextAlign.center,
+                                textDirection:
+                                    firstCharIsArabic(googleSearchResult.title)
+                                        ? TextDirection.rtl
+                                        : TextDirection.ltr,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const Divider(),
+                              Text(
+                                googleSearchResult.snippet,
+                                textAlign: TextAlign.justify,
+                                textDirection: firstCharIsArabic(
+                                        googleSearchResult.snippet)
+                                    ? TextDirection.rtl
+                                    : TextDirection.ltr,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                      const Divider(),
-                      Text(
-                        googleSearchResult.snippet,
-                        textAlign: TextAlign.justify,
-                        textDirection:
-                            firstCharIsArabic(googleSearchResult.snippet)
-                                ? TextDirection.rtl
-                                : TextDirection.ltr,
-                      ),
-                    ],
+                    ].animate(interval: 100.ms).fade().moveX(),
                   ),
                 ),
-              )
-              .toList()
-              .animate(interval: 100.ms)
-              .fade()
-              .moveX(),
+                Image.asset(
+                  searchTypeToAssetImage(widget.searchType),
+                  height: widget.searchType == SearchTypes.wikipedia ? 55 : 50,
+                ).animate(delay: 200.ms).fade().moveY(),
+              ],
+            ),
+          ],
         );
       },
     );
@@ -186,4 +199,17 @@ String _spokenString(List<SearchResult> result) {
       : "Below is another search results. You can tap on any result to open it.";
 
   return "${result.first.title}.\n${result.first.snippet}.\n $instructions";
+}
+
+String searchTypeToAssetImage(SearchTypes searchType) {
+  switch (searchType) {
+    case SearchTypes.ai:
+      return "assets/images/ai.png";
+    case SearchTypes.google:
+      return "assets/images/google.png";
+    case SearchTypes.googleScholar:
+      return "assets/images/google_scholar.png";
+    case SearchTypes.wikipedia:
+      return "assets/images/wikipedia.png";
+  }
 }

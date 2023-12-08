@@ -162,13 +162,16 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
                       );
                     }).toList(),
                   ),
-                ),
+                ).animate().fade(duration: 200.ms).moveX(duration: 200.ms),
                 Transform.translate(
                   offset: const Offset(0.0, -30.0),
-                  child: Image.asset("assets/images/ai.png", height: 55),
+                  child: Image.asset("assets/images/ai.png", height: 55)
+                      .animate(delay: 200.ms)
+                      .fade()
+                      .moveY(),
                 ),
               ],
-            ).animate().fade(duration: 200.ms).moveY(duration: 200.ms),
+            ),
           ],
         );
       },
@@ -205,97 +208,3 @@ enum StringTypes {
   bulleted,
   normal,
 }
-
-//////////////////////////////////////// test ////////////////////////////
-
-Future<String> chatGPT(String searchWord) => Future.delayed(
-      const Duration(seconds: 2),
-      () {
-        // throw Exception(searchWord);
-        return """Flutter `Speech to Text` is a plugin that allows you to easily integrate speech recognition into your Flutter apps. It uses the Google Cloud Speech-to-Text API to convert audio to text, and it supports a variety of languages.
-
-To use Flutter Speech to Text, you first need to create a project in the Google Cloud Platform Console. Once you have created a project, you need to enable the Google Cloud Speech-to-Text API.
-
-After you have enabled the API, you need to create a service account and download the JSON key file. You will need to provide the JSON key file to the Flutter Speech to Text plugin.
-
-There are many things you can do to reduce your **risk of breast cancer**, such as:
-
-
-
-* Getting regular mammograms Flutter `Speech to Text` is a **plugin** that allows you www.sdsfsff.com
-
-* Having regular breast exams
-
-* Eating a healthy diet
-
-* Exercising regularly
-
-* Maintaining a healthy weight
-
-* Not smoking
-
-* Limiting alcohol intake
-
-* Not taking hormones after menopause
-
-
-
-If you are concerned about **breast cancer**, talk to your doctor.
-
-To install the Flutter 'Speech to Text' plugin, you can use the following command:
-
-```command
-pub add flutter_speech_to_text
-```
-
-Once the plugin is installed, you can use it in your Flutter app. The following code snippet shows how to use the Flutter Speech to Text plugin to convert audio to text:
-
-```dart
-import 'package:flutter/material.dart';
-import 'package:flutter_speech_to_text/flutter_speech_to_text.dart';
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Speech to Text',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Flutter Speech to Text'),
-        ),
-        body: Center(
-          child: RaisedButton(
-            onPressed: () async {
-              // Create a SpeechToText object.
-              final speechToText = SpeechToText();
-
-              // Set the language code.
-              speechToText.setLanguageCode('en-US');
-
-              // Start listening for speech.
-              final result = await speechToText.listen();
-
-              // Print the result.
-              print(result.text);
-            },
-            child: Text('Listen'),
-          ),
-        ),
-      ),
-    );
-  }
-}
-```
-
-see this link for more: https://translate.google.com.eg/?hl=en&sl=en&tl=ar&text=highlighted&op=translate the link is valid.
-
-to email: salahalshafey@gmail.com and website: www.salahalshafey.com
-
-When you run the app, you will see a button that says "Listen". When you click on the button, the app will start listening for speech. The text that is spoken will be converted to text and printed to the console.
-
-Flutter `Speech to Text` is a powerful tool that can be used to add speech recognition to your Flutter apps. It is easy to use and supports a variety of languages.
-""";
-      },
-    );
