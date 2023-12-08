@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../pages/search_screen.dart';
+import '../../domain/entities/search_types.dart';
 
 class SearchTypeChoices extends StatelessWidget {
   const SearchTypeChoices({
@@ -23,23 +23,18 @@ class SearchTypeChoices extends StatelessWidget {
           PopupMenuItem<SearchTypes>(
             value: SearchTypes.ai,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Image.asset("assets/images/ai.png", height: 20),
-                    const SizedBox(width: 20),
-                    Text(
-                      "Ask AI",
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+                Image.asset("assets/images/ai.png", height: 20),
+                const SizedBox(width: 20),
+                Text(
+                  "Ask AI",
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
+                const Spacer(),
                 searchType == SearchTypes.ai
                     ? const Icon(Icons.check)
                     : const SizedBox(),
@@ -49,24 +44,61 @@ class SearchTypeChoices extends StatelessWidget {
           PopupMenuItem<SearchTypes>(
             value: SearchTypes.google,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Image.asset("assets/images/google.png", height: 20),
-                    const SizedBox(width: 20),
-                    Text(
-                      "Google Search",
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+                Image.asset("assets/images/google.png", height: 20),
+                const SizedBox(width: 20),
+                Text(
+                  "Google Search",
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
+                const Spacer(),
                 searchType == SearchTypes.google
+                    ? const Icon(Icons.check)
+                    : const SizedBox(),
+              ],
+            ),
+          ),
+          PopupMenuItem<SearchTypes>(
+            value: SearchTypes.googleScholar,
+            child: Row(
+              children: [
+                Image.asset("assets/images/google_scholar.png", height: 20),
+                const SizedBox(width: 20),
+                Text(
+                  "Google Scholar",
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Spacer(),
+                searchType == SearchTypes.googleScholar
+                    ? const Icon(Icons.check)
+                    : const SizedBox(),
+              ],
+            ),
+          ),
+          PopupMenuItem<SearchTypes>(
+            value: SearchTypes.wikipedia,
+            child: Row(
+              children: [
+                Image.asset("assets/images/wikipedia.png", height: 20),
+                const SizedBox(width: 20),
+                Text(
+                  "Wikipedia Search",
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Spacer(),
+                searchType == SearchTypes.wikipedia
                     ? const Icon(Icons.check)
                     : const SizedBox(),
               ],

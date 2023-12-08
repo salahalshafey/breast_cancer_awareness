@@ -1,10 +1,12 @@
-import '../entities/google_search_result.dart';
+import '../entities/search_result.dart';
+import '../entities/search_types.dart';
 
 abstract class SearchRepository {
-  Future<List<GoogleSearchResult>> customGoogleSearch(
+  Future<List<SearchResult>> customWebSearch(
     String query,
-    int numOfResult,
-  );
+    int numOfResult, {
+    required SearchTypes searchType,
+  });
 
   Future<String> aiResult(String message);
 }

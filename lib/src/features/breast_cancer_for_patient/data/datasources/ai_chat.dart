@@ -14,7 +14,7 @@ abstract class AIChat {
 class MakerSuite implements AIChat {
   @override
   Future<String> chatResult(String message) async {
-    const apiKey = makerSuiteAPIKey;
+    /* const apiKey = makerSuiteAPIKey;
 
     final breastCancer =
         firstCharIsArabic(message) ? "\"سرطان الثدي\"" : "\"Breast Cancer\"";
@@ -68,11 +68,13 @@ class MakerSuite implements AIChat {
       throw FilterException();
     }
 
-    return responseMap["candidates"][0]["content"];
+    return responseMap["candidates"][0]["content"];*/
+
+    return testString;
   }
 }
 
-/*const testString =
+const testString =
     """Flutter Speech to Text is a **plugin that** allows you to easily integrate `speech recognition` into your Flutter apps. It uses the Google Cloud Speech-to-Text API to convert audio to text, and it supports a variety of languages.
 
 To use `Flutter Speech to Text`, you first need to create a project in the Google Cloud Platform Console. Once you have created a project, you need to enable the Google Cloud Speech-to-Text API.
@@ -196,4 +198,4 @@ class MyApp extends StatelessWidget {
 * و`Emial` هو salahalshafey@gmail.com صالح.
 
 يعد Flutter Speech to Text أداة قوية يمكن استخدامها لإضافة ميزة التعرف على الكلام إلى تطبيقات Flutter. إنه سهل الاستخدام ويدعم مجموعة متنوعة من اللغات.
-""";*/
+""";

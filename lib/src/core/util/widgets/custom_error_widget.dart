@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'text_well_formatted.dart';
+
 class CustomErrorWidget extends StatelessWidget {
   const CustomErrorWidget({
     super.key,
@@ -55,9 +57,9 @@ class CustomErrorWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               color: color.withOpacity(0.1),
             ),
-            child: Text(
-              error ?? "",
-              style: TextStyle(fontSize: errorFontSize ?? 16),
+            child: TextWellFormattedWithBulleted(
+              data: error ?? "",
+              fontSize: errorFontSize ?? 16,
             ),
           ),
       ],

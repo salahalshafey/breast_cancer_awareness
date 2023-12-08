@@ -1,35 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wakelock/wakelock.dart';
 
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
-
 import '../../../../core/util/widgets/custom_card.dart';
 import '../../../../core/util/widgets/custom_error_widget.dart';
 import '../../../../core/util/widgets/dots_loading.dart';
-import '../../domain/entities/google_search_result.dart';
+
+import '../../domain/entities/search_result.dart';
+import '../../domain/entities/search_types.dart';
+
 import '../providers/search.dart';
 
-class GoogleResult extends StatefulWidget {
-  const GoogleResult({
+class WebSearchResult extends StatefulWidget {
+  const WebSearchResult({
     super.key,
     required this.searchWord,
+    required this.searchType,
     required this.textToSpeech,
     required this.flutterTts,
   });
 
   final String searchWord;
+  final SearchTypes searchType;
   final bool textToSpeech;
   final FlutterTts flutterTts;
 
   @override
-  State<GoogleResult> createState() => _GoogleResultState();
+  State<WebSearchResult> createState() => _WebSearchResultState();
 }
 
-class _GoogleResultState extends State<GoogleResult>
+class _WebSearchResultState extends State<WebSearchResult>
     with WidgetsBindingObserver {
   @override
   void initState() {
@@ -69,8 +73,9 @@ class _GoogleResultState extends State<GoogleResult>
   Widget build(BuildContext context) {
     return FutureBuilder(
       key: UniqueKey(),
-      future: Provider.of<Search>(context, listen: false).customGoogleSearch(
+      future: Provider.of<Search>(context, listen: false).customWebSearch(
         widget.searchWord,
+        searchType: widget.searchType,
         numOfResult: 5,
       ),
       builder: (context, snapshot) {
@@ -81,9 +86,12 @@ class _GoogleResultState extends State<GoogleResult>
           }
 
           return Center(
-            child: CustomErrorWidget(
-              iconSize: 50,
-              error: snapshot.error.toString(),
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(10.0),
+              child: CustomErrorWidget(
+                iconSize: 50,
+                error: snapshot.error.toString(),
+              ),
             ),
           );
         }
@@ -102,10 +110,14 @@ class _GoogleResultState extends State<GoogleResult>
 
         if (result.isEmpty) {
           return const Center(
-            child: CustomErrorWidget(
-              iconSize: 50,
-              error: "Your search did not match any results.\n\n"
-                  "Make sure all words are spelled correctly or Try different keywords.",
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(10.0),
+              child: CustomErrorWidget(
+                iconSize: 50,
+                error: "**Your search did not match any results results**\n\n"
+                    "* Make sure all words are spelled correctly or Try different keywords.\n"
+                    "* Or maybe you are using a **language** that is not supported yet.",
+              ),
             ),
           );
         }
@@ -162,10 +174,11 @@ class _GoogleResultState extends State<GoogleResult>
   }
 }
 
-String _spokenString(List<GoogleSearchResult> result) {
+String _spokenString(List<SearchResult> result) {
   if (result.isEmpty) {
     return "Your search did not match any results.\n\n"
-        "Make sure all words are spelled correctly or Try different keywords.";
+        "Make sure all words are spelled correctly or Try different keywords.\n"
+        "Or maybe you are using a language that is not supported yet.";
   }
 
   final instructions = firstCharIsArabic(result.first.title)

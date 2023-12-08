@@ -123,40 +123,51 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
         }
 
         return ListView(
-          padding: const EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsets.only(bottom: 10, top: 30),
           children: [
-            CustomCard(
-              padding: const EdgeInsets.all(10),
-              borderRadius: BorderRadius.circular(15),
-              child: Column(
-                children: result.map((inlineString) {
-                  if (inlineString.type == StringTypes.code) {
-                    final code = _getCodeAndlanguageName(inlineString.string);
+            Stack(
+              alignment: Alignment.topCenter,
+              children: [
+                CustomCard(
+                  padding: const EdgeInsets.all(10)
+                      .add(const EdgeInsets.only(top: 20)),
+                  borderRadius: BorderRadius.circular(15),
+                  child: Column(
+                    children: result.map((inlineString) {
+                      if (inlineString.type == StringTypes.code) {
+                        final code =
+                            _getCodeAndlanguageName(inlineString.string);
 
-                    return CodeContainer(
-                      code: code.first,
-                      languageName: code.second,
-                    );
-                  }
+                        return CodeContainer(
+                          code: code.first,
+                          languageName: code.second,
+                        );
+                      }
 
-                  if (inlineString.type == StringTypes.bulleted) {
-                    return BulletedList(
-                      textDirection: firstCharIsArabic(snapshot.data!)
-                          ? TextDirection.rtl
-                          : TextDirection.ltr,
-                      text: TextWellFormattedWitouthBulleted(
-                        data: inlineString.string.substring(2),
+                      if (inlineString.type == StringTypes.bulleted) {
+                        return BulletedList(
+                          textDirection: firstCharIsArabic(snapshot.data!)
+                              ? TextDirection.rtl
+                              : TextDirection.ltr,
+                          text: TextWellFormattedWitouthBulleted(
+                            data: inlineString.string.substring(2),
+                            isSelectableText: true,
+                          ),
+                        );
+                      }
+
+                      return TextWellFormattedWitouthBulleted(
+                        data: inlineString.string,
                         isSelectableText: true,
-                      ),
-                    );
-                  }
-
-                  return TextWellFormattedWitouthBulleted(
-                    data: inlineString.string,
-                    isSelectableText: true,
-                  );
-                }).toList(),
-              ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                Transform.translate(
+                  offset: const Offset(0.0, -30.0),
+                  child: Image.asset("assets/images/ai.png", height: 55),
+                ),
+              ],
             ).animate().fade(duration: 200.ms).moveY(duration: 200.ms),
           ],
         );

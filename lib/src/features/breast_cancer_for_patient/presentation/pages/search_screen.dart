@@ -9,8 +9,9 @@ import '../../../../core/util/builders/custom_snack_bar.dart';
 import '../../../../core/util/widgets/default_screen.dart';
 
 import '../../../account/presentation/providers/account.dart';
+import '../../domain/entities/search_types.dart';
 import '../widgets/ai_result.dart';
-import '../widgets/google_result.dart';
+import '../widgets/web_search_result.dart';
 import '../widgets/search_field.dart';
 import '../widgets/search_keywords.dart';
 import '../widgets/search_type_choices.dart';
@@ -164,8 +165,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   padding: const EdgeInsets.only(left: 35),
                   child: SearchField(
                     controller: _controller,
-                    hintText:
-                        _searchType == SearchTypes.ai ? "Ask AI" : "Search",
+                    hintText: _searchTypeToString(_searchType),
                     flutterTts: _flutterTts,
                     setSearchWord: _setSearchWord,
                   ),
@@ -204,8 +204,9 @@ class _SearchScreenState extends State<SearchScreen> {
                   )
                 else
                   Expanded(
-                    child: GoogleResult(
+                    child: WebSearchResult(
                       searchWord: _searchWord!,
+                      searchType: _searchType,
                       textToSpeech: _textToSpeech,
                       flutterTts: _flutterTts,
                     ),
@@ -219,7 +220,15 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 }
 
-enum SearchTypes {
-  google,
-  ai,
+String _searchTypeToString(SearchTypes searchType) {
+  switch (searchType) {
+    case SearchTypes.ai:
+      return "Ask AI";
+    case SearchTypes.google:
+      return "Google Search";
+    case SearchTypes.googleScholar:
+      return "Google Scholar Search";
+    case SearchTypes.wikipedia:
+      return "Wikipedia Search";
+  }
 }

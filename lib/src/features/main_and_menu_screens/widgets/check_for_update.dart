@@ -73,8 +73,8 @@ void forcUpdateDialog(BuildContext context) {
     barrierDismissible: false,
     title: "Need Update",
     contentPadding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
-    content: "App current version isn't supported enymore, You have to update "
-        "to the latest version.",
+    content: "This version of Breast Cancer Awareness isn't supported enymore, "
+        "You have to update to the latest version.",
     actionsBuilder: (dialogContext) => [
       ElevatedButton(
         onPressed: () {

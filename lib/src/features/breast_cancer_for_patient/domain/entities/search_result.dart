@@ -1,13 +1,13 @@
-class GoogleSearchResult {
-  GoogleSearchResult({
+class SearchResult {
+  const SearchResult({
     required this.title,
     required this.link,
     required this.snippet,
   });
 
-  String title;
-  String link;
-  String snippet;
+  final String title;
+  final String link;
+  final String snippet;
 
   @override
   String toString() {
