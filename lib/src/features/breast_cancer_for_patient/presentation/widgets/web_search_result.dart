@@ -129,43 +129,63 @@ class _WebSearchResultState extends State<WebSearchResult>
               alignment: Alignment.topCenter,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 40),
+                  padding: const EdgeInsets.only(top: 60),
                   child: Column(
                     children: [
                       ...result.map(
-                        (googleSearchResult) => CustomCard(
+                        (searchResult) => CustomCard(
                           padding: const EdgeInsets.all(10),
                           margin: const EdgeInsets.only(bottom: 15),
                           borderRadius: BorderRadius.circular(15),
                           elevation: 5,
                           onTap: () {
                             launchUrl(
-                              Uri.parse(googleSearchResult.link),
+                              Uri.parse(searchResult.link),
                               mode: LaunchMode.externalApplication,
                             );
                           },
                           child: Column(
                             children: [
-                              Text(
-                                googleSearchResult.title,
-                                textAlign: TextAlign.center,
-                                textDirection:
-                                    firstCharIsArabic(googleSearchResult.title)
-                                        ? TextDirection.rtl
-                                        : TextDirection.ltr,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              Row(
+                                children: [
+                                  Image.network(
+                                    searchResult.imageLink,
+                                    height: 32,
+                                    width: 32,
+                                    errorBuilder: (ctx, error, stk) {
+                                      return Image.asset(
+                                        searchTypeToAssetImage(
+                                            widget.searchType),
+                                        height: 32,
+                                        width: 32,
+                                      );
+                                    },
+                                  ),
+                                  const SizedBox(width: 20),
+                                  Expanded(
+                                    child: Text(
+                                      searchResult.title,
+                                      textAlign: TextAlign.center,
+                                      textDirection:
+                                          firstCharIsArabic(searchResult.title)
+                                              ? TextDirection.rtl
+                                              : TextDirection.ltr,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                               const Divider(),
                               Text(
-                                googleSearchResult.snippet,
+                                searchResult.snippet,
                                 textAlign: TextAlign.justify,
-                                textDirection: firstCharIsArabic(
-                                        googleSearchResult.snippet)
-                                    ? TextDirection.rtl
-                                    : TextDirection.ltr,
+                                textDirection:
+                                    firstCharIsArabic(searchResult.snippet)
+                                        ? TextDirection.rtl
+                                        : TextDirection.ltr,
                               ),
                             ],
                           ),
@@ -178,6 +198,19 @@ class _WebSearchResultState extends State<WebSearchResult>
                   searchTypeToAssetImage(widget.searchType),
                   height: widget.searchType == SearchTypes.wikipedia ? 55 : 50,
                 ).animate(delay: 200.ms).fade().moveY(),
+                if (widget.searchType == SearchTypes.googleScholar)
+                  Positioned(
+                    right: 0,
+                    top: 30,
+                    child: Text(
+                      "Articles",
+                      style: TextStyle(
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? Colors.black54
+                            : Colors.grey,
+                      ),
+                    ),
+                  ).animate(delay: 200.ms).fade().moveY(),
               ],
             ),
           ],

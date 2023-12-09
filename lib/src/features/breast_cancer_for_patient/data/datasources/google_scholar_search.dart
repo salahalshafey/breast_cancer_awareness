@@ -4,6 +4,7 @@ import 'package:html/dom.dart' as dom;
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 
+import '../../../../core/util/functions/web_utils.dart';
 import '../models/search_result_model.dart';
 
 abstract class GoogleScholarSearch {
@@ -63,6 +64,7 @@ class GoogleScholarScrappingImpl implements GoogleScholarSearch {
             link: urls[i],
             title: titles[i],
             snippet: sinpts[i],
+            imageLink: getWebsitIconFromUrl(urls[i]),
           ),
         );
       }

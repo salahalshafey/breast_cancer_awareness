@@ -5,6 +5,7 @@ class SearchResultModel extends SearchResult {
     required super.title,
     required super.link,
     required super.snippet,
+    required super.imageLink,
   });
 
   factory SearchResultModel.fromJson(Map<String, dynamic> json) {
@@ -12,6 +13,7 @@ class SearchResultModel extends SearchResult {
       title: json["title"],
       link: json["link"],
       snippet: json["snippet"],
+      imageLink: json["image"],
     );
   }
 }
