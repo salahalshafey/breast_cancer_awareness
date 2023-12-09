@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:html/dom.dart' as dom;
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
@@ -12,6 +13,90 @@ abstract class GoogleSearch {
     String query,
     int numOfResult,
   );
+}
+
+class GoogleSearchScrappingImpl implements GoogleSearch {
+  @override
+  Future<List<SearchResultModel>> searchResult(
+    String query,
+    int numOfResult,
+  ) async {
+    try {
+      final searchKey = query.split(RegExp(r" +")).join("+");
+      final fixedKey =
+          firstCharIsArabic(query) ? "سرطان+الثدي" : "Breast+Cancer";
+
+      final url = Uri.parse(
+          'https://www.google.com.eg/search?q=$searchKey+%22$fixedKey%22');
+
+      final headers = {
+        'User-Agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36',
+        'Referer': 'https://www.google.com/',
+      };
+
+      final response = await http.get(url, headers: headers);
+
+      if (response.statusCode != 200) {
+        throw ServerException();
+      }
+
+      final html = dom.Document.html(response.body);
+
+      final targetElements =
+          html.getElementsByClassName("g Ww4FFb vt6azd tF2Cxc asEBEc");
+
+      final urls = <String>[];
+      for (int i = 0; i < targetElements.length; i++) {
+        urls.add(
+          targetElements[i]
+              .getElementsByClassName("yuRUbf")[0]
+              .children[0]
+              .children[0]
+              .children[0]
+              .attributes['href']!,
+        );
+      }
+
+      final titles = <String>[];
+      for (int i = 0; i < targetElements.length; i++) {
+        titles.add(
+          targetElements[i]
+              .getElementsByClassName("LC20lb MBeuO DKV0Md")[0]
+              .text
+              .trim(),
+        );
+      }
+
+      final sinpts = <String>[];
+      for (int i = 0; i < targetElements.length; i++) {
+        final sniptsSpans = targetElements[i]
+            .getElementsByClassName("VwiC3b yXK7lf lVm3ye r025kc hJNv6b")[0]
+            .children;
+
+        sinpts.add(
+          sniptsSpans.length > 1
+              ? sniptsSpans[1].text.trim()
+              : sniptsSpans[0].text.trim(),
+        );
+      }
+
+      final result = <SearchResultModel>[];
+      for (int i = 0; (i < urls.length) && (i < numOfResult); i++) {
+        result.add(
+          SearchResultModel(
+            link: urls[i],
+            title: titles[i],
+            snippet: sinpts[i],
+          ),
+        );
+      }
+
+      return result;
+    } catch (error) {
+      throw ServerException();
+    }
+  }
 }
 
 class HerokuappImpl implements GoogleSearch {

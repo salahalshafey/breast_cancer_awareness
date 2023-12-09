@@ -26,7 +26,14 @@ class GoogleScholarScrappingImpl implements GoogleScholarSearch {
 
       final url = Uri.parse(
           'https://scholar.google.com.eg/scholar?q=$searchKey+%22$breastCancer%22&hl=en&as_sdt=0&as_vis=1&oi=scholart');
-      final response = await http.get(url);
+
+      final headers = {
+        'User-Agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36',
+        'Referer': 'https://www.google.com/',
+      };
+
+      final response = await http.get(url, headers: headers);
 
       if (response.statusCode != 200) {
         throw ServerException();

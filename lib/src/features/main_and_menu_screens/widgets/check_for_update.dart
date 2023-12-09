@@ -99,6 +99,7 @@ void forceUpdateAfterDaysDialog(
   showCustomAlretDialog(
     context: context,
     constraints: const BoxConstraints(maxWidth: 500),
+    barrierDismissible: false,
     titleColor: titleColor,
     title: "Need Update",
     contentPadding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
@@ -139,6 +140,7 @@ void selectiveUpdateDialog(
   showCustomAlretDialog(
     context: context,
     constraints: const BoxConstraints(maxWidth: 500),
+    barrierDismissible: false,
     titleColor: titleColor,
     title: "Update App?",
     contentPadding: const EdgeInsetsDirectional.symmetric(horizontal: 20),

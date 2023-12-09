@@ -146,7 +146,7 @@ Future<void> init() async {
 // Datasources
 
   sl.registerLazySingleton<AIChat>(() => MakerSuite());
-  sl.registerLazySingleton<GoogleSearch>(() => HerokuappImpl());
+  sl.registerLazySingleton<GoogleSearch>(() => GoogleSearchScrappingImpl());
   sl.registerLazySingleton<GoogleScholarSearch>(
       () => GoogleScholarScrappingImpl());
   sl.registerLazySingleton<WikipediaSearch>(() => WikipediaScrappingImpl());

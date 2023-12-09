@@ -30,7 +30,13 @@ class WikipediaScrappingImpl implements WikipediaSearch {
       final url = Uri.parse(
           'https://$lang.wikipedia.org/w/index.php?search=$searchKey+%22$breastCancer%22&title=$searchHeaderTitle&profile=advanced&fulltext=1&ns0=1');
 
-      final response = await http.get(url);
+      final headers = {
+        'User-Agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36',
+        'Referer': 'https://www.google.com/',
+      };
+
+      final response = await http.get(url, headers: headers);
 
       if (response.statusCode != 200) {
         throw ServerException();
