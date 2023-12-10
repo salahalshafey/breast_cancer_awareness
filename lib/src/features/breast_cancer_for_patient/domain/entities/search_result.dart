@@ -1,18 +1,18 @@
 class SearchResult {
   const SearchResult({
-    required this.title,
     required this.link,
+    required this.title,
     required this.snippet,
-    required this.imageLink,
+    required this.image,
   });
 
-  final String title;
   final String link;
+  final String title;
   final String snippet;
-  final String imageLink;
+  final String image;
 
   @override
   String toString() {
-    return "GoogleSearchResult(\ntitle: $title \nlink: $link \nsnippet: $snippet \nimageLink: $imageLink\n)";
+    return "GoogleSearchResult(\ntitle: $title \nlink: $link \nsnippet: $snippet \nimageLink: $image\n)";
   }
 }

@@ -149,7 +149,7 @@ class _WebSearchResultState extends State<WebSearchResult>
                               Row(
                                 children: [
                                   Image.network(
-                                    searchResult.imageLink,
+                                    searchResult.image,
                                     height: 32,
                                     width: 32,
                                     errorBuilder: (ctx, error, stk) {

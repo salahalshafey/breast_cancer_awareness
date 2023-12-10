@@ -64,7 +64,7 @@ class GoogleScholarScrappingImpl implements GoogleScholarSearch {
             link: urls[i],
             title: titles[i],
             snippet: sinpts[i],
-            imageLink: getWebsitIconFromUrl(urls[i]),
+            image: getWebsitIconFromUrl(urls[i]),
           ),
         );
       }

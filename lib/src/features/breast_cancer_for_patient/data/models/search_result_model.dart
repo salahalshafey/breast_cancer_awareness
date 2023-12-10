@@ -2,18 +2,18 @@ import '../../domain/entities/search_result.dart';
 
 class SearchResultModel extends SearchResult {
   const SearchResultModel({
-    required super.title,
     required super.link,
+    required super.title,
     required super.snippet,
-    required super.imageLink,
+    required super.image,
   });
 
   factory SearchResultModel.fromJson(Map<String, dynamic> json) {
     return SearchResultModel(
-      title: json["title"],
       link: json["link"],
+      title: json["title"],
       snippet: json["snippet"],
-      imageLink: json["image"],
+      image: json["image"],
     );
   }
 }
