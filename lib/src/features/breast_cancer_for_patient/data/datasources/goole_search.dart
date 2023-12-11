@@ -47,40 +47,31 @@ class GoogleSearchScrappingImpl implements GoogleSearch {
       final targetElements =
           html.getElementsByClassName("g Ww4FFb vt6azd tF2Cxc asEBEc");
 
-      final urls = <String>[];
-      for (int i = 0; i < targetElements.length; i++) {
-        urls.add(
-          targetElements[i]
+      final urls = targetElements
+          .map((element) => element
               .getElementsByClassName("yuRUbf")[0]
               .children[0]
               .children[0]
               .children[0]
-              .attributes['href']!,
-        );
-      }
+              .attributes['href']!)
+          .toList();
 
-      final titles = <String>[];
-      for (int i = 0; i < targetElements.length; i++) {
-        titles.add(
-          targetElements[i]
+      final titles = targetElements
+          .map((element) => element
               .getElementsByClassName("LC20lb MBeuO DKV0Md")[0]
               .text
-              .trim(),
-        );
-      }
+              .trim())
+          .toList();
 
-      final sinpts = <String>[];
-      for (int i = 0; i < targetElements.length; i++) {
-        final sniptsSpans = targetElements[i]
+      final sinpts = targetElements.map((element) {
+        final sniptsSpans = element
             .getElementsByClassName("VwiC3b yXK7lf lVm3ye r025kc hJNv6b")[0]
             .children;
 
-        sinpts.add(
-          sniptsSpans.length > 1
-              ? sniptsSpans[1].text.trim()
-              : sniptsSpans[0].text.trim(),
-        );
-      }
+        return sniptsSpans.length > 1
+            ? sniptsSpans[1].text.trim()
+            : sniptsSpans[0].text.trim();
+      }).toList();
 
       final result = <SearchResultModel>[];
       for (int i = 0; (i < urls.length) && (i < numOfResult); i++) {

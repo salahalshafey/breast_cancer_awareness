@@ -116,7 +116,7 @@ class LandingPageWithCheckForUpdate extends StatelessWidget {
           ? "1 day"
           : "$daysToUpdate days";
 
-      Future.delayed(const Duration(seconds: 3), () {
+      Future.delayed(const Duration(seconds: 2), () {
         forceUpdateAfterDaysDialog(context, daysToUpdateString);
       });
 
@@ -124,7 +124,7 @@ class LandingPageWithCheckForUpdate extends StatelessWidget {
     }
 
     if (currentAppVersion < latestAppVersion) {
-      Future.delayed(const Duration(seconds: 3), () {
+      Future.delayed(const Duration(seconds: 2), () {
         selectiveUpdateDialog(context, latestAppVersion, currentAppVersion);
       });
 
