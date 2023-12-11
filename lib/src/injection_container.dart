@@ -29,7 +29,7 @@ import 'features/breast_cancer_for_normal/presentation/providers/notes.dart';
 
 import 'features/breast_cancer_for_patient/data/datasources/ai_chat.dart';
 import 'features/breast_cancer_for_patient/data/datasources/google_scholar_search.dart';
-import 'features/breast_cancer_for_patient/data/datasources/goole_search.dart';
+import 'features/breast_cancer_for_patient/data/datasources/google_search.dart';
 import 'features/breast_cancer_for_patient/data/datasources/wikipedia_search.dart';
 import 'features/breast_cancer_for_patient/data/repositories/search_repositories_impl.dart';
 import 'features/breast_cancer_for_patient/domain/repositories/search_repositories.dart';

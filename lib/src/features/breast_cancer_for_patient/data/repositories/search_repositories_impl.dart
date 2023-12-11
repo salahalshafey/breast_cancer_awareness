@@ -6,7 +6,7 @@ import '../../domain/entities/search_result.dart';
 import '../../domain/repositories/search_repositories.dart';
 
 import '../datasources/ai_chat.dart';
-import '../datasources/goole_search.dart';
+import '../datasources/google_search.dart';
 import '../datasources/google_scholar_search.dart';
 import '../datasources/wikipedia_search.dart';
 
