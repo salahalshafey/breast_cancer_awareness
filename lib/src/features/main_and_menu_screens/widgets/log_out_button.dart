@@ -14,7 +14,7 @@ class LogOutButton extends StatelessWidget {
     final account = Provider.of<Account>(context, listen: false);
 
     return Align(
-      alignment: Alignment.bottomLeft,
+      alignment: AlignmentDirectional.bottomStart,
       child: OutlinedButton.icon(
         onPressed: () async {
           account.signOut(context);

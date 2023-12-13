@@ -11,7 +11,8 @@ void goToScreenWithSlideTransition(
     context,
     PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => screen,
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      transitionsBuilder: (ctx, animation, secondaryAnimation, child) {
+        // ScaffoldMessenger.of(ctx).removeCurrentSnackBar();
         return SlideTransition(
           position: Tween<Offset>(
             begin: beginOffset,

@@ -1,0 +1,15 @@
+{
+    "english": "الإنجليزية",
+    "arabic": "العربية",
+
+    "settings": "الإعدادات",
+    "theme": "السمات",
+    "systemDefault": "تلقائياً",
+    "light": "فاتح",
+    "dark": "مظلم",
+    "language": "اللغة",
+    "notifications": "الإشعارات",
+
+    "selfCheckNow": "فحص-ذاتي الان",
+    "myBreastCheckHistory": "سجل الفحص الذاتي"
+}

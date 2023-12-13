@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../widgets/awareness/awareness_title.dart';
 import '../widgets/awareness/greeting.dart';
 import '../widgets/custom_texts.dart';
@@ -39,10 +41,10 @@ class HomeScreen extends StatelessWidget {
                 padding: MaterialStatePropertyAll(
                     EdgeInsets.symmetric(horizontal: 55)),
               ),
-              child: const Text(
-                "SELF-CHECK NOW",
+              child: Text(
+                AppLocalizations.of(context)!.selfCheckNow,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
@@ -55,10 +57,10 @@ class HomeScreen extends StatelessWidget {
                 context,
                 const BreastCheckHistoryScreen(),
               ),
-              child: const Text(
-                "MY BREAST-CHECK HISTORY",
+              child: Text(
+                AppLocalizations.of(context)!.myBreastCheckHistory,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),

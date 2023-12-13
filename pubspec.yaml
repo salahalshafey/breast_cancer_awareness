@@ -30,6 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: any
 
 
  # flutter_local_notifications:
@@ -76,6 +79,7 @@ dependencies:
   flutter_facebook_auth: ^5.0.11
   twitter_login: ^4.4.0
   ntp: ^2.0.0
+  #devicelocale: ^0.7.0
   #flutter_html: ^3.0.0-beta.2
   #flutter_markdown: ^0.6.17+3
   #observe_internet_connectivity: ^1.0.2
@@ -105,6 +109,7 @@ flutter_icons:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

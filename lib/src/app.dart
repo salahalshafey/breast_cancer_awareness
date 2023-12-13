@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'core/theme/colors.dart';
 import 'core/theme/dark_theme.dart';
 import 'core/theme/light_theme.dart';
@@ -39,7 +41,9 @@ class MyApp extends StatelessWidget {
     navigatorKey = _navigatorKey;
 
     final settingsProvider = Provider.of<SettingsProvider>(context);
+
     final currentThemeMode = settingsProvider.themeMode;
+    final currentLocale = settingsProvider.currentLocale;
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -48,6 +52,9 @@ class MyApp extends StatelessWidget {
       theme: myLightTheme(),
       darkTheme: myDarkTheme(),
       themeMode: currentThemeMode,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: currentLocale,
       home: const LandingPageWithCheckForUpdate(),
       routes: {
         SignInScreen.routName: (ctx) => const SignInScreen(),
@@ -159,6 +166,10 @@ class LandingPage extends StatelessWidget {
             !userSnapshot.data!.isAnonymous) {
           return const SecondSignUpScreen();
         }
+
+        final settingsProvider = Provider.of<SettingsProvider>(context);
+
+        print(settingsProvider.currentLanguageCode);
 
         return const MainScreenWithDrawer();
       },

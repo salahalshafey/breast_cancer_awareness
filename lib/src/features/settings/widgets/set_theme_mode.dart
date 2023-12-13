@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../core/theme/colors.dart';
 
 import '../providers/settings_provider.dart';
@@ -11,12 +13,13 @@ class SetThemeMode extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
+      // alignment: AlignmentDirectional.centerStart,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            "Theme",
-            style: TextStyle(
+          Text(
+            AppLocalizations.of(context)!.theme,
+            style: const TextStyle(
               color: MyColors.tetraryColor,
               fontSize: 20,
             ),
@@ -32,7 +35,7 @@ class SetThemeMode extends StatelessWidget {
                       onPressed: null,
                       icon: const Icon(Icons.light_mode),
                       label: Text(
-                        "Light",
+                        AppLocalizations.of(context)!.light,
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontSize: 18,
@@ -47,7 +50,7 @@ class SetThemeMode extends StatelessWidget {
                       onPressed: null,
                       icon: const Icon(Icons.dark_mode),
                       label: Text(
-                        "Dark",
+                        AppLocalizations.of(context)!.dark,
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontSize: 18,
@@ -62,7 +65,7 @@ class SetThemeMode extends StatelessWidget {
                       onPressed: null,
                       icon: const Icon(Icons.brightness_6),
                       label: Text(
-                        "System default",
+                        AppLocalizations.of(context)!.systemDefault,
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontSize: 18,

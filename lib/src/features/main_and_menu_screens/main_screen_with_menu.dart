@@ -20,6 +20,7 @@ class MainScreenWithDrawer extends StatelessWidget {
       style: DrawerStyle.defaultStyle,
       menuScreen: const MenuScreen(),
       mainScreen: const MainScreen(),
+      // isRtl: true,
       //dragOffset: 0,
       borderRadius: 24.0,
       androidCloseOnBackTap: true,

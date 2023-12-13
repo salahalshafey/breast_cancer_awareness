@@ -1,0 +1,48 @@
+{
+  "english": "English",
+  "@english": {
+    "description": "the english language"
+  },
+  "arabic": "Arabic",
+  "@arabic": {
+    "description": "the arabic language"
+  },
+
+  "settings": "Settings",
+  "@settings": {
+    "description": "title of settings screen"
+  },
+  "theme": "Theme",
+  "@theme": {
+  "description": "theme text of settings screen"
+  },
+  "systemDefault": "System default",
+  "@systemDefault": {
+    "description": "System default of theme"
+  },
+  "light": "Light",
+  "@light": {
+    "description": "Light mode of theme"
+  },
+  "dark": "Dark",
+  "@dark": {
+    "description": "Dark mode of theme"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "the language word"
+  },
+  "notifications": "Notifications",
+  "@language": {
+    "description": "the notifications word"
+  },
+
+  "selfCheckNow": "SELF-CHECK NOW",
+  "@selfCheckNow": {
+    "description": "self check button on the home screen"
+  },
+   "myBreastCheckHistory": "MY BREAST-CHECK HISTORY",
+  "@myBreastCheckHistory": {
+    "description": "Breast Check History button on the home screen"
+  }
+}

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../core/theme/colors.dart';
 
 import '../providers/settings_provider.dart';
@@ -15,9 +17,9 @@ class SetNotificationsMode extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
-          "Notifications",
-          style: TextStyle(
+        Text(
+          AppLocalizations.of(context)!.notifications,
+          style: const TextStyle(
             color: MyColors.tetraryColor,
             fontSize: 18,
           ),

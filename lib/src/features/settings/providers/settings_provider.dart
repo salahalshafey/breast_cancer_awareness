@@ -3,6 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../app.dart';
+import '../../../core/util/classes/pair_class.dart';
 import '../../breast_cancer_for_normal/presentation/providers/notification.dart';
 
 class SettingsProvider with ChangeNotifier {
@@ -45,7 +49,35 @@ class SettingsProvider with ChangeNotifier {
 ////////////////////////////// language ////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-  String get currentLanguage => _userSettings.language;
+  String get currentLanguageCode {
+    final context = navigatorKey.currentContext!;
+
+    if (_userSettings.languageCode == null) {
+      return Localizations.localeOf(context).languageCode;
+    }
+
+    return _userSettings.languageCode!;
+  }
+
+  Locale? get currentLocale => _userSettings.languageCode == null
+      ? null
+      : Locale(_userSettings.languageCode!);
+
+  List<Pair<String, String>> get allAvailableLanguagesFullName {
+    final context = navigatorKey.currentContext!;
+
+    return [
+      Pair("en", AppLocalizations.of(context)!.english),
+      Pair('ar', AppLocalizations.of(context)!.arabic),
+    ];
+  }
+
+  void changeLocale(String languageCode) {
+    _userSettings = _userSettings.copyWith(languageCode: languageCode);
+    _saveSettings();
+
+    notifyListeners();
+  }
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////// notifications ///////////////////////////////////
@@ -68,6 +100,13 @@ class SettingsProvider with ChangeNotifier {
 ////////////////////////// save the settings in local //////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
+  void restSettings() {
+    _userSettings = Settings.defaultValues();
+
+    _saveSettings();
+    notifyListeners();
+  }
+
   void _saveSettings() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -80,18 +119,18 @@ class SettingsProvider with ChangeNotifier {
 
 class Settings {
   final String theme;
-  final String language;
+  final String? languageCode;
   final bool notification;
 
   const Settings({
     required this.theme,
-    required this.language,
+    required this.languageCode,
     required this.notification,
   });
 
   Settings.defaultValues()
       : theme = "system",
-        language = "english",
+        languageCode = null,
         notification = true;
 
   factory Settings.fromJson(Map<String, dynamic>? json) {
@@ -101,25 +140,25 @@ class Settings {
 
     return Settings(
       theme: json["theme"] ?? "system",
-      language: json["language"] ?? "english",
+      languageCode: json["language_code"],
       notification: json["notification"] ?? true,
     );
   }
 
   Map<String, dynamic> toJson() => {
         'theme': theme,
-        'language': language,
+        'language_code': languageCode,
         'notification': notification,
       };
 
   Settings copyWith({
     String? theme,
-    String? language,
+    String? languageCode,
     bool? notification,
   }) {
     return Settings(
       theme: theme ?? this.theme,
-      language: language ?? this.language,
+      languageCode: languageCode ?? this.languageCode,
       notification: notification ?? this.notification,
     );
   }
@@ -127,7 +166,7 @@ class Settings {
   @override
   String toString() {
     return "current theme: $theme\n"
-        "current language: $language\n"
+        "current language Code: $languageCode\n"
         "get notification: $notification\n";
   }
 }
