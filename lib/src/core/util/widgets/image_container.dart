@@ -612,7 +612,7 @@ class _ImageScreenState extends State<ImageScreen> {
                 child: SelectableLinkifyText(
                   text: widget.caption!,
                   textAlign: TextAlign.justify,
-                  textDirection: firstCharIsArabic(widget.caption!)
+                  textDirection: firstCharIsRtl(widget.caption!)
                       ? TextDirection.rtl
                       : TextDirection.ltr,
                   style: const TextStyle(
@@ -863,7 +863,7 @@ extension on String {
       text: TextSpan(text: this, style: textStyle),
       textAlign: TextAlign.justify,
       textDirection:
-          firstCharIsArabic(this) ? TextDirection.rtl : TextDirection.ltr,
+          firstCharIsRtl(this) ? TextDirection.rtl : TextDirection.ltr,
     );
 
     // Layout constraints, if any

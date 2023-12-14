@@ -29,7 +29,7 @@ class _SearchFieldState extends State<SearchField> {
   final _focusNode = FocusNode();
   bool _hasFocus = false;
 
-  late TextDirection _textDirection = firstCharIsArabic(widget.controller.text)
+  late TextDirection _textDirection = firstCharIsRtl(widget.controller.text)
       ? TextDirection.rtl
       : TextDirection.ltr;
 
@@ -102,7 +102,7 @@ class _SearchFieldState extends State<SearchField> {
             style: const TextStyle(color: Colors.white, fontSize: 20),
             onChanged: (value) {
               setState(() {
-                _textDirection = firstCharIsArabic(value)
+                _textDirection = firstCharIsRtl(value)
                     ? TextDirection.rtl
                     : TextDirection.ltr;
               });

@@ -76,6 +76,28 @@
 
 
 
+    "@_PROFILE_SCREEN": {},
+    "somethingWentWrong": "حدث خطأ ما!!",
+    "youAreAGuest": "أنت ضيف ولم تسجل حساب بعد",
+    "email": "البريد الإلكتروني",
+    "facebook": "فيسبوك",
+    "twitter": "تويتر",
+    "x": "إكس",
+    "google": "جوجل",
+    "emailOfYourProviderAccount": "البريد الإلكتروني لحساب {providerName} الخاص بك",
+    "fullName": "الإسم بالكامل",
+    "noPhoneNumberProvided": "لا يوجد رقم هاتف",
+    "phoneNumber": "رقم الهاتف",
+    "doctor": "طبيب",
+    "patient": "مريض",
+    "normal": "عادي",
+    "userType": "نوع المستخدم",
+    "userOf": "مستخدم {userType}",
+    "joinedIn": "تم الانضمام في {dateOfSignUp}",
+    "editProfile": "تعديل الملف الشخصي",
+  
+
+
     "@_HOME_SCREEN": {},
     "selfCheckNow": "فحص-ذاتي الان",
     "myBreastCheckHistory": "سجل الفحص الذاتي"

@@ -33,13 +33,9 @@ class _EditProfileFormState extends State<EditProfileForm> {
   bool _isPhoneFocused = false;
 
   late TextDirection _textDirectionForFirstName =
-      firstCharIsArabic(widget.firstNameController.text)
-          ? TextDirection.rtl
-          : TextDirection.ltr;
+      getDirectionalityOf(widget.firstNameController.text);
   late TextDirection _textDirectionForLastName =
-      firstCharIsArabic(widget.lastNameController.text)
-          ? TextDirection.rtl
-          : TextDirection.ltr;
+      getDirectionalityOf(widget.lastNameController.text);
 
   @override
   void initState() {
@@ -130,7 +126,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
                     widget.renderState();
 
                     setState(() {
-                      _textDirectionForFirstName = firstCharIsArabic(value)
+                      _textDirectionForFirstName = firstCharIsRtl(value)
                           ? TextDirection.rtl
                           : TextDirection.ltr;
                     });
@@ -173,9 +169,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
                     widget.renderState();
 
                     setState(() {
-                      _textDirectionForLastName = firstCharIsArabic(value)
-                          ? TextDirection.rtl
-                          : TextDirection.ltr;
+                      _textDirectionForLastName = getDirectionalityOf(value);
                     });
                   },
                 ),
@@ -196,6 +190,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
             ],
             keyboardType: TextInputType.phone,
             textInputAction: TextInputAction.done,
+            textDirection: TextDirection.ltr,
             style: const TextStyle(color: Colors.white, fontSize: 20),
             decoration: InputDecoration(
               hintText: 'Phone Number',

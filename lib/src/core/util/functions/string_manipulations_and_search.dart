@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart' as intl;
+
+import '../../../app.dart';
 import '../classes/pair_class.dart';
 
 /// ## This function takes three parameters:
@@ -142,9 +146,30 @@ String wellFormatedString(String str) {
 
 String firstName(String fullName) => fullName.split(RegExp(r' +')).first;
 
-bool firstCharIsArabic(String text) {
+bool firstCharIsRtl(String text) {
+  final context = navigatorKey.currentContext!;
+
   if (text.isEmpty) {
-    return false;
+    return Directionality.of(context) == TextDirection.rtl;
+  }
+
+  return intl.Bidi.startsWithRtl(text);
+}
+
+TextDirection getDirectionalityOf(String text) =>
+    firstCharIsRtl(text) ? TextDirection.rtl : TextDirection.ltr;
+
+/// ### Useful to detect if the first character in a string is an Arabic OR English character.
+///
+/// * If `true` this means it starts with an **Arabic** character OR empty and `Directionality.of(context)` is [TextDirection.rtl].
+///
+/// * If `false` this means it starts with an **English** character OR empty and `Directionality.of(context)` is [TextDirection.ltr].
+///
+bool firstCharIsArabic(String text) {
+  final context = navigatorKey.currentContext!;
+
+  if (text.isEmpty) {
+    return Directionality.of(context) == TextDirection.rtl;
   }
 
   final arabicChars = 'ا؟؛أإءئؤآبتثةجحخدذرزسشصضطظعغفقكلمنهويلالآى'.toSet();
@@ -162,7 +187,8 @@ bool firstCharIsArabic(String text) {
     }
   }
 
-  return false; // if all chars is special chars
+  // if all chars is special chars
+  return Directionality.of(context) == TextDirection.rtl;
 }
 
 extension on String {

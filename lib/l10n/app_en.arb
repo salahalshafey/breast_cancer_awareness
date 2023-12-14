@@ -245,6 +245,100 @@
 
 
 
+  "@_PROFILE_SCREEN": {},
+  "somethingWentWrong": "Something went wrong!!",
+  "@somethingWentWrong": {
+    "description": "response if error happend while getting user data"
+  },
+  "youAreAGuest": "You Are a Guest",
+  "@youAreAGuest": {
+    "description": "all the available user data in case of 'guest or anonymous' user"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "the Email word"
+  },
+  "facebook": "Facebook",
+  "@facebook": {
+    "description": "the Facebook word"
+  },
+  "twitter": "Twitter",
+  "@twitter": {
+    "description": "the Twitter word"
+  },
+  "x": "X",
+  "@x": {
+    "description": "the X word 'for X company OR Twitter'"
+  },
+  "google": "Google",
+  "@google": {
+    "description": "the Google word"
+  },
+  "emailOfYourProviderAccount": "Email of Your {providerName} Account",
+  "@emailOfYourProviderAccount": {
+    "description": "tooltip of providerName of profile screen",
+    "placeholders": {
+      "providerName": {
+        "type": "String",
+        "example": "Google"
+      }
+    }
+  },
+  "fullName": "Full Name",
+  "@fullName": {
+    "description": "the Full Name tooltip"
+  },
+  "noPhoneNumberProvided": "No phone number provided",
+  "@noPhoneNumberProvided": {
+    "description": "in case if user didn't provide a phone number of profile screen"
+  },
+  "phoneNumber": "Phone Number",
+  "@phoneNumber": {
+    "description": "the Phone Number word"
+  },
+  "doctor": "Doctor",
+  "@doctor": {
+    "description": "the Doctor word"
+  },
+  "patient": "Patient",
+  "@patient": {
+    "description": "the Patient word"
+  },
+  "normal": "Normal",
+  "@normal": {
+    "description": "the Normal word"
+  },
+  "userType": "User Type",
+  "@userType": {
+    "description": "the User Type tooltip"
+  },
+  "userOf": "{userType} User",
+  "@userOf": {
+    "description": "the type of the user on the profile screen, like 'Doctor User'",
+    "placeholders": {
+      "userType": {
+        "type": "String",
+        "example": "Doctor"
+      }
+    }
+  },
+  "joinedIn": "Joined {dateOfSignUp}",
+  "@joinedIn": {
+    "description": "the date when the user joned in profile screen",
+    "placeholders": {
+      "dateOfSignUp": {
+        "type": "String",
+        "example": "November 2022"
+      }
+    }
+  },
+  "editProfile": "    Edit Profile    ",
+  "@editProfile": {
+    "description": "editProfile button in profile screen"
+  },
+
+
+
   "@_HOME_SCREEN": {},
   "selfCheckNow": "SELF-CHECK NOW",
   "@selfCheckNow": {

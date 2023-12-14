@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/util/widgets/image_container.dart';
 import '../../../domain/entities/user_information.dart';
 import '../../providers/account.dart';
@@ -31,11 +33,11 @@ class GuestView extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        const Align(
+        Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            "You Are a Guest",
-            style: TextStyle(
+            AppLocalizations.of(context)!.youAreAGuest,
+            style: const TextStyle(
               color: Color.fromRGBO(193, 27, 107, 1),
               fontSize: 25,
               fontWeight: FontWeight.bold,
@@ -50,7 +52,7 @@ class GuestView extends StatelessWidget {
               account.signOut(context);
               Navigator.of(context).pop();
             },
-            child: const Text("Sign In"),
+            child: Text(AppLocalizations.of(context)!.signIn),
           ),
         ),
       ],

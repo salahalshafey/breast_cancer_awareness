@@ -213,7 +213,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   ),
                   onChanged: (value) {
                     setState(() {
-                      _firstNameTextDirection = firstCharIsArabic(value)
+                      _firstNameTextDirection = firstCharIsRtl(value)
                           ? TextDirection.rtl
                           : TextDirection.ltr;
                     });
@@ -264,7 +264,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   ),
                   onChanged: (value) {
                     setState(() {
-                      _lastNameTextDirection = firstCharIsArabic(value)
+                      _lastNameTextDirection = firstCharIsRtl(value)
                           ? TextDirection.rtl
                           : TextDirection.ltr;
                     });

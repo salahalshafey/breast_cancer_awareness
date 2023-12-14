@@ -167,7 +167,7 @@ class _WebSearchResultState extends State<WebSearchResult>
                                       searchResult.title,
                                       textAlign: TextAlign.center,
                                       textDirection:
-                                          firstCharIsArabic(searchResult.title)
+                                          firstCharIsRtl(searchResult.title)
                                               ? TextDirection.rtl
                                               : TextDirection.ltr,
                                       style: const TextStyle(
@@ -183,7 +183,7 @@ class _WebSearchResultState extends State<WebSearchResult>
                                 searchResult.snippet,
                                 textAlign: TextAlign.justify,
                                 textDirection:
-                                    firstCharIsArabic(searchResult.snippet)
+                                    firstCharIsRtl(searchResult.snippet)
                                         ? TextDirection.rtl
                                         : TextDirection.ltr,
                               ),
@@ -227,7 +227,7 @@ String _spokenString(List<SearchResult> result) {
         "Or maybe you are using a language that is not supported yet.";
   }
 
-  final instructions = firstCharIsArabic(result.first.title)
+  final instructions = firstCharIsRtl(result.first.title)
       ? "فيما يلي نتائج أخرى، يمكنك الضغط على أي من هذه النتائج لفتحها."
       : "Below is another search results. You can tap on any result to open it.";
 

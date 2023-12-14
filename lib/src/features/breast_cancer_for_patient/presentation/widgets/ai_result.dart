@@ -146,7 +146,7 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
 
                       if (inlineString.type == StringTypes.bulleted) {
                         return BulletedList(
-                          textDirection: firstCharIsArabic(snapshot.data!)
+                          textDirection: firstCharIsRtl(snapshot.data!)
                               ? TextDirection.rtl
                               : TextDirection.ltr,
                           text: TextWellFormattedWitouthBulleted(

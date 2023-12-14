@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/theme/colors.dart';
 import '../../../../core/util/extensions/list_seperator.dart';
 import '../../../../core/util/widgets/default_screen.dart';
@@ -53,7 +55,7 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     Text(
                       snapshot.error == null
-                          ? "Something went wrong!!"
+                          ? AppLocalizations.of(context)!.somethingWentWrong
                           : "${snapshot.error}",
                       textAlign: TextAlign.center,
                     ),
@@ -75,7 +77,7 @@ class ProfileScreen extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 120, horizontal: 20),
                 children: [
                   Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: AlignmentDirectional.centerStart,
                     child: ImageContainer(
                       image: userInfo.imageUrl ??
                           "assets/images/person_avatar.png",
@@ -94,7 +96,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: AlignmentDirectional.centerStart,
                     child: Text(
                       wellFormatedString(
                           "${userInfo.firstName} ${userInfo.lastName}"),
@@ -111,8 +113,11 @@ class ProfileScreen extends StatelessWidget {
                       icon: ProviderIcon(providerId),
                       info: userInfo.email,
                       tooltip: providerId == "password"
-                          ? "Email"
-                          : "Email of Your ${wellFormatedString(providerId.split(".").first)} Account",
+                          ? AppLocalizations.of(context)!.email
+                          : AppLocalizations.of(context)!
+                              .emailOfYourProviderAccount(
+                              providerName(providerId),
+                            ),
                     ),
                     InfoWithIcon(
                       icon: const Icon(
@@ -121,7 +126,7 @@ class ProfileScreen extends StatelessWidget {
                         color: MyColors.primaryColor,
                       ),
                       info: "${userInfo.firstName} ${userInfo.lastName}",
-                      tooltip: "Full Name",
+                      tooltip: AppLocalizations.of(context)!.fullName,
                     ),
                     InfoWithIcon(
                       icon: Icon(
@@ -134,14 +139,17 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       info: userInfo.phoneNumber == null ||
                               userInfo.phoneNumber!.trim().isEmpty
-                          ? "No phone number provided"
+                          ? AppLocalizations.of(context)!.noPhoneNumberProvided
                           : userInfo.phoneNumber!,
-                      tooltip: "Phone Number",
+                      tooltip: AppLocalizations.of(context)!.phoneNumber,
+                      textDirection: TextDirection.ltr,
                     ),
                     InfoWithIcon(
                       icon: UserTypeIcon(userInfo.userType),
-                      info: "${userInfo.userType} User",
-                      tooltip: "User Type",
+                      info: AppLocalizations.of(context)!.userOf(
+                        userType(userInfo.userType),
+                      ),
+                      tooltip: AppLocalizations.of(context)!.userType,
                     ),
                     InfoWithIcon(
                       icon: const Icon(
@@ -149,8 +157,10 @@ class ProfileScreen extends StatelessWidget {
                         size: 30,
                         color: MyColors.primaryColor,
                       ),
-                      info:
-                          "Joined ${wellFormattedDateWithoutDay(userInfo.dateOfSignUp.toLocal())}",
+                      info: AppLocalizations.of(context)!.joinedIn(
+                        wellFormattedDateWithoutDay(
+                            userInfo.dateOfSignUp.toLocal()),
+                      ),
                       tooltip: wellFormattedDateTimeLong(
                         userInfo.dateOfSignUp.toLocal(),
                         seperateByLine: true,
@@ -172,7 +182,7 @@ class ProfileScreen extends StatelessWidget {
                         );
                       },
                       icon: const Icon(Icons.edit),
-                      label: const Text("    Edit Profile    "),
+                      label: Text(AppLocalizations.of(context)!.editProfile),
                       style: const ButtonStyle(
                         fixedSize:
                             MaterialStatePropertyAll(Size.fromWidth(260)),
@@ -227,5 +237,31 @@ class ProviderIcon extends StatelessWidget {
                     size: 30,
                     color: MyColors.primaryColor,
                   );
+  }
+}
+
+String providerName(String providerId) {
+  switch (providerId) {
+    case "google.com":
+      return AppLocalizations.of(context)!.google;
+    case "facebook.com":
+      return AppLocalizations.of(context)!.facebook;
+    case "twitter.com":
+      return AppLocalizations.of(context)!.twitter;
+    default:
+      return AppLocalizations.of(context)!.email;
+  }
+}
+
+String userType(String userType) {
+  switch (userType) {
+    case "Doctor":
+      return AppLocalizations.of(context)!.doctor;
+    case "Patient":
+      return AppLocalizations.of(context)!.patient;
+    case "Normal":
+      return AppLocalizations.of(context)!.normal;
+    default:
+      return AppLocalizations.of(context)!.normal;
   }
 }

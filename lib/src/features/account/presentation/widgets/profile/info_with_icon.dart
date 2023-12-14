@@ -8,12 +8,14 @@ class InfoWithIcon extends StatelessWidget {
     required this.icon,
     required this.info,
     this.textAlign,
+    this.textDirection,
     this.tooltip,
   });
 
   final Widget icon;
   final String info;
   final TextAlign? textAlign;
+  final TextDirection? textDirection;
   final String? tooltip;
 
   @override
@@ -34,6 +36,7 @@ class InfoWithIcon extends StatelessWidget {
                 child: Text(
                   info,
                   textAlign: textAlign,
+                  textDirection: textDirection,
                   style: const TextStyle(
                     color: MyColors.tetraryColor,
                     fontSize: 18,

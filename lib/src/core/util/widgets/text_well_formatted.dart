@@ -38,7 +38,7 @@ class TextWellFormattedWithBulleted extends StatelessWidget {
         if (inlineString.type == StringTypes.bulleted) {
           return BulletedList(
             textDirection:
-                firstCharIsArabic(data) ? TextDirection.rtl : TextDirection.ltr,
+                firstCharIsRtl(data) ? TextDirection.rtl : TextDirection.ltr,
             text: TextWellFormattedWitouthBulleted(
               data: inlineString.string.substring(2),
               fontSize: fontSize,
@@ -237,13 +237,13 @@ class _TextWellFormattedWitouthBulletedState
     return widget.isSelectableText
         ? SelectableText.rich(
             _getTextSpan(context),
-            textDirection: firstCharIsArabic(widget.data)
+            textDirection: firstCharIsRtl(widget.data)
                 ? TextDirection.rtl
                 : TextDirection.ltr,
           )
         : Text.rich(
             _getTextSpan(context),
-            textDirection: firstCharIsArabic(widget.data)
+            textDirection: firstCharIsRtl(widget.data)
                 ? TextDirection.rtl
                 : TextDirection.ltr,
           );

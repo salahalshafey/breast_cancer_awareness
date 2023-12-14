@@ -1,4 +1,18 @@
-String time24To12HoursFormat(int hours, int minuts) {
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../../../app.dart';
+
+final context = navigatorKey.currentContext!;
+
+String time24To12HoursFormat(DateTime dateTime) {
+  return DateFormat(
+    "hh:mm a",
+    Localizations.localeOf(context).languageCode,
+  ).format(dateTime);
+}
+
+/*String time24To12HoursFormat(int hours, int minuts) {
   String minut = minuts.toString();
   if (minut.length < 2) {
     minut = '0$minut';
@@ -16,7 +30,7 @@ String time24To12HoursFormat(int hours, int minuts) {
     return '$hours:$minut AM';
   }
   return '0$hours:$minut AM';
-}
+}*/
 
 String formatedDate(DateTime date) {
   final currentDate = DateTime.now();
@@ -39,7 +53,7 @@ String formatedDate(DateTime date) {
 String wellFormattedDateTime(DateTime date, {bool seperateByLine = false}) {
   return formatedDate(date) +
       (seperateByLine ? '\n' : ' at ') +
-      time24To12HoursFormat(date.hour, date.minute);
+      time24To12HoursFormat(date);
 }
 
 String formatedDuration(Duration time) {
@@ -51,57 +65,19 @@ String formatedDuration(Duration time) {
 /// * if seperateByLine = true, the time 02:30 PM will be in new line
 String wellFormattedDateTimeLong(DateTime dateTime,
     {bool seperateByLine = false}) {
-  const List<String> months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+  final date = DateFormat(
+    "EEEE, d MMMM, y",
+    Localizations.localeOf(context).languageCode,
+  ).format(dateTime);
 
-  const List<String> daysInWeek = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
-
-  final date =
-      "${daysInWeek[dateTime.weekday - 1]}, ${months[dateTime.month - 1]} "
-      "${dateTime.day}, ${dateTime.year}";
-
-  return date +
-      (seperateByLine ? '\n' : ' ') +
-      time24To12HoursFormat(dateTime.hour, dateTime.minute);
+  return date + (seperateByLine ? '\n' : ' ') + time24To12HoursFormat(dateTime);
 }
 
 String wellFormattedDateWithoutDay(DateTime dateTime) {
-  const List<String> months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  return "${months[dateTime.month - 1]} ${dateTime.year}";
+  return DateFormat(
+    "MMMM yyy",
+    Localizations.localeOf(context).languageCode,
+  ).format(dateTime);
 }
 
 DateTime getCurrentDateTimeremovedMinutesAndSeconds() =>

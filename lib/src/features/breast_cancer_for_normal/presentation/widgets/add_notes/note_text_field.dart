@@ -17,7 +17,7 @@ class _NoteTextFieldState extends State<NoteTextField> {
       TextEditingController(text: widget.addNoteState.text);
 
   late TextDirection _textDirection =
-      firstCharIsArabic(widget.addNoteState.text ?? "")
+      firstCharIsRtl(widget.addNoteState.text ?? "")
           ? TextDirection.rtl
           : TextDirection.ltr;
 
@@ -74,7 +74,7 @@ class _NoteTextFieldState extends State<NoteTextField> {
             },
             onChanged: (value) {
               setState(() {
-                _textDirection = firstCharIsArabic(value)
+                _textDirection = firstCharIsRtl(value)
                     ? TextDirection.rtl
                     : TextDirection.ltr;
               });

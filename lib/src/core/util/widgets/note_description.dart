@@ -51,7 +51,7 @@ class NoteDescription extends StatelessWidget {
           const SizedBox(height: 15),
           LinkifyText(
             text: description ?? "",
-            textDirection: firstCharIsArabic(description ?? "")
+            textDirection: firstCharIsRtl(description ?? "")
                 ? TextDirection.rtl
                 : TextDirection.ltr,
             textAlign: TextAlign.justify,
