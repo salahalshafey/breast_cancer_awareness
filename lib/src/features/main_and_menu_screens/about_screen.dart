@@ -6,6 +6,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../core/util/builders/custom_alret_dialoge.dart';
 import '../../core/util/widgets/bulleted_list.dart';
 import '../../core/util/widgets/default_screen.dart';
@@ -34,10 +36,10 @@ class AboutScreen extends StatelessWidget {
           bottom: 50,
         ),
         children: [
-          const Text(
-            "App Overview",
+          Text(
+            AppLocalizations.of(context)!.appOverview,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               color: MyColors.primaryColor,
               fontSize: 22,
               fontWeight: FontWeight.bold,
@@ -45,34 +47,21 @@ class AboutScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           ...[
-            const TextWellFormattedWithBulleted(
-              data:
-                  "**Breast Cancer Awareness app** is a comprehensive tool designed to raise awareness and promote early detection of breast cancer. "
-                  "It addresses four key aspects: providing `information and awareness`, facilitating `self-examination` through a symptom checker, assisting doctors with `deep learning models` for detection, and offering support `resources` and `guidance` for patients.\n"
-                  "* **Purpose:** The app was created with the primary goal of empowering individuals to take charge of their breast health. "
-                  "By amalgamating information, self-examination tools, advanced detection models, and supportive resources, we aim to contribute to the early detection and management of breast cancer.\n"
-                  "* **Target Audience:** Our target audience spans a wide range, including individuals of all genders interested in breast health awareness, those performing self-examinations, medical professionals seeking advanced diagnostic tools, and patients in need of support and guidance.\n\n"
-                  "**Key Features**\n"
-                  "* **Information Hub:** Accessible `information` on breast cancer, its symptoms, risk factors, and preventive measures.\n"
-                  "* **Symptom Checker:** An interactive `self-examination` tool guiding users through the detection of potential symptoms.\n"
-                  "* **Deep Learning Models:** Advanced AI models for doctors, aiding in the detection of breast cancer from `mammogram` and `histopathology` images.\n"
-                  "* **Patient Support:** Nutrition, diet, and exercise `guidance`, along with a `chatbot` providing answers and guidance through `text-to-speech` and `speech-to-text` capabilities.\n\n"
-                  "**Data and Research**\n"
-                  "* **The Breast Cancer Awareness app** is built on a foundation of thorough research and collaboration with medical professionals. We've incorporated insights from reputable studies and partnered with experts in the field to develop the deep learning models. The app's content is curated based on evidence-based information to ensure accuracy and reliability.\n\n"
-                  "**Contact and App Privacy**",
+            TextWellFormattedWithBulleted(
+              data: AppLocalizations.of(context)!.appOverviewdetailed,
             ),
-            const TextWellFormattedWithBulleted(
+            TextWellFormattedWithBulleted(
               isSelectableText: true,
               data: ///////// change this email //////////
-                  "* **Contact us** through this email: salahforgraduationproject@gmail.com",
+                  AppLocalizations.of(context)!.contactUs,
             ),
             BulletedList(
               text: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextWithActionText(
-                    text: "App ",
-                    actionText: "Privacy Policy",
+                    text: AppLocalizations.of(context)!.app,
+                    actionText: AppLocalizations.of(context)!.privacyPolicy,
                     actionTextStyle: const TextStyle(color: Colors.blue),
                     onActionTextTap: () {
                       launchUrl(
@@ -84,8 +73,8 @@ class AboutScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: TextWithActionText(
-                      text: " and ",
-                      actionText: "Terms of service",
+                      text: AppLocalizations.of(context)!.and,
+                      actionText: AppLocalizations.of(context)!.termsOfService,
                       actionTextStyle: const TextStyle(color: Colors.blue),
                       onActionTextTap: () {
                         launchUrl(
@@ -154,7 +143,7 @@ class CheckForUpdatesButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      tooltip: "Check for updates",
+      tooltip: AppLocalizations.of(context)!.checkForUpdates,
       icon: const Icon(Icons.update),
       onPressed: () async {
         final updatesFound = await checkForUpdateWithDialog(context);
@@ -162,8 +151,9 @@ class CheckForUpdatesButton extends StatelessWidget {
         if (updatesFound == null) {
           showCustomAlretDialog(
             context: context,
-            title: "Error",
-            content: "error happend while checking for updates!!",
+            title: AppLocalizations.of(context)!.error,
+            content: AppLocalizations.of(context)!
+                .errorHappendWhileCheckingForUpdates,
             titleColor: Colors.red,
           );
           return;
@@ -172,9 +162,8 @@ class CheckForUpdatesButton extends StatelessWidget {
         if (!updatesFound) {
           showCustomAlretDialog(
             context: context,
-            title: "No Updates",
-            content:
-                "You have the latest version of Breast Cancer Awareness 👍👍",
+            title: AppLocalizations.of(context)!.noUpdates,
+            content: AppLocalizations.of(context)!.youHaveTheLatestVersion,
             titleColor: Theme.of(context).appBarTheme.foregroundColor,
           );
         }

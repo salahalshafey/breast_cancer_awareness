@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../core/theme/colors.dart';
 import '../../account/presentation/providers/account.dart';
 
@@ -20,7 +22,9 @@ class LogOutButton extends StatelessWidget {
           account.signOut(context);
         },
         label: Text(
-          account.userId == "guest" ? "Sign In" : "Log out",
+          account.userId == "guest"
+              ? AppLocalizations.of(context)!.signIn
+              : AppLocalizations.of(context)!.logout,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         icon: Icon(account.userId == "guest" ? Icons.login : Icons.logout),

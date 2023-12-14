@@ -9,6 +9,8 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:ntp/ntp.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../core/network/network_info.dart';
 import '../../../core/util/builders/custom_alret_dialoge.dart';
 
@@ -44,8 +46,11 @@ Future<bool?> checkForUpdateWithDialog(BuildContext context) async {
 
   if (currentAppVersion < versionToForceUpdateIfBelow) {
     final daysToUpdate = forceUpdateAfter.difference(currentDateTime).inDays;
-    final daysToUpdateString =
-        daysToUpdate == 0 || daysToUpdate == 1 ? "1 day" : "$daysToUpdate days";
+    final daysToUpdateString = daysToUpdate == 0 || daysToUpdate == 1
+        ? AppLocalizations.of(context)!.oneDay
+        : daysToUpdate == 2
+            ? AppLocalizations.of(context)!.twoDays
+            : AppLocalizations.of(context)!.days(daysToUpdate);
 
     forceUpdateAfterDaysDialog(context, daysToUpdateString);
 
@@ -71,10 +76,10 @@ void forcUpdateDialog(BuildContext context) {
     constraints: const BoxConstraints(maxWidth: 500),
     canPopScope: false,
     barrierDismissible: false,
-    title: "Need Update",
+    title: AppLocalizations.of(context)!.needUpdate,
     contentPadding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
-    content: "This version of Breast Cancer Awareness isn't supported enymore, "
-        "You have to update to the latest version.",
+    content:
+        AppLocalizations.of(context)!.thisVersionOfTheAppNotSupportedAnymore,
     actionsBuilder: (dialogContext) => [
       ElevatedButton(
         onPressed: () {
@@ -86,7 +91,7 @@ void forcUpdateDialog(BuildContext context) {
         },
         style: ButtonStyle(
             backgroundColor: MaterialStatePropertyAll(Colors.red.shade900)),
-        child: const Text("Update"),
+        child: Text(AppLocalizations.of(context)!.update),
       ),
     ],
   );
@@ -101,11 +106,10 @@ void forceUpdateAfterDaysDialog(
     constraints: const BoxConstraints(maxWidth: 500),
     barrierDismissible: false,
     titleColor: titleColor,
-    title: "Need Update",
+    title: AppLocalizations.of(context)!.needUpdate,
     contentPadding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
-    content: "This version of Breast Cancer Awareness needs "
-        "to be **updated in $daysToUpdateString**.\n\n"
-        "Update to the latest version?",
+    content: AppLocalizations.of(context)!
+        .thisVersionOfTheAppNotSupportedAfterDays(daysToUpdateString),
     actionsBuilder: (dialogContext) => [
       OutlinedButton(
         onPressed: () {
@@ -115,7 +119,7 @@ void forceUpdateAfterDaysDialog(
           foregroundColor: MaterialStatePropertyAll(titleColor),
           side: MaterialStatePropertyAll(BorderSide(color: titleColor)),
         ),
-        child: const Text("Later"),
+        child: Text(AppLocalizations.of(context)!.later),
       ),
       ElevatedButton(
         onPressed: () {
@@ -127,7 +131,7 @@ void forceUpdateAfterDaysDialog(
         },
         style: const ButtonStyle(
             backgroundColor: MaterialStatePropertyAll(titleColor)),
-        child: const Text("Update"),
+        child: Text(AppLocalizations.of(context)!.update),
       ),
     ],
   );
@@ -142,11 +146,10 @@ void selectiveUpdateDialog(
     constraints: const BoxConstraints(maxWidth: 500),
     barrierDismissible: false,
     titleColor: titleColor,
-    title: "Update App?",
+    title: AppLocalizations.of(context)!.updateApp,
     contentPadding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
-    content: "A new version of Breast Cancer Awareness is available! "
-        "Version $latestAppVersion is now available-you have $currentAppVersion.\n\n"
-        "Would you like to update it now?",
+    content: AppLocalizations.of(context)!
+        .newVersionOfTheAppIsAvailable(latestAppVersion, currentAppVersion),
     actionsBuilder: (dialogContext) => [
       OutlinedButton(
         onPressed: () {
@@ -156,7 +159,7 @@ void selectiveUpdateDialog(
           foregroundColor: MaterialStatePropertyAll(titleColor),
           side: MaterialStatePropertyAll(BorderSide(color: titleColor!)),
         ),
-        child: const Text("Later"),
+        child: Text(AppLocalizations.of(context)!.later),
       ),
       ElevatedButton(
         onPressed: () {
@@ -168,7 +171,7 @@ void selectiveUpdateDialog(
         },
         style:
             ButtonStyle(backgroundColor: MaterialStatePropertyAll(titleColor)),
-        child: const Text("Update"),
+        child: Text(AppLocalizations.of(context)!.update),
       ),
     ],
   );

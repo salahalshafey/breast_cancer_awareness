@@ -3,7 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:share_plus/share_plus.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../core/theme/colors.dart';
+import '../../../core/util/builders/go_to_screen_with_slide_transition.dart';
+
 import '../../account/presentation/widgets/icon_from_asset.dart';
 import '../main_screen_state_provider.dart';
 
@@ -14,31 +18,12 @@ import '../../account/presentation/pages/profile_screen.dart';
 class MenuItems extends StatelessWidget {
   const MenuItems({super.key});
 
-  void _goToScreen(BuildContext context, Widget screen) {
-    // Navigator.of(context).pushNamed(ProfileScreen.routName);
-    Navigator.push(
-      context,
-      PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => screen,
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          return SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(1, 0),
-              end: Offset.zero,
-            ).animate(animation),
-            child: child,
-          );
-        },
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         MenuItem(
-          title: "Home",
+          title: AppLocalizations.of(context)!.home,
           assetIcon: "assets/icons/home_icon.svg",
           iconHeight: 40,
           onTap: () {
@@ -47,35 +32,33 @@ class MenuItems extends StatelessWidget {
           },
         ),
         MenuItem(
-          title: "Profile",
+          title: AppLocalizations.of(context)!.profile,
           assetIcon: "assets/icons/normal_user_icon.png",
           iconHeight: 40,
-          onTap: () => _goToScreen(context, const ProfileScreen()),
+          onTap: () =>
+              goToScreenWithSlideTransition(context, const ProfileScreen()),
         ),
         MenuItem(
-          title: "Settings",
+          title: AppLocalizations.of(context)!.settings,
           assetIcon: "assets/icons/settings_icon.png",
           iconHeight: 40,
-          onTap: () => _goToScreen(context, const SettingsScreen()),
+          onTap: () =>
+              goToScreenWithSlideTransition(context, const SettingsScreen()),
         ),
         MenuItem(
-          title: "Share",
+          title: AppLocalizations.of(context)!.shareTheApp,
           assetIcon: "assets/icons/share_icon.png",
           iconHeight: 40,
           onTap: () {
-            Share.share(
-              "          \"Breast Cancer Awareness App\"\n\n"
-              "Empowering individuals to take charge of their breast health.\n\n"
-              "You can download this app from Google Play, by following this link: \n"
-              "https://play.google.com/store/apps/details?id=com.salahalshafey.breastcancerawareness",
-            );
+            Share.share(AppLocalizations.of(context)!.shareTheAppText);
           },
         ),
         MenuItem(
-          title: "About",
+          title: AppLocalizations.of(context)!.about,
           assetIcon: "assets/icons/about_icon.png",
           iconHeight: 40,
-          onTap: () => _goToScreen(context, const AboutScreen()),
+          onTap: () =>
+              goToScreenWithSlideTransition(context, const AboutScreen()),
         ),
       ],
     );

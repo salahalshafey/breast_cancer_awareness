@@ -31,18 +31,20 @@ class MenuScreen extends StatelessWidget {
             right: 0,
             child: ShapeForMenuScreen(),
           ),
-          const Positioned(
+          Positioned(
             bottom: 0,
-            left: 0,
-            child: ShapeForSecondSignUpScreen(
+            left: Directionality.of(context) == TextDirection.ltr ? 0 : null,
+            right: Directionality.of(context) == TextDirection.rtl ? 0 : null,
+            child: const ShapeForSecondSignUpScreen(
               angle: pi,
               widthFactor: 0.30,
             ),
           ),
-          const Positioned(
+          Positioned(
             top: -20,
-            left: -20,
-            child: ShapeForSecondSignUpScreen(
+            left: Directionality.of(context) == TextDirection.ltr ? -20 : null,
+            right: Directionality.of(context) == TextDirection.rtl ? -20 : null,
+            child: const ShapeForSecondSignUpScreen(
               angle: -pi / 2,
               widthFactor: 0.30,
             ),

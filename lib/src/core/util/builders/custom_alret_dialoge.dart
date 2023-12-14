@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../widgets/text_well_formatted.dart';
 
 /// * [titleColor] if null it will be Colors.red.shade900
@@ -90,7 +92,7 @@ Future<T?> showCustomAlretDialog<T>({
             if (actionsBuilder == null)
               TextButton(
                 child: Text(
-                  "OK",
+                  AppLocalizations.of(context)!.ok,
                   style: TextStyle(
                     color: titleColor ?? Colors.red.shade900,
                   ),

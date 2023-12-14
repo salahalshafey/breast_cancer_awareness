@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/theme/colors.dart';
+import '../../../core/util/builders/go_to_screen_with_slide_transition.dart';
 import '../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../core/util/widgets/image_container.dart';
 
@@ -15,22 +16,9 @@ class ImageWithName extends StatelessWidget {
   const ImageWithName({super.key});
 
   void _goToProfileScreen(BuildContext context) {
-    // Navigator.of(context).pushNamed(ProfileScreen.routName);
-    Navigator.push(
+    goToScreenWithSlideTransition(
       context,
-      PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            const ProfileScreen(),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          return SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(1, 0),
-              end: Offset.zero,
-            ).animate(animation),
-            child: child,
-          );
-        },
-      ),
+      const ProfileScreen(),
     );
   }
 

@@ -131,7 +131,7 @@ class _AudioPlayerState extends State<AudioPlayer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(right: 10),
+      padding: const EdgeInsetsDirectional.only(end: 10),
       decoration: BoxDecoration(
         color: MyColors.primaryColor.withOpacity(0.3),
         borderRadius: BorderRadius.circular(30),

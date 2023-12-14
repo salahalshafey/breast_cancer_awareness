@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../providers/settings_provider.dart';
 
 class ToggleThemeButton extends StatelessWidget {
@@ -13,11 +15,11 @@ class ToggleThemeButton extends StatelessWidget {
     return IconButton(
       onPressed: () => provider.toggleThemeMode(context),
       tooltip: Theme.of(context).brightness == Brightness.dark
-          ? "Change to Light Mode"
-          : "Change to Dark Mode",
+          ? AppLocalizations.of(context)!.changeToLightMode
+          : AppLocalizations.of(context)!.changeToDarkMode,
       icon: Icon(
         Theme.of(context).brightness == Brightness.dark
-            ? Icons.dark_mode //light_mode
+            ? Icons.dark_mode
             : Icons.light_mode,
       ),
     );

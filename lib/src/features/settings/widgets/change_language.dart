@@ -27,16 +27,22 @@ class ChangeLanguage extends StatelessWidget {
             builder: (context, provider, child) {
               return DropdownButton<String>(
                 value: provider.currentLanguageCode,
-                items: provider.allAvailableLanguagesFullName
-                    .map((p) => DropdownMenuItem<String>(
-                          value: p.first,
-                          child: Text(
-                            p.second,
-                            style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
+                items: provider.allAvailableLanguagesWithDetails
+                    .map((localWithFlage) => DropdownMenuItem<String>(
+                          value: localWithFlage.languageCode,
+                          child: Row(
+                            children: [
+                              Text(localWithFlage.countryFlage),
+                              const SizedBox(width: 20),
+                              Text(
+                                localWithFlage.languageFullName,
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
                         ))
                     .toList(),

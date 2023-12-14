@@ -120,8 +120,10 @@ class LandingPageWithCheckForUpdate extends StatelessWidget {
     if (currentAppVersion < versionToForceUpdateIfBelow) {
       final daysToUpdate = forceUpdateAfter.difference(currentDateTime).inDays;
       final daysToUpdateString = daysToUpdate == 0 || daysToUpdate == 1
-          ? "1 day"
-          : "$daysToUpdate days";
+          ? AppLocalizations.of(context)!.oneDay
+          : daysToUpdate == 2
+              ? AppLocalizations.of(context)!.twoDays
+              : AppLocalizations.of(context)!.days(daysToUpdate);
 
       Future.delayed(const Duration(seconds: 2), () {
         forceUpdateAfterDaysDialog(context, daysToUpdateString);

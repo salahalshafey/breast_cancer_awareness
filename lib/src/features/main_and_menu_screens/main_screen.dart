@@ -5,6 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../app.dart';
 import '../../core/util/builders/on_will_pop_dialog.dart';
 import 'main_screen_state_provider.dart';
 
@@ -21,11 +24,15 @@ class MainScreen extends StatelessWidget {
 
   const MainScreen({super.key});
 
-  static const List<String> _screenTitles = [
-    "Home",
-    "For Doctors",
-    "For Patients"
-  ];
+  List<String> get _screenTitles {
+    final context = navigatorKey.currentContext!;
+
+    return [
+      AppLocalizations.of(context)!.home,
+      AppLocalizations.of(context)!.forDoctors,
+      AppLocalizations.of(context)!.forPatients,
+    ];
+  }
 
   static const _screenOptions = <Widget>[
     HomeScreen(key: PageStorageKey('HomeScreen')),
@@ -105,9 +112,11 @@ class MainScreen extends StatelessWidget {
             ),
             Positioned(
               top: 40,
-              left: 20,
+              left: Directionality.of(context) == TextDirection.ltr ? 20 : null,
+              right:
+                  Directionality.of(context) == TextDirection.rtl ? 20 : null,
               child: IconButton(
-                tooltip: "Open Menu",
+                tooltip: AppLocalizations.of(context)!.openMenu,
                 onPressed: () {
                   ZoomDrawer.of(context)!.toggle();
                 },

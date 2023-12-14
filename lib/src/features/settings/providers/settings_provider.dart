@@ -6,7 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../app.dart';
-import '../../../core/util/classes/pair_class.dart';
 import '../../breast_cancer_for_normal/presentation/providers/notification.dart';
 
 class SettingsProvider with ChangeNotifier {
@@ -63,12 +62,20 @@ class SettingsProvider with ChangeNotifier {
       ? null
       : Locale(_userSettings.languageCode!);
 
-  List<Pair<String, String>> get allAvailableLanguagesFullName {
+  List<LocaleWithCountryFlage> get allAvailableLanguagesWithDetails {
     final context = navigatorKey.currentContext!;
 
     return [
-      Pair("en", AppLocalizations.of(context)!.english),
-      Pair('ar', AppLocalizations.of(context)!.arabic),
+      LocaleWithCountryFlage(
+        "en",
+        AppLocalizations.of(context)!.english,
+        "🇺🇸",
+      ),
+      LocaleWithCountryFlage(
+        "ar",
+        AppLocalizations.of(context)!.arabic,
+        "🇪🇬",
+      ),
     ];
   }
 
@@ -100,19 +107,20 @@ class SettingsProvider with ChangeNotifier {
 ////////////////////////// save the settings in local //////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
+  void _saveSettings() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await prefs.setString('settings', jsonEncode(_userSettings.toJson()));
+  }
+
   void restSettings() {
     _userSettings = Settings.defaultValues();
 
     _saveSettings();
     notifyListeners();
   }
-
-  void _saveSettings() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    await prefs.setString('settings', jsonEncode(_userSettings.toJson()));
-  }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////// Setting model ///////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -169,4 +177,16 @@ class Settings {
         "current language Code: $languageCode\n"
         "get notification: $notification\n";
   }
+}
+
+class LocaleWithCountryFlage {
+  final String languageCode;
+  final String languageFullName;
+  final String countryFlage;
+
+  const LocaleWithCountryFlage(
+    this.languageCode,
+    this.languageFullName,
+    this.countryFlage,
+  );
 }

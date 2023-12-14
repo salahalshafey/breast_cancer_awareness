@@ -1,17 +1,183 @@
 {
+  "@_LANGAUGES": {},
   "english": "English",
   "@english": {
-    "description": "the english language"
+    "description": "the english language word"
   },
   "arabic": "Arabic",
   "@arabic": {
-    "description": "the arabic language"
+    "description": "the arabic language word"
   },
 
+
+
+  "@_CORE": {},
+  "ok": "Ok",
+  "@ok": {
+    "description": "the ok word"
+  },
+
+
+
+  "@_MAIN_SCREEN": {},
+  "home": "Home",
+  "@home": {
+    "description": "the home word"
+  },
+  "forDoctors": "For Doctors",
+  "@forDoctors": {
+    "description": "the title of forDoctorsScreen"
+  },
+  "forPatients": "For Patients",
+  "@forPatients": {
+    "description": "title of ForPatients screen"
+  },
+  "openMenu": "Open Menu",
+  "@openMenu": {
+    "description": "Open Menu tooltip of mainScreen"
+  },
+  "attention": "Attention",
+  "@attention": {
+    "description": "the Attention word"
+  },
+  "doYouWantToExit": "Do you want to exit?",
+  "@doYouWantToExit": {
+    "description": "the response if you pressed the system navigation back button ON the scope of homeScreen"
+  },
+  "exit": "  Exit  ",
+  "@exit": {
+    "description": "the Exit word"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "the Cancel word"
+  },
+
+
+
+  "@_MENUE_SCREEN": {},
+  "profile": "Profile",
+  "@profile": {
+    "description": "the profile button of menue screen"
+  },
   "settings": "Settings",
   "@settings": {
     "description": "title of settings screen"
   },
+  "share": "Share",
+  "@share": {
+    "description": "the Share word"
+  },
+  "shareTheApp": "Share",
+  "@shareTheApp": {
+    "description": "the Share The App word"
+  },
+  "shareTheAppText": "          \"Breast Cancer Awareness App\"\n\nEmpowering individuals to take charge of their breast health.\n\nYou can download this app from Google Play, by following this link: \nhttps://play.google.com/store/apps/details?id=com.salahalshafey.breastcancerawareness",
+  "@shareTheAppText": {
+    "description": "share text of share the app button in menue screen"
+  },
+  "about": "About",
+  "@about": {
+    "description": "the about button of menue screen"
+  },
+  "logout": "Log out",
+  "@logout": {
+    "description": "the log out button of menue screen"
+  },
+  "signIn": "Sign In",
+  "@signIn": {
+    "description": "the Sign In button of menue screen 'guest view'"
+  },
+
+
+
+  "@_CHECK_FOR_UPDATES": {},
+  "checkForUpdates": "Check for updates",
+  "@checkForUpdates": {
+    "description": "Check for updates tooltip of about screen"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "the Error word"
+  },
+  "errorHappendWhileCheckingForUpdates": "error happend while checking for updates!!",
+  "@errorHappendWhileCheckingForUpdates": {
+    "description": "the response if error accured while checkForUpdates"
+  },
+  "noUpdates": "No Updates",
+  "@noUpdates": {
+    "description": "the No Updates word"
+  },
+  "youHaveTheLatestVersion": "You have the latest version of Breast Cancer Awareness 👍👍",
+  "@youHaveTheLatestVersion": {
+    "description": "the response if no updates after checkForUpdates"
+  },
+  "needUpdate": "Need Update",
+  "@needUpdate": {
+    "description": "the Need Update word"
+  },
+  "thisVersionOfTheAppNotSupportedAnymore": "This version of Breast Cancer Awareness isn't supported anymore, You have to update to the latest version.",
+  "@thisVersionOfTheAppNotSupportedAnymore": {
+    "description": "the response if you have to force update the app"
+  },
+  "update": "Update",
+  "@update": {
+    "description": "the Update word"
+  },
+  "oneDay": "1 day",
+  "@oneDay": {
+    "description": "the 1 day word"
+  },
+  "twoDays": "2 days",
+  "@twoDays": {
+    "description": "the 2 days word"
+  },
+  "days": "{numberOfDays} days",
+  "@days": {
+    "description": "number of days like: 5 days",
+    "placeholders": {
+      "numberOfDays": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "thisVersionOfTheAppNotSupportedAfterDays": "This version of Breast Cancer Awareness needs to be **updated in {numberOfDays}**.\n\nUpdate to the latest version?",
+  "@thisVersionOfTheAppNotSupportedAfterDays": {
+    "description": "the response if you have to force update the app after some days",
+    "placeholders": {
+      "numberOfDays": {
+        "type": "String",
+        "example": "5 days"
+      }
+    }
+  },
+  "later": "Later",
+  "@later": {
+    "description": "the Later word"
+  },
+  "updateApp": "Update App?",
+  "@updateApp": {
+    "description": "the update App? word"
+  },
+  "newVersionOfTheAppIsAvailable": "A new version of Breast Cancer Awareness is available! Version {latestAppVersion} is now available-you have {currentAppVersion}.\n\nWould you like to update it now?",
+  "@newVersionOfTheAppIsAvailable": {
+    "description": "the response if you can choose if you want to update the app",
+    "placeholders": {
+      "latestAppVersion": {
+        "type": "String",
+        "example": "1.0.3"
+      },
+      "currentAppVersion": {
+        "type": "String",
+        "example": "1.0.0"
+      }
+    }
+  },
+
+
+
+  "@_SETINGS_SCREEN": {},
   "theme": "Theme",
   "@theme": {
   "description": "theme text of settings screen"
@@ -33,10 +199,53 @@
     "description": "the language word"
   },
   "notifications": "Notifications",
-  "@language": {
+  "@notifications": {
     "description": "the notifications word"
   },
+  "changeToLightMode": "Change to Light Mode",
+  "@changeToLightMode": {
+    "description": "tooltip Change to Light Mode of ToggleThemeButton"
+  },
+  "changeToDarkMode": "Change to Dark Mode",
+  "@changeToDarkMode": {
+    "description": "tooltip Change to Dark Mode of ToggleThemeButton"
+  },
 
+
+
+  "@_ABOUT_SCREEN": {},
+  "appOverview": "App Overview",
+  "@appOverview": {
+    "description": "title of the about screen"
+  },
+  "appOverviewdetailed": "**Breast Cancer Awareness app** is a comprehensive tool designed to raise awareness and promote early detection of breast cancer. It addresses four key aspects: providing `information and awareness`, facilitating `self-examination` through a symptom checker, assisting doctors with `deep learning models` for detection, and offering support `resources` and `guidance` for patients.\n* **Purpose:** The app was created with the primary goal of empowering individuals to take charge of their breast health. By amalgamating information, self-examination tools, advanced detection models, and supportive resources, we aim to contribute to the early detection and management of breast cancer.\n* **Target Audience:** Our target audience spans a wide range, including individuals of all genders interested in breast health awareness, those performing self-examinations, medical professionals seeking advanced diagnostic tools, and patients in need of support and guidance.\n\n**Key Features**\n* **Information Hub:** Accessible `information` on breast cancer, its symptoms, risk factors, and preventive measures.\n* **Symptom Checker:** An interactive `self-examination` tool guiding users through the detection of potential symptoms.\n* **Deep Learning Models:** Advanced AI models for doctors, aiding in the detection of breast cancer from `mammogram` and `histopathology` images.\n* **Patient Support:** Nutrition, diet, and exercise `guidance`, along with a `chatbot` providing answers and guidance through `text-to-speech` and `speech-to-text` capabilities.\n\n**Data and Research**\n* **The Breast Cancer Awareness app** is built on a foundation of thorough research and collaboration with medical professionals. We've incorporated insights from reputable studies and partnered with experts in the field to develop the deep learning models. The app's content is curated based on evidence-based information to ensure accuracy and reliability.\n\n**Contact and App Privacy**",
+  "@appOverviewdetailed": {
+    "description": "the details of the abb Overview in about screen"
+  },
+  "contactUs": "* **Contact us** through this email: salahforgraduationproject@gmail.com",
+  "@contactUs": {
+    "description": "contact Us through email in about screen"
+  },
+  "app": "App ",
+  "@app": {
+    "description": "the app word"
+  },
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "the privacy Policy word"
+  },
+  "and": " And ",
+  "@and": {
+    "description": "the and word"
+  },
+  "termsOfService": "Terms Of Service",
+  "@termsOfService": {
+    "description": "the terms of service word"
+  },
+
+
+
+  "@_HOME_SCREEN": {},
   "selfCheckNow": "SELF-CHECK NOW",
   "@selfCheckNow": {
     "description": "self check button on the home screen"

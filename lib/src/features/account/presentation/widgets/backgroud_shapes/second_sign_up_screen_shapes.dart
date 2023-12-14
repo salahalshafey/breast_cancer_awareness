@@ -19,11 +19,14 @@ class ShapeForSecondSignUpScreen extends StatelessWidget {
       shapeWidth = screenSize.height * widthFactor;
     }
 
-    return Transform.rotate(
-      angle: angle,
-      child: CustomPaint(
-        size: Size(shapeWidth, shapeWidth),
-        painter: PaintForSecondSignUpScreen(),
+    return Transform.flip(
+      flipX: Directionality.of(context) == TextDirection.rtl,
+      child: Transform.rotate(
+        angle: angle,
+        child: CustomPaint(
+          size: Size(shapeWidth, shapeWidth),
+          painter: PaintForSecondSignUpScreen(),
+        ),
       ),
     );
   }

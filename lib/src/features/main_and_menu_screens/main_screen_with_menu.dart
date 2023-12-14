@@ -20,7 +20,7 @@ class MainScreenWithDrawer extends StatelessWidget {
       style: DrawerStyle.defaultStyle,
       menuScreen: const MenuScreen(),
       mainScreen: const MainScreen(),
-      // isRtl: true,
+      isRtl: Directionality.of(context) == TextDirection.rtl,
       //dragOffset: 0,
       borderRadius: 24.0,
       androidCloseOnBackTap: true,

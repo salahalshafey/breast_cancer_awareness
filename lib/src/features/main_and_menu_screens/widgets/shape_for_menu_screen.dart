@@ -13,9 +13,12 @@ class ShapeForMenuScreen extends StatelessWidget {
         MediaQuery.of(context).orientation == Orientation.portrait;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return CustomPaint(
-      size: Size(shapeWidth, shapeWidth * (isPortrait ? 2.5 : 1.5)),
-      painter: PaintForMenuScreen(isDark: isDark),
+    return Transform.flip(
+      flipX: Directionality.of(context) == TextDirection.rtl,
+      child: CustomPaint(
+        size: Size(shapeWidth, shapeWidth * (isPortrait ? 2.5 : 1.5)),
+        painter: PaintForMenuScreen(isDark: isDark),
+      ),
     );
   }
 }

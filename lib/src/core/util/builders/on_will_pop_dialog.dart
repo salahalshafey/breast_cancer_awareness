@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'custom_alret_dialoge.dart';
 
 Future<bool> exitWillPopDialog(BuildContext context) async {
@@ -7,9 +10,9 @@ Future<bool> exitWillPopDialog(BuildContext context) async {
         canPopScope: false,
         barrierDismissible: false,
         dialogDismissedAfter: const Duration(seconds: 5),
-        title: "Attention",
+        title: AppLocalizations.of(context)!.attention,
         titleColor: Colors.red,
-        content: "Do you really want to exit?",
+        content: AppLocalizations.of(context)!.doYouWantToExit,
         actionsBuilder: (dialogContext) => [
           ElevatedButton(
             onPressed: () {
@@ -18,7 +21,7 @@ Future<bool> exitWillPopDialog(BuildContext context) async {
             style: const ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(Colors.red),
             ),
-            child: const Text("  Exit  "),
+            child: Text(AppLocalizations.of(context)!.exit),
           ),
           OutlinedButton(
             onPressed: () {
@@ -28,7 +31,7 @@ Future<bool> exitWillPopDialog(BuildContext context) async {
               foregroundColor: MaterialStatePropertyAll(Colors.red),
               side: MaterialStatePropertyAll(BorderSide(color: Colors.red)),
             ),
-            child: const Text("Cancel"),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
         ],
       )) ??

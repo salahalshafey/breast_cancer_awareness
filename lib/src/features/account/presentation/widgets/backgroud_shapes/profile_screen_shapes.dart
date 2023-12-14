@@ -12,9 +12,13 @@ class ShapeForProfileScreen extends StatelessWidget {
         MediaQuery.of(context).orientation == Orientation.portrait;
     final shapeWidth =
         MediaQuery.of(context).size.width * (isPortrait ? 0.7 : 0.5);
-    return CustomPaint(
-      size: Size(shapeWidth, shapeWidth * (isPortrait ? 2 : 1.5)),
-      painter: PaintForProfileScreen(),
+
+    return Transform.flip(
+      flipX: Directionality.of(context) == TextDirection.rtl,
+      child: CustomPaint(
+        size: Size(shapeWidth, shapeWidth * (isPortrait ? 2 : 1.5)),
+        painter: PaintForProfileScreen(),
+      ),
     );
   }
 }
