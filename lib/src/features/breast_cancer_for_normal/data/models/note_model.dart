@@ -13,7 +13,7 @@ class NoteModel extends Note {
   factory NoteModel.fromJson(Map<String, dynamic> json) {
     return NoteModel(
       id: json["id"],
-      finding: json["finding"],
+      finding: Note.findingFromString(json["finding"]),
       text: json["text"],
       recorderFilePath: json["recorder_file_path"],
       imageFilePath: json["image_file_path"],
@@ -23,7 +23,7 @@ class NoteModel extends Note {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "finding": finding,
+        "finding": finding.toStringValue(),
         "text": text,
         "recorder_file_path": recorderFilePath,
         "image_file_path": imageFilePath,

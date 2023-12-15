@@ -13,7 +13,7 @@ import '../../providers/notes.dart';
 class FinishButton extends StatefulWidget {
   const FinishButton(this.finding, {super.key});
 
-  final String finding;
+  final Findings finding;
 
   @override
   State<FinishButton> createState() => _FinishButtonState();

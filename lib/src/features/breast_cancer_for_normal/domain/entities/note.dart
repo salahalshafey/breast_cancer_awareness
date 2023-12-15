@@ -2,7 +2,7 @@ import '../../data/models/note_model.dart';
 
 class Note {
   final String id;
-  final String finding;
+  final Findings finding;
   final String? text;
   final String? recorderFilePath;
   final String? imageFilePath;
@@ -19,7 +19,7 @@ class Note {
 
   Note copyWith({
     String? id,
-    String? finding,
+    Findings? finding,
     String? text,
     String? recorderFilePath,
     String? imageFilePath,
@@ -46,9 +46,25 @@ class Note {
     );
   }
 
+  static Findings findingFromString(String finding) {
+    switch (finding) {
+      case "All is well":
+        return Findings.allIsWell;
+
+      case "Not sure":
+        return Findings.notSure;
+
+      case "Noticed something":
+        return Findings.noticedSomething;
+
+      default:
+        return Findings.allIsWell;
+    }
+  }
+
   @override
   String toString() {
-    return "Note($id, $finding, $text, $recorderFilePath, $imageFilePath, $dateOfNote)";
+    return "Note($id, ${finding.toStringValue()}, $text, $recorderFilePath, $imageFilePath, $dateOfNote)";
   }
 
   @override
@@ -60,5 +76,24 @@ class Note {
       return id == other.id;
     }
     return false;
+  }
+}
+
+enum Findings {
+  allIsWell,
+  notSure,
+  noticedSomething,
+}
+
+extension FindingsExtension on Findings {
+  String toStringValue() {
+    switch (this) {
+      case Findings.allIsWell:
+        return "All is well";
+      case Findings.notSure:
+        return "Not sure";
+      case Findings.noticedSomething:
+        return "Noticed something";
+    }
   }
 }

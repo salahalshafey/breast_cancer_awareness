@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/util/widgets/default_screen.dart';
 
 import '../../../../account/presentation/widgets/icon_from_asset.dart';
+import '../../../domain/entities/note.dart';
 import '../../widgets/custom_texts.dart';
 import 'notes_and_reminder_screen.dart';
 
@@ -41,7 +42,7 @@ class FindingsScreen extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pushReplacementNamed(
                   NotesAndReminderScreen.routName,
-                  arguments: "All is well",
+                  arguments: Findings.allIsWell,
                 );
               },
             ),
@@ -52,7 +53,7 @@ class FindingsScreen extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pushReplacementNamed(
                   NotesAndReminderScreen.routName,
-                  arguments: "Not sure",
+                  arguments: Findings.notSure,
                 );
               },
             ),
@@ -63,7 +64,7 @@ class FindingsScreen extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pushReplacementNamed(
                   NotesAndReminderScreen.routName,
-                  arguments: "Noticed something",
+                  arguments: Findings.noticedSomething,
                 );
               },
             ),

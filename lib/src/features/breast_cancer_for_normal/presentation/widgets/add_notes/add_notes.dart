@@ -5,6 +5,7 @@ import 'package:wakelock/wakelock.dart';
 
 import '../../../../../core/util/builders/image_picker.dart';
 
+import '../../../domain/entities/note.dart';
 import '../../providers/add_notes_state_provider.dart';
 
 import '../custom_texts.dart';
@@ -17,7 +18,7 @@ import 'record_and_play_voice.dart';
 class AddNotes extends StatelessWidget {
   const AddNotes(this.finding, {super.key});
 
-  final String finding;
+  final Findings finding;
 
   @override
   Widget build(BuildContext context) {

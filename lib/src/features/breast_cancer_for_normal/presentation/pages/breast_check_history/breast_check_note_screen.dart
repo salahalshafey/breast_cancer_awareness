@@ -8,6 +8,7 @@ import '../../../../account/presentation/widgets/icon_from_asset.dart';
 import '../../../domain/entities/note.dart';
 import '../../../../../core/util/widgets/note_description.dart';
 import '../../widgets/audio_player.dart';
+import '../../widgets/breast_check_history/breast_check_history_item.dart';
 
 class BreastCheckNoteScreen extends StatefulWidget {
   const BreastCheckNoteScreen(this.note, {super.key});
@@ -47,11 +48,7 @@ class _BreastCheckNoteScreenState extends State<BreastCheckNoteScreen>
               Hero(
                 tag: widget.note.id,
                 child: IconFromAsset(
-                  assetIcon: widget.note.finding == "All is well"
-                      ? "assets/breast_cancer/all_is_well.png"
-                      : widget.note.finding == "Not sure"
-                          ? "assets/breast_cancer/not_sure.png"
-                          : "assets/breast_cancer/noticed_something.png",
+                  assetIcon: findingsIconFromAsset(widget.note.finding),
                   iconHeight: 110,
                   opacity:
                       Theme.of(context).brightness == Brightness.dark ? 0.7 : 1,

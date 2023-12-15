@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../../../core/util/functions/date_time_and_duration.dart';
 import '../../../../../core/util/widgets/default_screen.dart';
 
+import '../../../domain/entities/note.dart';
 import '../../providers/add_notes_state_provider.dart';
 import '../../providers/notification.dart';
 import '../../../../settings/providers/settings_provider.dart';
@@ -40,9 +41,9 @@ class _NotesAndReminderScreenState extends State<NotesAndReminderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final finding = ModalRoute.of(context)!.settings.arguments as String;
+    final finding = ModalRoute.of(context)!.settings.arguments as Findings;
 
-    if (finding == "All is well") {
+    if (finding == Findings.allIsWell) {
       _setLocalNotificationEveryTwoWeeks();
     }
 
@@ -58,14 +59,15 @@ class _NotesAndReminderScreenState extends State<NotesAndReminderScreen> {
             children: [
               const SizedBox(height: 20),
               TextTitle(
-                data:
-                    finding != "All is well" ? "Don't worry" : "Next reminder",
+                data: finding != Findings.allIsWell
+                    ? "Don't worry"
+                    : "Next reminder",
                 fontSize: 24,
                 color: const Color.fromRGBO(199, 40, 107, 1),
               ),
               const SizedBox(height: 20),
               TextNormal(
-                data: finding != "All is well"
+                data: finding != Findings.allIsWell
                     ? "If you noticed anything unusual when examining your breasts, "
                         "stay calm! Check the area again after your next menstruation. "
                         "If the change persists, you should see a doctor.\n\n"
@@ -74,7 +76,7 @@ class _NotesAndReminderScreenState extends State<NotesAndReminderScreen> {
                         "This is on:",
                 fontSize: 22,
               ),
-              if (finding == "All is well" || _reminderSeted)
+              if (finding == Findings.allIsWell || _reminderSeted)
                 TextTitle(
                   data: wellFormattedDateTimeLong(
                     DateTime.now().add(const Duration(days: 14)),
@@ -82,7 +84,7 @@ class _NotesAndReminderScreenState extends State<NotesAndReminderScreen> {
                   ),
                   fontSize: 22,
                 ),
-              if (finding != "All is well" && !_reminderSeted) ...[
+              if (finding != Findings.allIsWell && !_reminderSeted) ...[
                 const SizedBox(height: 20),
                 Align(
                   child: ElevatedButton(

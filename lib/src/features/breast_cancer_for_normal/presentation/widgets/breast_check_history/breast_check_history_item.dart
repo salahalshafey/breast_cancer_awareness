@@ -94,11 +94,7 @@ class BreastCheckHistorytem extends StatelessWidget {
             Hero(
               tag: note.id,
               child: IconFromAsset(
-                assetIcon: note.finding == "All is well"
-                    ? "assets/breast_cancer/all_is_well.png"
-                    : note.finding == "Not sure"
-                        ? "assets/breast_cancer/not_sure.png"
-                        : "assets/breast_cancer/noticed_something.png",
+                assetIcon: findingsIconFromAsset(note.finding),
                 iconHeight: 60,
                 opacity:
                     Theme.of(context).brightness == Brightness.dark ? 0.7 : 1,
@@ -122,5 +118,18 @@ class BreastCheckHistorytem extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+String findingsIconFromAsset(Findings finding) {
+  switch (finding) {
+    case Findings.allIsWell:
+      return "assets/breast_cancer/all_is_well.png";
+
+    case Findings.notSure:
+      return "assets/breast_cancer/not_sure.png";
+
+    case Findings.noticedSomething:
+      return "assets/breast_cancer/noticed_something.png";
   }
 }
