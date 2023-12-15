@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/error_exceptions_with_message.dart';
+import '../../../../core/error/exceptions_without_message.dart';
 import '../../domain/entities/search_result.dart';
 
 import '../../domain/entities/search_types.dart';
@@ -30,14 +31,14 @@ class Search with ChangeNotifier {
 
       return result;
     } on OfflineException {
-      throw Error('You are currently offline.');
+      throw ErrorForDialog('You are currently offline.');
     } on ServerException {
-      throw Error('Something went wrong, please try again later.');
+      throw ErrorForDialog('Something went wrong, please try again later.');
     } on FilterException {
-      throw Error(
+      throw ErrorForDialog(
           "Sorry, there is no result for your search, the result has been filtered.");
     } catch (error) {
-      throw Error('An unexpected error happened.');
+      throw ErrorForDialog('An unexpected error happened.');
     }
   }
 
@@ -47,14 +48,14 @@ class Search with ChangeNotifier {
 
       return result;
     } on OfflineException {
-      throw Error('You are currently offline.');
+      throw ErrorForDialog('You are currently offline.');
     } on ServerException {
-      throw Error('Something went wrong, please try again later.');
+      throw ErrorForDialog('Something went wrong, please try again later.');
     } on FilterException {
-      throw Error(
+      throw ErrorForDialog(
           "Sorry, there is no result for your search, the result has been filtered or it is not of our capability yet.");
     } catch (error) {
-      throw Error('An unexpected error happened.');
+      throw ErrorForDialog('An unexpected error happened.');
     }
   }
 }

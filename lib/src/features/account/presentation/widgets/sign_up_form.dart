@@ -9,7 +9,7 @@ import '../../domain/entities/user_information.dart';
 
 import '../providers/account.dart';
 
-import '../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../../core/util/functions/password_validation.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 

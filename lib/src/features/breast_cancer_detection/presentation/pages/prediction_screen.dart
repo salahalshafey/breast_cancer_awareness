@@ -10,9 +10,9 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
+import '../../../../core/error/error_exceptions_with_message.dart';
 import '../../../../core/util/widgets/image_container.dart';
 import '../providers/for_doctor_screen_state_provider.dart';
-import 'package:breast_cancer_awareness/src/core/error/exceptions.dart';
 import '../widgets/styled_text.dart';
 
 class PredictionScreen extends StatefulWidget {
@@ -165,7 +165,7 @@ Future<String> _getPrediction(
         ((recognitions[0]["confidence"] as double) * 100).toStringAsFixed(0) +
         "% confidence";
   } catch (error) {
-    throw Error("Something went wrong!!!");
+    throw ErrorMessage("Something went wrong!!!");
   }
 
   return prediction;
@@ -190,7 +190,7 @@ Future<String> _saveLabelsToFile() async {
 
 Future<String> _getNetworkImageToFile(String? imageUrl) async {
   if (imageUrl == null) {
-    throw Error("You didn't provide an image!!!");
+    throw ErrorMessage("You didn't provide an image!!!");
   }
 
   final tempDir = await getTemporaryDirectory();

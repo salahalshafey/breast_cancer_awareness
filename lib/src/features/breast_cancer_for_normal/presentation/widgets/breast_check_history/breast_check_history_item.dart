@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/theme/colors.dart';
-import '../../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../../../core/util/functions/date_time_and_duration.dart';
 import '../../../../account/presentation/widgets/icon_from_asset.dart';
 

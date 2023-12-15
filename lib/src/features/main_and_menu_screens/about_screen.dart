@@ -8,7 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../core/util/builders/custom_alret_dialoge.dart';
+import '../../core/util/builders/custom_alret_dialog.dart';
 import '../../core/util/widgets/bulleted_list.dart';
 import '../../core/util/widgets/default_screen.dart';
 import '../../core/theme/colors.dart';

@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/theme/colors.dart';
 import '../../../../../core/util/widgets/image_container.dart';
 
@@ -42,7 +44,9 @@ class EditProfileImage extends StatelessWidget {
             bottom: -10,
             left: 49,
             child: IconButton(
-              tooltip: "Choose Image",
+              tooltip: fileImagePath == null
+                  ? AppLocalizations.of(context)!.selectImage
+                  : AppLocalizations.of(context)!.changeImage,
               onPressed: chooseImage,
               icon: Container(
                 padding: const EdgeInsets.all(3.0),
@@ -62,7 +66,7 @@ class EditProfileImage extends StatelessWidget {
             top: -10,
             right: -10,
             child: IconButton(
-              tooltip: "Clear The Image",
+              tooltip: AppLocalizations.of(context)!.clearTheImage,
               onPressed: clearTheImage,
               icon: Container(
                 decoration: BoxDecoration(

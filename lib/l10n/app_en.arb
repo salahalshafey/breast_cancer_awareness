@@ -16,6 +16,78 @@
   "@ok": {
     "description": "the ok word"
   },
+  "error": "Error",
+  "@error": {
+    "description": "the Error word"
+  },
+  "pleaseChoose": "Please Choose",
+  "@pleaseChoose": {
+    "description": "the Please Choose word"
+  },
+  "camera": "Camera",
+  "@camera": {
+    "description": "the Camera word"
+  },
+  "gallery": "Gallery",
+  "@gallery": {
+    "description": "the Gallery word"
+  },
+  "share": "Share",
+  "@share": {
+    "description": "the Share word"
+  },
+  "errorHappenedWhileTryingToShareTheImage": "An error happened while trying to share the image.",
+  "@errorHappenedWhileTryingToShareTheImage": {
+    "description": "the error if Trying To Share did not complete"
+  },
+  "saveToGallery": "Save to gallery",
+  "@saveToGallery": {
+    "description": "the Save to gallery word"
+  },
+  "imageSavedToGallery": "Image saved to gallery",
+  "@imageSavedToGallery": {
+    "description": "the image saved to gallery word, basicly in imageScreen of imageContainer"
+  },
+  "errorHappenedWhileSavingTheImage": "An error happened while saving the image to the gallery.",
+  "@errorHappenedWhileSavingTheImage": {
+    "description": "the error if Trying To save to gallery did not complete"
+  },
+  "attention": "Attention",
+  "@attention": {
+    "description": "the Attention word"
+  },
+  "doYouWantToExit": "Do you want to exit?",
+  "@doYouWantToExit": {
+    "description": "the response if you pressed the system navigation back button ON the scope of homeScreen"
+  },
+  "exit": "  Exit  ",
+  "@exit": {
+    "description": "the Exit word"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "the Cancel word"
+  },
+  "copyCode": "Copy code",
+  "@copyCode": {
+    "description": "the Copy code word, for code container"
+  },
+  "copid": "Copid!",
+  "@copid": {
+    "description": "the Copid! word"
+  },
+  "today": "Today",
+  "@today": {
+    "description": "the Today word"
+  },
+  "yesterday": "Yesterday",
+  "@yesterday": {
+    "description": "the Yesterday word"
+  },
+  "at": "at",
+  "@at": {
+    "description": "the at word `for clocks` like **at 10:33 PM**"
+  },
 
 
 
@@ -36,22 +108,6 @@
   "@openMenu": {
     "description": "Open Menu tooltip of mainScreen"
   },
-  "attention": "Attention",
-  "@attention": {
-    "description": "the Attention word"
-  },
-  "doYouWantToExit": "Do you want to exit?",
-  "@doYouWantToExit": {
-    "description": "the response if you pressed the system navigation back button ON the scope of homeScreen"
-  },
-  "exit": "  Exit  ",
-  "@exit": {
-    "description": "the Exit word"
-  },
-  "cancel": "Cancel",
-  "@cancel": {
-    "description": "the Cancel word"
-  },
 
 
 
@@ -63,10 +119,6 @@
   "settings": "Settings",
   "@settings": {
     "description": "title of settings screen"
-  },
-  "share": "Share",
-  "@share": {
-    "description": "the Share word"
   },
   "shareTheApp": "Share",
   "@shareTheApp": {
@@ -95,10 +147,6 @@
   "checkForUpdates": "Check for updates",
   "@checkForUpdates": {
     "description": "Check for updates tooltip of about screen"
-  },
-  "error": "Error",
-  "@error": {
-    "description": "the Error word"
   },
   "errorHappendWhileCheckingForUpdates": "error happend while checking for updates!!",
   "@errorHappendWhileCheckingForUpdates": {
@@ -334,7 +382,87 @@
   },
   "editProfile": "    Edit Profile    ",
   "@editProfile": {
-    "description": "editProfile button in profile screen"
+    "description": "edit Profile button in profile screen and EditProfileScreen"
+  },
+  "deleteAccount": "Delete Account",
+  "@deleteAccount": {
+    "description": "Delete Account button in profile screen"
+  },
+  "dangerousArea": "Dangerous area",
+  "@dangerousArea": {
+    "description": "the title of confirm delete account dialog"
+  },
+  "areYouSureOfDeletingYourAccount": "* Are you sure of **Deleting your account?** All the data and information will be deleted. **That can't be undone.**\n* You may be asked to **confirm** your credentials to ensure it is you.",
+  "@areYouSureOfDeletingYourAccount": {
+    "description": "the content of confirm delete account dialog"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "the Delete word"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "the Cancel word"
+  },
+  "pleaseEnterYourPasswordToConfirm": "Please enter your password to confirm deleting your account.",
+  "@pleaseEnterYourPasswordToConfirm": {
+    "description": "the contentString of putting password dialog 'to delete Password type account'"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "the Password word"
+  },
+  "passwordMustBeAtLeast": "Password must be at least 8 characters long.",
+  "@passwordMustBeAtLeast": {
+    "description": "password formField error if num of char is less than 8"
+  },
+
+
+
+  "@_EDIT_PROFILE_SCREEN": {},
+  "save": "Save",
+  "@save": {
+    "description": "the Save word"
+  },
+  "someFieldsAreEmpty": "Some Fields are Empty.",
+  "@someFieldsAreEmpty": {
+    "description": "error if you try to save in EditProfileScreen and firstName or lastName is empty"
+  },
+  "pleaseEnterAValidPhoneNumber": "Please enter a valid Phone Number.",
+  "@pleaseEnterAValidPhoneNumber": {
+    "description": "error if you try to save in EditProfileScreen and phone number is not valid"
+  },
+  "selectImage": "Select Image",
+  "@selectImage": {
+    "description": "'Select Image' word basicly tooltip or button"
+  },
+  "changeImage": "Change Image",
+  "@changeImage": {
+    "description": "'Change Image' word basicly tooltip or button"
+  },
+  "clearTheImage": "Clear The Image",
+  "@clearTheImage": {
+    "description": "'Clear The Image' word basicly tooltip or button"
+  },
+  "firstName": "First Name",
+  "@firstName": {
+    "description": "First Name hint text in textField"
+  },
+  "lastName": "Last Name",
+  "@lastName": {
+    "description": "Last Name hint text in textField"
+  },
+  "pleaseEnterTheFirstName": "Please enter the first name.",
+  "@pleaseEnterTheFirstName": {
+    "description": "error under textField 'validator' if you did not put the first name"
+  },
+  "pleaseEnterTheLastName": "Please enter the last name.",
+  "@pleaseEnterTheLastName": {
+    "description": "error under textField 'validator' if you did not put the last name"
+  },
+  "pleaseEnterAValidPhoneNumber": "Please enter a valid Phone Number.",
+  "@pleaseEnterAValidPhoneNumber": {
+    "description": "error under textField 'validator' if you did not put a valid phone number"
   },
 
 

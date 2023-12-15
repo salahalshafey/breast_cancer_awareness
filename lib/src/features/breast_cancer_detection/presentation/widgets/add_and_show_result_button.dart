@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import 'package:breast_cancer_awareness/src/core/error/exceptions.dart';
-import '../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../core/error/error_exceptions_with_message.dart';
+import '../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../account/domain/entities/user_information.dart';
 import '../../../account/presentation/providers/account.dart';
 
@@ -26,7 +26,7 @@ class AddAndShowResultButton extends StatelessWidget {
         final user = await account.getUserInfo();
 
         if (provider.networkImage == null && provider.fileImage == null) {
-          throw Error("You didn't provide an image!!!");
+          throw ErrorForDialog("You didn't provide an image!!!");
         }
 
         if (user == null || user.userType == UserTypes.guest) {

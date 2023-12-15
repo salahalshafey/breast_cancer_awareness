@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class CodeContainer extends StatelessWidget {
   const CodeContainer({
     super.key,
@@ -110,7 +112,9 @@ class _CopyCodeState extends State<CopyCode> {
           ),
           const Text("  "),
           Text(
-            _isCopyed ? "Copid!" : "Copy code",
+            _isCopyed
+                ? AppLocalizations.of(context)!.copid
+                : AppLocalizations.of(context)!.copyCode,
             style: const TextStyle(color: Colors.white),
           ),
           const SizedBox(width: 10),

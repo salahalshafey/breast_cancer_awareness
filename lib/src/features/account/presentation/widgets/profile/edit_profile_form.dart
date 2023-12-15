@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/util/functions/string_manipulations_and_search.dart';
 
 class EditProfileForm extends StatefulWidget {
@@ -105,7 +107,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
                   textInputAction: TextInputAction.next,
                   style: const TextStyle(color: Colors.white, fontSize: 16),
                   decoration: InputDecoration(
-                    hintText: 'First name',
+                    hintText: AppLocalizations.of(context)!.firstName,
                     fillColor: _isFirstNameFocused ? focusColor : null,
                     errorMaxLines: 2,
                   ),
@@ -117,7 +119,8 @@ class _EditProfileFormState extends State<EditProfileForm> {
                   },
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Please enter the first name.';
+                      return AppLocalizations.of(context)!
+                          .pleaseEnterTheFirstName;
                     }
 
                     return null;
@@ -148,7 +151,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
                   textDirection: _textDirectionForLastName,
                   style: const TextStyle(color: Colors.white, fontSize: 16),
                   decoration: InputDecoration(
-                    hintText: 'Last name',
+                    hintText: AppLocalizations.of(context)!.lastName,
                     fillColor: _isLastNameFocused ? focusColor : null,
                     errorMaxLines: 2,
                   ),
@@ -160,7 +163,8 @@ class _EditProfileFormState extends State<EditProfileForm> {
                   },
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Please enter the last name.';
+                      return AppLocalizations.of(context)!
+                          .pleaseEnterTheLastName;
                     }
 
                     return null;
@@ -193,7 +197,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
             textDirection: TextDirection.ltr,
             style: const TextStyle(color: Colors.white, fontSize: 20),
             decoration: InputDecoration(
-              hintText: 'Phone Number',
+              hintText: AppLocalizations.of(context)!.phoneNumber,
               errorMaxLines: 3,
               fillColor: _isPhoneFocused ? focusColor : null,
               prefixIcon: const Icon(Icons.phone_android_rounded),
@@ -212,7 +216,8 @@ class _EditProfileFormState extends State<EditProfileForm> {
               if (value != null &&
                   value.isNotEmpty &&
                   !phoneNumberMatcher.hasMatch(value)) {
-                return 'Please enter a valid Phone Number.';
+                return AppLocalizations.of(context)!
+                    .pleaseEnterAValidPhoneNumber;
               }
 
               return null;

@@ -12,7 +12,7 @@ import 'package:ntp/ntp.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/network/network_info.dart';
-import '../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../core/util/builders/custom_alret_dialog.dart';
 
 /// ### This is useful for button `Check for update`.
 ///

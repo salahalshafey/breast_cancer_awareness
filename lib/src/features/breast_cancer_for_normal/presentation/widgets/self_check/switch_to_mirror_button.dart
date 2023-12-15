@@ -3,7 +3,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../../core/util/builders/custom_alret_dialog.dart';
 
 import '../../pages/self_check_and_note_adding/mirror_screen.dart';
 

@@ -9,7 +9,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../providers/account.dart';
 
-import '../../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../../core/util/builders/custom_alret_dialog.dart';
 
 import '../../pages/send_password_reset_email_screen.dart';
 import '../../pages/first_sign_up_screen.dart';

@@ -1,6 +1,7 @@
+import '../../../../core/error/error_exceptions_with_message.dart';
 import '../../../../dispose_container.dart';
 
-import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/exceptions_without_message.dart';
 
 import '../../domain/entities/note.dart';
 import '../../domain/usecases/add_note.dart';
@@ -31,7 +32,7 @@ class Notes extends DisposableProvider {
       _notes = _notes.reversed.toList();
       notifyListeners();
     } catch (error) {
-      throw Error('An unexpected error happened.');
+      throw ErrorForDialog('An unexpected error happened.');
     }
   }
 
@@ -47,9 +48,9 @@ class Notes extends DisposableProvider {
     try {
       await addNoteUsecase.call(userId, note);
     } on LocalStorageException {
-      throw Error("Not able to save files to local device storage.");
+      throw ErrorForDialog("Not able to save files to local device storage.");
     } catch (error) {
-      throw Error('An unexpected error happened.');
+      throw ErrorForDialog('An unexpected error happened.');
     }
   }
 
@@ -60,9 +61,10 @@ class Notes extends DisposableProvider {
       _notes.removeWhere((note) => note.id == noteId);
       notifyListeners();
     } on LocalStorageException {
-      throw Error("Not able to delete files from local device storage.");
+      throw ErrorForDialog(
+          "Not able to delete files from local device storage.");
     } catch (error) {
-      throw Error('An unexpected error happened.');
+      throw ErrorForDialog('An unexpected error happened.');
     }
   }
 
@@ -73,9 +75,10 @@ class Notes extends DisposableProvider {
       _notes = [];
       notifyListeners();
     } on LocalStorageException {
-      throw Error("Not able to delete files from local device storage.");
+      throw ErrorForDialog(
+          "Not able to delete files from local device storage.");
     } catch (error) {
-      throw Error('An unexpected error happened.');
+      throw ErrorForDialog('An unexpected error happened.');
     }
   }
 

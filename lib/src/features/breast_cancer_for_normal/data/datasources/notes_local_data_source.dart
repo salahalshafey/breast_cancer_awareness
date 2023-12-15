@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/exceptions_without_message.dart';
 
 import '../models/note_model.dart';
 

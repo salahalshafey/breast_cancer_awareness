@@ -1,14 +1,3 @@
-class Error implements Exception {
-  Error(this.message);
-
-  final String message;
-
-  @override
-  String toString() {
-    return message;
-  }
-}
-
 class LocalStorageException implements Exception {}
 
 class ServerException implements Exception {}

@@ -13,7 +13,9 @@ import 'package:share_plus/share_plus.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../builders/custom_alret_dialoge.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../builders/custom_alret_dialog.dart';
 import '../builders/custom_snack_bar.dart';
 
 import '../functions/string_manipulations_and_search.dart';
@@ -696,8 +698,8 @@ class _DownloadButtonState extends State<DownloadButton> {
       _loadingState(false);
       showCustomAlretDialog(
         context: context,
-        title: "Error",
-        content: 'Error happend while saving the image to gallery.',
+        title: AppLocalizations.of(context)!.error,
+        content: AppLocalizations.of(context)!.errorHappenedWhileSavingTheImage,
         titleColor: Colors.red,
       );
       return;
@@ -707,8 +709,8 @@ class _DownloadButtonState extends State<DownloadButton> {
     if (savedToGallery == null || !savedToGallery) {
       showCustomAlretDialog(
         context: context,
-        title: "Error",
-        content: 'Error happend while saving the image to gallery.',
+        title: AppLocalizations.of(context)!.error,
+        content: AppLocalizations.of(context)!.errorHappenedWhileSavingTheImage,
         titleColor: Colors.red,
       );
 
@@ -729,8 +731,8 @@ class _DownloadButtonState extends State<DownloadButton> {
                 ? const Icon(Icons.download)
                 : const Icon(Icons.download_done, color: Colors.white),
             tooltip: !_imageDownloaded
-                ? 'Save to gallery'
-                : 'image saved to gallery',
+                ? AppLocalizations.of(context)!.saveToGallery
+                : AppLocalizations.of(context)!.imageSavedToGallery,
             onPressed: !_imageDownloaded ? _saveImageToGallery : null,
           );
   }
@@ -781,7 +783,8 @@ class __ShareButtonState extends State<_ShareButton> {
       _loadingState(false);
       showCustomSnackBar(
         context: context,
-        content: 'Error happend while trying to share the image.',
+        content: AppLocalizations.of(context)!
+            .errorHappenedWhileTryingToShareTheImage,
       );
     }
   }
@@ -793,7 +796,7 @@ class __ShareButtonState extends State<_ShareButton> {
             child: CircularProgressIndicator(),
           )
         : IconButton(
-            tooltip: 'Share',
+            tooltip: AppLocalizations.of(context)!.share,
             onPressed: _share,
             icon: const Icon(Icons.share),
           );

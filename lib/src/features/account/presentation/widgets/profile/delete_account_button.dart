@@ -5,7 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../../../core/util/builders/custom_alret_dialoge.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../../core/util/builders/custom_alret_dialog.dart';
 
 import '../../../../breast_cancer_for_normal/presentation/providers/notes.dart';
 import '../../providers/account.dart';
@@ -25,10 +27,9 @@ class DeleteAccountButton extends StatelessWidget {
     return showCustomAlretDialog<bool>(
       context: profileScreenContext,
       constraints: const BoxConstraints(maxWidth: 500),
-      title: "Dangerous area",
-      content: "* Are you sure of **Deleting your account?** "
-          "All the data and information will be deleted. **That can't be undone.**\n"
-          "* You may be asked to **confirm** your credentials to ensure it is you.",
+      title: AppLocalizations.of(profileScreenContext)!.dangerousArea,
+      content: AppLocalizations.of(profileScreenContext)!
+          .areYouSureOfDeletingYourAccount,
       actionsBuilder: (dialogContext) => [
         ElevatedButton(
           onPressed: () {
@@ -37,7 +38,7 @@ class DeleteAccountButton extends StatelessWidget {
           style: ButtonStyle(
             backgroundColor: MaterialStatePropertyAll(Colors.red.shade900),
           ),
-          child: const Text("Delete"),
+          child: Text(AppLocalizations.of(profileScreenContext)!.delete),
         ),
         OutlinedButton(
           onPressed: () {
@@ -48,7 +49,7 @@ class DeleteAccountButton extends StatelessWidget {
             side: MaterialStatePropertyAll(
                 BorderSide(color: Colors.red.shade900)),
           ),
-          child: const Text("Cancel"),
+          child: Text(AppLocalizations.of(profileScreenContext)!.cancel),
         ),
       ],
     );
@@ -61,8 +62,9 @@ class DeleteAccountButton extends StatelessWidget {
 
     final passwordConfirmed = await showCustomAlretDialog<bool>(
       context: profileScreenContext,
-      title: "Delete Account",
-      content: "Please enter your password to confirm deleting your account.",
+      title: AppLocalizations.of(profileScreenContext)!.deleteAccount,
+      content: AppLocalizations.of(profileScreenContext)!
+          .pleaseEnterYourPasswordToConfirm,
       contentWidget: const PasswordTextFieldToDeleteAccount(),
       actionsBuilder: (dialogContext) => [],
       actionsPaddingAll: 0,
@@ -121,7 +123,7 @@ class DeleteAccountButton extends StatelessWidget {
       showCustomAlretDialog(
         context: profileScreenContext,
         constraints: const BoxConstraints(maxWidth: 400),
-        title: "Error",
+        title: AppLocalizations.of(profileScreenContext)!.error,
         content: error.toString(),
         titleColor: Colors.red,
       );
@@ -140,7 +142,7 @@ class DeleteAccountButton extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             Text(
-              "Delete Account",
+              AppLocalizations.of(profileScreenContext)!.deleteAccount,
               style: provider.isLoading
                   ? const TextStyle(color: Colors.transparent)
                   : null,

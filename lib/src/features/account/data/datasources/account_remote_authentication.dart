@@ -1,4 +1,4 @@
-import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/exceptions_without_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../domain/entities/user_information.dart';

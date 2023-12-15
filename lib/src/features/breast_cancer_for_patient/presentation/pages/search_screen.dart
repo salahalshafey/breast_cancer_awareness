@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../../core/util/builders/custom_snack_bar.dart';
 import '../../../../core/util/widgets/default_screen.dart';
 
@@ -148,7 +148,8 @@ class _SearchScreenState extends State<SearchScreen> {
         children: [
           Positioned(
             top: 70,
-            left: 0,
+            left: Directionality.of(context) == TextDirection.ltr ? 0 : null,
+            right: Directionality.of(context) == TextDirection.rtl ? 0 : null,
             child: IconButton(
               onPressed: () => Navigator.of(context).pop(),
               icon: Icon(
@@ -163,7 +164,7 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 35),
+                  padding: const EdgeInsetsDirectional.only(start: 35),
                   child: SearchField(
                     controller: _controller,
                     hintText: _searchTypeToString(_searchType),

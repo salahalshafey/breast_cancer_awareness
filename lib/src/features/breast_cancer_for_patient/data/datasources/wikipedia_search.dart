@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:html/dom.dart' as dom;
 
-import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/exceptions_without_message.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 
 import '../../../../core/util/functions/web_utils.dart';

@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' as intl;
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../app.dart';
 
 final context = navigatorKey.currentContext!;
 
+/// * DateFormat pattern = `hh:mm a`.
+///
+/// * example of returning string: `06:22 PM` in case of the current locale is `en`.
+
 String time24To12HoursFormat(DateTime dateTime) {
-  return DateFormat(
+  return intl.DateFormat(
     "hh:mm a",
     Localizations.localeOf(context).languageCode,
   ).format(dateTime);
@@ -32,40 +38,84 @@ String time24To12HoursFormat(DateTime dateTime) {
   return '0$hours:$minut AM';
 }*/
 
+/// ### Examples of returning string in case of the current locale is `en`
+///
+/// * `Today` **OR**
+/// * `Yesterday` **OR**
+/// * `23/7/2022` or `٢٠٢٢/٧/٢٣` for `ar`.
+///
+/// ## details
+///
+/// * If the [date] is today the returning string is `Today` in case of the current locale is `en`.
+///
+/// * If the [date] is yesterday the returning string is `Yesterday` in case of the current locale is `en`.
+///
+/// * If before the above DateFormat pattern is: `Directionality.of(context) == TextDirection.rtl ? "y/M/d" : "d/M/y"`. for example: `23/7/2022` OR `٢٠٢٢/٧/٢٣`
+
 String formatedDate(DateTime date) {
   final currentDate = DateTime.now();
 
   if (currentDate.year == date.year &&
       currentDate.month == date.month &&
       currentDate.day == date.day) {
-    return 'Today';
+    return AppLocalizations.of(context)!.today;
   }
 
   if (currentDate.year == date.year &&
       currentDate.month == date.month &&
       currentDate.day == date.day + 1) {
-    return 'Yesterday';
+    return AppLocalizations.of(context)!.yesterday;
   }
 
-  return '${date.day}/${date.month}/${date.year}';
+  // return '${date.day}/${date.month}/${date.year}';
+
+  return intl.DateFormat(
+    Directionality.of(context) == TextDirection.rtl ? "y/M/d" : "d/M/y",
+    Localizations.localeOf(context).languageCode,
+  ).format(date);
 }
 
+/// ### Examples of returning string in case of the current locale is `en`
+///
+/// * `Today at 06:22 PM` **OR**
+/// * `Yesterday at 06:22 PM` **OR**
+/// * `23/7/2022 at 06:22 PM` **OR** for `ar`
+/// * `٢٠٢٢/٧/٢٣ الساعة ٠٨:٤٨ م`
+///
+/// * if [seperateByLine] = `true`, the time `06:22 PM` will be in new line.
+///
+/// ## details
+///
+/// * If the [date] is today the returning string is `Today at 06:22 PM` in case of the current locale is `en`.
+///
+/// * If the [date] is yesterday the returning string is `Yesterday at 06:22 PM` in case of the current locale is `en`.
+///
+/// * If before the above DateFormat pattern is:
+///
+///  ```
+/// Directionality.of(context) == TextDirection.rtl ? "y/M/d" : "d/M/y"
+/// ```
+/// * for example:
+///   * `23/7/2022 at 06:22 PM` OR
+///   * `٢٠٢٢/٧/٢٣ الساعة ٠٨:٤٨ م`
+///
+
 String wellFormattedDateTime(DateTime date, {bool seperateByLine = false}) {
+  final at = AppLocalizations.of(context)!.at;
+
   return formatedDate(date) +
-      (seperateByLine ? '\n' : ' at ') +
+      (seperateByLine ? '\n' : ' $at ') +
       time24To12HoursFormat(date);
 }
 
-String formatedDuration(Duration time) {
-  // print(time.toString());
-  return time.toString().substring(2, 7);
-}
+/// ### Examples of returning string in case of the current locale is `en`
+/// * `Sunday, August 8, 2023 02:30 PM`.
+///
+/// * if [seperateByLine] = `true`, the time `02:30 PM` will be in new line.
 
-/// * example of returning string: Sunday, August 8, 2023 02:30 PM
-/// * if seperateByLine = true, the time 02:30 PM will be in new line
 String wellFormattedDateTimeLong(DateTime dateTime,
     {bool seperateByLine = false}) {
-  final date = DateFormat(
+  final date = intl.DateFormat(
     "EEEE, d MMMM, y",
     Localizations.localeOf(context).languageCode,
   ).format(dateTime);
@@ -73,8 +123,12 @@ String wellFormattedDateTimeLong(DateTime dateTime,
   return date + (seperateByLine ? '\n' : ' ') + time24To12HoursFormat(dateTime);
 }
 
+/// ### Examples of returning string in case of the current locale is `en`
+/// * ` August 2023` **OR** for `ar`
+/// * `أغسطس ٢٠٢٣`
+
 String wellFormattedDateWithoutDay(DateTime dateTime) {
-  return DateFormat(
+  return intl.DateFormat(
     "MMMM yyy",
     Localizations.localeOf(context).languageCode,
   ).format(dateTime);
@@ -87,6 +141,11 @@ DateTime getCurrentDateTimeremovedMinutesAndSeconds() =>
       millisecond: 0,
       microsecond: 0,
     );
+
+String formatedDuration(Duration time) {
+  // print(time.toString());
+  return time.toString().substring(2, 7);
+}
 
 String wellFormatedDuration(Duration duration, {bool lineEach = false}) {
   int durationInSecond = duration.inSeconds;
@@ -102,7 +161,9 @@ String wellFormatedDuration(Duration duration, {bool lineEach = false}) {
       : '$minutes minute${_s(minutes)}${_lineOrSpace(lineEach)}';
   durationInSecond %= 60;
 
-  final secondsString = '$durationInSecond second${_s(durationInSecond)}';
+  final secondsString = durationInSecond == 0
+      ? ''
+      : '$durationInSecond second${_s(durationInSecond)}';
 
   return hoursString + minutesString + secondsString;
 }

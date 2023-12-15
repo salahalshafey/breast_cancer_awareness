@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
-import '../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../../core/util/builders/custom_snack_bar.dart';
 import '../../../../core/util/functions/general_functions.dart';
 

@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../core/util/builders/custom_alret_dialoge.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../providers/account.dart';
 
 class PasswordTextFieldToDeleteAccount extends StatefulWidget {
@@ -95,7 +97,7 @@ class _PasswordTextFieldToDeleteAccountState
             autofocus: true,
             keyboardType: TextInputType.visiblePassword,
             decoration: InputDecoration(
-              hintText: 'Password',
+              hintText: AppLocalizations.of(context)!.password,
               hintStyle: const TextStyle(),
               errorMaxLines: 2,
               fillColor: Colors.transparent,
@@ -139,7 +141,7 @@ class _PasswordTextFieldToDeleteAccountState
             },
             validator: (value) {
               if (value == null || value.trim().length < 8) {
-                return 'Password must be at least 8 characters long.';
+                return AppLocalizations.of(context)!.passwordMustBeAtLeast;
               }
 
               return _apiErrorForPassword;
@@ -162,7 +164,7 @@ class _PasswordTextFieldToDeleteAccountState
                   alignment: Alignment.center,
                   children: [
                     Text(
-                      "Delete",
+                      AppLocalizations.of(context)!.delete,
                       style: TextStyle(
                         color: _isLoading ? Colors.transparent : null,
                       ),
@@ -189,7 +191,7 @@ class _PasswordTextFieldToDeleteAccountState
                   side: MaterialStatePropertyAll(
                       BorderSide(color: Colors.red.shade900)),
                 ),
-                child: const Text("Cancel"),
+                child: Text(AppLocalizations.of(context)!.cancel),
               ),
             ],
           )

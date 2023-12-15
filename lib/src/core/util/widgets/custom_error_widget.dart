@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'text_well_formatted.dart';
 
 class CustomErrorWidget extends StatelessWidget {
@@ -43,7 +45,7 @@ class CustomErrorWidget extends StatelessWidget {
             ),
             const SizedBox(width: 20),
             Text(
-              "Error!",
+              AppLocalizations.of(context)!.error,
               style: TextStyle(fontSize: (iconSize ?? 70) - 10),
             )
           ],

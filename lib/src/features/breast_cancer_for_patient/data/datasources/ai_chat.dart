@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/exceptions_without_message.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 
 import 'api_keys.dart';

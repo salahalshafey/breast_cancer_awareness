@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/util/builders/image_picker.dart';
 import '../../../../core/util/extensions/list_seperator.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
@@ -95,7 +97,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
     return DefaultScreen(
       containingBackgroundRightSympol: false,
-      appBartitle: "Edit Profile",
+      appBartitle: AppLocalizations.of(context)!.editProfile.trim(),
       appBarbackgroundColor: Theme.of(context).brightness == Brightness.dark
           ? const Color.fromRGBO(28, 27, 31, 1)
           : Colors.white,
@@ -104,7 +106,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           Navigator.of(context).pop();
         },
         icon: const Icon(Icons.close, size: 40),
-        tooltip: "Cancel",
+        tooltip: AppLocalizations.of(context)!.cancel,
       ),
       appBarActions: [
         SaveEditButton(

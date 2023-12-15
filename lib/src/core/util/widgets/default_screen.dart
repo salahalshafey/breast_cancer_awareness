@@ -39,7 +39,9 @@ class DefaultScreen extends StatelessWidget {
       appBar: containingAppBar
           ? AppBar(
               backgroundColor: appBarbackgroundColor,
-              title: appBartitle == null ? null : Text(appBartitle!),
+              title: appBartitle == null
+                  ? null
+                  : FittedBox(child: Text(appBartitle!)),
               actions: appBarActions,
               leading: appBarLeading,
             )

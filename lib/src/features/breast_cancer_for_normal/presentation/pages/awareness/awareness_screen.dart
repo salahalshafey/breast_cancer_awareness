@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../../core/network/network_info.dart';
-import '../../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../../../core/util/widgets/default_screen.dart';
 import '../../../../account/presentation/widgets/icon_from_asset.dart';
 

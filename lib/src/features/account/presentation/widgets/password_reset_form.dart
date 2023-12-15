@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 
-import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/error_exceptions_with_message.dart';
 
 import '../../../../core/network/network_info.dart';
-import '../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../core/util/builders/custom_alret_dialog.dart';
 
 class PasswordResetForm extends StatefulWidget {
   const PasswordResetForm({super.key});
@@ -68,7 +68,7 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
       _isLoadingState(true);
 
       if (await NetworkInfoImpl().isNotConnected) {
-        throw Error("You are currently offline.");
+        throw ErrorForDialog("You are currently offline.");
       }
 
       await FirebaseAuth.instance.sendPasswordResetEmail(email: _userEmail);

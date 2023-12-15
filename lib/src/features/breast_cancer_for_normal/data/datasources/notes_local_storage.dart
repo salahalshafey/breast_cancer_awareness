@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 
-import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/exceptions_without_message.dart';
 
 abstract class NotesLocalStorage {
   Future<String> save(String tempFilePath, String newFilePath);

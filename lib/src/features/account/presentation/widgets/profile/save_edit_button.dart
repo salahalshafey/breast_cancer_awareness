@@ -7,7 +7,9 @@ import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../../../../core/util/builders/custom_alret_dialoge.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../../core/util/builders/custom_alret_dialog.dart';
 
 import '../../../domain/entities/user_information.dart';
 
@@ -44,12 +46,16 @@ class _SaveEditButtonState extends State<SaveEditButton> {
 
       if (widget.updatedUserInfo.firstName.isEmpty ||
           widget.updatedUserInfo.lastName.isEmpty) {
-        throw ErrorDescription("Some Fields are Empty");
+        throw ErrorDescription(
+          AppLocalizations.of(context)!.someFieldsAreEmpty,
+        );
       }
 
       if (widget.updatedUserInfo.phoneNumber != null &&
           widget.updatedUserInfo.phoneNumber!.isNotValidPhoneNumber) {
-        throw ErrorDescription("Please enter a valid Phone Number.");
+        throw ErrorDescription(
+          AppLocalizations.of(context)!.pleaseEnterAValidPhoneNumber,
+        );
       }
 
       final account = Provider.of<Account>(context, listen: false);
@@ -70,7 +76,7 @@ class _SaveEditButtonState extends State<SaveEditButton> {
 
       showCustomAlretDialog(
         context: context,
-        title: "Error",
+        title: AppLocalizations.of(context)!.error,
         content: error.toString(),
         titleColor: Colors.red,
       );
@@ -91,7 +97,7 @@ class _SaveEditButtonState extends State<SaveEditButton> {
 
         return _isLoading
             ? Padding(
-                padding: const EdgeInsets.only(right: 15),
+                padding: const EdgeInsetsDirectional.only(end: 15),
                 child: Center(
                   child: CircularProgressIndicator(
                     color: Theme.of(context).appBarTheme.foregroundColor,
@@ -103,7 +109,7 @@ class _SaveEditButtonState extends State<SaveEditButton> {
                 icon: const Icon(Icons.check, size: 40)
                     .animate(target: isProfileUpdated ? 1 : 0)
                     .scaleXY(begin: 1, end: 1.12, duration: 150.ms),
-                tooltip: "Save",
+                tooltip: AppLocalizations.of(context)!.save,
               );
       },
     );

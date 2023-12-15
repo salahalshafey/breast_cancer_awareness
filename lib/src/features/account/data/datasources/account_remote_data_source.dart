@@ -1,4 +1,4 @@
-import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/exceptions_without_message.dart';
 import '../models/user_information_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
