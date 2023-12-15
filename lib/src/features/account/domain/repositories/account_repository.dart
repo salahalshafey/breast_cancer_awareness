@@ -13,7 +13,7 @@ abstract class AccountRepository {
   Future<UserInformation> signUpWithEmailAndPassword(
       UserInformation userInformation, String password);
 
-  Future<String?> sendUserImageAndType(File? image, String userType);
+  Future<String?> sendUserImageAndType(File? image, UserTypes? userType);
 
   Future<UserInformation> addOrUpdateUserData(
     UserInformation userInformation,

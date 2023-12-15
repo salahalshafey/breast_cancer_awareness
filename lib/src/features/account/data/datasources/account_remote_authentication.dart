@@ -87,7 +87,7 @@ class AccountFirebaseAuthenticationImpl implements AccountRemoteAuthentication {
             : authUserInfo.phoneNumber,
         imageUrl: authUserInfo.photoURL,
         dateOfSignUp: currentUser.metadata.creationTime!,
-        userType: "Normal",
+        userType: UserTypes.normal,
       );
     }
 
@@ -102,7 +102,7 @@ class AccountFirebaseAuthenticationImpl implements AccountRemoteAuthentication {
               : currentUser.phoneNumber,
       imageUrl: currentUser.photoURL,
       dateOfSignUp: currentUser.metadata.creationTime!,
-      userType: "Normal",
+      userType: UserTypes.normal,
     );
   }
 

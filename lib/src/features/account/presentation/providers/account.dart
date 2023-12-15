@@ -362,7 +362,7 @@ class Account extends DisposableProvider {
   //////////////////// User add/update/delete/signOut /////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
-  Future<void> sendUserImageAndType(File? image, String userType) async {
+  Future<void> sendUserImageAndType(File? image, UserTypes? userType) async {
     try {
       final imageUrl = await sendUserImageAndTypeUseCase.call(image, userType);
 

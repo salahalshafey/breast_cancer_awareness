@@ -23,7 +23,7 @@ class UserInformationModel extends UserInformation {
       phoneNumber: document['phone_number'],
       imageUrl: document['image_url'],
       dateOfSignUp: (document['date_of_sign_up'] as Timestamp).toDate(),
-      userType: document['user_type'],
+      userType: UserInformation.userTypeFromString(document['user_type']),
     );
   }
 
@@ -34,7 +34,7 @@ class UserInformationModel extends UserInformation {
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'date_of_sign_up': dateOfSignUp,
-        'user_type': userType,
+        'user_type': userTypeToString,
       };
 
   factory UserInformationModel.fromJson(Map<String, dynamic> json) {
@@ -46,7 +46,7 @@ class UserInformationModel extends UserInformation {
       phoneNumber: json['phone_number'],
       imageUrl: json['image_url'],
       dateOfSignUp: DateTime.parse(json['date_of_sign_up']),
-      userType: json['user_type'],
+      userType: UserInformation.userTypeFromString(json['user_type']),
     );
   }
 
@@ -58,6 +58,6 @@ class UserInformationModel extends UserInformation {
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'date_of_sign_up': dateOfSignUp.toString(),
-        'user_type': userType,
+        'user_type': userTypeToString,
       };
 }

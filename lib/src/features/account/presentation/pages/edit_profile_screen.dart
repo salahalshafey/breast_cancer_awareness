@@ -27,7 +27,7 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   String? _fileImagePath;
-  late String _userType = widget.userInfo.userType;
+  late UserTypes _userType = widget.userInfo.userType;
 
   late final _firstNameController =
       TextEditingController(text: widget.userInfo.firstName);
@@ -79,7 +79,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     setState(() {});
   }
 
-  void _changeUserType(String userType) {
+  void _changeUserType(UserTypes userType) {
     setState(() {
       _userType = userType;
     });

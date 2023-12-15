@@ -8,6 +8,7 @@ import '../../../../core/util/builders/custom_alret_dialoge.dart';
 import '../../../../core/util/builders/custom_snack_bar.dart';
 import '../../../../core/util/widgets/default_screen.dart';
 
+import '../../../account/domain/entities/user_information.dart';
 import '../../../account/presentation/providers/account.dart';
 import '../../domain/entities/search_types.dart';
 import '../widgets/ai_result.dart';
@@ -36,7 +37,7 @@ class _SearchScreenState extends State<SearchScreen> {
       final account = Provider.of<Account>(context, listen: false);
       final user = await account.getUserInfo();
 
-      if (user == null || user.userType == "guest") {
+      if (user == null || user.userType == UserTypes.guest) {
         final color = Theme.of(context).appBarTheme.foregroundColor;
 
         showCustomAlretDialog(

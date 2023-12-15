@@ -36,7 +36,7 @@ class _SignUpFormState extends State<SignUpForm> {
     phoneNumber: null,
     imageUrl: null,
     dateOfSignUp: DateTime.now(),
-    userType: "Normal",
+    userType: UserTypes.normal,
   );
 
   String? _apiErrorForEmail;

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import '../entities/user_information.dart';
 import '../repositories/account_repository.dart';
 
 class SendUserImageAndTypeUseCase {
@@ -7,6 +8,6 @@ class SendUserImageAndTypeUseCase {
 
   SendUserImageAndTypeUseCase(this.repository);
 
-  Future<String?> call(File? image, String userType) =>
+  Future<String?> call(File? image, UserTypes? userType) =>
       repository.sendUserImageAndType(image, userType);
 }

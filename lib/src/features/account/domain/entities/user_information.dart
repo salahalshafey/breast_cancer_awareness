@@ -8,7 +8,7 @@ class UserInformation {
   final String? phoneNumber;
   final String? imageUrl;
   final DateTime dateOfSignUp;
-  final String userType;
+  final UserTypes userType;
 
   const UserInformation({
     required this.id,
@@ -29,7 +29,7 @@ class UserInformation {
     String? phoneNumber,
     String? imageUrl,
     DateTime? dateOfSignUp,
-    String? userType,
+    UserTypes? userType,
   }) {
     return UserInformation(
       id: id ?? this.id,
@@ -80,6 +80,41 @@ class UserInformation {
         userType: userType,
       );
 
+  String get userTypeToString {
+    switch (userType) {
+      case UserTypes.doctor:
+        return "Doctor";
+
+      case UserTypes.patient:
+        return "Patient";
+
+      case UserTypes.normal:
+        return "Normal";
+
+      case UserTypes.guest:
+        return "Guest";
+    }
+  }
+
+  static UserTypes userTypeFromString(String userType) {
+    switch (userType) {
+      case "Doctor":
+        return UserTypes.doctor;
+
+      case "Patient":
+        return UserTypes.patient;
+
+      case "Normal":
+        return UserTypes.normal;
+
+      case "Guest":
+        return UserTypes.guest;
+
+      default:
+        return UserTypes.normal;
+    }
+  }
+
   @override
   String toString() {
     return "id = $id, \n"
@@ -89,6 +124,31 @@ class UserInformation {
         "phoneNmber = $phoneNumber, \n"
         "imageUrl = $imageUrl, \n"
         "dateOfSignUp = $dateOfSignUp, \n"
-        "userType = $userType \n";
+        "userType = $userTypeToString \n";
+  }
+}
+
+enum UserTypes {
+  doctor,
+  patient,
+  normal,
+  guest,
+}
+
+extension UserTypesExtension on UserTypes {
+  String toStringValue() {
+    switch (this) {
+      case UserTypes.doctor:
+        return "Doctor";
+
+      case UserTypes.patient:
+        return "Patient";
+
+      case UserTypes.normal:
+        return "Normal";
+
+      case UserTypes.guest:
+        return "Guest";
+    }
   }
 }

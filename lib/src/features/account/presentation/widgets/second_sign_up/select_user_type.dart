@@ -4,7 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../../core/util/widgets/custom_card.dart';
+import '../../../domain/entities/user_information.dart';
 import '../../providers/image_and_user_type_provider.dart';
+import '../get_user_type_with_localizations.dart';
 import '../icon_from_asset.dart';
 
 class SellectUserType extends StatelessWidget {
@@ -19,28 +21,28 @@ class SellectUserType extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         UserType(
-          userType: "Normal",
+          userType: UserTypes.normal,
           userAssetIcon: "assets/icons/normal_user_icon.png",
           iconHeight: 50,
-          isSelected: userType == "Normal",
+          isSelected: userType == UserTypes.normal,
           onTap: (userType) {
             provider.changeUserType(userType);
           },
         ),
         UserType(
-          userType: "Doctor",
+          userType: UserTypes.doctor,
           userAssetIcon: "assets/icons/doctor_icon.png",
           iconHeight: 66,
-          isSelected: userType == "Doctor",
+          isSelected: userType == UserTypes.doctor,
           onTap: (userType) {
             provider.changeUserType(userType);
           },
         ),
         UserType(
-          userType: "Patient",
+          userType: UserTypes.patient,
           userAssetIcon: "assets/icons/patient_icon.svg",
           iconHeight: 50,
-          isSelected: userType == "Patient",
+          isSelected: userType == UserTypes.patient,
           onTap: (userType) {
             provider.changeUserType(userType);
           },
@@ -60,16 +62,16 @@ class UserType extends StatelessWidget {
     required this.onTap,
   });
 
-  final String userType;
+  final UserTypes userType;
   final String userAssetIcon;
   final double iconHeight;
   final bool isSelected;
-  final void Function(String userType) onTap;
+  final void Function(UserTypes userType) onTap;
 
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
-    final isDoctor = userType == "Doctor";
+    final isDoctor = userType == UserTypes.doctor;
 
     return Align(
       child: CustomCard(
@@ -100,7 +102,7 @@ class UserType extends StatelessWidget {
               ),
             ),
             Text(
-              userType,
+              getuserTypeWithLocalizations(userType),
               style: TextStyle(
                 color: isSelected ? Colors.white : primaryColor,
                 fontSize: 18,

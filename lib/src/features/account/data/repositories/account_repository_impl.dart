@@ -76,7 +76,7 @@ class AccountRepositoryImpl implements AccountRepository {
         phoneNumber: null,
         imageUrl: null,
         dateOfSignUp: DateTime.now(),
-        userType: "guest",
+        userType: UserTypes.guest,
       );
 
       await localDataSource.addUser(userInfo);
@@ -129,9 +129,8 @@ class AccountRepositoryImpl implements AccountRepository {
   }
 
   @override
-  Future<String?> sendUserImageAndType(File? image, String userType) async {
-    userType = userType.isEmpty ? "Normal" : userType;
-    if (image == null && userType == "Normal") {
+  Future<String?> sendUserImageAndType(File? image, UserTypes? userType) async {
+    if (image == null && (userType == null || userType == UserTypes.normal)) {
       return null;
     }
 
@@ -150,7 +149,7 @@ class AccountRepositoryImpl implements AccountRepository {
       await remoteDataSource.storeUserImageAndType(
         userId,
         downloadUrl,
-        userType,
+        (userType ?? UserTypes.normal).toStringValue(),
       );
 
       return downloadUrl;

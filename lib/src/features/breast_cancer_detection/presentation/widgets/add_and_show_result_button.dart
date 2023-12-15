@@ -6,6 +6,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:breast_cancer_awareness/src/core/error/exceptions.dart';
 import '../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../account/domain/entities/user_information.dart';
 import '../../../account/presentation/providers/account.dart';
 
 import '../providers/for_doctor_screen_state_provider.dart';
@@ -28,7 +29,7 @@ class AddAndShowResultButton extends StatelessWidget {
           throw Error("You didn't provide an image!!!");
         }
 
-        if (user == null || user.userType == "guest") {
+        if (user == null || user.userType == UserTypes.guest) {
           final color = Theme.of(context).appBarTheme.foregroundColor;
 
           showCustomAlretDialog(
@@ -61,7 +62,7 @@ class AddAndShowResultButton extends StatelessWidget {
           return;
         }
 
-        if (user.userType != "Doctor") {
+        if (user.userType != UserTypes.doctor) {
           showCustomAlretDialog(
             context: context,
             title: "Sorry",

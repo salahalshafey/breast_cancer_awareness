@@ -169,10 +169,6 @@ class LandingPage extends StatelessWidget {
           return const SecondSignUpScreen();
         }
 
-        final settingsProvider = Provider.of<SettingsProvider>(context);
-
-        print(settingsProvider.currentLanguageCode);
-
         return const MainScreenWithDrawer();
       },
     );

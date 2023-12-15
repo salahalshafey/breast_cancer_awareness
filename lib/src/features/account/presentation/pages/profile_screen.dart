@@ -14,9 +14,11 @@ import '../../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../../core/util/functions/date_time_and_duration.dart';
 import '../../../../core/util/builders/go_to_screen_with_slide_transition.dart';
 
+import '../../domain/entities/user_information.dart';
 import '../providers/account.dart';
 
 import '../providers/delete_account_state_provider.dart';
+import '../widgets/get_user_type_with_localizations.dart';
 import 'edit_profile_screen.dart';
 import '../widgets/icon_from_asset.dart';
 import '../widgets/profile/delete_account_button.dart';
@@ -147,7 +149,7 @@ class ProfileScreen extends StatelessWidget {
                     InfoWithIcon(
                       icon: UserTypeIcon(userInfo.userType),
                       info: AppLocalizations.of(context)!.userOf(
-                        userType(userInfo.userType),
+                        getuserTypeWithLocalizations(userInfo.userType),
                       ),
                       tooltip: AppLocalizations.of(context)!.userType,
                     ),
@@ -204,16 +206,16 @@ class ProfileScreen extends StatelessWidget {
 class UserTypeIcon extends StatelessWidget {
   const UserTypeIcon(this.userType, {super.key});
 
-  final String userType;
+  final UserTypes userType;
 
   @override
   Widget build(BuildContext context) {
     return IconFromAsset(
-      assetIcon: userType == "Doctor"
+      assetIcon: userType == UserTypes.doctor
           ? "assets/icons/doctor_icon.png"
-          : userType == "Normal"
-              ? "assets/icons/normal_user_icon.png"
-              : "assets/icons/patient_icon.svg",
+          : userType == UserTypes.patient
+              ? "assets/icons/patient_icon.svg"
+              : "assets/icons/normal_user_icon.png",
       iconHeight: 30,
     );
   }
@@ -250,18 +252,5 @@ String providerName(String providerId) {
       return AppLocalizations.of(context)!.twitter;
     default:
       return AppLocalizations.of(context)!.email;
-  }
-}
-
-String userType(String userType) {
-  switch (userType) {
-    case "Doctor":
-      return AppLocalizations.of(context)!.doctor;
-    case "Patient":
-      return AppLocalizations.of(context)!.patient;
-    case "Normal":
-      return AppLocalizations.of(context)!.normal;
-    default:
-      return AppLocalizations.of(context)!.normal;
   }
 }
