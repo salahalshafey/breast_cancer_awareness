@@ -13,6 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/network/network_info.dart';
 import '../../../core/util/builders/custom_alret_dialog.dart';
+import '../../../core/util/functions/nouns_in_diff_languages.dart';
 
 /// ### This is useful for button `Check for update`.
 ///
@@ -46,11 +47,8 @@ Future<bool?> checkForUpdateWithDialog(BuildContext context) async {
 
   if (currentAppVersion < versionToForceUpdateIfBelow) {
     final daysToUpdate = forceUpdateAfter.difference(currentDateTime).inDays;
-    final daysToUpdateString = daysToUpdate == 0 || daysToUpdate == 1
-        ? AppLocalizations.of(context)!.oneDay
-        : daysToUpdate == 2
-            ? AppLocalizations.of(context)!.twoDays
-            : AppLocalizations.of(context)!.days(daysToUpdate);
+    final daysToUpdateString =
+        dayWithLocalization(daysToUpdate == 0 ? 1 : daysToUpdate);
 
     forceUpdateAfterDaysDialog(context, daysToUpdateString);
 

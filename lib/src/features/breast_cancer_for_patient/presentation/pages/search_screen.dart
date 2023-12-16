@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../../core/util/builders/custom_snack_bar.dart';
 import '../../../../core/util/widgets/default_screen.dart';
@@ -156,7 +158,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 Icons.arrow_back,
                 color: Theme.of(context).appBarTheme.foregroundColor,
               ),
-              tooltip: "Back",
+              tooltip: AppLocalizations.of(context)!.back,
             ),
           ),
           Padding(

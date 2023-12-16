@@ -16,6 +16,10 @@
   "@ok": {
     "description": "the ok word"
   },
+  "back": "Back",
+  "@back": {
+    "description": "the back word `for backArrow icon tooltip`"
+  },
   "error": "Error",
   "@error": {
     "description": "the Error word"
@@ -76,6 +80,54 @@
   "@copid": {
     "description": "the Copid! word"
   },
+  "km": "km",
+  "@km": {
+    "description": "the km word"
+  },
+  "meter": "meter",
+  "@meter": {
+    "description": "the meter word"
+  },
+  "linkIsNotvalid": "Link is Not valid",
+  "@linkIsNotvalid": {
+    "description": "the response if `web link` is not valid"
+  },
+  "youAreCurrentlyOffline": "You are currently offline",
+  "@youAreCurrentlyOffline": {
+    "description": "the response if no internet connections"
+  },
+  "linkDoesnotPointToImage": "Link doesn't point to an image",
+  "@linkDoesnotPointToImage": {
+    "description": "the response if the linke is valid but not resolve as an image"
+  },
+  "passwordMustBeAtLeastWithDetails": "Password must be at least 8 characters long, with at least 5 alphabet, 2 numbers, and 1 special character like ",
+  "@passwordMustBeAtLeastWithDetails": {
+    "description": "the response if `password formField in SignUp screen` is empty or less than 8 characters."
+  },
+  "fiveAlphabetCharacters": "5 alphabet characters",
+  "@fiveAlphabetCharacters": {
+    "description": "one of possible errors in `password formField in SignUp screen`"
+  },
+  "twoNumbers": "2 numbers",
+  "@twoNumbers": {
+    "description": "one of possible errors in `password formField in SignUp screen`"
+  },
+  "oneSpecialCharachtersLike": "1 special charachters like ",
+  "@oneSpecialCharachtersLike": {
+    "description": "one of possible errors in `password formField in SignUp screen`"
+  },
+  "passwordMustContainAtLeast": "Password must contain at least",
+  "@passwordMustContainAtLeast": {
+    "description": "one of possible errors in `password formField in SignUp screen`"
+  },
+  "comma": ", ",
+  "@comma": {
+    "description": "the comma seperator `,`"
+  },
+  "and": " And ",
+  "@and": {
+    "description": "the and word"
+  },
   "today": "Today",
   "@today": {
     "description": "the Today word"
@@ -87,6 +139,255 @@
   "at": "at",
   "@at": {
     "description": "the at word `for clocks` like **at 10:33 PM**"
+  },
+  "justNow": "just now",
+  "@justNow": {
+    "description": "the just now word"
+  },
+  "durationAgo": "{durationInString} ago",
+  "@durationAgo": {
+    "description": "used for duration ago like: `3 years ago`",
+    "placeholders": {
+      "durationInString": {
+        "type": "String",
+        "example": "3 years"
+      }
+    }
+  },
+  "durationFromNow": "{durationInString} from now",
+  "@durationFromNow": {
+    "description": "used for duration from now like: `3 years from now`",
+    "placeholders": {
+      "durationInString": {
+        "type": "String",
+        "example": "3 years"
+      }
+    }
+  },
+  "@_CORE_NOUNS_SINGULAR_PLURAL": {},
+  "second": "second",
+  "@second": {
+    "description": "the second word"
+  },
+  "twoSeconds": "2 seconds",
+  "@twoSeconds": {
+    "description": "the 2 seconds word"
+  },
+  "secondsBeteenThreeAndTen": "{numberOfSeconds} seconds",
+  "@secondsBeteenThreeAndTen": {
+    "description": "number of seconds between 3 and 10 like: 3, 5 or 10 seconds",
+    "placeholders": {
+      "numberOfSeconds": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "secondsMoreThanTen": "{numberOfSeconds} seconds",
+  "@secondsMoreThanTen": {
+    "description": "number of seconds more than 10 like: 11 seconds",
+    "placeholders": {
+      "numberOfSeconds": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "minute": "minute",
+  "@minute": {
+    "description": "the minute word"
+  },
+  "twoMinutes": "2 minutes",
+  "@twoMinutes": {
+    "description": "the 2 minutes word"
+  },
+  "minutesBeteenThreeAndTen": "{numberOfMinutes} minutes",
+  "@minutesBeteenThreeAndTen": {
+    "description": "number of minutes between 3 and 10 like: 3, 5 or 10 minutes",
+    "placeholders": {
+      "numberOfMinutes": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "minutesMoreThanTen": "{numberOfMinutes} minutes",
+  "@minutesMoreThanTen": {
+    "description": "number of minutes more than 10 like: 11 minutes",
+    "placeholders": {
+      "numberOfMinutes": {
+        "type": "int",
+        "example": "11"
+      }
+    }
+  },
+  "hour": "hour",
+  "@hour": {
+    "description": "the hour word"
+  },
+  "twoHours": "2 hours",
+  "@twoHours": {
+    "description": "the 2 hours word"
+  },
+  "hoursBeteenThreeAndTen": "{numberOfHours} hours",
+  "@hoursBeteenThreeAndTen": {
+    "description": "number of hours between 3 and 10 like: 3, 5 or 10 hours",
+    "placeholders": {
+      "numberOfHours": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "hoursMoreThanTen": "{numberOfHours} hours",
+  "@hoursMoreThanTen": {
+    "description": "number of hours more than 10 like: 11 hours",
+    "placeholders": {
+      "numberOfHours": {
+        "type": "int",
+        "example": "11"
+      }
+    }
+  },
+  "day": "day",
+  "@day": {
+    "description": "the day word"
+  },
+  "twoDays": "2 days",
+  "@twoDays": {
+    "description": "the 2 days word"
+  },
+  "daysBeteenThreeAndTen": "{numberOfDays} days",
+  "@daysBeteenThreeAndTen": {
+    "description": "number of days between 3 and 10 like: 3, 5 or 10 days",
+    "placeholders": {
+      "numberOfDays": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "daysMoreThanTen": "{numberOfDays} days",
+  "@daysMoreThanTen": {
+    "description": "number of days more than 10 like: 11 days",
+    "placeholders": {
+      "numberOfDays": {
+        "type": "int",
+        "example": "11"
+      }
+    }
+  },
+  "week": "week",
+  "@week": {
+    "description": "the week word"
+  },
+  "twoWeeks": "2 weeks",
+  "@twoWeeks": {
+    "description": "the 2 weeks word"
+  },
+  "weeksBeteenThreeAndTen": "{numberOfWeeks} weeks",
+  "@weeksBeteenThreeAndTen": {
+    "description": "number of weeks between 3 and 10 like: 3, 5 or 10 weeks",
+    "placeholders": {
+      "numberOfWeeks": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "weeksMoreThanTen": "{numberOfWeeks} weeks",
+  "@weeksMoreThanTen": {
+    "description": "number of weeks more than 10 like: 11 weeks",
+    "placeholders": {
+      "numberOfWeeks": {
+        "type": "int",
+        "example": "11"
+      }
+    }
+  },
+  "month": "month",
+  "@month": {
+    "description": "the month word"
+  },
+  "twoMonths": "2 months",
+  "@twoMonths": {
+    "description": "the 2 months word"
+  },
+  "monthsBeteenThreeAndTen": "{numberOfMonths} months",
+  "@monthsBeteenThreeAndTen": {
+    "description": "number of months between 3 and 10 like: 3, 5 or 10 months",
+    "placeholders": {
+      "numberOfMonths": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "monthsMoreThanTen": "{numberOfMonths} months",
+  "@monthsMoreThanTen": {
+    "description": "number of months more than 10 like: 11 months",
+    "placeholders": {
+      "numberOfMonths": {
+        "type": "int",
+        "example": "11"
+      }
+    }
+  },
+  "year": "year",
+  "@year": {
+    "description": "the year word"
+  },
+  "twoYears": "2 years",
+  "@twoYears": {
+    "description": "the 2 years word"
+  },
+  "yearsBeteenThreeAndTen": "{numberOfYears} years",
+  "@yearsBeteenThreeAndTen": {
+    "description": "number of years between 3 and 10 like: 3, 5 or 10 years",
+    "placeholders": {
+      "numberOfYears": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "yearsMoreThanTen": "{numberOfYears} years",
+  "@yearsMoreThanTen": {
+    "description": "number of years more than 10 like: 11 years",
+    "placeholders": {
+      "numberOfYears": {
+        "type": "int",
+        "example": "11"
+      }
+    }
+  },
+  "decade": "decade",
+  "@decade": {
+    "description": "the decade word"
+  },
+  "twoDecades": "2 decades",
+  "@twoDecades": {
+    "description": "the 2 decades word"
+  },
+  "decadesBeteenThreeAndTen": "{numberOfDecades} decades",
+  "@decadesBeteenThreeAndTen": {
+    "description": "number of decades between 3 and 10 like: 3, 5 or 10 decades",
+    "placeholders": {
+      "numberOfDecades": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "decadesMoreThanTen": "{numberOfDecades} decades",
+  "@decadesMoreThanTen": {
+    "description": "number of decades more than 10 like: 11 decades",
+    "placeholders": {
+      "numberOfDecades": {
+        "type": "int",
+        "example": "11"
+      }
+    }
   },
 
 
@@ -171,24 +472,6 @@
   "update": "Update",
   "@update": {
     "description": "the Update word"
-  },
-  "oneDay": "1 day",
-  "@oneDay": {
-    "description": "the 1 day word"
-  },
-  "twoDays": "2 days",
-  "@twoDays": {
-    "description": "the 2 days word"
-  },
-  "days": "{numberOfDays} days",
-  "@days": {
-    "description": "number of days like: 5 days",
-    "placeholders": {
-      "numberOfDays": {
-        "type": "int",
-        "example": "5"
-      }
-    }
   },
   "thisVersionOfTheAppNotSupportedAfterDays": "This version of Breast Cancer Awareness needs to be **updated in {numberOfDays}**.\n\nUpdate to the latest version?",
   "@thisVersionOfTheAppNotSupportedAfterDays": {
@@ -281,10 +564,6 @@
   "privacyPolicy": "Privacy Policy",
   "@privacyPolicy": {
     "description": "the privacy Policy word"
-  },
-  "and": " And ",
-  "@and": {
-    "description": "the and word"
   },
   "termsOfService": "Terms Of Service",
   "@termsOfService": {
@@ -412,8 +691,8 @@
   "@password": {
     "description": "the Password word"
   },
-  "passwordMustBeAtLeast": "Password must be at least 8 characters long.",
-  "@passwordMustBeAtLeast": {
+  "passwordMustBeAtLeast8CharactersLong": "Password must be at least 8 characters long.",
+  "@passwordMustBeAtLeast8CharactersLong": {
     "description": "password formField error if num of char is less than 8"
   },
 

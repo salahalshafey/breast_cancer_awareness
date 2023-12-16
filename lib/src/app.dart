@@ -10,7 +10,7 @@ import 'core/theme/colors.dart';
 import 'core/theme/dark_theme.dart';
 import 'core/theme/light_theme.dart';
 
-import 'core/util/functions/date_time_and_duration.dart';
+import 'core/util/functions/nouns_in_diff_languages.dart';
 import 'features/account/presentation/pages/sign_in_screen.dart';
 import 'features/account/presentation/pages/send_password_reset_email_screen.dart';
 import 'features/account/presentation/pages/first_sign_up_screen.dart';
@@ -120,11 +120,8 @@ class LandingPageWithCheckForUpdate extends StatelessWidget {
 
     if (currentAppVersion < versionToForceUpdateIfBelow) {
       final daysToUpdate = forceUpdateAfter.difference(currentDateTime).inDays;
-      final daysToUpdateString = daysToUpdate == 0 || daysToUpdate == 1
-          ? AppLocalizations.of(context)!.oneDay
-          : daysToUpdate == 2
-              ? AppLocalizations.of(context)!.twoDays
-              : AppLocalizations.of(context)!.days(daysToUpdate);
+      final daysToUpdateString =
+          dayWithLocalization(daysToUpdate == 0 ? 1 : daysToUpdate);
 
       Future.delayed(const Duration(seconds: 2), () {
         forceUpdateAfterDaysDialog(context, daysToUpdateString);
@@ -169,12 +166,6 @@ class LandingPage extends StatelessWidget {
             !userSnapshot.data!.isAnonymous) {
           return const SecondSignUpScreen();
         }
-
-        print(wellFormatedDuration(
-          Duration(
-              days: 0, hours: 2, minutes: 33, seconds: 15, microseconds: 100),
-          lineEach: false,
-        ));
 
         return const MainScreenWithDrawer();
       },

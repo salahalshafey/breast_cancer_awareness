@@ -4,6 +4,7 @@ import 'package:intl/intl.dart' as intl;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../app.dart';
+import 'nouns_in_diff_languages.dart';
 
 final context = navigatorKey.currentContext!;
 
@@ -148,22 +149,19 @@ String formatedDuration(Duration time) {
 }
 
 String wellFormatedDuration(Duration duration, {bool lineEach = false}) {
-  int durationInSecond = duration.inSeconds;
+  final hours = duration.inHours;
+  final minutes = duration.inMinutes.remainder(60);
+  final seconds = duration.inSeconds.remainder(60);
 
-  final hours = durationInSecond ~/ 3600;
-  final hoursString =
-      hours == 0 ? '' : '$hours hour${_s(hours)}${_lineOrSpace(lineEach)}';
-  durationInSecond %= 3600;
+  final hoursString = hours == 0
+      ? ''
+      : '${hourWithLocalization(hours)}${_lineOrSpace(lineEach)}';
 
-  final minutes = durationInSecond ~/ 60;
   final minutesString = minutes == 0
       ? ''
-      : '$minutes minute${_s(minutes)}${_lineOrSpace(lineEach)}';
-  durationInSecond %= 60;
+      : '${minuteWithLocalization(minutes)}${_lineOrSpace(lineEach)}';
 
-  final secondsString = durationInSecond == 0
-      ? ''
-      : '$durationInSecond second${_s(durationInSecond)}';
+  final secondsString = seconds == 0 ? '' : secondWithLocalization(seconds);
 
   return hoursString + minutesString + secondsString;
 }
@@ -176,58 +174,58 @@ String pastOrFutureTimeFromNow(DateTime dateTime) {
   final duration = DateTime.now().difference(dateTime);
 
   var d = duration.inDays ~/ 3650;
-  var res = _res(d, 'decade');
+  var res = _res(d, decadeWithLocalization(d.abs()));
   if (res != null) {
     return res;
   }
 
   d = duration.inDays ~/ 365;
-  res = _res(d, 'year');
+  res = _res(d, yearWithLocalization(d.abs()));
   if (res != null) {
     return res;
   }
 
   d = duration.inDays ~/ 30;
-  res = _res(d, 'month');
+  res = _res(d, monthWithLocalization(d.abs()));
   if (res != null) {
     return res;
   }
 
   d = duration.inDays ~/ 7;
-  res = _res(d, 'week');
+  res = _res(d, weekWithLocalization(d.abs()));
   if (res != null) {
     return res;
   }
 
   d = duration.inDays;
-  res = _res(d, 'day');
+  res = _res(d, dayWithLocalization(d.abs()));
   if (res != null) {
     return res;
   }
 
   d = duration.inHours;
-  res = _res(d, 'hour');
+  res = _res(d, hourWithLocalization(d.abs()));
   if (res != null) {
     return res;
   }
 
   d = duration.inMinutes;
-  res = _res(d, 'minute');
+  res = _res(d, minuteWithLocalization(d.abs()));
   if (res != null) {
     return res;
   }
 
-  return 'just now';
+  return AppLocalizations.of(context)!.justNow;
 }
 
-String? _res(int d, String timeName) {
+String? _res(int d, String timeInString) {
   if (d > 0) {
-    return '$d $timeName${_s(d)} ago';
+    return AppLocalizations.of(context)!.durationAgo(timeInString);
   }
+
   if (d < 0) {
-    return '${d.abs()} $timeName${_s(d)} from now';
+    return AppLocalizations.of(context)!.durationFromNow(timeInString);
   }
+
   return null;
 }
-
-String _s(int num) => num.abs() > 1 ? 's' : '';

@@ -141,7 +141,8 @@ class _PasswordTextFieldToDeleteAccountState
             },
             validator: (value) {
               if (value == null || value.trim().length < 8) {
-                return AppLocalizations.of(context)!.passwordMustBeAtLeast;
+                return AppLocalizations.of(context)!
+                    .passwordMustBeAtLeast8CharactersLong;
               }
 
               return _apiErrorForPassword;

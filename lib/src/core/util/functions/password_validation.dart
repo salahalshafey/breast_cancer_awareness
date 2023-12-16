@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../app.dart';
+
+final context = navigatorKey.currentContext!;
+
 String? validatPassword(String? value) {
   const errorMessage =
       "Password must be at least 8 characters long, with at least 5 alphabet, 2 numbers and 1 special charachters like '~!@#\$%^&*()_'.";
@@ -80,40 +86,44 @@ String? validatPassword2(String? value) {
 }
 
 String? validatPassword3(String? value) {
+  const specialleteral = "'~!@#\$%^&*()_.'";
+
   if (value == null || value.length < 8) {
-    return "Password must be at least 8 characters long, with at least 5 alphabet, 2 numbers and 1 special charachters like '~!@#\$%^&*()_'.";
+    return AppLocalizations.of(context)!.passwordMustBeAtLeastWithDetails +
+        specialleteral;
   }
 
   List<String> validationValues = [];
 
-  final alphabet =
-      ("abcdefghijklmnopqrstuvwxyz${"abcdefghijklmnopqrstuvwxyz".toUpperCase()}")
-          .characters
-          .toSet();
+  final alphabetRegex = RegExp(r'\p{L}', unicode: true);
   var countAlpha = 0;
   value.characters.toList().forEach((char) {
-    if (alphabet.contains(char)) countAlpha++;
+    if (alphabetRegex.hasMatch(char)) countAlpha++;
   });
   if (countAlpha < 5) {
-    validationValues.add("5 alphabet characters");
+    validationValues.add(AppLocalizations.of(context)!.fiveAlphabetCharacters);
   }
 
-  final numbers = "0123456789".characters.toSet();
-  var countNum = 0;
+  final digitsRegex = RegExp(r'-?[\d٠-٩०-९০-৯]+');
+  var countDigit = 0;
   value.characters.toList().forEach((char) {
-    if (numbers.contains(char)) countNum++;
+    if (digitsRegex.hasMatch(char)) countDigit++;
   });
-  if (countNum < 2) {
-    validationValues.add("2 numbers");
+  if (countDigit < 2) {
+    validationValues.add(AppLocalizations.of(context)!.twoNumbers);
   }
 
-  final specialChar = "~!@#\$%^&*()_-+={}[]'\"\\;: ,.<>?/،؟".characters.toSet();
+  //final specialChar = "~!@#\$%^&*()_-+={}[]'\"\\;: ,.<>?/،؟".characters.toSet();
   var countSpecial = 0;
   value.characters.toList().forEach((char) {
-    if (specialChar.contains(char)) countSpecial++;
+    if (!digitsRegex.hasMatch(char) && !alphabetRegex.hasMatch(char)) {
+      countSpecial++;
+    }
   });
   if (countSpecial < 1) {
-    validationValues.add("1 special charachters like '~!@#\$%^&*()_'.");
+    validationValues.add(
+        AppLocalizations.of(context)!.oneSpecialCharachtersLike +
+            specialleteral);
   }
 
   return _joinValidations(validationValues);
@@ -124,10 +134,13 @@ String? _joinValidations(List<String> validations) {
     return null;
   }
 
-  const s = "Password must contain at least ";
+  final s = AppLocalizations.of(context)!.passwordMustContainAtLeast;
+  final comma = AppLocalizations.of(context)!.comma;
+  final and = AppLocalizations.of(context)!.and;
+
   if (validations.length == 1) {
-    return s + validations.join();
-  } else {
-    return "$s${validations.sublist(0, validations.length - 1).join(", ")} and ${validations.last}";
+    return "$s ${validations.join()}.";
   }
+
+  return "$s ${validations.sublist(0, validations.length - 1).join(comma)} $and ${validations.last}.";
 }
