@@ -572,6 +572,76 @@
 
 
 
+  "@_ACCOINT_PROVIDER": {},
+  "somethingWentWrongPleaseTryAgainLater": "Something went wrong, please try again later.",
+  "@somethingWentWrongPleaseTryAgainLater": {
+    "description": "the response if an `API` error"
+  },
+  "errorHappendThereIsNoDataForThatAccount": "Error happened, There is no data for that Account",
+  "@errorHappendThereIsNoDataForThatAccount": {
+    "description": "the response if an `API` error **No data**"
+  },
+  "unexpectedErrorHappened": "An unexpected error happened.",
+  "@unexpectedErrorHappened": {
+    "description": "the response if error not associated with `API` directly"
+  },
+  "userNotFoundForThatEmail": "User not found for that email.",
+  "@userNotFoundForThatEmail": {
+    "description": "the response if an `API` error of `sign in`"
+  },
+  "emailNotValid": "Email Not Valid.",
+  "@emailNotValid": {
+    "description": "the response if an `API` error"
+  },
+  "thePasswordIsWrong": "The password is wrong.",
+  "@thePasswordIsWrong": {
+    "description": "the response if an `API` error"
+  },
+  "theUserIsNotFoundForThatEmailOrThePasswordIsWrong": "The User is not found for that email OR The password is wrong.",
+  "@theUserIsNotFoundForThatEmailOrThePasswordIsWrong": {
+    "description": "the response if an `API` error"
+  },
+  "theProvidedPasswordIsWeakTryToPutAStrongPassword": "The provided password is weak try to put a strong password.",
+  "@theProvidedPasswordIsWeakTryToPutAStrongPassword": {
+    "description": "the response if an `API` error"
+  },
+  "theProvidedEmailAlreadyExistsSignInInsteadOrProvideAnotherEmail": "The provided email already exists, sign in instead or provide another email.",
+  "@theProvidedEmailAlreadyExistsSignInInsteadOrProvideAnotherEmail": {
+    "description": "the response if an `API` error `sign up`"
+  },
+  "noProviderNameAccountWasSelected": "No {provider} account was selected!!!",
+  "@noProviderNameAccountWasSelected": {
+    "description": "the response if an no token error or `not sellecting a social account`",
+    "placeholders": {
+      "provider": {
+        "type": "String",
+        "example": "Google"
+      }
+    }
+  },
+  "anAccountAlreadyExistsWithTheSameEmailAddressAsYourProviderAccount": "An account already exists with the same email address as your {providerName} account.\nSign in using the account that is associated with this email address.",
+  "@anAccountAlreadyExistsWithTheSameEmailAddressAsYourProviderAccount": {
+    "description": "the response if an `API` error `trying to sign up with social account already signed`",
+    "placeholders": {
+      "providerName": {
+        "type": "String",
+        "example": "Google"
+      }
+    }
+  },
+  "youSelectedADifferentProviderAccount": "You selected a different {providerName} Account.\nselect the {providerName} Account that you logged in with the App. OR re-sign into the app instead.",
+  "@youSelectedADifferentProviderAccount": {
+    "description": "the response if an `API` error `trying to reauthenticate with different account`",
+    "placeholders": {
+      "providerName": {
+        "type": "String",
+        "example": "Google"
+      }
+    }
+  },
+
+
+
   "@_PROFILE_SCREEN": {},
   "somethingWentWrong": "Something went wrong!!",
   "@somethingWentWrong": {

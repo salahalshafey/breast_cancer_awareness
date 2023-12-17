@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, use_build_context_synchronously
 
 import 'dart:io';
 
@@ -8,6 +8,9 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:twitter_login/twitter_login.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../app.dart';
 import '../../../../core/error/error_exceptions_with_message.dart';
 import '../../../../dispose_container.dart';
 
@@ -48,6 +51,8 @@ class Account extends DisposableProvider {
     required this.deleteEveryThingToCurrentUserUsecase,
   });
 
+  final context = navigatorKey.currentContext!;
+
   UserInformation? _userInfo;
   bool _userFetchedFromBackend = false;
   String? _providerId;
@@ -82,13 +87,15 @@ class Account extends DisposableProvider {
       _userFetchedFromBackend = true;
       notifyListeners();
     } on OfflineException {
-      throw ErrorForDialog('You are currently offline.');
+      throw ErrorMessage(AppLocalizations.of(context)!.youAreCurrentlyOffline);
     } on ServerException {
-      throw ErrorForDialog('Something went wrong, please try again later.');
+      throw ErrorMessage(
+          AppLocalizations.of(context)!.somethingWentWrongPleaseTryAgainLater);
     } on EmptyDataException {
-      throw ErrorForDialog("Error happend, There is no data for that Account");
+      throw ErrorMessage(AppLocalizations.of(context)!
+          .errorHappendThereIsNoDataForThatAccount);
     } catch (error) {
-      throw ErrorForDialog('An unexpected error happened.');
+      throw ErrorMessage(AppLocalizations.of(context)!.unexpectedErrorHappened);
     }
   }
 
@@ -101,11 +108,14 @@ class Account extends DisposableProvider {
       _userFetchedFromBackend = true;
       notifyListeners();
     } on OfflineException {
-      throw ErrorForDialog('You are currently offline.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.youAreCurrentlyOffline);
     } on ServerException {
-      throw ErrorForDialog('Something went wrong, please try again later.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.somethingWentWrongPleaseTryAgainLater);
     } catch (error) {
-      throw ErrorForDialog('An unexpected error happened.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.unexpectedErrorHappened);
     }
   }
 
@@ -117,22 +127,28 @@ class Account extends DisposableProvider {
       _userFetchedFromBackend = true;
       notifyListeners();
     } on OfflineException {
-      throw ErrorForDialog('You are currently offline.');
-    } on ServerException {
-      throw ErrorForDialog('Something went wrong, please try again later.');
-    } on EmptyDataException {
-      throw ErrorForDialog("Error happend, There is no data for that user");
-    } on UserNotFoundException {
-      throw ErrorForDialog("User not found for that email.");
-    } on EmailNotValidException {
-      throw ErrorForDialog("Email Not Valid.");
-    } on WrongPasswordException {
-      throw ErrorForDialog("The password is wrong.");
-    } on UserNotFoundOrWrongPasswordException {
       throw ErrorForDialog(
-          "The User is not found for that email OR The password is wrong.");
+          AppLocalizations.of(context)!.youAreCurrentlyOffline);
+    } on ServerException {
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.somethingWentWrongPleaseTryAgainLater);
+    } on EmptyDataException {
+      throw ErrorForDialog(AppLocalizations.of(context)!
+          .errorHappendThereIsNoDataForThatAccount);
+    } on UserNotFoundException {
+      throw ErrorForEmailTextField(
+          AppLocalizations.of(context)!.userNotFoundForThatEmail);
+    } on EmailNotValidException {
+      throw ErrorForEmailTextField(AppLocalizations.of(context)!.emailNotValid);
+    } on WrongPasswordException {
+      throw ErrorForPasswordTextField(
+          AppLocalizations.of(context)!.thePasswordIsWrong);
+    } on UserNotFoundOrWrongPasswordException {
+      throw ErrorForDialog(AppLocalizations.of(context)!
+          .theUserIsNotFoundForThatEmailOrThePasswordIsWrong);
     } catch (error) {
-      throw ErrorForDialog('An unexpected error happened.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.unexpectedErrorHappened);
     }
   }
 
@@ -146,21 +162,25 @@ class Account extends DisposableProvider {
 
       notifyListeners();
     } on OfflineException {
-      throw ErrorForDialog('You are currently offline.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.youAreCurrentlyOffline);
     } on ServerException {
-      throw ErrorForDialog('Something went wrong, please try again later.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.somethingWentWrongPleaseTryAgainLater);
     } on EmptyDataException {
-      throw ErrorForDialog("Error happend, There is no data for that user");
+      throw ErrorForDialog(AppLocalizations.of(context)!
+          .errorHappendThereIsNoDataForThatAccount);
     } on WeakPasswordException {
-      throw ErrorForDialog(
-          "The provided password is weak try to put a strong password.");
+      throw ErrorForPasswordTextField(AppLocalizations.of(context)!
+          .theProvidedPasswordIsWeakTryToPutAStrongPassword);
     } on EmailAlreadyInUseException {
-      throw ErrorForDialog(
-          "The provided email already exists, sign in instead or provide another email.");
+      throw ErrorForEmailTextField(AppLocalizations.of(context)!
+          .theProvidedEmailAlreadyExistsSignInInsteadOrProvideAnotherEmail);
     } on EmailNotValidException {
-      throw ErrorForDialog("Email Not Valid.");
+      throw ErrorForEmailTextField(AppLocalizations.of(context)!.emailNotValid);
     } catch (error) {
-      throw ErrorForDialog('An unexpected error happened.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.unexpectedErrorHappened);
     }
   }
 
@@ -169,14 +189,17 @@ class Account extends DisposableProvider {
 
   Future<OAuthCredential> _getGoogleCredential() async {
     if (await NetworkInfoImpl().isNotConnected) {
-      throw ErrorForDialog('You are currently offline.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.youAreCurrentlyOffline);
     }
 
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
     if (googleUser == null) {
-      throw ErrorForDialog("No Google account was selected!!!");
+      throw ErrorForSnackBar(AppLocalizations.of(context)!
+          .noProviderNameAccountWasSelected(
+              AppLocalizations.of(context)!.google));
     }
 
     // Obtain the auth details from the request
@@ -199,9 +222,11 @@ class Account extends DisposableProvider {
       // Once signed in, return the UserCredential
       return await FirebaseAuth.instance.signInWithCredential(credential);
     } on FirebaseAuthException {
-      throw ErrorForDialog('Something went wrong, please try again later.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.somethingWentWrongPleaseTryAgainLater);
     } catch (error) {
-      throw ErrorForDialog('An unexpected error happened.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.unexpectedErrorHappened);
     }
   }
 
@@ -210,14 +235,17 @@ class Account extends DisposableProvider {
 
   Future<OAuthCredential> _getFacebookCredential() async {
     if (await NetworkInfoImpl().isNotConnected) {
-      throw ErrorForDialog('You are currently offline.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.youAreCurrentlyOffline);
     }
 
     // Trigger the sign-in flow
     final LoginResult loginResult = await FacebookAuth.instance.login();
 
     if (loginResult.accessToken == null) {
-      throw ErrorForDialog("No Facebook account was selected!!!");
+      throw ErrorForSnackBar(AppLocalizations.of(context)!
+          .noProviderNameAccountWasSelected(
+              AppLocalizations.of(context)!.facebook));
     }
 
     // Create a credential from the access token
@@ -236,14 +264,16 @@ class Account extends DisposableProvider {
           .signInWithCredential(facebookAuthCredential);
     } on FirebaseAuthException catch (e) {
       if (e.code == "account-exists-with-different-credential") {
-        throw ErrorForDialog(
-            "An account already exists with the same email address as your **Facebook** account.\n"
-            "Sign in using the account that is associated with this email address.");
+        throw ErrorForDialog(AppLocalizations.of(context)!
+            .anAccountAlreadyExistsWithTheSameEmailAddressAsYourProviderAccount(
+                AppLocalizations.of(context)!.facebook));
       }
 
-      throw ErrorForDialog('Something went wrong, please try again later.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.somethingWentWrongPleaseTryAgainLater);
     } catch (error) {
-      throw ErrorForDialog('An unexpected error happened.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.unexpectedErrorHappened);
     }
   }
 
@@ -252,7 +282,8 @@ class Account extends DisposableProvider {
 
   Future<OAuthCredential> _getTwitterCredential() async {
     if (await NetworkInfoImpl().isNotConnected) {
-      throw ErrorForDialog('You are currently offline.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.youAreCurrentlyOffline);
     }
 
     // Create a TwitterLogin instance
@@ -266,7 +297,9 @@ class Account extends DisposableProvider {
     final authResult = await twitterLogin.login();
 
     if (authResult.authToken == null) {
-      throw ErrorForDialog("No X account was selected!!!");
+      throw ErrorForSnackBar(AppLocalizations.of(context)!
+          .noProviderNameAccountWasSelected(
+              AppLocalizations.of(context)!.twitter));
     }
 
     // Create a credential from the access token
@@ -287,14 +320,16 @@ class Account extends DisposableProvider {
           .signInWithCredential(twitterAuthCredential);
     } on FirebaseAuthException catch (e) {
       if (e.code == "account-exists-with-different-credential") {
-        throw ErrorForDialog(
-            "An account already exists with the same email address as your **X** account.\n"
-            "Sign in using the account that is associated with this email address.");
+        throw ErrorForDialog(AppLocalizations.of(context)!
+            .anAccountAlreadyExistsWithTheSameEmailAddressAsYourProviderAccount(
+                AppLocalizations.of(context)!.twitter));
       }
 
-      throw ErrorForDialog('Something went wrong, please try again later.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.somethingWentWrongPleaseTryAgainLater);
     } catch (error) {
-      throw ErrorForDialog('An unexpected error happened.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.unexpectedErrorHappened);
     }
   }
 
@@ -303,7 +338,8 @@ class Account extends DisposableProvider {
 
   Future<void> reauthenticateWithPasswordCredential(String password) async {
     if (await NetworkInfoImpl().isNotConnected) {
-      throw ErrorForDialog('You are currently offline.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.youAreCurrentlyOffline);
     }
 
     try {
@@ -316,21 +352,24 @@ class Account extends DisposableProvider {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == "wrong-password") {
-        throw ErrorForDialog("The password is wrong.");
+        throw ErrorForPasswordTextField(
+            AppLocalizations.of(context)!.thePasswordIsWrong);
       }
 
-      throw ErrorForDialog('Something went wrong, please try again later.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.somethingWentWrongPleaseTryAgainLater);
     } catch (error) {
-      throw ErrorForDialog('An unexpected error happened.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.unexpectedErrorHappened);
     }
   }
 
   Future<void> reauthenticateWithSocialCredential(String providerId) async {
     final providerName = providerId == "google.com"
-        ? "Google"
+        ? AppLocalizations.of(context)!.google
         : providerId == "facebook.com"
-            ? "Facebook"
-            : "X";
+            ? AppLocalizations.of(context)!.facebook
+            : AppLocalizations.of(context)!.twitter;
 
     late OAuthCredential socialAuthCredential;
 
@@ -348,15 +387,16 @@ class Account extends DisposableProvider {
     } on FirebaseAuthException catch (e) {
       if (e.code == "user-mismatch" || e.code == "user-not-found") {
         throw ErrorForDialog(
-          "You selected a different **$providerName** Account.\n"
-          "select the **$providerName** Account that you logged in with the App. "
-          "OR re-sign into the app instead.",
+          AppLocalizations.of(context)!
+              .youSelectedADifferentProviderAccount(providerName),
         );
       }
 
-      throw ErrorForDialog('Something went wrong, please try again later.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.somethingWentWrongPleaseTryAgainLater);
     } catch (error) {
-      throw ErrorForDialog('An unexpected error happened.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.unexpectedErrorHappened);
     }
   }
 
@@ -371,13 +411,17 @@ class Account extends DisposableProvider {
 
       notifyListeners();
     } on OfflineException {
-      throw ErrorForDialog('You are currently offline.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.youAreCurrentlyOffline);
     } on ServerException {
-      throw ErrorForDialog('Something went wrong, please try again later.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.somethingWentWrongPleaseTryAgainLater);
     } on EmptyDataException {
-      throw ErrorForDialog("Error happend, There is no data for that user");
+      throw ErrorForDialog(AppLocalizations.of(context)!
+          .errorHappendThereIsNoDataForThatAccount);
     } catch (error) {
-      throw ErrorForDialog('An unexpected error happened.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.unexpectedErrorHappened);
     }
   }
 
@@ -396,13 +440,17 @@ class Account extends DisposableProvider {
 
       notifyListeners();
     } on OfflineException {
-      throw ErrorForDialog('You are currently offline.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.youAreCurrentlyOffline);
     } on ServerException {
-      throw ErrorForDialog('Something went wrong, please try again later.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.somethingWentWrongPleaseTryAgainLater);
     } on EmptyDataException {
-      throw ErrorForDialog("Error happend, There is no data for that user");
+      throw ErrorForDialog(AppLocalizations.of(context)!
+          .errorHappendThereIsNoDataForThatAccount);
     } catch (error) {
-      throw ErrorForDialog('An unexpected error happened.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.unexpectedErrorHappened);
     }
   }
 
@@ -410,11 +458,14 @@ class Account extends DisposableProvider {
     try {
       await deleteEveryThingToCurrentUserUsecase.call();
     } on OfflineException {
-      throw ErrorForDialog('You are currently offline.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.youAreCurrentlyOffline);
     } on ServerException {
-      throw ErrorForDialog('Something went wrong, please try again later.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.somethingWentWrongPleaseTryAgainLater);
     } catch (error) {
-      throw ErrorForDialog('An unexpected error happened.');
+      throw ErrorForDialog(
+          AppLocalizations.of(context)!.unexpectedErrorHappened);
     }
   }
 

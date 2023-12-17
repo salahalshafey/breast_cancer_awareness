@@ -130,7 +130,7 @@ class StringWithType<T> {
   }
 }
 
-String wellFormatedString(String str) {
+String wellFormatedString(String str, {String seperatorBetweenWords = " "}) {
   return str.trim().isEmpty
       ? str
       : str
@@ -141,7 +141,7 @@ String wellFormatedString(String str) {
                 word.substring(0, 1).toUpperCase() +
                 word.substring(1).toLowerCase(),
           )
-          .join(' ');
+          .join(seperatorBetweenWords);
 }
 
 String firstName(String fullName) => fullName.split(RegExp(r' +')).first;
@@ -154,6 +154,30 @@ bool firstCharIsRtl(String text) {
   }
 
   return intl.Bidi.startsWithRtl(text);
+}
+
+String multiLineConvertTolowerCamelCaseStyle(String multiLinestring) {
+  return multiLinestring.split("\n").map((lineString) {
+    return converTolowerCamelCaseStyle(lineString);
+  }).join("\n");
+}
+
+String converTolowerCamelCaseStyle(String string) {
+  final dartNamingMather = RegExp(r"^[a-zA-Z]\w*$");
+  final whiteSpaceMatcher = RegExp(r" +");
+
+  final stringList = string.characters.toList()
+    ..removeWhere((char) =>
+        !dartNamingMather.hasMatch(char) && !whiteSpaceMatcher.hasMatch(char));
+
+  return wellFormatedString(stringList.join(), seperatorBetweenWords: "")
+      .replaceRange(
+    0,
+    stringList.join().trim().isEmpty ? 0 : 1,
+    stringList.join().trim().isEmpty
+        ? ""
+        : stringList.join().trim().substring(0, 1).toLowerCase(),
+  );
 }
 
 TextDirection getDirectionalityOf(String text) =>

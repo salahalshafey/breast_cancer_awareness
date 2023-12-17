@@ -41,3 +41,25 @@ class ErrorForTextField implements Exception {
     return message;
   }
 }
+
+class ErrorForEmailTextField implements Exception {
+  ErrorForEmailTextField(this.message);
+
+  final String message;
+
+  @override
+  String toString() {
+    return message;
+  }
+}
+
+class ErrorForPasswordTextField implements Exception {
+  ErrorForPasswordTextField(this.message);
+
+  final String message;
+
+  @override
+  String toString() {
+    return message;
+  }
+}

@@ -133,6 +133,22 @@
 
 
 
+    "@_ACCOINT_PROVIDER": {},
+    "somethingWentWrongPleaseTryAgainLater": "حدث خطأ ما ، الرجاء المحاولة في قت لاحق",
+    "errorHappendThereIsNoDataForThatAccount": "حدث خطأ، لا توجد بيانات لهذا الحساب",
+    "unexpectedErrorHappened": "حدث خطأ غير متوقع.",
+    "userNotFoundForThatEmail": "لم يتم العثور على المستخدم لهذا البريد الإلكتروني.",
+    "emailNotValid": "البريد الإلكتروني غير صالح.",
+    "thePasswordIsWrong": "كلمة المرور خاطئة.",
+    "theUserIsNotFoundForThatEmailOrThePasswordIsWrong": "لم يتم العثور على المستخدم لهذا البريد الإلكتروني أو كلمة المرور خاطئة.",
+    "theProvidedPasswordIsWeakTryToPutAStrongPassword": "كلمة المرور المقدمة ضعيفة حاول وضع كلمة مرور قوية.",
+    "noProviderNameAccountWasSelected": "لم يتم اختيار حساب {provider} !!!",
+    "theProvidedEmailAlreadyExistsSignInInsteadOrProvideAnotherEmail": "البريد الإلكتروني المقدم موجود بالفعل، قم بتسجيل الدخول بدلاً من ذلك أو قم بتقديم بريد إلكتروني آخر.",
+    "anAccountAlreadyExistsWithTheSameEmailAddressAsYourProviderAccount": "يوجد حساب بالفعل بنفس عنوان البريد الإلكتروني لحساب {providerName}.\nقم بتسجيل الدخول باستخدام الحساب المقترن بعنوان البريد الإلكتروني هذا.",
+    "youSelectedADifferentProviderAccount": "لقد حددت حساب {providerName} مختلفًا.\nحدد حساب {providerName} الذي قمت بتسجيل الدخول إليه باستخدام التطبيق. أو قم بإعادة تسجيل الدخول إلى التطبيق بدلاً من ذلك.",
+
+
+
     "@_PROFILE_SCREEN": {},
     "somethingWentWrong": "حدث خطأ ما!!",
     "youAreAGuest": "أنت ضيف ولم تسجل حساب بعد",
