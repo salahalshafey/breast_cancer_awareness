@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_svg/svg.dart';
+//import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../settings/widgets/change_language_for_sign_in.dart';
 import '../../../settings/widgets/toggle_theme_button.dart';
+import '../widgets/backgroud_shapes/sign_in_screen_shapes.dart';
 import '../widgets/sign_in/sign_in_form.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -12,8 +14,6 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
-
     final screenWidth = MediaQuery.of(context).size.width;
     var horizantalPadding = 40.0;
     if (screenWidth > 600) {
@@ -23,40 +23,7 @@ class SignInScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned(
-            top: -205,
-            right: -65,
-            child: Opacity(
-              opacity: 0.58,
-              child: SvgPicture.asset(
-                "assets/images/background_flower.svg",
-                height: 350,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: -14 - keyboardHeight,
-            left: -165,
-            child: Opacity(
-              opacity: 0.58,
-              child: SvgPicture.asset(
-                "assets/images/background_flower.svg",
-                height: 350,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: -15 - keyboardHeight,
-            right: 5,
-            child: Opacity(
-              opacity: 0.48,
-              child: Image.asset(
-                "assets/images/background_cancer_sympol.png",
-                height: 90,
-                filterQuality: FilterQuality.high,
-              ),
-            ),
-          ),
+          ...singInBackGroundShapes(context),
           ListView(
             padding: EdgeInsets.only(
               left: horizantalPadding,
@@ -65,20 +32,30 @@ class SignInScreen extends StatelessWidget {
               bottom: 10,
             ),
             children: [
-              const SizedBox(height: 10),
-              const Text(
-                "Log in",
-                style: TextStyle(
-                  color: Color.fromRGBO(191, 76, 136, 1),
-                  fontSize: 26,
-                ),
+              /*   const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.logIn,
+                    style: const TextStyle(
+                      color: Color.fromRGBO(191, 76, 136, 1),
+                      fontSize: 26,
+                    ),
+                  ),
+                  const ChangLanguageForSignIn(),
+                ],
               ),
-              const Text(
-                "Please sign in to continue",
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context)!.pleaseSignInToContinue,
+                style: const TextStyle(
                   color: Color.fromRGBO(206, 50, 116, 0.76),
                   fontSize: 20,
                 ),
+              ), */
+              const Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: ChangLanguageForSignIn(),
               ),
               const SizedBox(height: 10),
               const Align(
@@ -87,10 +64,13 @@ class SignInScreen extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.topCenter,
-                child: Image.asset(
-                  "assets/images/person_avatar.png",
-                  scale: 1.5,
-                  filterQuality: FilterQuality.high,
+                child: Transform.flip(
+                  flipX: Directionality.of(context) == TextDirection.rtl,
+                  child: Image.asset(
+                    "assets/images/person_avatar.png",
+                    scale: 1.5,
+                    filterQuality: FilterQuality.high,
+                  ),
                 ),
               ).animate(delay: 1.seconds).shimmer(duration: 1.seconds),
               const SizedBox(height: 30),

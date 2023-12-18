@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../../account/presentation/providers/account.dart';
 
@@ -16,19 +18,20 @@ class Greeting extends StatelessWidget {
         FutureBuilder(
           future: Provider.of<Account>(context).getUserInfo(),
           builder: (context, snapshot) {
+            final helloWord = AppLocalizations.of(context)!.hello;
+
             if (snapshot.hasError || snapshot.data == null) {
-              return const TextTitle(data: "Hello", fontSize: 24);
+              return TextTitle(data: helloWord, fontSize: 24);
             }
 
             final userName = wellFormatedString(snapshot.data!.firstName);
-            return TextTitle(data: "Hello $userName", fontSize: 24);
+            return TextTitle(data: "$helloWord $userName", fontSize: 24);
           },
         ),
         const SizedBox(height: 30),
-        const TextNormal(
-          data:
-              "You understand that every day counts when it comes to early breast cancer detection."
-              " it's great that you take responsibility for your health and check your breasts regularly.",
+        TextNormal(
+          data: AppLocalizations.of(context)!
+              .youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection,
           fontSize: 20,
         ),
       ],

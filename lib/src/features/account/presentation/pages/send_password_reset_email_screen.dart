@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../widgets/backgroud_shapes/sign_in_screen_shapes.dart';
 import '../widgets/password_reset_form.dart';
 
 class SendPasswordResetEmailScreen extends StatelessWidget {
@@ -10,8 +12,6 @@ class SendPasswordResetEmailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
-
     final screenWidth = MediaQuery.of(context).size.width;
     var horizantalPadding = 40.0;
     if (screenWidth > 600) {
@@ -21,63 +21,31 @@ class SendPasswordResetEmailScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned(
-            top: -205,
-            right: -65,
-            child: Opacity(
-              opacity: 0.58,
-              child: SvgPicture.asset(
-                "assets/images/background_flower.svg",
-                height: 350,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: -14 - keyboardHeight,
-            left: -165,
-            child: Opacity(
-              opacity: 0.58,
-              child: SvgPicture.asset(
-                "assets/images/background_flower.svg",
-                height: 350,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: -15 - keyboardHeight,
-            right: 5,
-            child: Opacity(
-              opacity: 0.48,
-              child: Image.asset(
-                "assets/images/background_cancer_sympol.png",
-                height: 90,
-                filterQuality: FilterQuality.high,
-              ),
-            ),
-          ),
+          ...singInBackGroundShapes(context),
           ListView(
             padding: EdgeInsets.symmetric(
                 horizontal: horizantalPadding, vertical: 60),
-            children: const [
-              SizedBox(height: 50),
+            children: [
+              const SizedBox(height: 50),
               Text(
-                "Forgot your password?",
-                style: TextStyle(
+                AppLocalizations.of(context)!.forgotYourPassword,
+                style: const TextStyle(
                   color: Color.fromRGBO(191, 76, 136, 1),
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
-                "Put your Email to send a link for resetting your password.",
-                style: TextStyle(
+                AppLocalizations.of(context)!
+                    .putYourEmailToSendALinkForResettingYourPassword,
+                style: const TextStyle(
                   color: Color.fromRGBO(206, 50, 116, 0.76),
                   fontSize: 20,
                 ),
               ),
-              SizedBox(height: 50),
-              PasswordResetForm(),
+              const SizedBox(height: 50),
+              const PasswordResetForm(),
             ],
           ),
         ],

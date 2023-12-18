@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/network/network_info.dart';
 import '../../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../../../core/util/widgets/default_screen.dart';
@@ -36,9 +38,9 @@ class _AwarenessScreenState extends State<AwarenessScreen> {
       _loadingState(false);
       showCustomAlretDialog(
         context: context,
-        title: "Error",
+        title: AppLocalizations.of(context)!.error,
         titleColor: Colors.red,
-        content: "You are currently offline.",
+        content: AppLocalizations.of(context)!.youAreCurrentlyOffline,
       );
       return;
     }
@@ -101,7 +103,7 @@ class _AwarenessScreenState extends State<AwarenessScreen> {
           const SizedBox(height: 30),
           NoteDescription(
             icon: const Icon(Icons.info, size: 40),
-            title: "Description",
+            title: AppLocalizations.of(context)!.description,
             description: widget.awarenessInfo.description,
             descriptionStyle: TextStyle(
               fontSize: 20,

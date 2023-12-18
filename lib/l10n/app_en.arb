@@ -533,6 +533,10 @@
   "@notifications": {
     "description": "the notifications word"
   },
+  "changeLanguage": "Change Language",
+  "@changeLanguage": {
+    "description": "tooltip Change to Language of sign in screen"
+  },
   "changeToLightMode": "Change to Light Mode",
   "@changeToLightMode": {
     "description": "tooltip Change to Light Mode of ToggleThemeButton"
@@ -816,13 +820,156 @@
 
 
 
+  "@_SIGN_IN_SCREEN": {},
+  "logIn": "Log in",
+  "@logIn": {
+    "description": "the Log in word"
+  },
+  "pleaseSignInToContinue": "Please sign in to continue",
+  "@pleaseSignInToContinue": {
+    "description": "in sign in screen"
+  },
+  "pleaseEnterAValidEmailAddress": "Please enter a valid email address.",
+  "@pleaseEnterAValidEmailAddress": {
+    "description": "if email is not valid from RegExpresion"
+  },
+  "forgotPassword": "Forgot password?",
+  "@forgotPassword": {
+    "description": "the button in sign in screen in case password forgoten"
+  },
+  "dontHaveAnAccount": "Don't have an account? ",
+  "@dontHaveAnAccount": {
+    "description": "in sign in in screen"
+  },
+  "signUp": "Sign Up",
+  "@signUp": {
+    "description": "the Sign Up word"
+  },
+  "or": "Or",
+  "@or": {
+    "description": "the Or word"
+  },
+  "signUpLater": "Sign up later? ",
+  "@signUpLater": {
+    "description": "in sign in in screen"
+  },
+  "continueAsGuest": "Continue as guest",
+  "@continueAsGuest": {
+    "description": "button in sign in in screen"
+  },
+  "signInUsingProviderAccount": "Sign in using {provider} Account",
+  "@signInUsingProviderAccount": {
+    "description": "tooltip for social sign in in `sign in screen`",
+    "placeholders": {
+      "provider": {
+        "type": "String",
+        "example": "Google"
+      }
+    }
+  },
+  "@_PASSWORD_RESET_SCREEN": {},
+  "forgotYourPassword": "Forgot your password?",
+  "@forgotYourPassword": {
+    "description": "in `passwordResetScreen`"
+  },
+  "putYourEmailToSendALinkForResettingYourPassword": "Put your Email to send a link for resetting your password.",
+  "@putYourEmailToSendALinkForResettingYourPassword": {
+    "description": "in `passwordResetScreen`"
+  },
+  "followUp": "Follow up",
+  "@followUp": {
+    "description": "the followUp word"
+  },
+  "finishedResetting": "Finished resetting",
+  "@finishedResetting": {
+    "description": "the finishedResetting word in `passwordResetScreen`"
+  },
+  "sendResetRequest": "Send Reset Request",
+  "@sendResetRequest": {
+    "description": "in `passwordResetScreen`"
+  },
+  "checkYourInboxForAnEmailThatHasJustBeenSent": "* Check your **inbox** for an email that has just been sent for your {userEmail}.\n* Follow the **link** and reset your password.\n* When you **finish**, return to the app and sign in with the new password.",
+  "@checkYourInboxForAnEmailThatHasJustBeenSent": {
+    "description": "instruction in dialog for resetting password",
+    "placeholders": {
+      "userEmail": {
+        "type": "String",
+        "example": "example@gmail.com"
+      }
+    }
+  },
+
+
+
+  "@_FIRST_SIGN_UP_SCREEN": {},
+  "createAnAccount": "Create an account",
+  "@createAnAccount": {
+    "description": "the createAnAccount word in `_FIRST_SIGN_UP_SCREEN`"
+  },
+  "pleaseEnterAValidName": "Please enter a valid name.",
+  "@pleaseEnterAValidName": {
+    "description": "the response if name is less than 2 letters in `_FIRST_SIGN_UP_SCREEN`"
+  },
+  "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+    "description": "the confirm Password word in `_FIRST_SIGN_UP_SCREEN`"
+  },
+  "emptyFieldPleaseConfirmThePassword": "Empty Field, Please confirm the password.",
+  "@emptyFieldPleaseConfirmThePassword": {
+    "description": "in `_FIRST_SIGN_UP_SCREEN`"
+  },
+  "thosePasswordsDidntMatchTryAgain": "Those passwords didn't match. Try again.",
+  "@thosePasswordsDidntMatchTryAgain": {
+    "description": "if the first and second passord (confirmPassword) not alike in `_FIRST_SIGN_UP_SCREEN`"
+  },
+  "alreadyHaveAnAccount": "Already have an account ? ",
+  "@alreadyHaveAnAccount": {
+    "description": "the alreadyHaveAnAccount word in `_FIRST_SIGN_UP_SCREEN`"
+  },
+  "@_SECOND_SIGN_UP_SCREEN": {},
+  "selectUserType": "Select User Type",
+  "@selectUserType": {
+    "description": "the selectUserType word in `_SECOND_SIGN_UP_SCREEN`"
+  },
+  "skipForNow": "Skip For Now",
+  "@skipForNow": {
+    "description": "button if error happend in `_SECOND_SIGN_UP_SCREEN`"
+  },
+  "continueToMainScreen": "Continue",
+  "@continueToMainScreen": {
+    "description": "button in `_SECOND_SIGN_UP_SCREEN`"
+  },
+  
+
+
+
   "@_HOME_SCREEN": {},
+  "hello": "Hello",
+  "@hello": {
+    "description": "the ok word"
+  },
+  "youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection": "You understand that every day counts when it comes to early breast cancer detection. it's great that you take responsibility for your health and check your breasts regularly.",
+  "@youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection": {
+    "description": "the ok word"
+  },
   "selfCheckNow": "SELF-CHECK NOW",
   "@selfCheckNow": {
     "description": "self check button on the home screen"
   },
-   "myBreastCheckHistory": "MY BREAST-CHECK HISTORY",
+  "myBreastCheckHistory": "MY BREAST-CHECK HISTORY",
   "@myBreastCheckHistory": {
     "description": "Breast Check History button on the home screen"
+  },
+  "breastCancerAwarenessandwhy": "Breast Cancer Awareness\nAnd\nWhy early detection is important",
+  "@breastCancerAwarenessandwhy": {
+    "description": "the ok word"
+  },
+  "learnMore": "LEARN MORE",
+  "@learnMore": {
+    "description": "the ok word"
+  },
+  "description": "Description",
+  "@description": {
+    "description": "the ok word"
   }
 }

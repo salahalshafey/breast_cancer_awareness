@@ -118,6 +118,7 @@
     "dark": "مظلم",
     "language": "اللغة",
     "notifications": "الإشعارات",
+    "changeLanguage": "تغيير اللغة",
     "changeToLightMode": "التغيير إلى الوضع الفاتح",
     "changeToDarkMode": "التغيير إلى الوضع المظلم",
 
@@ -167,7 +168,7 @@
     "userType": "نوع المستخدم",
     "userOf": "مستخدم {userType}",
     "joinedIn": "تم الانضمام في {dateOfSignUp}",
-    "editProfile": "تعديل الملف الشخصي",
+    "editProfile": "تعديل الحساب الشخصي",
     "deleteAccount": "حذف الحساب الخاص بي",
     "dangerousArea": "منطقة خطر",
     "areYouSureOfDeletingYourAccount": "* هل أنت متأكد من **حذف حسابك؟** سيتم حذف كافة البيانات والمعلومات. **لا يمكن التراجع عن ذلك.**\n* قد يُطلب منك **تأكيد** بياناتك للتأكد من هويتك.",
@@ -194,7 +195,49 @@
 
 
 
+    "@_SIGN_IN_SCREEN": {},
+    "logIn": "تسجيل الدخول",
+    "pleaseSignInToContinue": "قم بتسجيل الدخول للمتابعة",
+    "pleaseEnterAValidEmailAddress": "يرجى إدخال عنوان بريد إلكتروني صالح.",
+    "forgotPassword": "هل نسيت كلمة السر؟",
+    "dontHaveAnAccount": "ليس لديك حساب؟ ",
+    "signUp": "إنشاء حساب",
+    "or": "أو",
+    "signUpLater": "إنشاء حساب لاحقاً؟ ",
+    "continueAsGuest": "الاستمرار كضيف",
+    "signInUsingProviderAccount": "قم بتسجيل الدخول باستخدام حساب {provider}.",
+    "@_PASSWORD_RESET_SCREEN": {},
+    "forgotYourPassword": "هل نسيت كلمة السر؟",
+    "putYourEmailToSendALinkForResettingYourPassword": "أدخل بريدك الإلكتروني لإرسال رابط لإعادة تعيين كلمة المرور الخاصة بك.",
+    "followUp": "متابعة",
+    "finishedResetting": "تم الانتهاء من إعادة الضبط",
+    "sendResetRequest": "إرسال طلب إعادة تعيين",
+    "checkYourInboxForAnEmailThatHasJustBeenSent": "* تحقق من **البريد الوارد** بحثًا عن رسالة بريد إلكتروني تم إرسالها للتو إلى {userEmail}.\n* اتبع **الرابط** وأعد تعيين كلمة المرور.\n* عند **الانتهاء**، ارجع إلى التطبيق وقم بتسجيل الدخول باستخدام كلمة المرور الجديدة.",
+    
+    
+
+    "@_FIRST_SIGN_UP_SCREEN": {},
+    "createAnAccount": "إنشاء حساب",
+    "pleaseEnterAValidName": "رجاء ادخل اسما صحيحا.",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "emptyFieldPleaseConfirmThePassword": "حقل فارغ، الرجاء تأكيد كلمة المرور.",
+    "thosePasswordsDidntMatchTryAgain": "كلمات المرور غير متطابقة. حاول ثانية.",
+    "alreadyHaveAnAccount": "هل لديك حساب بالفعل ؟ ",
+    "@_SECOND_SIGN_UP_SCREEN": {},
+    "selectUserType": "حدد نوع المستخدم",
+    "skipForNow": "تخطي",
+    "continueToMainScreen": "المتابعة",
+
+
+
+
     "@_HOME_SCREEN": {},
     "selfCheckNow": "فحص-ذاتي الان",
-    "myBreastCheckHistory": "سجل الفحص الذاتي"
+    "myBreastCheckHistory": "سجل الفحص الذاتي",
+    "hello": "أهلاً",
+    "youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection": "أنت تدرك أن كل يوم مهم عندما يتعلق الأمر بالكشف المبكر عن سرطان الثدي. من الرائع أن تتحمل مسؤولية صحتك وتقوم بفحص الثدي بانتظام.",
+    "breastCancerAwarenessandwhy": "التوعية بسرطان الثدي\nو\nلماذا يعد الكشف المبكر مهمًا",
+    "learnMore": "المزيد",
+    "description": "الوصف"
+
 }

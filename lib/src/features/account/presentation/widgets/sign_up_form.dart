@@ -5,6 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../core/error/error_exceptions_with_message.dart';
 import '../../domain/entities/user_information.dart';
 
 import '../providers/account.dart';
@@ -60,8 +63,8 @@ class _SignUpFormState extends State<SignUpForm> {
 
   bool _isLoading = false;
 
-  TextDirection _firstNameTextDirection = TextDirection.ltr;
-  TextDirection _lastNameTextDirection = TextDirection.ltr;
+  TextDirection? _firstNameTextDirection;
+  TextDirection? _lastNameTextDirection;
 
   void _isLoadingState(bool state) {
     setState(() {
@@ -140,35 +143,34 @@ class _SignUpFormState extends State<SignUpForm> {
           _editedUserInformation, _userPassword);
 
       Navigator.of(context).pop();
+    } on ErrorForEmailTextField catch (error) {
+      // if the error on any textField show that error on the validator
+      // if not, for example you are offline, show it to alret dialoge
+
+      _isLoadingState(false);
+
+      setState(() {
+        _apiErrorForEmail = error.toString();
+      });
+      _formKey.currentState!.validate();
+      // _focusNodeForEmail.requestFocus();
+    } on ErrorForPasswordTextField catch (error) {
+      _isLoadingState(false);
+
+      setState(() {
+        _apiErrorForPassword = error.toString();
+      });
+      _formKey.currentState!.validate();
+      // _focusNodeForPassword.requestFocus();
     } catch (error) {
       _isLoadingState(false);
 
-      // if the error on any textField show that error on the validator
-      // if not, for example you are offline, show it to alret dialoge
-      if (error.toString() ==
-              "The provided email already exists, sign in instead or provide another email." ||
-          error.toString() == "Email Not Valid.") {
-        setState(() {
-          _apiErrorForEmail = error.toString();
-        });
-        _formKey.currentState!.validate();
-        // _focusNodeForEmail.requestFocus();
-      } else if (error.toString() ==
-          "The provided password is weak try to put a strong password.") {
-        setState(() {
-          _apiErrorForPassword = error.toString();
-        });
-        _formKey.currentState!.validate();
-        _focusNodeForPassword.requestFocus();
-        _confirmPasswordController.clear();
-      } else {
-        showCustomAlretDialog(
-          context: context,
-          title: 'ERROR',
-          titleColor: Colors.red,
-          content: '$error',
-        );
-      }
+      showCustomAlretDialog(
+        context: context,
+        title: AppLocalizations.of(context)!.error,
+        titleColor: Colors.red,
+        content: '$error',
+      );
     }
   }
 
@@ -207,7 +209,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   textDirection: _firstNameTextDirection,
                   style: const TextStyle(color: Colors.white, fontSize: 16),
                   decoration: InputDecoration(
-                    hintText: 'First name',
+                    hintText: AppLocalizations.of(context)!.firstName,
                     fillColor: _isFirstNameFocused ? focusColor : null,
                     errorMaxLines: 2,
                   ),
@@ -226,10 +228,12 @@ class _SignUpFormState extends State<SignUpForm> {
                   },
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Please enter the first name.';
+                      return AppLocalizations.of(context)!
+                          .pleaseEnterTheFirstName;
                     }
                     if (value.trim().length < 2) {
-                      return 'Please enter a valid name.';
+                      return AppLocalizations.of(context)!
+                          .pleaseEnterAValidName;
                     }
 
                     return null;
@@ -258,7 +262,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   textDirection: _lastNameTextDirection,
                   style: const TextStyle(color: Colors.white, fontSize: 16),
                   decoration: InputDecoration(
-                    hintText: 'Last name',
+                    hintText: AppLocalizations.of(context)!.lastName,
                     fillColor: _isLastNameFocused ? focusColor : null,
                     errorMaxLines: 2,
                   ),
@@ -277,10 +281,12 @@ class _SignUpFormState extends State<SignUpForm> {
                   },
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Please enter the last name.';
+                      return AppLocalizations.of(context)!
+                          .pleaseEnterTheLastName;
                     }
                     if (value.trim().length < 2) {
-                      return 'Please enter a valid name.';
+                      return AppLocalizations.of(context)!
+                          .pleaseEnterAValidName;
                     }
 
                     return null;
@@ -307,9 +313,10 @@ class _SignUpFormState extends State<SignUpForm> {
             inputFormatters: [FilteringTextInputFormatter.deny(" ")],
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
+            textDirection: TextDirection.ltr,
             style: const TextStyle(color: Colors.white, fontSize: 20),
             decoration: InputDecoration(
-                hintText: 'Email',
+                hintText: AppLocalizations.of(context)!.email,
                 errorMaxLines: 3,
                 fillColor: _isEmailFocused ? focusColor : null),
             onTapOutside: (_) {
@@ -323,7 +330,8 @@ class _SignUpFormState extends State<SignUpForm> {
               final emailMatcher =
                   RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$");
               if (value == null || !emailMatcher.hasMatch(value)) {
-                return 'Please enter a valid email address.';
+                return AppLocalizations.of(context)!
+                    .pleaseEnterAValidEmailAddress;
               }
 
               return _apiErrorForEmail;
@@ -342,9 +350,10 @@ class _SignUpFormState extends State<SignUpForm> {
             style: const TextStyle(color: Colors.white, fontSize: 20),
             keyboardType: TextInputType.visiblePassword,
             textInputAction: TextInputAction.next,
+            textDirection: TextDirection.ltr,
             decoration: InputDecoration(
-              hintText: 'Password',
-              errorMaxLines: 3,
+              hintText: AppLocalizations.of(context)!.password,
+              errorMaxLines: 4,
               fillColor: _isPasswordFocused ? focusColor : null,
               suffixIconColor: Colors.white,
               suffixIcon: _isPasswordIconShowen
@@ -403,9 +412,10 @@ class _SignUpFormState extends State<SignUpForm> {
             obscureText: _isPasswordShowen ? false : true,
             keyboardType: TextInputType.visiblePassword,
             textInputAction: TextInputAction.done,
+            textDirection: TextDirection.ltr,
             style: const TextStyle(color: Colors.white, fontSize: 20),
             decoration: InputDecoration(
-              hintText: 'Confirm Password',
+              hintText: AppLocalizations.of(context)!.confirmPassword,
               errorMaxLines: 1,
               fillColor: _isPasswordConfirmFocused ? focusColor : null,
               suffixIconColor: Colors.white,
@@ -444,20 +454,31 @@ class _SignUpFormState extends State<SignUpForm> {
             },
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return "Empty Field, Please confirm the password.";
+                return AppLocalizations.of(context)!
+                    .emptyFieldPleaseConfirmThePassword;
               }
 
               if (value != _userPassword) {
                 //  _confirmPasswordController.clear();
                 // _focusNodeForConfirmPassword.requestFocus();
-                return "Those passwords didn't match. Try again.";
+                return AppLocalizations.of(context)!
+                    .thosePasswordsDidntMatchTryAgain;
               }
 
               return null;
             },
           ),
           const SizedBox(height: 30),
-          Row(
+          _isLoading
+              ? const Padding(
+                  padding: EdgeInsets.only(bottom: 11),
+                  child: CircularProgressIndicator(),
+                )
+              : ElevatedButton(
+                  onPressed: _saveForm,
+                  child: Text(AppLocalizations.of(context)!.signUp),
+                ),
+          /*  Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               _isLoading
@@ -477,13 +498,13 @@ class _SignUpFormState extends State<SignUpForm> {
                     Theme.of(context).brightness == Brightness.dark ? 0.7 : 1,
               ),*/
             ],
-          ),
+          ),*/
           const SizedBox(height: 30),
           PopScope(
             canPop: !_isLoading, // if loading don't pop
             child: DontOrAlreadyHaveAccount(
-              text: "Already have an account ? ",
-              actionText: "Sign In",
+              text: AppLocalizations.of(context)!.alreadyHaveAnAccount,
+              actionText: AppLocalizations.of(context)!.signIn,
               onTap: () {
                 Navigator.of(context).pop();
               },

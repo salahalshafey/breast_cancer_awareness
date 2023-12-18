@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/util/builders/custom_alret_dialog.dart';
 
 import '../../providers/account.dart';
@@ -35,7 +37,7 @@ class _SignInAsGuestButtonState extends State<SignInAsGuestButton> {
 
       showCustomAlretDialog(
         context: context,
-        title: "Error",
+        title: AppLocalizations.of(context)!.error,
         titleColor: Colors.red,
         content: error.toString(),
       );
@@ -49,8 +51,8 @@ class _SignInAsGuestButtonState extends State<SignInAsGuestButton> {
       child: _isLoading
           ? const CircularProgressIndicator()
           : DontOrAlreadyHaveAccount(
-              text: "In a hurry? ",
-              actionText: "Continue as guest",
+              text: AppLocalizations.of(context)!.signUpLater,
+              actionText: AppLocalizations.of(context)!.continueAsGuest,
               onTap: signInAsGuest,
             ),
     );

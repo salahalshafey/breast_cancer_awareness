@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../providers/image_and_user_type_provider.dart';
 
 import '../widgets/backgroud_shapes/second_sign_up_screen_shapes.dart';
@@ -33,26 +35,29 @@ class SecondSignUpScreen extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            const Positioned(
+            Positioned(
               top: 0,
-              left: 0,
-              child: ShapeForSecondSignUpScreen(
+              left: Directionality.of(context) == TextDirection.ltr ? 0 : null,
+              right: Directionality.of(context) == TextDirection.rtl ? 0 : null,
+              child: const ShapeForSecondSignUpScreen(
                 angle: -pi / 2,
                 widthFactor: 0.50,
               ),
             ),
-            const Positioned(
+            Positioned(
               top: 0,
-              right: 0,
-              child: ShapeForSecondSignUpScreen(
+              left: Directionality.of(context) == TextDirection.ltr ? null : 0,
+              right: Directionality.of(context) == TextDirection.rtl ? null : 0,
+              child: const ShapeForSecondSignUpScreen(
                 angle: 0,
                 widthFactor: 0.33,
               ),
             ),
-            const Positioned(
+            Positioned(
               bottom: 0,
-              right: 0,
-              child: ShapeForSecondSignUpScreen(
+              left: Directionality.of(context) == TextDirection.ltr ? null : 0,
+              right: Directionality.of(context) == TextDirection.rtl ? null : 0,
+              child: const ShapeForSecondSignUpScreen(
                 angle: pi / 2,
                 widthFactor: 0.40,
               ),
@@ -98,7 +103,7 @@ class SelectUserTypeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.topLeft,
+      alignment: AlignmentDirectional.centerStart,
       child: Container(
         margin: const EdgeInsets.only(left: 10),
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
@@ -107,7 +112,7 @@ class SelectUserTypeHeader extends StatelessWidget {
           borderRadius: BorderRadius.circular(22),
         ),
         child: Text(
-          "Select User Type",
+          AppLocalizations.of(context)!.selectUserType,
           style: TextStyle(
             color: Theme.of(context).primaryColor,
             fontSize: 20,

@@ -68,9 +68,8 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 50),
-          const TextTitle(
-            data:
-                "Breast Cancer Awareness\nAnd\nWhy early detection is imprtant",
+          TextTitle(
+            data: AppLocalizations.of(context)!.breastCancerAwarenessandwhy,
             fontSize: 22,
           ),
           const SizedBox(height: 30),

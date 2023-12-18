@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:provider/provider.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../providers/account.dart';
 
+import '../../../../../core/error/error_exceptions_with_message.dart';
 import '../../../../../core/util/builders/custom_alret_dialog.dart';
 
 import '../../pages/send_password_reset_email_screen.dart';
@@ -106,32 +108,34 @@ class _SignInFormState extends State<SignInForm> {
       _isLoadingState(true);
 
       await account.signInUsingEmailAndPassword(_userEmail, _userPassword);
+    } on ErrorForEmailTextField catch (error) {
+      // if the error on any textField show that error on the validator
+      // if not, for example you are offline, show it to alret dialoge
+
+      _isLoadingState(false);
+
+      setState(() {
+        _apiErrorForEmail = error.toString();
+      });
+      _formKey.currentState!.validate();
+      // _focusNodeForEmail.requestFocus();
+    } on ErrorForPasswordTextField catch (error) {
+      _isLoadingState(false);
+
+      setState(() {
+        _apiErrorForPassword = error.toString();
+      });
+      _formKey.currentState!.validate();
+      // _focusNodeForPassword.requestFocus();
     } catch (error) {
       _isLoadingState(false);
 
-      // if the error on any textField show that error on the validator
-      // if not, for example you are offline, show it to alret dialoge
-      if (error.toString() == "User not found for that email." ||
-          error.toString() == "Email Not Valid.") {
-        setState(() {
-          _apiErrorForEmail = error.toString();
-        });
-        _formKey.currentState!.validate();
-        // _focusNodeForEmail.requestFocus();
-      } else if (error.toString() == "The password is wrong.") {
-        setState(() {
-          _apiErrorForPassword = error.toString();
-        });
-        _formKey.currentState!.validate();
-        // _focusNodeForPassword.requestFocus();
-      } else {
-        showCustomAlretDialog(
-          context: context,
-          title: 'ERROR',
-          titleColor: Colors.red,
-          content: '$error',
-        );
-      }
+      showCustomAlretDialog(
+        context: context,
+        title: AppLocalizations.of(context)!.error,
+        titleColor: Colors.red,
+        content: '$error',
+      );
     }
   }
 
@@ -141,180 +145,151 @@ class _SignInFormState extends State<SignInForm> {
 
     return Form(
       key: _formKey,
-      child: Stack(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextFormField(
-                key: const ValueKey('email'),
-                focusNode: _focusNodeForEmail,
-                autocorrect: false,
-                enableSuggestions: false,
-                textCapitalization: TextCapitalization.none,
-                inputFormatters: [FilteringTextInputFormatter.deny(" ")],
-                keyboardType: TextInputType.emailAddress,
-                textInputAction: TextInputAction.next,
-                style: const TextStyle(color: Colors.white, fontSize: 20),
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                  hintText: 'Email',
-                  fillColor: _isEmailFocused ? focusColor : null,
-                ),
-                onTapOutside: (_) {
-                  _focusNodeForEmail.unfocus();
-                },
-                onFieldSubmitted: (value) {
-                  _focusNodeForPassword.requestFocus();
-                },
-                validator: (value) {
-                  // if all the value is email
-                  final emailMatcher = RegExp(
-                      r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$");
-                  if (value == null || !emailMatcher.hasMatch(value)) {
-                    return 'Please enter a valid email address.';
-                  }
+          TextFormField(
+            key: const ValueKey('email'),
+            focusNode: _focusNodeForEmail,
+            autocorrect: false,
+            enableSuggestions: false,
+            textCapitalization: TextCapitalization.none,
+            inputFormatters: [FilteringTextInputFormatter.deny(" ")],
+            keyboardType: TextInputType.emailAddress,
+            textInputAction: TextInputAction.next,
+            style: const TextStyle(color: Colors.white, fontSize: 20),
+            textAlign: TextAlign.center,
+            textDirection: TextDirection.ltr,
+            decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.email,
+              errorMaxLines: 2,
+              fillColor: _isEmailFocused ? focusColor : null,
+            ),
+            onTapOutside: (_) {
+              _focusNodeForEmail.unfocus();
+            },
+            onFieldSubmitted: (value) {
+              _focusNodeForPassword.requestFocus();
+            },
+            validator: (value) {
+              // if all the value is email
+              final emailMatcher =
+                  RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$");
+              if (value == null || !emailMatcher.hasMatch(value)) {
+                return AppLocalizations.of(context)!
+                    .pleaseEnterAValidEmailAddress;
+              }
 
-                  return _apiErrorForEmail;
-                },
-                onSaved: (value) {
-                  _userEmail = value!.trim();
-                },
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                key: const ValueKey('password'),
-                focusNode: _focusNodeForPassword,
-                obscureText: _isPasswordShowen ? false : true,
-                style: const TextStyle(color: Colors.white, fontSize: 20),
-                textAlign: TextAlign.center,
-                keyboardType: TextInputType.visiblePassword,
-                textInputAction: TextInputAction.done,
-                decoration: InputDecoration(
-                  hintText: 'Password',
-                  fillColor: _isPasswordFocused ? focusColor : null,
-                  suffixIconColor: Colors.white,
-                  suffixIcon: _isPasswordIconShowen
-                      ? GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _isPasswordShowen = !_isPasswordShowen;
-                            });
-                          },
-                          child: Icon(
-                            _isPasswordShowen
-                                ? Icons.remove_red_eye_outlined
-                                : Icons.remove_red_eye,
-                          ),
-                        )
-                      : null,
-                ),
-                onChanged: (value) {
-                  if (value.isNotEmpty) {
-                    setState(() {
-                      _isPasswordIconShowen = true;
-                    });
-                  } else {
-                    setState(() {
-                      _isPasswordIconShowen = false;
-                      _isPasswordShowen = false;
-                    });
-                  }
-                },
-                onTapOutside: (_) {
-                  _focusNodeForPassword.unfocus();
-                },
-                onFieldSubmitted: (value) {
-                  _saveForm();
-                },
-                validator: (value) {
-                  if (value == null || value.trim().length < 8) {
-                    return 'Password must be at least 8 characters long.';
-                  }
-
-                  return _apiErrorForPassword;
-                },
-                onSaved: (value) {
-                  _userPassword = value!;
-                },
-              ),
-              const SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    "assets/icons/remember_me_icon.svg",
-                    height: 15,
-                    // ignore: deprecated_member_use
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.white
-                        : null,
-                  ),
-                  const SizedBox(width: 10),
-                  const Text(
-                    "Remember me",
-                    style: TextStyle(
-                      color: Color.fromRGBO(143, 39, 83, 1),
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30),
-              _isLoading
-                  ? const Padding(
-                      padding: EdgeInsets.only(bottom: 12),
-                      child: CircularProgressIndicator(),
-                    )
-                  : ElevatedButton(
-                      onPressed: _saveForm,
-                      style: const ButtonStyle(
-                        fixedSize:
-                            MaterialStatePropertyAll(Size.fromWidth(150)),
+              return _apiErrorForEmail;
+            },
+            onSaved: (value) {
+              _userEmail = value!.trim();
+            },
+          ),
+          const SizedBox(height: 20),
+          TextFormField(
+            key: const ValueKey('password'),
+            focusNode: _focusNodeForPassword,
+            obscureText: _isPasswordShowen ? false : true,
+            style: const TextStyle(color: Colors.white, fontSize: 20),
+            textAlign: TextAlign.center,
+            textDirection: TextDirection.ltr,
+            keyboardType: TextInputType.visiblePassword,
+            textInputAction: TextInputAction.done,
+            decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.password,
+              errorMaxLines: 2,
+              fillColor: _isPasswordFocused ? focusColor : null,
+              suffixIconColor: Colors.white,
+              suffixIcon: _isPasswordIconShowen
+                  ? GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _isPasswordShowen = !_isPasswordShowen;
+                        });
+                      },
+                      child: Icon(
+                        _isPasswordShowen
+                            ? Icons.remove_red_eye_outlined
+                            : Icons.remove_red_eye,
                       ),
-                      child: const Text("Sign in"),
-                    ),
-              const SizedBox(height: 30),
-              const OrDivider(),
-              const SizedBox(height: 10),
-              const SocialSignIn(),
-              const SignInAsGuestButton(),
-              const SizedBox(height: 80),
-              DontOrAlreadyHaveAccount(
-                text: "Don't have an account? ",
-                actionText: "Sign Up",
-                onTap: () {
-                  Navigator.of(context).pushNamed(FirstSignUpScreen.routName);
-                  _resetSignInState();
-                },
-              )
-                  .animate(target: _isLoading ? 0 : 1)
-                  .scaleXY(begin: 0, end: 1)
-                  .fade(begin: 0, end: 1),
-            ],
+                    )
+                  : null,
+            ),
+            onChanged: (value) {
+              if (value.isNotEmpty) {
+                setState(() {
+                  _isPasswordIconShowen = true;
+                });
+              } else {
+                setState(() {
+                  _isPasswordIconShowen = false;
+                  _isPasswordShowen = false;
+                });
+              }
+            },
+            onTapOutside: (_) {
+              _focusNodeForPassword.unfocus();
+            },
+            onFieldSubmitted: (value) {
+              _saveForm();
+            },
+            validator: (value) {
+              if (value == null || value.trim().length < 8) {
+                return AppLocalizations.of(context)!
+                    .passwordMustBeAtLeast8CharactersLong;
+              }
+
+              return _apiErrorForPassword;
+            },
+            onSaved: (value) {
+              _userPassword = value!;
+            },
           ),
-          Positioned(
-            right: 0,
-            top: 110,
-            child: TextButton(
-              onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(SendPasswordResetEmailScreen.routName);
-                _resetSignInState();
-              },
-              child: const Text(
-                "Forgot password?",
-                style: TextStyle(
-                  color: Color.fromRGBO(143, 39, 83, 1),
-                  fontSize: 15,
-                ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context)
+                  .pushNamed(SendPasswordResetEmailScreen.routName);
+              _resetSignInState();
+            },
+            child: Text(
+              AppLocalizations.of(context)!.forgotPassword,
+              style: const TextStyle(
+                color: Color.fromRGBO(143, 39, 83, 1),
+                fontSize: 15,
               ),
-            )
-                .animate(
-                    target: _isLoading || _apiErrorForPassword == null ? 0 : 1)
-                .scaleXY(begin: 0, end: 1)
-                .fade(begin: 0, end: 1),
+            ),
           ),
+          const SizedBox(height: 20),
+          _isLoading
+              ? const Padding(
+                  padding: EdgeInsets.only(bottom: 12),
+                  child: CircularProgressIndicator(),
+                )
+              : ElevatedButton(
+                  onPressed: _saveForm,
+                  style: const ButtonStyle(
+                      // fixedSize: MaterialStatePropertyAll(Size.fromWidth(150)),
+                      ),
+                  child: Text(AppLocalizations.of(context)!.signIn),
+                ),
+          const SizedBox(height: 30),
+          const OrDivider(),
+          const SizedBox(height: 10),
+          const SocialSignIn(),
+          const SignInAsGuestButton(),
+          const SizedBox(height: 80),
+          DontOrAlreadyHaveAccount(
+            text: AppLocalizations.of(context)!.dontHaveAnAccount,
+            actionText: AppLocalizations.of(context)!.signUp,
+            onTap: () {
+              Navigator.of(context).pushNamed(FirstSignUpScreen.routName);
+              _resetSignInState();
+            },
+          )
+              .animate(target: _isLoading ? 0 : 1)
+              .scaleXY(begin: 0, end: 1)
+              .fade(begin: 0, end: 1),
         ],
       ),
     );
@@ -341,7 +316,7 @@ class OrDivider extends StatelessWidget {
         ),
         const SizedBox(width: 10),
         Text(
-          "Or",
+          AppLocalizations.of(context)!.or,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,

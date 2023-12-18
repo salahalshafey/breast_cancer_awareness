@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../widgets/backgroud_shapes/first_sign_up_screen_shapes.dart';
 import '../widgets/sign_up_form.dart';
 
@@ -23,14 +25,17 @@ class FirstSignUpScreen extends StatelessWidget {
       body: Stack(
         alignment: Alignment.center,
         children: [
-          const Positioned(
+          Positioned(
             top: 0,
-            child: ShapeForFirsrSignUpScreen(),
+            child: Transform.flip(
+              flipX: Directionality.of(context) == TextDirection.rtl,
+              child: const ShapeForFirsrSignUpScreen(),
+            ),
           ),
-          // if (Theme.of(context).brightness == Brightness.light)
           Positioned(
             bottom: -15 - keyboardHeight,
-            right: 5,
+            right: Directionality.of(context) == TextDirection.ltr ? 5 : null,
+            left: Directionality.of(context) == TextDirection.rtl ? 5 : null,
             child: Opacity(
               opacity: 0.48,
               child: Image.asset(
@@ -49,17 +54,20 @@ class FirstSignUpScreen extends StatelessWidget {
                 opacity: 0.8,
                 child: Align(
                   alignment: Alignment.topCenter,
-                  child: Image.asset(
-                    "assets/images/person_avatar.png",
-                    scale: 2.5,
-                    filterQuality: FilterQuality.high,
+                  child: Transform.flip(
+                    flipX: Directionality.of(context) == TextDirection.rtl,
+                    child: Image.asset(
+                      "assets/images/person_avatar.png",
+                      scale: 2.5,
+                      filterQuality: FilterQuality.high,
+                    ),
                   ),
                 ),
               ),
               const SizedBox(height: 30),
-              const Text(
-                "Create an account",
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context)!.createAnAccount,
+                style: const TextStyle(
                   color: Color.fromRGBO(191, 76, 136, 1),
                   fontSize: 26,
                 ),

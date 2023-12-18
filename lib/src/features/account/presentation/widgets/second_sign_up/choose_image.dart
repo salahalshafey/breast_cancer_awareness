@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/util/builders/image_picker.dart';
 import '../../../../../core/util/widgets/image_container.dart';
 
@@ -52,10 +54,13 @@ class _ChooseImageState extends State<ChooseImage> {
         AnimatedCrossFade(
           firstChild: Align(
             alignment: Alignment.topCenter,
-            child: Image.asset(
-              "assets/images/person_avatar.png",
-              height: 140,
-              filterQuality: FilterQuality.high,
+            child: Transform.flip(
+              flipX: Directionality.of(context) == TextDirection.rtl,
+              child: Image.asset(
+                "assets/images/person_avatar.png",
+                height: 140,
+                filterQuality: FilterQuality.high,
+              ),
             ),
           ),
           secondChild: ImageContainer(
@@ -84,7 +89,9 @@ class _ChooseImageState extends State<ChooseImage> {
           child: ElevatedButton(
             onPressed: () => _chooseImage(provider),
             child: Text(
-              provider.currentImage == null ? "Select Image" : "Change Image",
+              provider.currentImage == null
+                  ? AppLocalizations.of(context)!.selectImage
+                  : AppLocalizations.of(context)!.changeImage,
             ),
           ),
         )

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../pages/awareness/awareness_screen.dart';
 import '../../pages/home_screen.dart';
 import '../custom_texts.dart';
@@ -41,16 +43,16 @@ class AwarenessTitle extends StatelessWidget {
             ],
           ),
           Align(
-            alignment: Alignment.centerRight,
+            alignment: AlignmentDirectional.centerEnd,
             child: TextButton(
               onPressed: () => goToScreenWithSlideTransition(
                 context,
                 AwarenessScreen(awarenessInfo),
                 beginOffset: const Offset(0, 1),
               ),
-              child: const Text(
-                "LEARN MORE",
-                style: TextStyle(
+              child: Text(
+                AppLocalizations.of(context)!.learnMore,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),

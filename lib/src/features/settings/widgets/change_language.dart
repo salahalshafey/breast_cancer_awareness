@@ -26,6 +26,7 @@ class ChangeLanguage extends StatelessWidget {
           Consumer<SettingsProvider>(
             builder: (context, provider, child) {
               return DropdownButton<String>(
+                borderRadius: BorderRadius.circular(15),
                 value: provider.currentLanguageCode,
                 items: provider.allAvailableLanguagesWithDetails
                     .map((localWithFlage) => DropdownMenuItem<String>(

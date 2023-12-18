@@ -58,6 +58,11 @@ class SettingsProvider with ChangeNotifier {
     return _userSettings.languageCode!;
   }
 
+  String get currentLanguageName => allAvailableLanguagesWithDetails
+      .firstWhere((localWithDetail) =>
+          localWithDetail.languageCode == currentLanguageCode)
+      .languageFullName;
+
   Locale? get currentLocale => _userSettings.languageCode == null
       ? null
       : Locale(_userSettings.languageCode!);

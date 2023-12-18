@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../app.dart';
 import '../../../../../core/util/builders/custom_alret_dialog.dart';
 
@@ -58,7 +60,7 @@ class _ContinueAndskipButtonState extends State<ContinueAndskipButton> {
 
       showCustomAlretDialog(
         context: context,
-        title: 'ERROR',
+        title: AppLocalizations.of(context)!.error,
         titleColor: Colors.red,
         content: '$error',
       );
@@ -94,7 +96,7 @@ class _ContinueAndskipButtonState extends State<ContinueAndskipButton> {
     }
 
     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
-      return const LandingPage();
+      return const LandingPageWithCheckForUpdate();
     }));
   }
 
@@ -110,16 +112,16 @@ class _ContinueAndskipButtonState extends State<ContinueAndskipButton> {
               ? const CircularProgressIndicator()
               : TextButton(
                   onPressed: _goToMainScreen,
-                  child: const Text(
-                    "Skip For Now",
+                  child: Text(
+                    AppLocalizations.of(context)!.skipForNow,
                   ),
                 ),
         _isContinueButtonLoading
             ? const CircularProgressIndicator()
             : ElevatedButton(
                 onPressed: () => _sendUserImageAndType(),
-                child: const Text(
-                  "Continue",
+                child: Text(
+                  AppLocalizations.of(context)!.continueToMainScreen,
                 ),
               ),
       ],

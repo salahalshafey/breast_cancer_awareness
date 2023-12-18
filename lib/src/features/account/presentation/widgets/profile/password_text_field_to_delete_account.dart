@@ -5,7 +5,9 @@ import 'package:provider/provider.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../../core/error/error_exceptions_with_message.dart';
 import '../../../../../core/util/builders/custom_alret_dialog.dart';
+
 import '../../providers/account.dart';
 
 class PasswordTextFieldToDeleteAccount extends StatefulWidget {
@@ -57,26 +59,27 @@ class _PasswordTextFieldToDeleteAccountState
 
       await account.reauthenticateWithPasswordCredential(_userPassword);
       Navigator.of(context).pop(true);
+    } on ErrorForPasswordTextField catch (error) {
+      // if the error on any textField show that error on the validator
+      // if not, for example you are offline, show it to alret dialoge
+
+      _setLoadingState(false);
+
+      setState(() {
+        _apiErrorForPassword = error.toString();
+      });
+
+      _formKey.currentState!.validate();
+      _focusNodeForPassword.requestFocus();
     } catch (error) {
       _setLoadingState(false);
 
-      // if the error on any textField show that error on the validator
-      // if not, for example you are offline, show it to alret dialoge
-      if (error.toString() == "The password is wrong.") {
-        setState(() {
-          _apiErrorForPassword = error.toString();
-        });
-
-        _formKey.currentState!.validate();
-        _focusNodeForPassword.requestFocus();
-      } else {
-        showCustomAlretDialog(
-          context: context,
-          title: 'ERROR',
-          titleColor: Colors.red,
-          content: '$error',
-        );
-      }
+      showCustomAlretDialog(
+        context: context,
+        title: AppLocalizations.of(context)!.error,
+        titleColor: Colors.red,
+        content: '$error',
+      );
     }
   }
 
@@ -96,6 +99,7 @@ class _PasswordTextFieldToDeleteAccountState
             style: const TextStyle(fontSize: 20),
             autofocus: true,
             keyboardType: TextInputType.visiblePassword,
+            textDirection: TextDirection.ltr,
             decoration: InputDecoration(
               hintText: AppLocalizations.of(context)!.password,
               hintStyle: const TextStyle(),

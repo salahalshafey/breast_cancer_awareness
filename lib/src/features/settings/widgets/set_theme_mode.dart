@@ -27,6 +27,7 @@ class SetThemeMode extends StatelessWidget {
           Consumer<SettingsProvider>(
             builder: (context, provider, child) {
               return DropdownButton<String>(
+                borderRadius: BorderRadius.circular(15),
                 value: provider.currentTheme,
                 items: [
                   DropdownMenuItem<String>(

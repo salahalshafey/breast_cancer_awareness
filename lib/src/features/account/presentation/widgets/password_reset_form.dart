@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 
-import '../../../../core/error/error_exceptions_with_message.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/network/network_info.dart';
 import '../../../../core/util/builders/custom_alret_dialog.dart';
@@ -68,7 +68,16 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
       _isLoadingState(true);
 
       if (await NetworkInfoImpl().isNotConnected) {
-        throw ErrorForDialog("You are currently offline.");
+        _isLoadingState(false);
+
+        showCustomAlretDialog(
+          context: context,
+          title: AppLocalizations.of(context)!.error,
+          titleColor: Colors.red,
+          content: AppLocalizations.of(context)!.youAreCurrentlyOffline,
+        );
+
+        return;
       }
 
       await FirebaseAuth.instance.sendPasswordResetEmail(email: _userEmail);
@@ -77,16 +86,18 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
 
       if (e.code == 'user-not-found' || e.code == 'invalid-email') {
         setState(() {
-          _apiErrorForEmail = "No user found for that email";
+          _apiErrorForEmail =
+              AppLocalizations.of(context)!.userNotFoundForThatEmail;
         });
         _formKey.currentState!.validate();
         _focusNodeForEmail.requestFocus();
       } else {
         showCustomAlretDialog(
           context: context,
-          title: 'ERROR',
+          title: AppLocalizations.of(context)!.error,
           titleColor: Colors.red,
-          content: e.code,
+          content: AppLocalizations.of(context)!
+              .somethingWentWrongPleaseTryAgainLater,
         );
       }
 
@@ -96,9 +107,9 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
 
       showCustomAlretDialog(
         context: context,
-        title: 'ERROR',
+        title: AppLocalizations.of(context)!.error,
         titleColor: Colors.red,
-        content: error.toString(),
+        content: AppLocalizations.of(context)!.unexpectedErrorHappened,
       );
 
       return;
@@ -112,13 +123,11 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
       constraints: const BoxConstraints(maxWidth: 500),
       barrierDismissible: false,
       canPopScope: false,
-      title: 'Follow up',
+      title: AppLocalizations.of(context)!.followUp,
       titleColor: titleColor,
       icon: Icon(Icons.info, color: titleColor, size: 45),
-      content:
-          "* Check your **inbox** for an email that has just been sent for your $_userEmail.\n"
-          "* Follow the **link** and reset your password.\n"
-          "* When you **finish**, return to the app and sign in with the new password.",
+      content: AppLocalizations.of(context)!
+          .checkYourInboxForAnEmailThatHasJustBeenSent(_userEmail),
       actionsBuilder: (dialogContext) => [
         ElevatedButton(
           onPressed: () {
@@ -127,7 +136,7 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
           },
           style: ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(titleColor)),
-          child: const Text("Finished resetting"),
+          child: Text(AppLocalizations.of(context)!.finishedResetting),
         ),
       ],
     );
@@ -152,8 +161,9 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
             inputFormatters: [FilteringTextInputFormatter.deny(" ")],
             style: const TextStyle(color: Colors.white, fontSize: 20),
             textAlign: TextAlign.center,
+            textDirection: TextDirection.ltr,
             decoration: InputDecoration(
-              hintText: 'Email',
+              hintText: AppLocalizations.of(context)!.email,
               fillColor: _isEmailFocused ? focusColor : null,
             ),
             onTapOutside: (_) {
@@ -167,7 +177,8 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
               final emailMatcher =
                   RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$");
               if (value == null || !emailMatcher.hasMatch(value)) {
-                return 'Please enter a valid email address.';
+                return AppLocalizations.of(context)!
+                    .pleaseEnterAValidEmailAddress;
               }
 
               return _apiErrorForEmail;
@@ -188,7 +199,7 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
                     fixedSize: MaterialStatePropertyAll(
                         Size.fromWidth(double.maxFinite)),
                   ),
-                  child: const Text("Send Reset Request"),
+                  child: Text(AppLocalizations.of(context)!.sendResetRequest),
                 ),
         ],
       ),
