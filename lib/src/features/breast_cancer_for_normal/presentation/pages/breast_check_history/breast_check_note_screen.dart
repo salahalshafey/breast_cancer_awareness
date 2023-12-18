@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/util/functions/date_time_and_duration.dart';
 import '../../../../../core/util/widgets/default_screen.dart';
 import '../../../../../core/util/widgets/image_container.dart';
@@ -69,13 +71,13 @@ class _BreastCheckNoteScreenState extends State<BreastCheckNoteScreen>
               const SizedBox(height: 40),
               NoteDescription(
                 icon: const Icon(Icons.note_alt_rounded, size: 40),
-                title: "Text Note",
+                title: AppLocalizations.of(context)!.textNote,
                 description: widget.note.text,
               ),
               const SizedBox(height: 20),
               NoteDescription(
                 icon: const Icon(Icons.record_voice_over, size: 40),
-                title: "Voice Note",
+                title: AppLocalizations.of(context)!.voiceNote,
                 child: widget.note.recorderFilePath == null
                     ? null
                     : AudioPlayer(

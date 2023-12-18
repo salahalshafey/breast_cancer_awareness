@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/theme/colors.dart';
 import '../../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../../../core/util/functions/date_time_and_duration.dart';
@@ -23,8 +25,8 @@ class BreastCheckHistorytem extends StatelessWidget {
   Future<bool?> _confirmDeleteNoteDialog(BuildContext context) {
     return showCustomAlretDialog<bool>(
       context: context,
-      title: "Are you sure?",
-      content: "Confirm Deletion?",
+      title: AppLocalizations.of(context)!.areYouSure,
+      content: AppLocalizations.of(context)!.confirmDeletion,
       titleColor: Colors.red,
       actionsBuilder: (dialogContext) => [
         ElevatedButton(
@@ -34,7 +36,7 @@ class BreastCheckHistorytem extends StatelessWidget {
           style: const ButtonStyle(
             backgroundColor: MaterialStatePropertyAll(Colors.red),
           ),
-          child: const Text("Delete"),
+          child: Text(AppLocalizations.of(context)!.delete),
         ),
         OutlinedButton(
           onPressed: () {
@@ -44,7 +46,7 @@ class BreastCheckHistorytem extends StatelessWidget {
             foregroundColor: MaterialStatePropertyAll(Colors.red),
             side: MaterialStatePropertyAll(BorderSide(color: Colors.red)),
           ),
-          child: const Text("Cancel"),
+          child: Text(AppLocalizations.of(context)!.cancel),
         ),
       ],
     );
@@ -59,7 +61,7 @@ class BreastCheckHistorytem extends StatelessWidget {
     } catch (error) {
       showCustomAlretDialog(
         context: context,
-        title: "Error",
+        title: AppLocalizations.of(context)!.error,
         titleColor: Colors.red.shade900,
         content: error.toString(),
       );
@@ -72,8 +74,8 @@ class BreastCheckHistorytem extends StatelessWidget {
       key: Key(note.id),
       direction: DismissDirection.startToEnd,
       background: Container(
-        padding: const EdgeInsets.only(left: 20),
-        alignment: Alignment.centerLeft,
+        padding: const EdgeInsetsDirectional.only(start: 20),
+        alignment: AlignmentDirectional.centerStart,
         color: Colors.red.shade900,
         child: const Icon(
           Icons.delete,

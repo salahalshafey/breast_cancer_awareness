@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class EmptyShape extends StatelessWidget {
   const EmptyShape({super.key});
 
@@ -20,7 +22,7 @@ class EmptyShape extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Text(
-          'No activity yet',
+          AppLocalizations.of(context)!.noActivityYet,
           style: TextStyle(
             fontSize: 18,
             color: Theme.of(context).brightness == Brightness.light

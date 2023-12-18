@@ -1,3 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../app.dart';
 import '../../../../core/error/error_exceptions_with_message.dart';
 import '../../../../dispose_container.dart';
 
@@ -22,6 +27,8 @@ class Notes extends DisposableProvider {
     required this.deleteAllNotesUsecase,
   });
 
+  final context = navigatorKey.currentContext!;
+
   List<Note> _notes = [];
 
   Future<void> fetchAllNotes(String userId) async {
@@ -32,7 +39,9 @@ class Notes extends DisposableProvider {
       _notes = _notes.reversed.toList();
       notifyListeners();
     } catch (error) {
-      throw ErrorForDialog('An unexpected error happened.');
+      throw ErrorForDialog(
+        AppLocalizations.of(context)!.unexpectedErrorHappened,
+      );
     }
   }
 
@@ -48,9 +57,13 @@ class Notes extends DisposableProvider {
     try {
       await addNoteUsecase.call(userId, note);
     } on LocalStorageException {
-      throw ErrorForDialog("Not able to save files to local device storage.");
+      throw ErrorForDialog(
+        AppLocalizations.of(context)!.notAbleToSaveFilesToLocalDeviceStorage,
+      );
     } catch (error) {
-      throw ErrorForDialog('An unexpected error happened.');
+      throw ErrorForDialog(
+        AppLocalizations.of(context)!.unexpectedErrorHappened,
+      );
     }
   }
 
@@ -62,9 +75,13 @@ class Notes extends DisposableProvider {
       notifyListeners();
     } on LocalStorageException {
       throw ErrorForDialog(
-          "Not able to delete files from local device storage.");
+        AppLocalizations.of(context)!
+            .notAbleToDeleteFilesFromLocalDeviceStorage,
+      );
     } catch (error) {
-      throw ErrorForDialog('An unexpected error happened.');
+      throw ErrorForDialog(
+        AppLocalizations.of(context)!.unexpectedErrorHappened,
+      );
     }
   }
 
@@ -76,9 +93,13 @@ class Notes extends DisposableProvider {
       notifyListeners();
     } on LocalStorageException {
       throw ErrorForDialog(
-          "Not able to delete files from local device storage.");
+        AppLocalizations.of(context)!
+            .notAbleToDeleteFilesFromLocalDeviceStorage,
+      );
     } catch (error) {
-      throw ErrorForDialog('An unexpected error happened.');
+      throw ErrorForDialog(
+        AppLocalizations.of(context)!.unexpectedErrorHappened,
+      );
     }
   }
 

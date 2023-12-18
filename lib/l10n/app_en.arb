@@ -941,8 +941,70 @@
   },
   
 
-
-
+  "@_NOTE_PROVIDER": {},
+  "notAbleToSaveFilesToLocalDeviceStorage": "Not able to save files to local device storage.",
+  "@notAbleToSaveFilesToLocalDeviceStorage": {
+    "description": "the response if error happened while trying to save file to local device storage in"
+  },
+  "notAbleToDeleteFilesFromLocalDeviceStorage": "Not able to delete files from local device storage.",
+  "@notAbleToDeleteFilesFromLocalDeviceStorage": {
+    "description": "the response if error happened while trying to delete file to local device storage"
+  },
+  "@_NOTES_HISTORY_SCREENS": {},
+  "deleteAllSelfchecks": "Delete All Self-Checks",
+  "@deleteAllSelfchecks": {
+    "description": "tooltip for button to delete all Self check in `_NOTES_HISTORY_SCREEN`"
+  },
+  "mySelfchecks": "My Self-checks",
+  "@mySelfchecks": {
+    "description": "the mySelfchecks word in `_NOTES_HISTORY_SCREEN`"
+  },
+  "warning": "Warning",
+  "@warning": {
+    "description": "the Warning word"
+  },
+  "deleteAll": "Delete All",
+  "@deleteAll": {
+    "description": "the deleteAll word"
+  },
+  "fromLeftToRight": "from left to right",
+  "@fromLeftToRight": {
+    "description": "in case of `Directionality.of(context) == TextDirection.ltr`"
+  },
+  "fromRightToLeft": "from right to left",
+  "@fromRightToLeft": {
+    "description": "in case of `Directionality.of(context) == TextDirection.rtl`"
+  },
+  "areYouSureOfDeletingAllYourSelfchecks": "* Are you sure of **Deleting all your Self-Checks?** All the data and notes information will be deleted.\n* If you want to delete a specific note, **drag** it {textDirection}",
+  "@areYouSureOfDeletingAllYourSelfchecks": {
+    "description": "the content of dialog when trying to delete all self checks in `_NOTES_HISTORY_SCREEN`",
+    "placeholders": {
+      "textDirection": {
+        "type": "String",
+        "example": "from left to right"
+      }
+    }
+  },
+  "textNote": "Text Note",
+  "@textNote": {
+    "description": "the textNote word in `_NOTE_SCREEN`"
+  },
+  "voiceNote": "Voice Note",
+  "@voiceNote": {
+    "description": "the voiceNote word in `_NOTE_SCREEN`"
+  },
+  "areYouSure": "Are you sure?",
+  "@areYouSure": {
+    "description": "the areYouSure word"
+  },
+  "confirmDeletion": "Confirm Deletion?",
+  "@confirmDeletion": {
+    "description": "the confirmDeletion word in dialog of deleteing a note in `_NOTES_HISTORY_SCREEN`"
+  },
+  "noActivityYet": "No activity yet",
+  "@noActivityYet": {
+    "description": "the noActivityYet word in case of no notes or self checks yet"
+  },
   "@_HOME_SCREEN": {},
   "hello": "Hello",
   "@hello": {

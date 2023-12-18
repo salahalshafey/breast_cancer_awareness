@@ -230,7 +230,22 @@
 
 
 
-
+    "@_NOTE_PROVIDER": {},
+    "notAbleToSaveFilesToLocalDeviceStorage": "غير قادر على حفظ الملفات على مساحة تخزين الجهاز المحلي.",
+    "notAbleToDeleteFilesFromLocalDeviceStorage": "غير قادر على حذف الملفات من مساحة تخزين الجهاز المحلي.",
+    "@_NOTES_HISTORY_SCREENS": {},
+    "deleteAllSelfchecks": "حذف كافة الفحوصات الذاتية",
+    "mySelfchecks": "فحوصاتي الذاتية",
+    "warning": "تحذير",
+    "deleteAll": "حذف الكل",
+    "fromLeftToRight": "من اليسار إلى اليمين",
+    "fromRightToLeft": "من اليمين إلى اليسار",
+    "areYouSureOfDeletingAllYourSelfchecks": "* هل أنت متأكد من **حذف كافة الفحوصات الذاتية؟** سيتم حذف كافة البيانات ومعلومات الملاحظات.\n* إذا كنت تريد حذف ملاحظة معينة، **اسحبها** {textDirection}.",
+    "textNote": "ملاحظة نصية",
+    "voiceNote": "ملاحظة صوتية",
+    "areYouSure": "هل أنت متأكد؟",
+    "confirmDeletion": "تأكيد الحذف؟",
+    "noActivityYet": "لا يوجد نشاط بعد",
     "@_HOME_SCREEN": {},
     "selfCheckNow": "فحص-ذاتي الان",
     "myBreastCheckHistory": "سجل الفحص الذاتي",

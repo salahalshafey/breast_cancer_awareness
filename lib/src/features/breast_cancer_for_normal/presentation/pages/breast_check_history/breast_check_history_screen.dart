@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../../../core/util/widgets/default_screen.dart';
 
@@ -39,16 +41,16 @@ class BreastCheckHistoryScreen extends StatelessWidget {
         IconButton(
           onPressed: () => _deleteAllSelfChecks(context, userId, notesHistory),
           icon: const Icon(Icons.delete),
-          tooltip: "Delete All Self-Checks",
+          tooltip: AppLocalizations.of(context)!.deleteAllSelfchecks,
         ),
       ],
       child: Column(
         children: [
           const SizedBox(height: 100),
-          const Text(
-            "My Self-checks",
+          Text(
+            AppLocalizations.of(context)!.mySelfchecks,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromRGBO(199, 40, 107, 1),
               fontSize: 24,
               fontWeight: FontWeight.w900,
@@ -109,13 +111,16 @@ class BreastCheckHistoryScreen extends StatelessWidget {
 ///
 
 Future<bool?> _showConfirmDeletionDialog(BuildContext context) {
+  final textDirection = Directionality.of(context) == TextDirection.rtl
+      ? AppLocalizations.of(context)!.fromRightToLeft
+      : AppLocalizations.of(context)!.fromLeftToRight;
+
   return showCustomAlretDialog<bool>(
     context: context,
     constraints: const BoxConstraints(maxWidth: 500),
-    title: "Warning",
-    content: "* Are you sure of **Deleting all your Self-Checks?** "
-        "All the data and notes information will be deleted.\n"
-        "* If you want to delete a specific note, **drag** it from left to right.",
+    title: AppLocalizations.of(context)!.warning,
+    content: AppLocalizations.of(context)!
+        .areYouSureOfDeletingAllYourSelfchecks(textDirection),
     actionsBuilder: (dialogContext) => [
       ElevatedButton(
         onPressed: () {
@@ -126,7 +131,7 @@ Future<bool?> _showConfirmDeletionDialog(BuildContext context) {
           fixedSize: const MaterialStatePropertyAll(Size.fromWidth(130)),
           backgroundColor: MaterialStatePropertyAll(Colors.red.shade900),
         ),
-        child: const Text("Delete All"),
+        child: Text(AppLocalizations.of(context)!.deleteAll),
       ),
       OutlinedButton(
         onPressed: () {
@@ -139,7 +144,7 @@ Future<bool?> _showConfirmDeletionDialog(BuildContext context) {
           side:
               MaterialStatePropertyAll(BorderSide(color: Colors.red.shade900)),
         ),
-        child: const Text("Cancel"),
+        child: Text(AppLocalizations.of(context)!.cancel),
       ),
     ],
   );
