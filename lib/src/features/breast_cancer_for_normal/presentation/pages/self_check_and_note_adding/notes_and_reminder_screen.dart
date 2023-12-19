@@ -1,5 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/util/functions/date_time_and_duration.dart';
 import '../../../../../core/util/widgets/default_screen.dart';
@@ -25,14 +29,15 @@ class _NotesAndReminderScreenState extends State<NotesAndReminderScreen> {
   bool _reminderSeted = false;
 
   String get _reminder => _reminderSeted
-      ? "Your reminder has been set:"
-      : "Do you want to be reminded to check again in 2 weeks?";
+      ? AppLocalizations.of(context)!.yourReminderHasBeenSet
+      : AppLocalizations.of(context)!.doYouWantToBeRemindedToCheckAgainIn(
+          AppLocalizations.of(context)!.twoWeeks);
 
   void _setLocalNotificationEveryTwoWeeks() async {
     await Noti.initialize();
     Noti.showBigTextNotification(
-      title: "Self-Check",
-      body: "Your next self-check is due.",
+      title: AppLocalizations.of(context)!.selfcheck,
+      body: AppLocalizations.of(context)!.yourNextSelfcheckIsDue,
     ).then((_) {
       Provider.of<SettingsProvider>(context, listen: false)
           .changeNotification(true);
@@ -60,20 +65,18 @@ class _NotesAndReminderScreenState extends State<NotesAndReminderScreen> {
               const SizedBox(height: 20),
               TextTitle(
                 data: finding != Findings.allIsWell
-                    ? "Don't worry"
-                    : "Next reminder",
+                    ? AppLocalizations.of(context)!.dontWorry
+                    : AppLocalizations.of(context)!.nextReminder,
                 fontSize: 24,
                 color: const Color.fromRGBO(199, 40, 107, 1),
               ),
               const SizedBox(height: 20),
               TextNormal(
                 data: finding != Findings.allIsWell
-                    ? "If you noticed anything unusual when examining your breasts, "
-                        "stay calm! Check the area again after your next menstruation. "
-                        "If the change persists, you should see a doctor.\n\n"
+                    ? "${AppLocalizations.of(context)!.ifYouNoticedAnythingUnusualWhenExaminingYourBreasts}"
                         "$_reminder"
-                    : "You will automatically be reminded of your next self-check.\n\n"
-                        "This is on:",
+                    : AppLocalizations.of(context)!
+                        .youWillAutomaticallyBeReminded,
                 fontSize: 22,
               ),
               if (finding == Findings.allIsWell || _reminderSeted)
@@ -97,9 +100,9 @@ class _NotesAndReminderScreenState extends State<NotesAndReminderScreen> {
                     style: const ButtonStyle(
                         fixedSize:
                             MaterialStatePropertyAll(Size.fromWidth(260))),
-                    child: const Text(
-                      "OK",
-                      style: TextStyle(
+                    child: Text(
+                      AppLocalizations.of(context)!.ok,
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),

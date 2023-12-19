@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/theme/colors.dart';
 import '../../../../../core/util/widgets/image_container.dart';
 
@@ -39,6 +41,7 @@ class ImageWithClearBadge extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     child: IconButton(
+                      tooltip: AppLocalizations.of(context)!.clearTheImage,
                       onPressed: () => addNoteState.setImage(null),
                       icon: const Icon(
                         Icons.close,

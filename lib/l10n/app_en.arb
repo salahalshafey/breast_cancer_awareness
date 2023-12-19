@@ -1005,6 +1005,236 @@
   "@noActivityYet": {
     "description": "the noActivityYet word in case of no notes or self checks yet"
   },
+  "@_STARTING_SELF_CHECK_WHAT_TO_LOOK_FOR_SCREENS": {},
+  "selfcheck": "Self-Check",
+  "@selfcheck": {
+    "description": "the selfcheck word"
+  },
+  "letYourselfBeGuidedByTextAndGraphicsStepByStep": "Let yourself be guided by text and graphics Step by Step",
+  "@letYourselfBeGuidedByTextAndGraphicsStepByStep": {
+    "description": "instructions fro `_STARTING_SELF_CHECK_WHAT_TO_LOOK_FOR_SCREENS`"
+  },
+  "startSelfcheck": "START SELF-CHECK",
+  "@startSelfcheck": {
+    "description": "button in `_STARTING_SELF_CHECK_WHAT_TO_LOOK_FOR_SCREENS`"
+  },
+  "whatShouldILookFor": "WHAT SHOULD I LOOK FOR?",
+  "@whatShouldILookFor": {
+    "description": "button in `_STARTING_SELF_CHECK_WHAT_TO_LOOK_FOR_SCREENS`"
+  },
+  "whatToLookFor": "What to look for",
+  "@whatToLookFor": {
+    "description": "the title of `_what_to_look_for_screen`"
+  },
+  "lumpsKnotsThickenings": "Lumps, knots, thickenings",
+  "@lumpsKnotsThickenings": {
+    "description": "one of titles in `_what_to_look_for_screen`"
+  },
+  "changesInSizeOrShape": "Changes in size or shape",
+  "@changesInSizeOrShape": {
+    "description": "one of titles in `_what_to_look_for_screen`"
+  },
+  "nippleDischarge": "Nipple discharge",
+  "@nippleDischarge": {
+    "description": "one of titles in `_what_to_look_for_screen`"
+  },
+  "skinChanges": "Skin changes",
+  "@skinChanges": {
+    "description": "one of titles in `_what_to_look_for_screen`"
+  },
+  "lumpsKnotsThickeningsDetails": "Lumps, hardened knots or thickenings in the breast tissue can be a sign of breast cancer. They can occur right under the skin, in the middle of the breast or in the deep tissue near the bones.",
+  "@lumpsKnotsThickeningsDetails": {
+    "description": "one of details in `_what_to_look_for_screen`"
+  },
+  "changesInSizeOrShapeDetails": "Unusual changes in size, contour or shape should be checked. The same is true for distortions or swellings. Keep in mind that your left and right breast might look different. Know what is normal for you.",
+  "@changesInSizeOrShapeDetails": {
+    "description": "one of details in `_what_to_look_for_screen`"
+  },
+  "nippleDischargeDetails": "The nipple should look normal to you, and should be free from irritation. Check for unusual discharge of fluid or blood",
+  "@nippleDischargeDetails": {
+    "description": "one of details in `_what_to_look_for_screen`"
+  },
+  "skinChangesDetails": "There should be no strange wrinkling or bulging of the skin. Get checked if there is any persistent redness, soreness or rash, especially if only on one side.",
+  "@skinChangesDetails": {
+    "description": "one of details in `_what_to_look_for_screen`"
+  },
+  "@_SELF_CHECK_FNDINGS_SCREENS": {},
+  "pageOf": "{numPage} of {numPages}",
+  "@pageOf": {
+    "description": "pageNaviagtor in `_SELF_CHECK_SCREEN`",
+    "placeholders": {
+      "numPage": {
+        "type": "int",
+        "example": "2"
+      },
+      "numPages": {
+        "type": "int",
+        "example": "8"
+      }
+    }
+  },
+  "thisIsTheFirstStep": "This Is The First Step",
+  "@thisIsTheFirstStep": {
+    "description": "tooltip if the current page is 1 in `_SELF_CHECK_SCREEN`"
+  },
+  "previousStep": "Previous Step",
+  "@previousStep": {
+    "description": "tooltip to go to Previous page in `_SELF_CHECK_SCREEN`"
+  },
+  "endSelfcheck": "End Self-check",
+  "@endSelfcheck": {
+    "description": "tooltip if the current page is last in `_SELF_CHECK_SCREEN`"
+  },
+  "nextStep": "Next Step",
+  "@nextStep": {
+    "description": "tooltip to go to nex page in `_SELF_CHECK_SCREEN`"
+  },
+  "switchToMirror": "SWITCH TO MIRROR",
+  "@switchToMirror": {
+    "description": "button to open mirror screen **fronCameraScreen** in `_SELF_CHECK_SCREEN`"
+  },
+  "start": "Start",
+  "@start": {
+    "description": "one of the titles in `_SELF_CHECK_SCREEN`"
+  },
+  "look": "Look",
+  "@look": {
+    "description": "one of the titles in `_SELF_CHECK_SCREEN`"
+  },
+  "feel": "Feel",
+  "@feel": {
+    "description": "one of the titles in `_SELF_CHECK_SCREEN`"
+  },
+  "circles": "Circles",
+  "@circles": {
+  "description": "one of the titles in `_SELF_CHECK_SCREEN`"
+  },
+  "armpit": "Armpit",
+  "@armpit": {
+    "description": "one of the titles in `_SELF_CHECK_SCREEN`"
+  },
+  "nipple": "Nipple",
+  "@nipple": {
+    "description": "one of the titles in `_SELF_CHECK_SCREEN`"
+  },
+  "lieDown": "Lie down",
+  "@lieDown": {
+    "description": "one of the titles in `_SELF_CHECK_SCREEN`"
+  },
+  "helpfulHintShower": "Helpful hint: Shower",
+  "@helpfulHintShower": {
+    "description": "one of the titles in `_SELF_CHECK_SCREEN`"
+  },
+  "startDetails": "Start in an upright position, hands on your hips. Look at your breasts with the help of a mirror, your mobile phone, or a friend.",
+  "@startDetails": {
+    "description": "one of the descriptions in `_SELF_CHECK_SCREEN`"
+  },
+  "lookDetails": "Do you see any changes in size, shape or colour? Swelling? Puckering of the skin? Raise your arms and check again.",
+  "@lookDetails": {
+    "description": "one of the descriptions in `_SELF_CHECK_SCREEN`"
+  },
+  "feelDetails": "Use the pads of your fingers and feel your breast. Follow a pattern. Feel for lumps, hardened knots and thickenings.",
+  "@feelDetails": {
+    "description": "one of the descriptions in `_SELF_CHECK_SCREEN`"
+  },
+  "circlesDetails": "keep your fingers together and flat. Move in small circles. Repeat using light, medium and then firm pressure. With firm pressure, you should feel your ribcage.",
+  "@circlesDetails": {
+    "description": "one of the descriptions in `_SELF_CHECK_SCREEN`"
+  },
+  "armpitDetails": "Cover all the way up to your armpit. The left hand feels the right side and the right hand feels the left side.",
+  "@armpitDetails": {
+    "description": "one of the descriptions in `_SELF_CHECK_SCREEN`"
+  },
+  "nippleDetails": "Squeeze the nipple. Is there any unusual discharge?",
+  "@nippleDetails": {
+  "description": "one of the descriptions in `_SELF_CHECK_SCREEN`"
+  },
+  "lieDownDetails": "Lie down so the tissue spreads out evenly. Repeat the examination of your breasts.",
+  "@lieDownDetails": {
+    "description": "one of the descriptions in `_SELF_CHECK_SCREEN`"
+  },
+  "helpfulHintShowerDetails": "You can do your self-check under the shower. Sometimes it's easier when the breast is wet and soapy.",
+  "@helpfulHintShowerDetails": {
+    "description": "one of the descriptions in `_SELF_CHECK_SCREEN`"
+  },
+  "findings": "Findings",
+  "@findings": {
+    "description": "the title of `_finding_screen`"
+  },
+  "congratulationsItsGreatThatYouAreTakingCareOfYourHealth": "Congratulations! It's great that you are taking care of your health.",
+  "@congratulationsItsGreatThatYouAreTakingCareOfYourHealth": {
+    "description": "in `_finding_screen`"
+  },
+  "allIsWell": "All is well",
+  "@allIsWell": {
+    "description": "button to click if all is well in self-check in `_finding_screen`"
+  },
+  "notSure": "Not sure",
+  "@notSure": {
+    "description": "button to click if Not sure if you noticedSomething in self-check in `_finding_screen`"
+  },
+  "noticedSomething": "Noticed something",
+  "@noticedSomething": {
+    "description": "button to click if Noticed something in self-check in `_finding_screen`"
+  },
+  "@_NOTES_AND_REMINDER_SCREENS": {},
+  "yourReminderHasBeenSet": "Your reminder has been set:",
+  "@yourReminderHasBeenSet": {
+    "description": "some of text of `_NOTES_AND_REMINDER_SCREENS`"
+  },
+  "doYouWantToBeRemindedToCheckAgainIn": "Do you want to be reminded to check again in {durationInString}?",
+  "@doYouWantToBeRemindedToCheckAgainIn": {
+    "description": "some of text of `_NOTES_AND_REMINDER_SCREENS`",
+    "placeholders": {
+      "durationInString": {
+        "type": "String",
+        "example": "2 weeks"
+      }
+    }
+  },
+  "yourNextSelfcheckIsDue": "Your next self-check is due.",
+  "@yourNextSelfcheckIsDue": {
+    "description": "the message of notification to make self-check"
+  },
+  "dontWorry": "Don't worry",
+  "@dontWorry": {
+    "description": "the title of `_NOTES_AND_REMINDER_SCREENS` if not all is well"
+  },
+  "nextReminder": "Next reminder",
+  "@nextReminder": {
+    "description": "the title of `_NOTES_AND_REMINDER_SCREENS` if all is well"
+  },
+  "ifYouNoticedAnythingUnusualWhenExaminingYourBreasts": "If you noticed anything unusual when examining your breasts, stay calm! Check the area again after your next menstruation. If the change persists, you should see a doctor.\n\n",
+  "@ifYouNoticedAnythingUnusualWhenExaminingYourBreasts": {
+    "description": "some of text of `_NOTES_AND_REMINDER_SCREENS`"
+  },
+  "youWillAutomaticallyBeReminded": "You will automatically be reminded of your next self-check.\n\nThis is on:",
+  "@youWillAutomaticallyBeReminded": {
+    "description": "some of text of `_NOTES_AND_REMINDER_SCREENS`"
+  },
+  "addNotes": "Add notes",
+  "@addNotes": {
+    "description": "the Add note word"
+  },
+  "finish": "FINISH",
+  "@finish": {
+    "description": "the FINISH word"
+  },
+  "enterATextNote": "Enter a text note",
+  "@enterATextNote": {
+    "description": "in textField of adding text note in `_NOTES_AND_REMINDER_SCREENS`"
+  },
+  "microphonePermissionIsNeededToRecordAVoiceNote": "Microphone permission is needed to record a voice note.",
+  "@microphonePermissionIsNeededToRecordAVoiceNote": {
+    "description": "the response if microphone permission not granted from user to record a voice note"
+  },
+  "recording": "Recording",
+  "@recording": {
+    "description": "the Recording word"
+  },
+
+
+
   "@_HOME_SCREEN": {},
   "hello": "Hello",
   "@hello": {

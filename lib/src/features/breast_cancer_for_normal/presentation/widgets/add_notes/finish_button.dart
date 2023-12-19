@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../domain/entities/note.dart';
 
@@ -52,7 +54,7 @@ class _FinishButtonState extends State<FinishButton> {
 
       showCustomAlretDialog(
         context: context,
-        title: "Error",
+        title: AppLocalizations.of(context)!.error,
         titleColor: Colors.red,
         content: error.toString(),
       );
@@ -77,9 +79,9 @@ class _FinishButtonState extends State<FinishButton> {
                   strokeWidth: 3.0,
                 ),
               )
-            : const Text(
-                "FINISH",
-                style: TextStyle(fontWeight: FontWeight.bold),
+            : Text(
+                AppLocalizations.of(context)!.finish,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
       ),
     );

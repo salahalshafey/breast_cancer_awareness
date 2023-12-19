@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:wakelock/wakelock.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../../app.dart';
 import '../../../../../core/util/widgets/default_screen.dart';
 
 import '../../widgets/custom_texts.dart';
@@ -26,7 +29,7 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
   final PageController _pageController = PageController();
   int _currentPageIndex = 0;
 
-  final _screenOptions = _selfCheckSteps
+  final _screenOptions = _selfCheckSteps()
       .map((selfCheckStep) => SelfCheckItem(
             selfCheckStep.title,
             selfCheckStep.description,
@@ -35,7 +38,7 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
       .toList();
 
   void _goToPageIndex(int pageIndex) {
-    if (pageIndex >= _selfCheckSteps.length || pageIndex < 0) {
+    if (pageIndex >= _selfCheckSteps().length || pageIndex < 0) {
       return;
     }
 
@@ -43,7 +46,7 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
   }
 
   void _goToNextPage() {
-    if (_currentPageIndex == _selfCheckSteps.length - 1) {
+    if (_currentPageIndex == _selfCheckSteps().length - 1) {
       Navigator.of(context).pushReplacementNamed(FindingsScreen.routName);
       return;
     }
@@ -72,7 +75,7 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
       _currentPageIndex = pageindex;
     });
 
-    if (_currentPageIndex == _selfCheckSteps.length - 1) {
+    if (_currentPageIndex == _selfCheckSteps().length - 1) {
       final screenHeight = MediaQuery.of(context).size.height;
 
       // all screen widgets height = 875, if you want to animate to the end
@@ -124,7 +127,7 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
         controller: _scrollController,
         children: [
           SelfCheckPageNavigator(
-            numOfPages: _selfCheckSteps.length,
+            numOfPages: _selfCheckSteps().length,
             currentPageIndex: _currentPageIndex,
             gotToNextPage: _goToNextPage,
             gotToPrevPage: _goToPrevPage,
@@ -141,13 +144,13 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
           ),
           const SizedBox(height: 20),
           DotsNavigator(
-            numOfDots: _selfCheckSteps.length,
+            numOfDots: _selfCheckSteps().length,
             currentPageIndex: _currentPageIndex,
             colorOfDots: Colors.grey,
             colorOfCurrentDot: const Color.fromRGBO(199, 40, 107, 1),
             gotToPageIndex: _goToPageIndex,
           ),
-          if (_currentPageIndex == _selfCheckSteps.length - 1)
+          if (_currentPageIndex == _selfCheckSteps().length - 1)
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Align(
@@ -156,7 +159,8 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
                     Navigator.of(context)
                         .pushReplacementNamed(FindingsScreen.routName);
                   },
-                  child: const Text("CONTINUE"),
+                  child:
+                      Text(AppLocalizations.of(context)!.continueToMainScreen),
                 ),
               ),
             ),
@@ -207,50 +211,49 @@ class SelfCheckStep {
   const SelfCheckStep(this.title, this.description, this.image);
 }
 
-const List<SelfCheckStep> _selfCheckSteps = [
-  SelfCheckStep(
-    "Start",
-    "Start in an upright position, hands on your hips. "
-        "Look at your breasts with the help of a mirror, your mobile phone, or a friend.",
-    "assets/breast_cancer/examination_1.jpeg",
-  ),
-  SelfCheckStep(
-    "Look",
-    "Do you see any changes in size, shape or colour? Swelling? Puckering of the skin?"
-        " Raise your arms and check again.",
-    "assets/breast_cancer/examination_2.jpeg",
-  ),
-  SelfCheckStep(
-    "Feel",
-    "Use the pads of your fingers and feel your breast. Follow a pattern."
-        " Feel for lumps, hardened knots and thickenings.",
-    "assets/breast_cancer/examination_3.jpeg",
-  ),
-  SelfCheckStep(
-    "Circles",
-    "keep your fingers together and flat. Move in small circles. Repeat using light, medium and then firm pressure."
-        " With firm pressure, you should feel your ribcage.",
-    "assets/breast_cancer/examination_4.jpeg",
-  ),
-  SelfCheckStep(
-    "Armpit",
-    "Cover all the way up to your armpit. The left hand feels the right side and the right hand feels the left side.",
-    "assets/breast_cancer/examination_5.jpg",
-  ),
-  SelfCheckStep(
-    "Nipple",
-    "Squeeze the nipple. Is there any unusual discharge?",
-    "assets/breast_cancer/examination_6.jpeg",
-  ),
-  SelfCheckStep(
-    "Lie down",
-    "Lie down so the tissue spreads out evenly. Repeat the examination of your breasts.",
-    "assets/breast_cancer/examination_7.jpeg",
-  ),
-  SelfCheckStep(
-    "Helpful hint: Shower",
-    "You can do your self-check under the shower."
-        " Sometimes it's easier when the breast is wet and soapy.",
-    "assets/breast_cancer/examination_8.jpeg",
-  ),
-];
+List<SelfCheckStep> _selfCheckSteps() {
+  final context = navigatorKey.currentContext!;
+
+  return [
+    SelfCheckStep(
+      AppLocalizations.of(context)!.start,
+      AppLocalizations.of(context)!.startDetails,
+      "assets/breast_cancer/examination_1.jpeg",
+    ),
+    SelfCheckStep(
+      AppLocalizations.of(context)!.look,
+      AppLocalizations.of(context)!.lookDetails,
+      "assets/breast_cancer/examination_2.jpeg",
+    ),
+    SelfCheckStep(
+      AppLocalizations.of(context)!.feel,
+      AppLocalizations.of(context)!.feelDetails,
+      "assets/breast_cancer/examination_3.jpeg",
+    ),
+    SelfCheckStep(
+      AppLocalizations.of(context)!.circles,
+      AppLocalizations.of(context)!.circlesDetails,
+      "assets/breast_cancer/examination_4.jpeg",
+    ),
+    SelfCheckStep(
+      AppLocalizations.of(context)!.armpit,
+      AppLocalizations.of(context)!.armpitDetails,
+      "assets/breast_cancer/examination_5.jpg",
+    ),
+    SelfCheckStep(
+      AppLocalizations.of(context)!.nipple,
+      AppLocalizations.of(context)!.nippleDetails,
+      "assets/breast_cancer/examination_6.jpeg",
+    ),
+    SelfCheckStep(
+      AppLocalizations.of(context)!.lieDown,
+      AppLocalizations.of(context)!.lieDownDetails,
+      "assets/breast_cancer/examination_7.jpeg",
+    ),
+    SelfCheckStep(
+      AppLocalizations.of(context)!.helpfulHintShower,
+      AppLocalizations.of(context)!.helpfulHintShowerDetails,
+      "assets/breast_cancer/examination_8.jpeg",
+    ),
+  ];
+}

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class SelfCheckPageNavigator extends StatelessWidget {
   const SelfCheckPageNavigator({
     super.key,
@@ -29,11 +31,12 @@ class SelfCheckPageNavigator extends StatelessWidget {
             size: 40,
           ),
           tooltip: currentPageIndex == 0
-              ? "This Is The First Step"
-              : "Previous Step",
+              ? AppLocalizations.of(context)!.thisIsTheFirstStep
+              : AppLocalizations.of(context)!.previousStep,
         ),
         Text(
-          "Self-check\n" "${currentPageIndex + 1} of $numOfPages",
+          "${AppLocalizations.of(context)!.selfcheck}\n"
+          "${AppLocalizations.of(context)!.pageOf(currentPageIndex + 1, numOfPages)}",
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 24,
@@ -51,8 +54,8 @@ class SelfCheckPageNavigator extends StatelessWidget {
             size: 40,
           ),
           tooltip: currentPageIndex == numOfPages - 1
-              ? "End Self-check"
-              : "Next Step",
+              ? AppLocalizations.of(context)!.endSelfcheck
+              : AppLocalizations.of(context)!.nextStep,
         ),
       ],
     );

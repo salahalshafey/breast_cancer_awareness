@@ -191,7 +191,12 @@ class _WebSearchResultState extends State<WebSearchResult>
                           ),
                         ),
                       ),
-                    ].animate(interval: 100.ms).fade().moveX(),
+                    ].animate(interval: 100.ms).fade().moveX(
+                          begin: Directionality.of(context) == TextDirection.ltr
+                              ? -15
+                              : 15,
+                          end: 0,
+                        ),
                   ),
                 ),
                 Image.asset(

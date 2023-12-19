@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/util/widgets/default_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../../core/util/widgets/default_screen.dart';
 import '../../../../../core/util/builders/go_to_screen_with_slide_transition.dart';
+
 import 'self_check_screen.dart';
 import 'should_look_for_screen.dart';
 
@@ -16,20 +18,21 @@ class StartingSelfCheckScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 80),
         children: [
           const SizedBox(height: 20),
-          const Text(
-            "Self-Check",
+          Text(
+            AppLocalizations.of(context)!.selfcheck,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromRGBO(199, 40, 107, 1),
               fontSize: 24,
               fontWeight: FontWeight.w900,
             ),
           ),
           const SizedBox(height: 30),
-          const Text(
-            "Let yourself be guided by text and graphics Step by Step",
+          Text(
+            AppLocalizations.of(context)!
+                .letYourselfBeGuidedByTextAndGraphicsStepByStep,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 22,
             ),
           ),
@@ -53,10 +56,10 @@ class StartingSelfCheckScreen extends StatelessWidget {
                 padding: MaterialStatePropertyAll(
                     EdgeInsets.symmetric(horizontal: 40)),
               ),
-              child: const Text(
-                "START SELF-CHECK",
+              child: Text(
+                AppLocalizations.of(context)!.startSelfcheck,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
@@ -69,10 +72,10 @@ class StartingSelfCheckScreen extends StatelessWidget {
                 context,
                 const ShouldLookForScreen(),
               ),
-              child: const Text(
-                "WHAT SHOULD I LOOK FOR?",
+              child: Text(
+                AppLocalizations.of(context)!.whatShouldILookFor,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),

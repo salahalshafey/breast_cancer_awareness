@@ -3,6 +3,8 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/util/builders/custom_alret_dialog.dart';
 
 import '../../pages/self_check_and_note_adding/mirror_screen.dart';
@@ -20,9 +22,9 @@ void _goToMirrorScreen(BuildContext context) async {
   } catch (error) {
     showCustomAlretDialog(
       context: context,
-      title: "Error",
+      title: AppLocalizations.of(context)!.error,
       titleColor: Colors.red,
-      content: "Something went wrong.",
+      content: AppLocalizations.of(context)!.somethingWentWrong,
     );
   }
 }
@@ -42,16 +44,33 @@ List<Widget> switchToMirrorButton(BuildContext context) {
         onTap: () => _goToMirrorScreen(context),
         child: Container(
           color: Colors.white,
+          alignment: Alignment.center,
           padding:
               const EdgeInsets.only(left: 30, right: 10, top: 10, bottom: 10),
-          child: const Text(
-            "SWITCH TO MIRROR",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w900,
-              color: Color.fromRGBO(199, 40, 107, 1),
-            ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.switchToMirror,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w900,
+                  color: Color.fromRGBO(199, 40, 107, 1),
+                ),
+              ),
+
+              // to make width of container equal with english letters
+              const Text(
+                "SWITCH TO MIRROR",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w900,
+                  color: Colors.transparent,
+                ),
+              ),
+            ],
           ),
         ),
       ),

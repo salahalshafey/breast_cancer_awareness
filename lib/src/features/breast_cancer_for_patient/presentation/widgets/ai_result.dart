@@ -162,7 +162,13 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
                       );
                     }).toList(),
                   ),
-                ).animate().fade(duration: 200.ms).moveX(duration: 200.ms),
+                ).animate().fade(duration: 200.ms).moveX(
+                      duration: 200.ms,
+                      begin: Directionality.of(context) == TextDirection.ltr
+                          ? -15
+                          : 15,
+                      end: 0,
+                    ),
                 Transform.translate(
                   offset: const Offset(0.0, -30.0),
                   child: Image.asset("assets/images/ai.png", height: 55)

@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:wakelock/wakelock.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/util/builders/image_picker.dart';
 
 import '../../../domain/entities/note.dart';
@@ -27,8 +29,8 @@ class AddNotes extends StatelessWidget {
 
     return Column(
       children: [
-        const TextTitle(
-          data: "Add notes",
+        TextTitle(
+          data: AppLocalizations.of(context)!.addNotes,
           fontSize: 22,
         ),
         const SizedBox(height: 20),
@@ -37,11 +39,13 @@ class AddNotes extends StatelessWidget {
           children: [
             NoteButton(
               icon: Icons.note_alt_rounded,
+              tooltip: AppLocalizations.of(context)!.textNote,
               onTap: () =>
                   showNoteDialog(context, child: NoteTextField(addNoteState)),
             ),
             NoteButton(
               icon: Icons.mic_external_on,
+              tooltip: AppLocalizations.of(context)!.voiceNote,
               onTap: () => showBottomSheet(
                 context,
                 child: RecordAndPlayVoice(addNoteState),
@@ -49,6 +53,7 @@ class AddNotes extends StatelessWidget {
             ),
             NoteButton(
               icon: Icons.camera_alt,
+              tooltip: AppLocalizations.of(context)!.selectImage,
               onTap: () async {
                 final imageFile =
                     await myImagePicker(context, imageQuality: 80);

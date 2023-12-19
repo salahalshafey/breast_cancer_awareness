@@ -138,14 +138,21 @@ class AddAndShowResultButton extends StatelessWidget {
                           provider.networkImage != null
                       ? 1
                       : 0)
-              .slideX(begin: 2, end: 0, duration: 500.ms)
+              .slideX(
+                begin: Directionality.of(context) == TextDirection.ltr ? 2 : -2,
+                end: 0,
+                duration: 500.ms,
+              )
               .fade(begin: 0, end: 1)
         ],
       ),
     );
     //.moveY(begin: -200, end: 0, duration: 50.ms);
   }
-}
+} /*begin: Directionality.of(context) == TextDirection.ltr
+                          ? -15
+                          : 15,
+                      end: 0,*/
 
 class AddIcon extends StatelessWidget {
   const AddIcon({super.key});

@@ -149,11 +149,11 @@ String firstName(String fullName) => fullName.split(RegExp(r' +')).first;
 bool firstCharIsRtl(String text) {
   final context = navigatorKey.currentContext!;
 
-  if (text.isEmpty) {
+  if (text.trim().isEmpty) {
     return Directionality.of(context) == TextDirection.rtl;
   }
 
-  return intl.Bidi.startsWithRtl(text);
+  return intl.Bidi.startsWithRtl(text.trim());
 }
 
 String multiLineConvertTolowerCamelCaseStyle(String multiLinestring) {

@@ -5,6 +5,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/theme/colors.dart';
 import '../../../../../core/util/builders/custom_snack_bar.dart';
 import '../../../../../core/util/functions/date_time_and_duration.dart';
@@ -58,7 +60,8 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
     if (status != PermissionStatus.granted) {
       showCustomSnackBar(
         context: context,
-        content: 'Microphone permission is needed to record a voice note.',
+        content: AppLocalizations.of(context)!
+            .microphonePermissionIsNeededToRecordAVoiceNote,
       );
       Navigator.of(context).pop();
       return;
@@ -280,9 +283,9 @@ class RecordInfo extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 10),
-              const Text(
-                "Recording",
-                style: TextStyle(fontSize: 18),
+              Text(
+                AppLocalizations.of(context)!.recording,
+                style: const TextStyle(fontSize: 18),
               ),
             ],
           ).animate(

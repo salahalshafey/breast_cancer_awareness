@@ -116,7 +116,10 @@ class _AwarenessScreenState extends State<AwarenessScreen> {
             iconHeight: 150,
             opacity: 0.62,
           )
-        ].animate(interval: 200.ms).fade().moveX(),
+        ].animate(interval: 200.ms).fade().moveX(
+              begin: Directionality.of(context) == TextDirection.ltr ? -15 : 15,
+              end: 0,
+            ),
       ),
     );
   }

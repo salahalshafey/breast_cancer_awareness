@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../core/util/widgets/default_screen.dart';
 
 import '../../../../account/presentation/widgets/icon_from_asset.dart';
@@ -23,20 +25,20 @@ class FindingsScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 80),
           children: [
             const SizedBox(height: 20),
-            const TextTitle(
-              data: "Findings",
+            TextTitle(
+              data: AppLocalizations.of(context)!.findings,
               fontSize: 24,
-              color: Color.fromRGBO(199, 40, 107, 1),
+              color: const Color.fromRGBO(199, 40, 107, 1),
             ),
             const SizedBox(height: 20),
-            const TextNormal(
-              data:
-                  "Congratulations! It's great that you are taking care of your health.",
+            TextNormal(
+              data: AppLocalizations.of(context)!
+                  .congratulationsItsGreatThatYouAreTakingCareOfYourHealth,
               fontSize: 22,
             ),
             const SizedBox(height: 50),
             FindingItem(
-              title: "All is well",
+              title: AppLocalizations.of(context)!.allIsWell,
               assetIcon: "assets/breast_cancer/all_is_well.png",
               iconHeight: 60,
               onTap: () {
@@ -47,7 +49,7 @@ class FindingsScreen extends StatelessWidget {
               },
             ),
             FindingItem(
-              title: "Not sure",
+              title: AppLocalizations.of(context)!.notSure,
               assetIcon: "assets/breast_cancer/not_sure.png",
               iconHeight: 60,
               onTap: () {
@@ -58,7 +60,7 @@ class FindingsScreen extends StatelessWidget {
               },
             ),
             FindingItem(
-              title: "Noticed something",
+              title: AppLocalizations.of(context)!.noticedSomething,
               assetIcon: "assets/breast_cancer/noticed_something.png",
               iconHeight: 60,
               onTap: () {

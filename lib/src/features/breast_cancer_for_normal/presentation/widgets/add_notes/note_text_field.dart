@@ -1,5 +1,8 @@
-import 'package:breast_cancer_awareness/src/core/util/functions/string_manipulations_and_search.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../../core/util/functions/string_manipulations_and_search.dart';
 
 import '../../providers/add_notes_state_provider.dart';
 
@@ -47,7 +50,7 @@ class _NoteTextFieldState extends State<NoteTextField> {
             decoration: InputDecoration(
               contentPadding:
                   const EdgeInsets.only(left: 20, right: 5, top: 5, bottom: 5),
-              hintText: 'Enter a text',
+              hintText: AppLocalizations.of(context)!.enterATextNote,
               hintStyle: const TextStyle(),
               isDense: true,
               enabledBorder: OutlineInputBorder(
@@ -85,9 +88,9 @@ class _NoteTextFieldState extends State<NoteTextField> {
             children: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: const Text(
-                  "CANCEL",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                child: Text(
+                  AppLocalizations.of(context)!.cancel,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               TextButton(
@@ -95,9 +98,9 @@ class _NoteTextFieldState extends State<NoteTextField> {
                   widget.addNoteState.setText(_controller.text);
                   Navigator.of(context).pop();
                 },
-                child: const Text(
-                  "SAVE",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                child: Text(
+                  AppLocalizations.of(context)!.save,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
             ],
