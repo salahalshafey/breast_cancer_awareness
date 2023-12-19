@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../app.dart';
 import '../../../../core/util/widgets/default_screen.dart';
 import '../../../../core/util/builders/custom_alret_dialog.dart';
 
@@ -15,12 +18,8 @@ class OtherResourcesScreen extends StatelessWidget {
       context: context,
       constraints: const BoxConstraints(maxWidth: 500),
       titleColor: Theme.of(context).appBarTheme.foregroundColor,
-      title: "Tips for translation",
-      content:
-          "* **Access Chrome Menu:** In the top-right corner, you'll find three dots (Menu). Tap on them to open the menu.\n"
-          "* **Select \"Translate\":** Look for the \"Translate\" option in the menu. Tap on it.\n"
-          "* **Enable Translation:** Toggle the switch to enable translation for the website. Chrome will automatically detect the language of the web page and ask if you want to translate it.\n"
-          "* **Confirm Translation:** A pop-up will appear asking if you want to translate the page. Tap on \"Translate\" to confirm.",
+      title: AppLocalizations.of(context)!.tipsForTranslation,
+      content: AppLocalizations.of(context)!.accessChromeMenuInstructions,
       contentWidget: const GifWithLoading(),
     );
   }
@@ -33,7 +32,7 @@ class OtherResourcesScreen extends StatelessWidget {
       appBarActions: [
         IconButton(
           onPressed: () => showTipDialog(context),
-          tooltip: "Show Tips",
+          tooltip: AppLocalizations.of(context)!.showTips,
           icon: const Icon(Icons.tips_and_updates)
               .animate(
                 onPlay: (controller) {
@@ -48,10 +47,10 @@ class OtherResourcesScreen extends StatelessWidget {
         padding: const EdgeInsets.only(left: 30, right: 30, top: 80),
         children: [
           const SizedBox(height: 20),
-          const Text(
-            "Other Resources",
+          Text(
+            AppLocalizations.of(context)!.otherResources,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromRGBO(199, 40, 107, 1),
               fontSize: 24,
               fontWeight: FontWeight.w900,
@@ -60,11 +59,11 @@ class OtherResourcesScreen extends StatelessWidget {
           const SizedBox(height: 30),
           Image.asset("assets/breast_cancer/other_resources_for_page.png"),
           const SizedBox(height: 20),
-          const Text(
-            "Take a look at some other helpful resources\n",
-            style: TextStyle(fontSize: 16),
+          Text(
+            AppLocalizations.of(context)!.takeALookAtSomeOtherHelpfulResources,
+            style: const TextStyle(fontSize: 16),
           ),
-          ...resources.map((resource) => ResourceItem(
+          ...resources().map((resource) => ResourceItem(
                 text: resource.text,
                 actionText: resource.actionText,
                 url: resource.url,
@@ -96,41 +95,46 @@ class Resource {
   });
 }
 
-List<Resource> resources = const [
-  Resource(
-    text: "Support: ",
-    actionText: "Young Survival Coalition\n",
-    url: "https://youngsurvival.org/",
-  ),
-  Resource(
-    text: "Treatment: ",
-    actionText: "Breast Cancer Treatment\n",
-    url: "https://www.cancer.gov/types/breast/patient/breast-treatment-pdq",
-  ),
-  Resource(
-    text: "Children Treatment: ",
-    actionText: "Childhood Breast Cancer Treatment\n",
-    url:
-        "https://www.cancer.gov/types/breast/patient/child-breast-treatment-pdq",
-  ),
-  Resource(
-    text: "During Pregnancy: ",
-    actionText: "Breast Cancer Treatment During Pregnancy\n",
-    url:
-        "https://www.cancer.gov/types/breast/patient/pregnancy-breast-treatment-pdq",
-  ),
-  Resource(
-    text: "For Males: ",
-    actionText: "Male Breast Cancer Treatment\n",
-    url:
-        "https://www.cancer.gov/types/breast/patient/male-breast-treatment-pdq",
-  ),
-  Resource(
-    text: "Screening: ",
-    actionText: "Breast Cancer Screening\n",
-    url: "https://www.cancer.gov/types/breast/patient/breast-screening-pdq",
-  ),
-];
+List<Resource> resources() {
+  final context = navigatorKey.currentContext!;
+
+  return [
+    Resource(
+      text: AppLocalizations.of(context)!.support,
+      actionText: AppLocalizations.of(context)!.youngSurvivalCoalition,
+      url: "https://youngsurvival.org/",
+    ),
+    Resource(
+      text: AppLocalizations.of(context)!.treatment,
+      actionText: AppLocalizations.of(context)!.breastCancerTreatment,
+      url: "https://www.cancer.gov/types/breast/patient/breast-treatment-pdq",
+    ),
+    Resource(
+      text: AppLocalizations.of(context)!.childrenTreatment,
+      actionText: AppLocalizations.of(context)!.childhoodBreastCancerTreatment,
+      url:
+          "https://www.cancer.gov/types/breast/patient/child-breast-treatment-pdq",
+    ),
+    Resource(
+      text: AppLocalizations.of(context)!.duringPregnancy,
+      actionText:
+          AppLocalizations.of(context)!.breastCancerTreatmentDuringPregnancy,
+      url:
+          "https://www.cancer.gov/types/breast/patient/pregnancy-breast-treatment-pdq",
+    ),
+    Resource(
+      text: AppLocalizations.of(context)!.forMales,
+      actionText: AppLocalizations.of(context)!.maleBreastCancerTreatment,
+      url:
+          "https://www.cancer.gov/types/breast/patient/male-breast-treatment-pdq",
+    ),
+    Resource(
+      text: AppLocalizations.of(context)!.screening,
+      actionText: AppLocalizations.of(context)!.breastCancerScreening,
+      url: "https://www.cancer.gov/types/breast/patient/breast-screening-pdq",
+    ),
+  ];
+}
 
 /////////////////////////////////////////////////////////
 /////////////////////////////////
@@ -153,7 +157,7 @@ class _GifWithLoadingState extends State<GifWithLoading> {
     return Column(
       children: [
         Text(
-          "GIF to explain the above",
+          AppLocalizations.of(context)!.gifToExplainTheAbove,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Theme.of(context).brightness == Brightness.light
@@ -202,7 +206,8 @@ class _GifWithLoadingState extends State<GifWithLoading> {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 10, top: 70),
                     child: Text(
-                      "error happened, couldn't load the GIF",
+                      AppLocalizations.of(context)!
+                          .errorHappenedCouldntLoadTheGif,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Theme.of(context).brightness == Brightness.light

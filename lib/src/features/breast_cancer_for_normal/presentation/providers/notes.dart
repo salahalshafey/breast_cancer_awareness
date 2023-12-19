@@ -27,7 +27,7 @@ class Notes extends DisposableProvider {
     required this.deleteAllNotesUsecase,
   });
 
-  final context = navigatorKey.currentContext!;
+  final _context = navigatorKey.currentContext!;
 
   List<Note> _notes = [];
 
@@ -40,7 +40,7 @@ class Notes extends DisposableProvider {
       notifyListeners();
     } catch (error) {
       throw ErrorForDialog(
-        AppLocalizations.of(context)!.unexpectedErrorHappened,
+        AppLocalizations.of(_context)!.unexpectedErrorHappened,
       );
     }
   }
@@ -58,11 +58,11 @@ class Notes extends DisposableProvider {
       await addNoteUsecase.call(userId, note);
     } on LocalStorageException {
       throw ErrorForDialog(
-        AppLocalizations.of(context)!.notAbleToSaveFilesToLocalDeviceStorage,
+        AppLocalizations.of(_context)!.notAbleToSaveFilesToLocalDeviceStorage,
       );
     } catch (error) {
       throw ErrorForDialog(
-        AppLocalizations.of(context)!.unexpectedErrorHappened,
+        AppLocalizations.of(_context)!.unexpectedErrorHappened,
       );
     }
   }
@@ -75,12 +75,12 @@ class Notes extends DisposableProvider {
       notifyListeners();
     } on LocalStorageException {
       throw ErrorForDialog(
-        AppLocalizations.of(context)!
+        AppLocalizations.of(_context)!
             .notAbleToDeleteFilesFromLocalDeviceStorage,
       );
     } catch (error) {
       throw ErrorForDialog(
-        AppLocalizations.of(context)!.unexpectedErrorHappened,
+        AppLocalizations.of(_context)!.unexpectedErrorHappened,
       );
     }
   }
@@ -93,12 +93,12 @@ class Notes extends DisposableProvider {
       notifyListeners();
     } on LocalStorageException {
       throw ErrorForDialog(
-        AppLocalizations.of(context)!
+        AppLocalizations.of(_context)!
             .notAbleToDeleteFilesFromLocalDeviceStorage,
       );
     } catch (error) {
       throw ErrorForDialog(
-        AppLocalizations.of(context)!.unexpectedErrorHappened,
+        AppLocalizations.of(_context)!.unexpectedErrorHappened,
       );
     }
   }

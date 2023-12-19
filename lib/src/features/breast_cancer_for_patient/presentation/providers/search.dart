@@ -1,5 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../app.dart';
 import '../../../../core/error/error_exceptions_with_message.dart';
 import '../../../../core/error/exceptions_without_message.dart';
 import '../../domain/entities/search_result.dart';
@@ -17,6 +22,8 @@ class Search with ChangeNotifier {
     required this.aiResultUsecase,
   });
 
+  final _context = navigatorKey.currentContext!;
+
   Future<List<SearchResult>> customWebSearch(
     String query, {
     int numOfResult = 3,
@@ -31,14 +38,21 @@ class Search with ChangeNotifier {
 
       return result;
     } on OfflineException {
-      throw ErrorForDialog('You are currently offline.');
+      throw ErrorMessage(
+        AppLocalizations.of(_context)!.youAreCurrentlyOffline,
+      );
     } on ServerException {
-      throw ErrorForDialog('Something went wrong, please try again later.');
+      throw ErrorMessage(
+        AppLocalizations.of(_context)!.somethingWentWrongPleaseTryAgainLater,
+      );
     } on FilterException {
-      throw ErrorForDialog(
-          "Sorry, there is no result for your search, the result has been filtered.");
+      throw ErrorMessage(
+        AppLocalizations.of(_context)!.sorryThereIsNoResultForYourSearch,
+      );
     } catch (error) {
-      throw ErrorForDialog('An unexpected error happened.');
+      throw ErrorMessage(
+        AppLocalizations.of(_context)!.unexpectedErrorHappened,
+      );
     }
   }
 
@@ -48,14 +62,22 @@ class Search with ChangeNotifier {
 
       return result;
     } on OfflineException {
-      throw ErrorForDialog('You are currently offline.');
+      throw ErrorMessage(
+        AppLocalizations.of(_context)!.youAreCurrentlyOffline,
+      );
     } on ServerException {
-      throw ErrorForDialog('Something went wrong, please try again later.');
+      throw ErrorMessage(
+        AppLocalizations.of(_context)!.somethingWentWrongPleaseTryAgainLater,
+      );
     } on FilterException {
-      throw ErrorForDialog(
-          "Sorry, there is no result for your search, the result has been filtered or it is not of our capability yet.");
+      throw ErrorMessage(
+        AppLocalizations.of(_context)!
+            .sorryThereIsNoResultForYourSearchWithDetails,
+      );
     } catch (error) {
-      throw ErrorForDialog('An unexpected error happened.');
+      throw ErrorMessage(
+        AppLocalizations.of(_context)!.unexpectedErrorHappened,
+      );
     }
   }
 }

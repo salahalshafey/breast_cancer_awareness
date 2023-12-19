@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/util/builders/go_to_screen_with_slide_transition.dart';
 
 import '../widgets/for_patients_item.dart';
@@ -32,9 +34,9 @@ class ForPatientsScreen extends StatelessWidget {
           children: [
             ForPatientsItem(
               image: "assets/breast_cancer/tips.png",
-              title: "TIPS FOR YOUR VISIT TO THE DOCTOR",
-              subTitle:
-                  "Tips for things to say & do at your doctor's appointment.",
+              title: AppLocalizations.of(context)!.tipsForYourVisitToTheDoctor,
+              subTitle: AppLocalizations.of(context)!
+                  .tipsForYourVisitToTheDoctorDetails,
               onTap: () => goToScreenWithSlideTransition(
                 context,
                 const TipsForYourVisit(),
@@ -42,8 +44,9 @@ class ForPatientsScreen extends StatelessWidget {
             ),
             ForPatientsItem(
               image: "assets/breast_cancer/search.png",
-              title: "Search about breast cancer".toUpperCase(),
-              subTitle: "Search for info OR ask AI for guidance",
+              title: AppLocalizations.of(context)!.searchAboutBreastCancer,
+              subTitle:
+                  AppLocalizations.of(context)!.searchAboutBreastCancerDetails,
               onTap: () => goToScreenWithSlideTransition(
                 context,
                 const SearchScreen(),
@@ -51,9 +54,8 @@ class ForPatientsScreen extends StatelessWidget {
             ),
             ForPatientsItem(
               image: "assets/breast_cancer/diet.png",
-              title: "CANCER & NUTRITION",
-              subTitle:
-                  "Information and guidelines for maintaining a healthy diet during cancer treatment.",
+              title: AppLocalizations.of(context)!.cancerNutrition,
+              subTitle: AppLocalizations.of(context)!.cancerNutritionDetais,
               onTap: () {
                 launchUrl(
                   Uri.parse(
@@ -64,8 +66,9 @@ class ForPatientsScreen extends StatelessWidget {
             ),
             ForPatientsItem(
               image: "assets/breast_cancer/exercise.png",
-              title: "Exercise & physical activity".toUpperCase(),
-              subTitle: "Regular exercise and physical activity are essential.",
+              title: AppLocalizations.of(context)!.exercisePhysicalActivity,
+              subTitle:
+                  AppLocalizations.of(context)!.exercisePhysicalActivityDetais,
               onTap: () {
                 launchUrl(
                   Uri.parse(
@@ -76,8 +79,8 @@ class ForPatientsScreen extends StatelessWidget {
             ),
             ForPatientsItem(
               image: "assets/breast_cancer/other_resources.png",
-              title: "OTHER RESOURCES",
-              subTitle: "Take a look at some other helpful resources.",
+              title: AppLocalizations.of(context)!.otherResources,
+              subTitle: AppLocalizations.of(context)!.otherResourcesDetails,
               onTap: () => goToScreenWithSlideTransition(
                 context,
                 const OtherResourcesScreen(),

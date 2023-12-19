@@ -553,7 +553,7 @@
   "@appOverview": {
     "description": "title of the about screen"
   },
-  "appOverviewdetailed": "**Breast Cancer Awareness app** is a comprehensive tool designed to raise awareness and promote early detection of breast cancer. It addresses four key aspects: providing `information and awareness`, facilitating `self-examination` through a symptom checker, assisting doctors with `deep learning models` for detection, and offering support `resources` and `guidance` for patients.\n* **Purpose:** The app was created with the primary goal of empowering individuals to take charge of their breast health. By amalgamating information, self-examination tools, advanced detection models, and supportive resources, we aim to contribute to the early detection and management of breast cancer.\n* **Target Audience:** Our target audience spans a wide range, including individuals of all genders interested in breast health awareness, those performing self-examinations, medical professionals seeking advanced diagnostic tools, and patients in need of support and guidance.\n\n**Key Features**\n* **Information Hub:** Accessible `information` on breast cancer, its symptoms, risk factors, and preventive measures.\n* **Symptom Checker:** An interactive `self-examination` tool guiding users through the detection of potential symptoms.\n* **Deep Learning Models:** Advanced AI models for doctors, aiding in the detection of breast cancer from `mammogram` and `histopathology` images.\n* **Patient Support:** Nutrition, diet, and exercise `guidance`, along with a `chatbot` providing answers and guidance through `text-to-speech` and `speech-to-text` capabilities.\n\n**Data and Research**\n* **The Breast Cancer Awareness app** is built on a foundation of thorough research and collaboration with medical professionals. We've incorporated insights from reputable studies and partnered with experts in the field to develop the deep learning models. The app's content is curated based on evidence-based information to ensure accuracy and reliability.\n\n**Contact and App Privacy**",
+  "appOverviewdetailed": "**Breast Cancer Awareness app** is a comprehensive tool designed to raise awareness and promote early detection of breast cancer. It addresses four key aspects: providing `information and awareness`, facilitating `self-examination` through a symptom checker, assisting doctors with `deep learning models` for detection, and offering support `resources` and `guidance` for patients.\n* **Purpose:** The app was created with the primary goal of empowering individuals to take charge of their breast health. By amalgamating information, self-examination tools, advanced detection models, and supportive resources, we aim to contribute to the early detection and management of breast cancer.\n* **Target Audience:** Our target audience spans a wide range, including individuals of all genders interested in breast health awareness, those performing self-examinations, medical professionals seeking advanced diagnostic tools, and patients in need of support and guidance.\n\n**Key Features**\n* **Information Hub:** Accessible information on breast cancer, its symptoms, risk factors, and preventive measures.\n* **Symptom Checker:** An interactive self-examination tool guiding users through the detection of potential symptoms.\n* **Deep Learning Models:** Advanced AI models for doctors, aiding in the detection of breast cancer from mammogram and histopathology images.\n* **Patient Support:** Nutrition, diet, and exercise guidance, along with a chatbot providing answers and guidance through text-to-speech and speech-to-text capabilities.\n\n**Data and Research**\n* **The Breast Cancer Awareness app** is built on a foundation of thorough research and collaboration with medical professionals. We've incorporated insights from reputable studies and partnered with experts in the field to develop the deep learning models. The app's content is curated based on evidence-based information to ensure accuracy and reliability.\n\n**Contact and App Privacy**",
   "@appOverviewdetailed": {
     "description": "the details of the abb Overview in about screen"
   },
@@ -1359,6 +1359,165 @@
       }
     }
   },
+
+  
+
+  "@_FOR_PATIENTS_SCREENS": {},
+  "sorryThereIsNoResultForYourSearch": "Sorry, there is no result for your search, the result has been filtered.",
+  "@sorryThereIsNoResultForYourSearch": {
+    "description": "the ok word"
+  },
+  "sorryThereIsNoResultForYourSearchWithDetails": "**Sorry, there is no result for your search**\n\n* The result has been filtered.\n* Or you are searching with a **language** that is not supported yet.",
+  "@sorryThereIsNoResultForYourSearchWithDetails": {
+    "description": "the back word `for backArrow icon tooltip`"
+  },
+  "tipsForYourVisitToTheDoctor": "TIPS FOR YOUR VISIT TO THE DOCTOR",
+  "@tipsForYourVisitToTheDoctor": {
+    "description": "one of the titles of `_FOR_PATIENTS_SCREEN`"
+  },
+  "tipsForYourVisitToTheDoctorDetails": "Tips for things to say & do at your doctor's appointment.",
+  "@tipsForYourVisitToTheDoctorDetails": {
+    "description": "one of the subtitles of `_FOR_PATIENTS_SCREEN`"
+  },
+  "searchAboutBreastCancer": "SEARCH ABOUT BREAST CANCER",
+  "@searchAboutBreastCancer": {
+    "description": "one of the titles of `_FOR_PATIENTS_SCREEN`"
+  },
+  "searchAboutBreastCancerDetails": "Search for info OR ask AI for guidance",
+  "@searchAboutBreastCancerDetails": {
+    "description": "one of the subtitles of `_FOR_PATIENTS_SCREEN`"
+  },
+  "cancerNutrition": "CANCER & NUTRITION",
+  "@cancerNutrition": {
+    "description": "one of the titles of `_FOR_PATIENTS_SCREEN`"
+  },
+  "cancerNutritionDetais": "Information and guidelines for maintaining a healthy diet during cancer treatment.",
+  "@cancerNutritionDetais": {
+    "description": "one of the subtitles of `_FOR_PATIENTS_SCREEN`"
+  },
+  "exercisePhysicalActivity": "EXERCISE & PHYSICAL ACTIVITY",
+  "@exercisePhysicalActivity": {
+    "description": "one of the titles of `_FOR_PATIENTS_SCREEN`"
+  },
+  "exercisePhysicalActivityDetais": "Regular exercise and physical activity are essential.",
+  "@exercisePhysicalActivityDetais": {
+    "description": "one of the subtitles of `_FOR_PATIENTS_SCREEN`"
+  },
+  "otherResources": "OTHER RESOURCES",
+  "@otherResources": {
+    "description": "one of the titles of `_FOR_PATIENTS_SCREEN`"
+  },
+  "otherResourcesDetails": "Take a look at some other helpful resources.",
+  "@otherResourcesDetails": {
+    "description": "one of the subtitles of `_FOR_PATIENTS_SCREEN`"
+  },
+  "@_TIPS_FOR_YOUR_VISIT_SCREEN": {},
+  "tipsForYourDoctorsVisit": "Tips For Your Doctor's Visit",
+  "@tipsForYourDoctorsVisit": {
+    "description": "one of the details of `_TIPS_FOR_YOUR_VISIT_SCREEN`"
+  },
+  "tipsForThingsToSayDoAtYourDoctorsAppointment": "Tips for things to say & do at your doctors appointment.\n\nRemember, we're not medical professionals but we are here to support you. Here are some tips for things to say and do at your appointment, but we encourage you to do further research.\n\n",
+  "@tipsForThingsToSayDoAtYourDoctorsAppointment": {
+    "description": "one of the details of `_TIPS_FOR_YOUR_VISIT_SCREEN`"
+  },
+  "weWantToHelpProvideYouWithToolsToBeYourOwnHealthAdvocatenn": "We want to help provide you with tools to be your own health advocate.\n\n",
+  "@weWantToHelpProvideYouWithToolsToBeYourOwnHealthAdvocatenn": {
+    "description": "one of the details of `_TIPS_FOR_YOUR_VISIT_SCREEN`"
+  },
+  "haveYourAppHandyToReferenceYourNotes": "Have your app handy to reference your notes at the doctor's office. It's always good to have information written down, that way you don't forget anything important.\n",
+  "@haveYourAppHandyToReferenceYourNotes": {
+    "description": "one of the details of `_TIPS_FOR_YOUR_VISIT_SCREEN`"
+  },
+  "bringSomeoneWithYouToTakeNotesOrAskYourDoctor": "Bring someone with you to take notes or ask your doctor if you can record your discussion so you have all the information. Having someone there can help ensure all your questions are answered, or help advocate for you, if necessary.\n",
+  "@bringSomeoneWithYouToTakeNotesOrAskYourDoctor": {
+    "description": "one of the details of `_TIPS_FOR_YOUR_VISIT_SCREEN`"
+  },
+  "askForPamphletsAndForTheirNotesToBePrintedOut": "Ask for pamphlets and for their notes to be printed out or emailed to you, if this is not done automatically. Get as much information as you can.\n",
+  "@askForPamphletsAndForTheirNotesToBePrintedOut": {
+    "description": "one of the details of `_TIPS_FOR_YOUR_VISIT_SCREEN`"
+  },
+  "beEmpoweredToGetASecondOpinion": "Be empowered to get a second opinion. There are lots of reasons this is a good idea. You need to be comfortable with the person you're working with, their diagnosis, and treatment - if there is something to be treated. Your doctor may even be able to refer you to someone else for a second opinion.\n",
+  "@beEmpoweredToGetASecondOpinion": {
+    "description": "one of the details of `_TIPS_FOR_YOUR_VISIT_SCREEN`"
+  },
+  "@_OTHER_RESOURCES_SCREEN": {},
+  "tipsForTranslation": "Tips for translation",
+  "@tipsForTranslation": {
+    "description": "the title of show Tips dialog"
+  },
+  "showTips": "Show Tips",
+  "@showTips": {
+    "description": "the tooltip of show Tips dialog"
+  },
+  "gifToExplainTheAbove": "GIF to explain the above",
+  "@gifToExplainTheAbove": {
+    "description": "above the GIF of show Tips dialog"
+  },
+  "errorHappenedCouldntLoadTheGif": "error happened, couldn't load the GIF",
+  "@errorHappenedCouldntLoadTheGif": {
+    "description": "the reasons if no GIF of show Tips dialog"
+  },
+  "accessChromeMenuInstructions": "* **Access Chrome Menu:** In the top-right (or left) corner, you'll find three dots (Menu). Tap on them to open the menu.\n* **Select \"Translate\":** Look for the \"Translate\" option in the menu. Tap on it.\n* **Enable Translation:** Toggle the switch to enable translation for the website. Chrome will automatically detect the language of the web page and ask if you want to translate it.\n* **Confirm Translation:** A pop-up will appear asking if you want to translate the page. Tap on \"Translate\" to confirm.",
+  "@accessChromeMenuInstructions": {
+    "description": "the content of show Tips dialog"
+  },
+  "otherResources": "Other Resources",
+  "@otherResources": {
+    "description": "the title of `_OTHER_RESOURCES_SCREEN`"
+  },
+  "takeALookAtSomeOtherHelpfulResources": "Take a look at some other helpful resources\n",
+  "@takeALookAtSomeOtherHelpfulResources": {
+    "description": "the subtitle of `_OTHER_RESOURCES_SCREEN`"
+  },
+  "support": "Support: ",
+  "@support": {
+    "description": "one of the resources of `_OTHER_RESOURCES_SCREEN`"
+  },
+  "youngSurvivalCoalition": "Young Survival Coalition\n",
+  "@youngSurvivalCoalition": {
+    "description": "one of the resources of `_OTHER_RESOURCES_SCREEN`"
+  },
+  "treatment": "Treatment: ",
+  "@treatment": {
+    "description": "one of the resources of `_OTHER_RESOURCES_SCREEN`"
+  },
+  "breastCancerTreatment": "Breast Cancer Treatment\n",
+  "@breastCancerTreatment": {
+    "description": "one of the resources of `_OTHER_RESOURCES_SCREEN`"
+  },
+  "childrenTreatment": "Children Treatment: ",
+  "@childrenTreatment": {
+    "description": "one of the resources of `_OTHER_RESOURCES_SCREEN`"
+  },
+  "childhoodBreastCancerTreatment": "Childhood Breast Cancer Treatment\n",
+  "@childhoodBreastCancerTreatment": {
+    "description": "one of the resources of `_OTHER_RESOURCES_SCREEN`"
+  },
+  "duringPregnancy": "During Pregnancy: ",
+  "@duringPregnancy": {
+    "description": "one of the resources of `_OTHER_RESOURCES_SCREEN`"
+  },
+  "breastCancerTreatmentDuringPregnancy": "Breast Cancer Treatment During Pregnancy\n",
+  "@breastCancerTreatmentDuringPregnancy": {
+    "description": "one of the resources of `_OTHER_RESOURCES_SCREEN`"
+  },
+  "forMales": "For Males: ",
+  "@forMales": {
+    "description": "one of the resources of `_OTHER_RESOURCES_SCREEN`"
+  },
+  "maleBreastCancerTreatment": "Male Breast Cancer Treatment\n",
+  "@maleBreastCancerTreatment": {
+    "description": "one of the resources of `_OTHER_RESOURCES_SCREEN`"
+  },
+  "screening": "Screening: ",
+  "@screening": {
+    "description": "one of the resources of `_OTHER_RESOURCES_SCREEN`"
+  },
+  "breastCancerScreening": "Breast Cancer Screening\n",
+  "@breastCancerScreening": {
+    "description": "one of the resources of `_OTHER_RESOURCES_SCREEN`"
+  },
+  
   
 
 

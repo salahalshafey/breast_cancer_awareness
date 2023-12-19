@@ -24,7 +24,7 @@ class _ResourceItemState extends State<ResourceItem> {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.centerLeft,
+      alignment: AlignmentDirectional.centerStart,
       child: Text.rich(
         TextSpan(
           children: [

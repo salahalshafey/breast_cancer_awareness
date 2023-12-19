@@ -116,7 +116,7 @@ class _WebSearchResultState extends State<WebSearchResult>
                 iconSize: 50,
                 error: "**Your search did not match any results**\n\n"
                     "* Make sure all words are spelled correctly or Try different keywords.\n"
-                    "* Or maybe you are using a **language** that is not supported yet.",
+                    "* Or you are serching with a **language** that is not supported yet.",
               ),
             ),
           );

@@ -82,9 +82,12 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
           }
 
           return Center(
-            child: CustomErrorWidget(
-              iconSize: 50,
-              error: snapshot.error.toString(),
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(10.0),
+              child: CustomErrorWidget(
+                iconSize: 50,
+                error: snapshot.error.toString(),
+              ),
             ),
           );
         }
