@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../providers/for_doctor_screen_state_provider.dart';
 
 import 'link_form.dart';
@@ -50,7 +52,7 @@ class PickImage extends StatelessWidget {
             provider.setFileImage(File(image.path));
           },
           child: Text(
-            "Open Camera",
+            AppLocalizations.of(context)!.openCamera,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
@@ -58,9 +60,9 @@ class PickImage extends StatelessWidget {
             ),
           ),
         ),
-        const Text(
-          " Or ",
-          style: TextStyle(
+        Text(
+          AppLocalizations.of(context)!.or,
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
             color: Colors.black45,
@@ -76,7 +78,7 @@ class PickImage extends StatelessWidget {
             provider.setFileImage(File(image.path));
           },
           child: Text(
-            "Pick an Image",
+            AppLocalizations.of(context)!.pickAnImage,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
@@ -107,7 +109,7 @@ class OrDivider extends StatelessWidget {
         ),
         const SizedBox(width: 10),
         Text(
-          "Or",
+          AppLocalizations.of(context)!.or,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,

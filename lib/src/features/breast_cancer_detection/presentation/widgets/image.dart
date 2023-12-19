@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/theme/colors.dart';
 import '../../../../core/util/widgets/image_container.dart';
 
@@ -32,7 +34,7 @@ class ImageFromFile extends StatelessWidget {
           top: -10,
           right: -10,
           child: IconButton(
-            tooltip: "remove this image",
+            tooltip: AppLocalizations.of(context)!.clearTheImage,
             onPressed: provider.resetBox,
             icon: const Icon(
               Icons.close,
@@ -73,7 +75,7 @@ class ImageFromNetwork extends StatelessWidget {
           top: -10,
           right: -10,
           child: IconButton(
-            tooltip: "remove this image",
+            tooltip: AppLocalizations.of(context)!.clearTheImage,
             onPressed: provider.resetBox,
             icon: const Icon(
               Icons.close,

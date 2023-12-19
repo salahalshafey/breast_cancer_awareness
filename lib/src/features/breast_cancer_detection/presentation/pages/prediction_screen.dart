@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:math';
 
 import 'package:dio/dio.dart';
@@ -6,10 +8,13 @@ import 'package:firebase_ml_model_downloader/firebase_ml_model_downloader.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
+import '../../../../app.dart';
 import '../../../../core/error/error_exceptions_with_message.dart';
 import '../../../../core/util/widgets/image_container.dart';
 import '../providers/for_doctor_screen_state_provider.dart';
@@ -55,7 +60,8 @@ class _PredictionScreenState extends State<PredictionScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "it may take a while, the model is getting downloaded or updated.",
+                        AppLocalizations.of(context)!
+                            .itMayTakeAWhileTheModelIsGettingDownloaded,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color:
@@ -73,7 +79,7 @@ class _PredictionScreenState extends State<PredictionScreen> {
             return Center(
               child: Text(
                 snapshot.error == null
-                    ? "Something went wrong!!"
+                    ? AppLocalizations.of(context)!.somethingWentWrong
                     : "${snapshot.error}",
                 textAlign: TextAlign.center,
               ),
@@ -83,12 +89,15 @@ class _PredictionScreenState extends State<PredictionScreen> {
           final screenSize = MediaQuery.of(context).size;
           final imageWidth = min(screenSize.width, screenSize.height) * 0.5;
 
-          final imageType = isXray ? "an X-Ray" : "a Histology";
+          final imageType = isXray
+              ? AppLocalizations.of(context)!.xrayImage
+              : AppLocalizations.of(context)!.histologyImage;
           final prediction = snapshot.data!;
           return ListView(
             padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 20),
             children: [
-              StyledText(text: "Prediction of $imageType Image"),
+              StyledText(
+                  text: AppLocalizations.of(context)!.predictionOf(imageType)),
               const SizedBox(height: 40),
               ImageContainer(
                 image: provider.fileImage != null
@@ -101,6 +110,9 @@ class _PredictionScreenState extends State<PredictionScreen> {
                 fit: BoxFit.cover,
                 showHighlight: true,
                 showImageScreen: true,
+                imageTitle:
+                    AppLocalizations.of(context)!.predictionOf(imageType),
+                imageCaption: prediction,
               ),
               const SizedBox(height: 20),
               Text(
@@ -158,17 +170,41 @@ Future<String> _getPrediction(
         numResults: 2, // defaults to 5
         threshold: 0.2, // defaults to 0.1
         asynch: true // defaults to true
-        );
+        ); // _getPredictionLabel(recognitions![0]["label"])
 
-    prediction = recognitions![0]["label"] +
-        " with " +
-        ((recognitions[0]["confidence"] as double) * 100).toStringAsFixed(0) +
-        "% confidence";
+    prediction = AppLocalizations.of(context)!.predictionWithConfidence(
+      _getPredictionLabel(recognitions![0]["label"]),
+      _getConfidence(recognitions[0]["confidence"]),
+    );
   } catch (error) {
-    throw ErrorMessage("Something went wrong!!!");
+    throw ErrorMessage(AppLocalizations.of(context)!.somethingWentWrong);
   }
 
   return prediction;
+}
+
+String _getPredictionLabel(String label) {
+  final context = navigatorKey.currentContext!;
+
+  switch (label) {
+    case "Normal":
+      return AppLocalizations.of(context)!.normalLabel;
+    case "Cancer":
+      return AppLocalizations.of(context)!.cancerLabel;
+    default:
+      return AppLocalizations.of(context)!.normalLabel;
+  }
+}
+
+String _getConfidence(double confidence) {
+  final context = navigatorKey.currentContext!;
+
+  confidence *= 100;
+  if (confidence < 90) {
+    return confidence.toStringAsFixed(0);
+  }
+
+  return AppLocalizations.of(context)!.aboveNinety;
 }
 
 Future<String> _saveLabelsToFile() async {
@@ -189,8 +225,12 @@ Future<String> _saveLabelsToFile() async {
 }
 
 Future<String> _getNetworkImageToFile(String? imageUrl) async {
+  final context = navigatorKey.currentContext!;
+
   if (imageUrl == null) {
-    throw ErrorMessage("You didn't provide an image!!!");
+    throw ErrorMessage(
+      AppLocalizations.of(context)!.youDidntProvideAnImage,
+    );
   }
 
   final tempDir = await getTemporaryDirectory();

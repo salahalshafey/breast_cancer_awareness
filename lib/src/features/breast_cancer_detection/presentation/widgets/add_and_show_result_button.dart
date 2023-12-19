@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/error/error_exceptions_with_message.dart';
 import '../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../account/domain/entities/user_information.dart';
@@ -26,7 +28,8 @@ class AddAndShowResultButton extends StatelessWidget {
         final user = await account.getUserInfo();
 
         if (provider.networkImage == null && provider.fileImage == null) {
-          throw ErrorForDialog("You didn't provide an image!!!");
+          throw ErrorForDialog(
+              AppLocalizations.of(context)!.youDidntProvideAnImage);
         }
 
         if (user == null || user.userType == UserTypes.guest) {
@@ -34,9 +37,9 @@ class AddAndShowResultButton extends StatelessWidget {
 
           showCustomAlretDialog(
             context: context,
-            title: "Sign In",
+            title: AppLocalizations.of(context)!.signIn,
             titleColor: color,
-            content: "You have to Sign In to continue!!",
+            content: AppLocalizations.of(context)!.youHaveToSignInToContinue,
             actionsBuilder: (dialogContext) => [
               OutlinedButton(
                 onPressed: () {
@@ -46,7 +49,7 @@ class AddAndShowResultButton extends StatelessWidget {
                   foregroundColor: MaterialStatePropertyAll(color),
                   side: MaterialStatePropertyAll(BorderSide(color: color!)),
                 ),
-                child: const Text("Later"),
+                child: Text(AppLocalizations.of(context)!.later),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -55,7 +58,7 @@ class AddAndShowResultButton extends StatelessWidget {
                 },
                 style: ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(color)),
-                child: const Text("Sign In"),
+                child: Text(AppLocalizations.of(context)!.signIn),
               ),
             ],
           );
@@ -65,9 +68,10 @@ class AddAndShowResultButton extends StatelessWidget {
         if (user.userType != UserTypes.doctor) {
           showCustomAlretDialog(
             context: context,
-            title: "Sorry",
+            title: AppLocalizations.of(context)!.sorry,
             titleColor: Colors.red,
-            content: "This feature only available to Doctors.",
+            content:
+                AppLocalizations.of(context)!.thisFeatureOnlyAvailableToDoctors,
           );
           return;
         }
@@ -82,7 +86,7 @@ class AddAndShowResultButton extends StatelessWidget {
       } catch (error) {
         showCustomAlretDialog(
           context: context,
-          title: "Error",
+          title: AppLocalizations.of(context)!.error,
           titleColor: Colors.red,
           content: error.toString(),
         );
@@ -113,8 +117,8 @@ class AddAndShowResultButton extends StatelessWidget {
             ),
             child: IconButton(
               tooltip: provider.isBoxShown
-                  ? "hide image box above"
-                  : "show image box",
+                  ? AppLocalizations.of(context)!.hideImageBoxAbove
+                  : AppLocalizations.of(context)!.showImageBox,
               onPressed: provider.togoleBoxShown,
               padding: EdgeInsets.zero,
               icon: const AddIcon()
@@ -125,9 +129,9 @@ class AddAndShowResultButton extends StatelessWidget {
           const Spacer(),
           TextButton(
             onPressed: showResult,
-            child: const Text(
-              "Show Result",
-              style: TextStyle(
+            child: Text(
+              AppLocalizations.of(context)!.showResult,
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
@@ -228,7 +232,7 @@ class _RadioListState extends State<RadioList> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Select Medical Image Type",
+            AppLocalizations.of(context)!.selectMedicalImageType,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 18,
@@ -238,7 +242,7 @@ class _RadioListState extends State<RadioList> {
           ),
           const SizedBox(height: 20),
           RadioListTile<bool>(
-            title: const Text('X-Ray Image'),
+            title: Text(AppLocalizations.of(context)!.xrayImage),
             value: true,
             groupValue: _isXray,
             onChanged: (value) {
@@ -248,7 +252,7 @@ class _RadioListState extends State<RadioList> {
             },
           ),
           RadioListTile(
-            title: const Text('Histology Image'),
+            title: Text(AppLocalizations.of(context)!.histologyImage),
             value: false,
             groupValue: _isXray,
             onChanged: (value) {
@@ -259,10 +263,11 @@ class _RadioListState extends State<RadioList> {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-              onPressed: () {
-                widget.onSellected(_isXray);
-              },
-              child: const Text("Select")),
+            onPressed: () {
+              widget.onSellected(_isXray);
+            },
+            child: Text(AppLocalizations.of(context)!.select),
+          ),
         ],
       ),
     );

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/util/functions/general_functions.dart';
 import '../providers/for_doctor_screen_state_provider.dart';
 
@@ -24,6 +26,7 @@ class _LinkFormState extends State<LinkForm> {
       key: formKey,
       child: TextFormField(
         keyboardType: TextInputType.url,
+        textDirection: TextDirection.ltr,
         autocorrect: false,
         style: const TextStyle(
           color: Colors.black,
@@ -35,7 +38,7 @@ class _LinkFormState extends State<LinkForm> {
         decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.only(left: 20, right: 5, top: 5, bottom: 5),
-          hintText: 'Or Paste a Link here',
+          hintText: AppLocalizations.of(context)!.orPasteALinkHere,
           hintStyle: const TextStyle(
             color: Color.fromRGBO(112, 112, 112, 0.85),
           ),

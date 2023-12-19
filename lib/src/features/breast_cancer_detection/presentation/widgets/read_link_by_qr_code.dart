@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../../core/util/builders/custom_snack_bar.dart';
 import '../../../../core/util/functions/general_functions.dart';
@@ -29,13 +31,17 @@ class _ReadLinkByQRCodeState extends State<ReadLinkByQRCode> {
         Provider.of<ForDoctorScreenState>(context, listen: false);
     try {
       final String imagelink = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'Cancel', true, ScanMode.QR);
+        '#ff6666',
+        AppLocalizations.of(context)!.cancel,
+        true,
+        ScanMode.QR,
+      );
       if (!mounted) return;
 
       if (imagelink == "-1") {
         showCustomSnackBar(
           context: context,
-          content: "you didn't read QR Code",
+          content: AppLocalizations.of(context)!.youDidntReadQrCode,
         );
         return;
       }
@@ -48,7 +54,7 @@ class _ReadLinkByQRCodeState extends State<ReadLinkByQRCode> {
       if (error != null) {
         showCustomAlretDialog(
           context: context,
-          title: "Error",
+          title: AppLocalizations.of(context)!.error,
           content: error,
           titleColor: Colors.red,
         );
@@ -59,8 +65,9 @@ class _ReadLinkByQRCodeState extends State<ReadLinkByQRCode> {
     } on PlatformException {
       showCustomAlretDialog(
         context: context,
-        title: "Error",
-        content: "Error happened while trying to open QR Code Scanner",
+        title: AppLocalizations.of(context)!.error,
+        content: AppLocalizations.of(context)!
+            .errorHappenedWhileTryingToOpenQrCodeScanner,
         titleColor: Colors.red,
       );
     }
@@ -78,7 +85,7 @@ class _ReadLinkByQRCodeState extends State<ReadLinkByQRCode> {
         : TextButton(
             onPressed: _readQRCode,
             child: Text(
-              "Get Image Link By Reading QR Code",
+              AppLocalizations.of(context)!.getImageLinkByReadingQrCode,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14,
