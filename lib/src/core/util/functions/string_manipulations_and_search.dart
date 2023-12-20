@@ -190,10 +190,10 @@ TextDirection getDirectionalityOf(String text) =>
 /// * If `false` this means it starts with an **English** character OR empty and `Directionality.of(context)` is [TextDirection.ltr].
 ///
 bool firstCharIsArabic(String text) {
-  final context = navigatorKey.currentContext!;
+  //final context = navigatorKey.currentContext!;
 
   if (text.isEmpty) {
-    return Directionality.of(context) == TextDirection.rtl;
+    return false;
   }
 
   final arabicChars = 'ا؟؛أإءئؤآبتثةجحخدذرزسشصضطظعغفقكلمنهويلالآى'.toSet();
@@ -212,7 +212,7 @@ bool firstCharIsArabic(String text) {
   }
 
   // if all chars is special chars
-  return Directionality.of(context) == TextDirection.rtl;
+  return false;
 }
 
 extension on String {

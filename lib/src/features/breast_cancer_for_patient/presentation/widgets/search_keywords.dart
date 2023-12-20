@@ -1,5 +1,9 @@
-import 'package:breast_cancer_awareness/src/core/util/functions/string_manipulations_and_search.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../app.dart';
+import '../../../../core/util/functions/string_manipulations_and_search.dart';
 
 class SearchKeyWords extends StatelessWidget {
   const SearchKeyWords(
@@ -11,28 +15,32 @@ class SearchKeyWords extends StatelessWidget {
   final String? searchWord;
   final void Function(String searchWord, {bool textToSpeech}) setSearchWord;
 
-  final _keyWords = const [
-    "Breast Cancer Symptoms",
-    "Breast Cancer Stages",
-    "Breast Cancer Treatment Options",
-    "Breast Cancer Support Groups",
-    "Breast Cancer Survivor Stories",
-    "Breast Cancer Research",
-    "Breast Cancer Awareness",
-    "Breast Cancer Organizations",
-    "Breast Cancer Diet and Nutrition",
-    "Breast Cancer Exercise and Fitness",
-    "Breast Reconstruction",
-    "Breast Cancer Side Effects",
-    "Breast Cancer Medications",
-    "Breast Cancer Financial Support",
-    "Breast Cancer Mental Health",
-    "Breast Cancer Screening Guidelines",
-    "Breast Cancer in Men",
-    "Breast Cancer Risk Factors",
-    "Breast Cancer Family History",
-    "Breast Cancer Prevention",
-  ];
+  List<String> get _keyWords {
+    final context = navigatorKey.currentContext!;
+
+    return [
+      AppLocalizations.of(context)!.breastCancerSymptoms,
+      AppLocalizations.of(context)!.breastCancerStages,
+      AppLocalizations.of(context)!.breastCancerTreatmentOptions,
+      AppLocalizations.of(context)!.breastCancerSupportGroups,
+      AppLocalizations.of(context)!.breastCancerSurvivorStories,
+      AppLocalizations.of(context)!.breastCancerResearch,
+      AppLocalizations.of(context)!.breastCancerAwareness,
+      AppLocalizations.of(context)!.breastCancerOrganizations,
+      AppLocalizations.of(context)!.breastCancerDietAndNutrition,
+      AppLocalizations.of(context)!.breastCancerExerciseAndFitness,
+      AppLocalizations.of(context)!.breastReconstruction,
+      AppLocalizations.of(context)!.breastCancerSideEffects,
+      AppLocalizations.of(context)!.breastCancerMedications,
+      AppLocalizations.of(context)!.breastCancerFinancialSupport,
+      AppLocalizations.of(context)!.breastCancerMentalHealth,
+      AppLocalizations.of(context)!.breastCancerScreeningGuidelines,
+      AppLocalizations.of(context)!.breastCancerInMen,
+      AppLocalizations.of(context)!.breastCancerRiskFactors,
+      AppLocalizations.of(context)!.breastCancerFamilyHistory,
+      AppLocalizations.of(context)!.breastCancerPrevention,
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -34,7 +34,7 @@ class _AwarenessScreenState extends State<AwarenessScreen> {
   void _goToYoutubePlayerScreen() async {
     _loadingState(true);
 
-    if (await NetworkInfoImpl().isNotConnected) {
+    if (await MyNetworkInfoImpl().isNotConnected) {
       _loadingState(false);
       showCustomAlretDialog(
         context: context,

@@ -67,7 +67,7 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
     try {
       _isLoadingState(true);
 
-      if (await NetworkInfoImpl().isNotConnected) {
+      if (await MyNetworkInfoImpl().isNotConnected) {
         _isLoadingState(false);
 
         showCustomAlretDialog(

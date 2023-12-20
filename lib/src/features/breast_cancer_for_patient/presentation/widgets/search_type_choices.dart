@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../domain/entities/search_types.dart';
 
 class SearchTypeChoices extends StatelessWidget {
@@ -16,7 +18,11 @@ class SearchTypeChoices extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopupMenuButton<SearchTypes>(
       icon: const Icon(Icons.filter_list),
-      tooltip: "Sellect search type",
+      tooltip: AppLocalizations.of(context)!.selectSearchType,
+      constraints: const BoxConstraints(
+        minWidth: 2.0 * 56.0,
+        maxWidth: 300,
+      ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       itemBuilder: (context) {
         return [
@@ -27,7 +33,7 @@ class SearchTypeChoices extends StatelessWidget {
                 Image.asset("assets/images/ai.png", height: 20),
                 const SizedBox(width: 20),
                 Text(
-                  "Ask AI",
+                  AppLocalizations.of(context)!.askAi,
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontSize: 18,
@@ -48,7 +54,7 @@ class SearchTypeChoices extends StatelessWidget {
                 Image.asset("assets/images/google.png", height: 20),
                 const SizedBox(width: 20),
                 Text(
-                  "Google Search",
+                  AppLocalizations.of(context)!.googleSearch,
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontSize: 18,
@@ -69,7 +75,7 @@ class SearchTypeChoices extends StatelessWidget {
                 Image.asset("assets/images/google_scholar.png", height: 20),
                 const SizedBox(width: 20),
                 Text(
-                  "Google Scholar",
+                  AppLocalizations.of(context)!.googleScholar,
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontSize: 18,
@@ -90,7 +96,7 @@ class SearchTypeChoices extends StatelessWidget {
                 Image.asset("assets/images/wikipedia.png", height: 20),
                 const SizedBox(width: 20),
                 Text(
-                  "Wikipedia Search",
+                  AppLocalizations.of(context)!.wikipediaSearch,
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontSize: 18,

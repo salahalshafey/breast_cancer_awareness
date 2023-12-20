@@ -24,7 +24,7 @@ Future<String?> validateImageLink(String url) async {
     return AppLocalizations.of(context)!.linkIsNotvalid;
   }
 
-  if (await NetworkInfoImpl().isNotConnected) {
+  if (await MyNetworkInfoImpl().isNotConnected) {
     return AppLocalizations.of(context)!.youAreCurrentlyOffline;
   }
 

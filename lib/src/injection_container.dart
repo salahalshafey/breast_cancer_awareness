@@ -145,7 +145,7 @@ Future<void> init() async {
 
 // Datasources
 
-  sl.registerLazySingleton<AIChat>(() => MakerSuite());
+  sl.registerLazySingleton<AIChat>(() => GeminiPro());
   sl.registerLazySingleton<GoogleSearch>(() => GoogleSearchScrappingImpl());
   sl.registerLazySingleton<GoogleScholarSearch>(
       () => GoogleScholarScrappingImpl());
@@ -154,5 +154,5 @@ Future<void> init() async {
 //////////////////////////////////////////////////// !!!! core !!!! ///////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl());
+  sl.registerLazySingleton<NetworkInfo>(() => MyNetworkInfoImpl());
 }

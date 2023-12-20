@@ -191,7 +191,7 @@ class Account extends DisposableProvider {
   ////////////////////////////////////////////////////////////////////////////////
 
   Future<OAuthCredential> _getGoogleCredential() async {
-    if (await NetworkInfoImpl().isNotConnected) {
+    if (await MyNetworkInfoImpl().isNotConnected) {
       throw ErrorForDialog(
           AppLocalizations.of(_context)!.youAreCurrentlyOffline);
     }
@@ -237,7 +237,7 @@ class Account extends DisposableProvider {
   ////////////////////////////////////////////////////////////////////////////////
 
   Future<OAuthCredential> _getFacebookCredential() async {
-    if (await NetworkInfoImpl().isNotConnected) {
+    if (await MyNetworkInfoImpl().isNotConnected) {
       throw ErrorForDialog(
           AppLocalizations.of(_context)!.youAreCurrentlyOffline);
     }
@@ -284,7 +284,7 @@ class Account extends DisposableProvider {
   ////////////////////////////////////////////////////////////////////////////////
 
   Future<OAuthCredential> _getTwitterCredential() async {
-    if (await NetworkInfoImpl().isNotConnected) {
+    if (await MyNetworkInfoImpl().isNotConnected) {
       throw ErrorForDialog(
           AppLocalizations.of(_context)!.youAreCurrentlyOffline);
     }
@@ -340,7 +340,7 @@ class Account extends DisposableProvider {
   ////////////////////////////////////////////////////////////////////////////////
 
   Future<void> reauthenticateWithPasswordCredential(String password) async {
-    if (await NetworkInfoImpl().isNotConnected) {
+    if (await MyNetworkInfoImpl().isNotConnected) {
       throw ErrorForDialog(
           AppLocalizations.of(_context)!.youAreCurrentlyOffline);
     }

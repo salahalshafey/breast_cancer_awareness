@@ -144,6 +144,7 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
                         return CodeContainer(
                           code: code.first,
                           languageName: code.second,
+                          animateTheCode: true,
                         );
                       }
 

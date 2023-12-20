@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 
 import 'speech_to_text.dart';
@@ -11,7 +13,7 @@ class SearchField extends StatefulWidget {
   const SearchField({
     super.key,
     required this.controller,
-    this.hintText = "Search",
+    required this.hintText,
     required this.flutterTts,
     required this.setSearchWord,
   });
@@ -118,29 +120,29 @@ class _SearchFieldState extends State<SearchField> {
           ),
         ),
         const SizedBox(width: 20),
-        Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Theme.of(context).primaryColor,
+        IconButton(
+          onPressed: () async {
+            await widget.flutterTts.stop();
+
+            final text = await showSpeechToTextDialog(context);
+
+            if (text == null || text.isEmpty) {
+              return;
+            }
+
+            widget.setSearchWord(text, textToSpeech: true);
+          },
+          tooltip: AppLocalizations.of(context)!.searchWithYourVoice,
+          icon: const Icon(
+            Icons.mic,
+            size: 28,
+            color: Colors.white,
           ),
-          child: IconButton(
-            onPressed: () async {
-              await widget.flutterTts.stop();
-
-              final text = await showSpeechToTextDialog(context);
-
-              if (text == null || text.isEmpty) {
-                return;
-              }
-
-              widget.setSearchWord(text, textToSpeech: true);
-            },
-            highlightColor: Colors.white.withOpacity(0.2),
-            icon: const Icon(
-              Icons.mic,
-              size: 28,
-              color: Colors.white,
-            ),
+          highlightColor: Colors.white.withOpacity(0.2),
+          style: ButtonStyle(
+            backgroundColor:
+                MaterialStatePropertyAll(Theme.of(context).primaryColor),
+            padding: const MaterialStatePropertyAll(EdgeInsets.all(10)),
           ),
         ),
       ],

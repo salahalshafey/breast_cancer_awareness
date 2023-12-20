@@ -176,7 +176,7 @@ void selectiveUpdateDialog(
 }
 
 Future<Map<String, dynamic>?> checkForAnyUpdates() async {
-  if (await NetworkInfoImpl().isNotConnected) {
+  if (await MyNetworkInfoImpl().isNotConnected) {
     return null;
   }
 

@@ -44,6 +44,7 @@ class CodeContainer extends StatelessWidget {
           Scrollbar(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
+              reverse: Directionality.of(context) == TextDirection.rtl,
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
               child: animateTheCode
                   ? Animate().custom(
@@ -53,6 +54,7 @@ class CodeContainer extends StatelessWidget {
                       builder: (_, value, __) {
                         return SelectableText(
                           code.substring(0, value.toInt()),
+                          textDirection: TextDirection.ltr,
                           style: const TextStyle(color: Colors.white),
                         );
                       },

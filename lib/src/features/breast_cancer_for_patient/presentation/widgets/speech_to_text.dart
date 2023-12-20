@@ -7,6 +7,8 @@ import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:wakelock/wakelock.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../core/util/builders/custom_snack_bar.dart';
 
 Future<String?> showSpeechToTextDialog(BuildContext context) async {
@@ -15,7 +17,8 @@ Future<String?> showSpeechToTextDialog(BuildContext context) async {
   if (status != PermissionStatus.granted) {
     showCustomSnackBar(
       context: context,
-      content: 'Microphone permission is needed for speech recognition.',
+      content: AppLocalizations.of(context)!
+          .microphonePermissionIsNeededToSearchWithYourVoice,
     );
 
     return null;
@@ -60,7 +63,7 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget>
     super.initState();
 
     _initSpeech();
-    Future.delayed(50.ms, () {
+    Future.delayed(Durations.short1, () {
       _startListening();
     });
   }
@@ -125,11 +128,11 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget>
             child: SingleChildScrollView(
               child: Text(
                 _speechStoped
-                    ? "Microphone off. Try again."
+                    ? AppLocalizations.of(context)!.microphoneOffTryAgain
                     : _speechToText.isNotListening && _text.isEmpty
-                        ? "Didn't hear that. Try again."
+                        ? AppLocalizations.of(context)!.didntHearThatTryAgain
                         : _text.isEmpty
-                            ? "Listening..."
+                            ? AppLocalizations.of(context)!.listening
                             : _text,
               ),
             ),
@@ -190,8 +193,9 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget>
                   ? const SizedBox()
                   : Text(
                       _speechEnabled
-                          ? "Tap the microphone to try again"
-                          : "Speech not available",
+                          ? AppLocalizations.of(context)!
+                              .tapTheMicrophoneToTryAgain
+                          : AppLocalizations.of(context)!.speechNotAvailable,
                     ),
             ),
           ),

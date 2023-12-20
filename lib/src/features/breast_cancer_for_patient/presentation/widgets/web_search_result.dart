@@ -5,6 +5,9 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wakelock/wakelock.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../app.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../../core/util/widgets/custom_card.dart';
 import '../../../../core/util/widgets/custom_error_widget.dart';
@@ -109,14 +112,13 @@ class _WebSearchResultState extends State<WebSearchResult>
         }
 
         if (result.isEmpty) {
-          return const Center(
+          return Center(
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               child: CustomErrorWidget(
                 iconSize: 50,
-                error: "**Your search did not match any results**\n\n"
-                    "* Make sure all words are spelled correctly or Try different keywords.\n"
-                    "* Or you are serching with a **language** that is not supported yet.",
+                error: AppLocalizations.of(context)!
+                    .yourSearchDidNotMatchAnyResultsWithDetails,
               ),
             ),
           );
@@ -208,7 +210,7 @@ class _WebSearchResultState extends State<WebSearchResult>
                     right: 0,
                     top: 30,
                     child: Text(
-                      "Articles",
+                      AppLocalizations.of(context)!.articles,
                       style: TextStyle(
                         color: Theme.of(context).brightness == Brightness.light
                             ? Colors.black54
@@ -226,10 +228,15 @@ class _WebSearchResultState extends State<WebSearchResult>
 }
 
 String _spokenString(List<SearchResult> result) {
+  final context = navigatorKey.currentContext!;
+
   if (result.isEmpty) {
-    return "Your search did not match any results.\n\n"
-        "Make sure all words are spelled correctly or Try different keywords.\n"
-        "Or maybe you are using a language that is not supported yet.";
+    return AppLocalizations.of(context)!
+        .yourSearchDidNotMatchAnyResultsWithDetails
+        .replaceAll(
+          RegExp(r"^\* |\*\*|`", multiLine: true, dotAll: false),
+          "",
+        );
   }
 
   final instructions = firstCharIsRtl(result.first.title)

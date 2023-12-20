@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../app.dart';
 import '../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../../core/util/builders/custom_snack_bar.dart';
 import '../../../../core/util/widgets/default_screen.dart';
@@ -44,9 +45,9 @@ class _SearchScreenState extends State<SearchScreen> {
 
         showCustomAlretDialog(
           context: context,
-          title: "Sign In",
+          title: AppLocalizations.of(context)!.signIn,
           titleColor: color,
-          content: "You have to Sign In to continue!!",
+          content: AppLocalizations.of(context)!.youHaveToSignInToContinue,
           actionsBuilder: (dialogContext) => [
             OutlinedButton(
               onPressed: () {
@@ -56,7 +57,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 foregroundColor: MaterialStatePropertyAll(color),
                 side: MaterialStatePropertyAll(BorderSide(color: color!)),
               ),
-              child: const Text("Later"),
+              child: Text(AppLocalizations.of(context)!.later),
             ),
             ElevatedButton(
               onPressed: () {
@@ -67,7 +68,7 @@ class _SearchScreenState extends State<SearchScreen> {
               },
               style:
                   ButtonStyle(backgroundColor: MaterialStatePropertyAll(color)),
-              child: const Text("Sign In"),
+              child: Text(AppLocalizations.of(context)!.signIn),
             ),
           ],
         );
@@ -124,15 +125,10 @@ class _SearchScreenState extends State<SearchScreen> {
         showCustomAlretDialog(
           context: context,
           constraints: const BoxConstraints(maxWidth: 600),
-          title: "Warning",
+          title: AppLocalizations.of(context)!.warning,
           contentFontSize: 14,
-          content:
-              "This app provides information and assistance related to `medical` topics using `artificial intelligence` and `online resources`. However, it is not a substitute for professional medical advice, diagnosis, or treatment. Please read and consider the following:\n\n"
-              "* **Consult a Healthcare Professional:** If you have a medical condition, symptoms, or concerns about your health, consult a qualified healthcare provider. This app does not replace the expertise of medical professionals.\n"
-              "* **Use as a Supplement:** Use this app as a supplemental tool to gather general information about medical topics. It can provide insights and suggestions but should not be your sole source of healthcare guidance.\n"
-              "* **Not for Emergencies:** In case of a medical emergency, call your local emergency number or seek immediate medical attention. This app is not equipped to handle urgent situations.\n"
-              "* **Verify Information:** Always verify the information you receive in this app with trusted medical sources or professionals. Medical knowledge evolves, and information provided here may not always reflect the latest guidelines.\n"
-              "* **User Responsibility:** Your health is your responsibility. Do not make medical decisions solely based on information obtained from this app.",
+          content: AppLocalizations.of(context)!
+              .thisAppProvidesInformationAndAssistanceRelatedToMedicalTopics,
         );
       },
     );
@@ -225,14 +221,16 @@ class _SearchScreenState extends State<SearchScreen> {
 }
 
 String _searchTypeToString(SearchTypes searchType) {
+  final context = navigatorKey.currentContext!;
+
   switch (searchType) {
     case SearchTypes.ai:
-      return "Ask AI";
+      return AppLocalizations.of(context)!.askAi;
     case SearchTypes.google:
-      return "Google Search";
+      return AppLocalizations.of(context)!.googleSearch;
     case SearchTypes.googleScholar:
-      return "Google Scholar Search";
+      return AppLocalizations.of(context)!.googleScholar;
     case SearchTypes.wikipedia:
-      return "Wikipedia Search";
+      return AppLocalizations.of(context)!.wikipediaSearch;
   }
 }
