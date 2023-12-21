@@ -22,11 +22,13 @@ class SettingsScreen extends StatelessWidget {
       appBartitle: AppLocalizations.of(context)!.settings,
       appBarActions: [
         IconButton(
-            onPressed: () {
-              Provider.of<SettingsProvider>(context, listen: false)
-                  .restSettings();
-            },
-            icon: Icon(Icons.restart_alt)),
+          onPressed: () {
+            Provider.of<SettingsProvider>(context, listen: false)
+                .restSettings();
+          },
+          tooltip: AppLocalizations.of(context)!.resetToDefault,
+          icon: const Icon(Icons.restart_alt),
+        ),
       ],
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 80),

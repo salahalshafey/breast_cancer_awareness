@@ -79,6 +79,7 @@ dependencies:
   flutter_facebook_auth: ^5.0.11
   twitter_login: ^4.4.0
   ntp: ^2.0.0
+  flutter_langdetect: ^0.0.2
   #devicelocale: ^0.7.0
   #flutter_html: ^3.0.0-beta.2
   #flutter_markdown: ^0.6.17+3

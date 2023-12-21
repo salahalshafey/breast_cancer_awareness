@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:provider/provider.dart';
 import 'package:wakelock/wakelock.dart';
+import 'package:flutter_langdetect/flutter_langdetect.dart' as langdetect;
 
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../../core/util/classes/pair_class.dart';
@@ -48,6 +49,30 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
     super.initState();
   }
 
+  Future<void> _speakWithCurrentLanguage(String spokenString) async {
+    final currentAppLanguage = Localizations.localeOf(context).languageCode;
+
+    if (await widget.flutterTts.isLanguageAvailable(currentAppLanguage)) {
+      await widget.flutterTts.setLanguage(currentAppLanguage);
+
+      widget.flutterTts.speak(spokenString);
+      Wakelock.enable();
+    }
+  }
+
+  Future<void> _speakWithSpokenStringLanguage(String spokenString) async {
+    final spokenStringLanguage = langdetect.detect(spokenString);
+
+    print(spokenStringLanguage);
+    if (await widget.flutterTts.isLanguageAvailable(spokenStringLanguage)) {
+      print("Avaliable");
+      await widget.flutterTts.setLanguage(spokenStringLanguage);
+
+      widget.flutterTts.speak(spokenString);
+      Wakelock.enable();
+    }
+  }
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused) {
@@ -76,10 +101,9 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
               .aiChatSearch(widget.searchWord),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          if (widget.textToSpeech) {
-            widget.flutterTts.speak(snapshot.error.toString());
-            Wakelock.enable();
-          }
+          // if (widget.textToSpeech) {
+          _speakWithCurrentLanguage(snapshot.error.toString());
+          //  }
 
           return Center(
             child: SingleChildScrollView(
@@ -120,10 +144,11 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
           ],
         );
 
-        if (widget.textToSpeech) {
-          widget.flutterTts.speak(_spokenString(result));
-          Wakelock.enable();
-        }
+        //   if (widget.textToSpeech) {
+        // widget.flutterTts.speak(_spokenString(result));
+        // Wakelock.enable();
+        _speakWithSpokenStringLanguage(_spokenString(result));
+        //}
 
         return ListView(
           padding: const EdgeInsets.only(bottom: 10, top: 30),

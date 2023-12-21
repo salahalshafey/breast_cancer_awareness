@@ -33,7 +33,7 @@ class AwarenessTitle extends StatelessWidget {
                 child: Image.asset(
                   awarenessInfo.image,
                   width: availableScreenWidth / 2,
-                  alignment: Alignment.centerLeft,
+                  alignment: AlignmentDirectional.centerStart,
                 ),
               ),
               SizedBox(

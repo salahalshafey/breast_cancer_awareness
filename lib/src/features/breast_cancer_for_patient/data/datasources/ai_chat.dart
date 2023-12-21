@@ -11,6 +11,10 @@ abstract class AIChat {
   Future<String> chatResult(String message);
 }
 
+abstract class AIChatStream {
+  Stream<String> chatResult(String message);
+}
+
 class GeminiPro implements AIChat {
   @override
   Future<String> chatResult(String message) async {
@@ -97,6 +101,10 @@ class GeminiPro implements AIChat {
   }
 }
 
+///////////////////////////////////////////////////////////
+////////////////////////////////////////
+/////////////////////
+
 class MakerSuite implements AIChat {
   @override
   Future<String> chatResult(String message) async {
@@ -158,193 +166,81 @@ class MakerSuite implements AIChat {
   }
 }
 
-/*const test = """**Breast Cancer: A Comprehensive Overview**
+///////////////////////////////////////////////////////////
+////////////////////////////////////////
+/////////////////////
 
-**1. Understanding Breast Cancer:**
-
-* Breast cancer is a malignant tumor that forms in the breast tissue.
-* It primarily affects women but can also occur in men.
-* Risk factors include age, family history, genetic mutations, and lifestyle choices.
-
-**2. Types of Breast Cancer:**
-
-* Invasive ductal carcinoma: Most common type, starts in the milk ducts and spreads to surrounding breast tissue.
-* Invasive lobular carcinoma: Begins in the milk-producing glands and spreads to surrounding breast tissue.
-* Ductal carcinoma in situ (DCIS): Non-invasive cancer confined to the milk ducts.
-* Lobular carcinoma in situ (LCIS): Non-invasive cancer confined to the milk-producing glands.
-
-**3. Breast Cancer Symptoms:**
-
-* Breast lump or thickening
-* Changes in breast size, shape, or appearance
-* Nipple changes, such as retraction, discharge, or pain
-* Skin changes, like dimpling, puckering, or redness
-* Swollen lymph nodes under the arm or near the collarbone
-
-**4. Diagnosis:**
-
-* Clinical breast exam
-* Mammogram: X-ray of the breast
-* Ultrasound: High-frequency sound waves to create images of the breast
-* MRI: Magnetic resonance imaging to detect cancer and determine its extent
-* Biopsy: Removal of a small tissue sample for examination under a microscope
-
-**5. Treatment Options:**
-
-* Surgery: Lumpectomy (removal of the tumor) or mastectomy (removal of the entire breast)
-* Radiation therapy: High-energy X-rays or other forms of radiation to kill cancer cells
-* Chemotherapy: Drugs to kill cancer cells throughout the body
-* Targeted therapy: Drugs that target specific molecules involved in cancer growth
-* Hormone therapy: Drugs to block the effects of hormones that fuel cancer growth
-* Immunotherapy: Drugs that boost the body's immune system to fight cancer
-
-**6. Prognosis and Survival Rates:**
-
-* Breast cancer survival rates have significantly improved over the past few decades.
-* Survival rates depend on various factors, including cancer stage, type, and treatment response.
-* Early detection and prompt treatment are crucial for improving survival outcomes.
-
-**7. Prevention:**
-
-* Maintaining a healthy weight
-* Regular physical activity
-* Limiting alcohol consumption
-* Avoiding tobacco smoke
-* Breastfeeding, if possible
-* Genetic testing and risk-reducing surgery for individuals with a high risk of breast cancer
-
-**8. Support and Resources:**
-
-* Support groups for breast cancer patients and their families
-* Online resources and helplines
-* Access to affordable and comprehensive healthcare services
-
-**Remember, breast cancer is treatable, and early detection is key. Regular self-exams, screenings, and prompt medical attention can significantly improve outcomes.** 
-""";*/
-
-/*
-const testString =
-    """Flutter Speech to Text is a **plugin that** allows you to easily integrate `speech recognition` into your Flutter apps. It uses the Google Cloud Speech-to-Text API to convert audio to text, and it supports a variety of languages.
-
-To use `Flutter Speech to Text`, you first need to create a project in the Google Cloud Platform Console. Once you have created a project, you need to enable the Google Cloud Speech-to-Text API.
-
-After you have enabled the API, you need to create a service account and download the JSON key file. You will need to provide the JSON key file to the Flutter Speech to Text plugin.
-
-To **install** the Flutter Speech to Text plugin, you can use the following command:
-
-```
-pub add flutter_speech_to_text
-```
-
-Once the plugin is installed, you can use it in your Flutter app. The following code snippet shows how to use the Flutter Speech to Text plugin to convert audio to text:
-
-```
-import 'package:flutter/material.dart';
-import 'package:flutter_speech_to_text/flutter_speech_to_text.dart';
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
+class ChatGPT implements AIChat {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Speech to Text',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Flutter Speech to Text'),
-        ),
-        body: Center(
-          child: RaisedButton(
-            onPressed: () async {
-              // Create a SpeechToText object.
-              final speechToText = SpeechToText();
+  Future<String> chatResult(String message) async {
+    final url = Uri.parse('https://api.openai.com/v1/chat/completions');
+    const apiKey = chatGPTApiKey;
 
-              // Set the language code.
-              speechToText.setLanguageCode('en-US');
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $apiKey',
+    };
 
-              // Start listening for speech.
-              final result = await speechToText.listen();
+    final body = jsonEncode({
+      'model': 'gpt-3.5-turbo',
+      'messages': [
+        {'role': 'user', 'content': message}
+      ],
+    });
 
-              // Print the result.
-              print(result.text);
-            },
-            child: Text('Listen'),
-          ),
-        ),
-      ),
-    );
+    final response = await http.post(url, headers: headers, body: body);
+
+    if (response.statusCode != 200) {
+      throw ServerException();
+    }
+
+    final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
+
+    return responseMap["choices"][0]["message"]["content"];
   }
 }
-```
 
-When you run the **app**, you will see a button that says "Listen". When you click on the button, the app will start listening for speech. The text that is spoken will be converted to text and printed to the `console`.
+///////////////////////////////////////////////////////////
+////////////////////////////////////////
+/////////////////////
 
-* that is `awesom` man you are **great** if you think
-* **you** can visit thi link www.google.com to chech fo ervery thing and https://www.hyth.com
-* `Emial` is salahalshafey@gmail.com is valid.
-
-Flutter Speech to Text is a powerful tool that can be used to add speech recognition to your Flutter apps. It is easy to use and supports a variety of languages.
-""";
-
-const testString2 =
-    """فلاتر Speech to Text هو **مكون إضافي** يسمح لك بدمج `التعرف على الكلام` بسهولة في تطبيقات Flutter. ويستخدم Google Cloud Speech-to-Text API لتحويل الصوت إلى نص، ويدعم مجموعة متنوعة من اللغات.
-
-لاستخدام `Flutter Speech to Text`، تحتاج أولاً إلى إنشاء مشروع في Google Cloud Platform Console. بمجرد إنشاء مشروع، تحتاج إلى تمكين Google Cloud Speech-to-Text API.
-
-بعد تمكين واجهة برمجة التطبيقات (API)، يتعين عليك إنشاء حساب خدمة وتنزيل ملف مفتاح JSON. سوف تحتاج إلى تقديم ملف مفتاح JSON إلى البرنامج المساعد Flutter Speech to Text.
-
-**لتثبيت** المكون الإضافي Flutter Speech to Text، يمكنك استخدام الأمر التالي:
-
-```
-حانة إضافة Flutter_Speech_to_text
-```
-
-بمجرد تثبيت المكون الإضافي، يمكنك استخدامه في تطبيق Flutter. يوضح مقتطف الكود التالي كيفية استخدام البرنامج المساعد Flutter Speech to Text لتحويل الصوت إلى نص:
-
-```
-import 'package:flutter/material.dart';
-import 'package:flutter_speech_to_text/flutter_speech_to_text.dart';
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
+class ChatGPTStream implements AIChatStream {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Speech to Text',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Flutter Speech to Text'),
-        ),
-        body: Center(
-          child: RaisedButton(
-            onPressed: () async {
-              // Create a SpeechToText object.
-              final speechToText = SpeechToText();
+  Stream<String> chatResult(String message) async* {
+    final url = Uri.parse('https://api.openai.com/v1/chat/completions');
+    const apiKey = chatGPTApiKey;
 
-              // Set the language code.
-              speechToText.setLanguageCode('en-US');
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $apiKey',
+    };
 
-              // Start listening for speech.
-              final result = await speechToText.listen();
+    final body = jsonEncode({
+      'model': 'gpt-3.5-turbo',
+      'messages': [
+        {'role': 'user', 'content': message}
+      ],
+      'stream': true,
+    });
 
-              // Print the result.
-              print(result.text);
-            },
-            child: Text('Listen'),
-          ),
-        ),
-      ),
-    );
+    final client = http.Client();
+    final request = http.Request('POST', url);
+    request.headers.addAll(headers);
+    request.body = body;
+
+    final response = await client.send(request);
+    await for (String subresponse in response.stream.transform(utf8.decoder)) {
+      // print(subresponse.substring(6));
+      subresponse = subresponse.substring(6);
+      //print(subresponse);
+      try {
+        final subresponseMap = jsonDecode(subresponse) as Map<String, dynamic>;
+
+        yield (subresponseMap["choices"][0]["delta"]["content"] as String?) ??
+            "";
+      } catch (error) {
+        throw ServerException();
+      }
+    }
   }
 }
-```
-
-عند تشغيل **التطبيق**، سترى زرًا مكتوبًا عليه "استمع". عند النقر على الزر، سيبدأ التطبيق في الاستماع للكلام. سيتم تحويل النص المنطوق إلى نص وطباعته على "وحدة التحكم".
-
-* هذا رجل رائع، أنت ** عظيم ** إذا كنت تعتقد ذلك
-* **أنت** يمكنك زيارة الرابط www.google.com للتحقق من كل شيء وhttps://www.hyth.com
-* و`Emial` هو salahalshafey@gmail.com صالح.
-
-يعد Flutter Speech to Text أداة قوية يمكن استخدامها لإضافة ميزة التعرف على الكلام إلى تطبيقات Flutter. إنه سهل الاستخدام ويدعم مجموعة متنوعة من اللغات.
-""";*/

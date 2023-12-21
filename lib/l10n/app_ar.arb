@@ -110,7 +110,8 @@
 
   
 
-    "@_SETINGS_SCREEN": {},
+    "@_SETTINGS_SCREEN": {},
+    "resetToDefault": "إعادة إلى الوضع الافتراضي",
     "settings": "الإعدادات",
     "theme": "السمات",
     "systemDefault": "تلقائياً من النظام",
@@ -230,6 +231,14 @@
 
 
 
+    "@_HOME_SCREEN": {},
+    "selfCheckNow": "فحص-ذاتي الان",
+    "myBreastCheckHistory": "سجل الفحص الذاتي",
+    "hello": "أهلاً",
+    "youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection": "أنت تدرك أن كل يوم مهم عندما يتعلق الأمر بالكشف المبكر عن سرطان الثدي. من الرائع أن تتحمل مسؤولية صحتك وتقوم بفحص الثدي بانتظام.",
+    "breastCancerAwarenessandwhy": "التوعية بسرطان الثدي\nو\nلماذا يعد الكشف المبكر مهمًا",
+    "learnMore": "المزيد",
+    "description": "الوصف",
     "@_NOTE_PROVIDER": {},
     "notAbleToSaveFilesToLocalDeviceStorage": "غير قادر على حفظ الملفات على مساحة تخزين الجهاز المحلي.",
     "notAbleToDeleteFilesFromLocalDeviceStorage": "غير قادر على حذف الملفات من مساحة تخزين الجهاز المحلي.",
@@ -412,17 +421,5 @@
     "didntHearThatTryAgain": "لم يتم سماع ذلك. حاول مرة أخرى.",
     "listening": "جاري الاستماع...",
     "tapTheMicrophoneToTryAgain": "اضغط على الميكروفون للمحاولة مرة أخرى",
-    "speechNotAvailable": "التعرف على الكلام غير متاح",
-
-
-
-    "@_HOME_SCREEN": {},
-    "selfCheckNow": "فحص-ذاتي الان",
-    "myBreastCheckHistory": "سجل الفحص الذاتي",
-    "hello": "أهلاً",
-    "youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection": "أنت تدرك أن كل يوم مهم عندما يتعلق الأمر بالكشف المبكر عن سرطان الثدي. من الرائع أن تتحمل مسؤولية صحتك وتقوم بفحص الثدي بانتظام.",
-    "breastCancerAwarenessandwhy": "التوعية بسرطان الثدي\nو\nلماذا يعد الكشف المبكر مهمًا",
-    "learnMore": "المزيد",
-    "description": "الوصف"
-
+    "speechNotAvailable": "التعرف على الكلام غير متاح"
 }

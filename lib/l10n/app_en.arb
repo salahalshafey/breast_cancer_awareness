@@ -508,7 +508,11 @@
 
 
 
-  "@_SETINGS_SCREEN": {},
+  "@_SETTINGS_SCREEN": {},
+  "resetToDefault": "Reset to default",
+  "@resetToDefault": {
+  "description": "the reset to default tooltip in `_SETTINGS_SCREEN`"
+  },
   "theme": "Theme",
   "@theme": {
   "description": "theme text of settings screen"
@@ -939,8 +943,37 @@
   "@continueToMainScreen": {
     "description": "button in `_SECOND_SIGN_UP_SCREEN`"
   },
-  
 
+
+  "@_HOME_SCREEN": {},
+  "hello": "Hello",
+  "@hello": {
+    "description": "the Hello word"
+  },
+  "youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection": "You understand that every day counts when it comes to early breast cancer detection. it's great that you take responsibility for your health and check your breasts regularly.",
+  "@youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection": {
+    "description": "the greeting in `_HOME_SCREEN`"
+  },
+  "selfCheckNow": "SELF-CHECK NOW",
+  "@selfCheckNow": {
+    "description": "self check button on the home screen"
+  },
+  "myBreastCheckHistory": "MY BREAST-CHECK HISTORY",
+  "@myBreastCheckHistory": {
+    "description": "Breast Check History button on the home screen"
+  },
+  "breastCancerAwarenessandwhy": "Breast Cancer Awareness\nAnd\nWhy early detection is important",
+  "@breastCancerAwarenessandwhy": {
+    "description": "title of awareness in `_HOME_SCREEN`"
+  },
+  "learnMore": "LEARN MORE",
+  "@learnMore": {
+    "description": "the LEARN MORE word"
+  },
+  "description": "Description",
+  "@description": {
+    "description": "the Description word"
+  },
   "@_NOTE_PROVIDER": {},
   "notAbleToSaveFilesToLocalDeviceStorage": "Not able to save files to local device storage.",
   "@notAbleToSaveFilesToLocalDeviceStorage": {
@@ -1365,11 +1398,11 @@
   "@_FOR_PATIENTS_SCREENS": {},
   "sorryThereIsNoResultForYourSearch": "Sorry, there is no result for your search, the result has been filtered.",
   "@sorryThereIsNoResultForYourSearch": {
-    "description": "the ok word"
+    "description": "the response if the result of web search filtered"
   },
   "sorryThereIsNoResultForYourSearchWithDetails": "**Sorry, there is no result for your search**\n\n* The result has been filtered.\n* Or you are searching with a **language** that is not supported yet.",
   "@sorryThereIsNoResultForYourSearchWithDetails": {
-    "description": "the back word `for backArrow icon tooltip`"
+    "description": "the response if the result of AI search filtered"
   },
   "tipsForYourVisitToTheDoctor": "TIPS FOR YOUR VISIT TO THE DOCTOR",
   "@tipsForYourVisitToTheDoctor": {
@@ -1661,38 +1694,5 @@
   "speechNotAvailable": "Speech not available",
   "@speechNotAvailable": {
     "description": "one of speech to text state in `_SEARCH_SCREEN`"
-  },
-  
-  
-
-
-  "@_HOME_SCREEN": {},
-  "hello": "Hello",
-  "@hello": {
-    "description": "the ok word"
-  },
-  "youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection": "You understand that every day counts when it comes to early breast cancer detection. it's great that you take responsibility for your health and check your breasts regularly.",
-  "@youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection": {
-    "description": "the ok word"
-  },
-  "selfCheckNow": "SELF-CHECK NOW",
-  "@selfCheckNow": {
-    "description": "self check button on the home screen"
-  },
-  "myBreastCheckHistory": "MY BREAST-CHECK HISTORY",
-  "@myBreastCheckHistory": {
-    "description": "Breast Check History button on the home screen"
-  },
-  "breastCancerAwarenessandwhy": "Breast Cancer Awareness\nAnd\nWhy early detection is important",
-  "@breastCancerAwarenessandwhy": {
-    "description": "the ok word"
-  },
-  "learnMore": "LEARN MORE",
-  "@learnMore": {
-    "description": "the ok word"
-  },
-  "description": "Description",
-  "@description": {
-    "description": "the ok word"
   }
 }

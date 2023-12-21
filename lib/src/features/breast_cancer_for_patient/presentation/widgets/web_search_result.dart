@@ -83,10 +83,10 @@ class _WebSearchResultState extends State<WebSearchResult>
       ),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          if (widget.textToSpeech) {
-            widget.flutterTts.speak(snapshot.error.toString());
-            Wakelock.enable();
-          }
+          //   if (widget.textToSpeech) {
+          widget.flutterTts.speak(snapshot.error.toString());
+          Wakelock.enable();
+          // }
 
           return Center(
             child: SingleChildScrollView(
@@ -105,11 +105,11 @@ class _WebSearchResultState extends State<WebSearchResult>
 
         final result = snapshot.data!;
 
-        if (widget.textToSpeech) {
-          //widget.flutterTts.setLanguage("ar");
-          widget.flutterTts.speak(_spokenString(result));
-          Wakelock.enable();
-        }
+        //  if (widget.textToSpeech) {
+        //widget.flutterTts.setLanguage("ar");
+        widget.flutterTts.speak(_spokenString(result));
+        Wakelock.enable();
+        //  }
 
         if (result.isEmpty) {
           return Center(

@@ -430,6 +430,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "5.8.0"
+  flutter_langdetect:
+    dependency: "direct main"
+    description:
+      name: flutter_langdetect
+      sha256: "93bd865c7d5723eac614744abb32234ee4f593505a293bc17ef097bd55fbdf38"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.2"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:

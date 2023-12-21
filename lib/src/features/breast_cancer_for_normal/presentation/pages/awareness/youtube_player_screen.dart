@@ -78,9 +78,9 @@ class _YoutubePlayerScreenState extends State<YoutubePlayerScreen> {
                 // aspectRatio: aspectRatio,
               ),
             ),
-            Positioned(
+            PositionedDirectional(
               bottom: 0,
-              right: 0,
+              start: 0,
               child: IconButton(
                 onPressed: () => Navigator.of(context).pop(),
                 icon: const Icon(Icons.exit_to_app, size: 30),
