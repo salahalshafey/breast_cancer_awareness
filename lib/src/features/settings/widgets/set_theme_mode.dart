@@ -21,7 +21,7 @@ class SetThemeMode extends StatelessWidget {
             AppLocalizations.of(context)!.theme,
             style: const TextStyle(
               color: MyColors.tetraryColor,
-              fontSize: 20,
+              fontSize: 18,
             ),
           ),
           Consumer<SettingsProvider>(
@@ -30,6 +30,21 @@ class SetThemeMode extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
                 value: provider.currentTheme,
                 items: [
+                  DropdownMenuItem<String>(
+                    value: 'system',
+                    child: TextButton.icon(
+                      onPressed: null,
+                      icon: const Icon(Icons.brightness_6),
+                      label: Text(
+                        AppLocalizations.of(context)!.systemDefault,
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
                   DropdownMenuItem<String>(
                     value: 'light',
                     child: TextButton.icon(
@@ -52,21 +67,6 @@ class SetThemeMode extends StatelessWidget {
                       icon: const Icon(Icons.dark_mode),
                       label: Text(
                         AppLocalizations.of(context)!.dark,
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  DropdownMenuItem<String>(
-                    value: 'system',
-                    child: TextButton.icon(
-                      onPressed: null,
-                      icon: const Icon(Icons.brightness_6),
-                      label: Text(
-                        AppLocalizations.of(context)!.systemDefault,
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontSize: 18,

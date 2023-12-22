@@ -8,6 +8,10 @@
   "@arabic": {
     "description": "the arabic language word"
   },
+  "frensh": "Frensh",
+  "@frensh": {
+    "description": "the frensh language word"
+  },
 
 
 

@@ -37,12 +37,12 @@ class TextWellFormattedWithBulleted extends StatelessWidget {
       ).map((inlineString) {
         if (inlineString.type == StringTypes.bulleted) {
           return BulletedList(
-            textDirection:
-                firstCharIsRtl(data) ? TextDirection.rtl : TextDirection.ltr,
+            textDirection: getDirectionalityOf(data),
             text: TextWellFormattedWitouthBulleted(
               data: inlineString.string.substring(2),
               fontSize: fontSize,
               isSelectableText: isSelectableText,
+              textDirection: getDirectionalityOf(data),
             ),
           );
         }
@@ -51,6 +51,7 @@ class TextWellFormattedWithBulleted extends StatelessWidget {
           data: inlineString.string,
           fontSize: fontSize,
           isSelectableText: isSelectableText,
+          textDirection: getDirectionalityOf(data),
         );
       }).toList(),
     );
@@ -63,11 +64,13 @@ class TextWellFormattedWitouthBulleted extends StatefulWidget {
     required this.data,
     this.fontSize,
     this.isSelectableText = false,
+    required this.textDirection,
   });
 
   final String data;
   final double? fontSize;
   final bool isSelectableText;
+  final TextDirection? textDirection;
 
   @override
   State<TextWellFormattedWitouthBulleted> createState() =>
@@ -237,15 +240,11 @@ class _TextWellFormattedWitouthBulletedState
     return widget.isSelectableText
         ? SelectableText.rich(
             _getTextSpan(context),
-            textDirection: firstCharIsRtl(widget.data)
-                ? TextDirection.rtl
-                : TextDirection.ltr,
+            textDirection: widget.textDirection,
           )
         : Text.rich(
             _getTextSpan(context),
-            textDirection: firstCharIsRtl(widget.data)
-                ? TextDirection.rtl
-                : TextDirection.ltr,
+            textDirection: widget.textDirection,
           );
   }
 }

@@ -13,8 +13,9 @@ import '../../../../core/util/widgets/code_container.dart';
 import '../../../../core/util/widgets/custom_card.dart';
 import '../../../../core/util/widgets/custom_error_widget.dart';
 import '../../../../core/util/widgets/dots_loading.dart';
-
 import '../../../../core/util/widgets/text_well_formatted.dart';
+
+import '../../../settings/providers/settings_provider.dart';
 import '../providers/search.dart';
 
 class AIResult extends StatefulWidget {
@@ -49,7 +50,7 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
     super.initState();
   }
 
-  Future<void> _speakWithCurrentLanguage(String spokenString) async {
+  void _speakWithCurrentLanguage(String spokenString) async {
     final currentAppLanguage = Localizations.localeOf(context).languageCode;
 
     if (await widget.flutterTts.isLanguageAvailable(currentAppLanguage)) {
@@ -60,7 +61,7 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
     }
   }
 
-  Future<void> _speakWithSpokenStringLanguage(String spokenString) async {
+  void _speakWithResultLanguage(String spokenString) async {
     final spokenStringLanguage = langdetect.detect(spokenString);
 
     print(spokenStringLanguage);
@@ -70,6 +71,17 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
 
       widget.flutterTts.speak(spokenString);
       Wakelock.enable();
+    }
+  }
+
+  void _speakIfPossible(String spokenString, void Function(String) speakWith) {
+    final textToSpeechType =
+        Provider.of<SettingsProvider>(context, listen: false).textToSpeechType;
+
+    if (textToSpeechType == TextToSpeechType.alwaysSpeak ||
+        textToSpeechType == TextToSpeechType.whenSearchWithVoiceOnly &&
+            widget.textToSpeech) {
+      speakWith(spokenString);
     }
   }
 
@@ -101,9 +113,12 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
               .aiChatSearch(widget.searchWord),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          // if (widget.textToSpeech) {
-          _speakWithCurrentLanguage(snapshot.error.toString());
-          //  }
+          final theSpokenError = snapshot.error.toString().replaceAll(
+                RegExp(r"^\* |\*\*|`", multiLine: true, dotAll: false),
+                "",
+              );
+
+          _speakIfPossible(theSpokenError, _speakWithCurrentLanguage);
 
           return Center(
             child: SingleChildScrollView(
@@ -144,11 +159,7 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
           ],
         );
 
-        //   if (widget.textToSpeech) {
-        // widget.flutterTts.speak(_spokenString(result));
-        // Wakelock.enable();
-        _speakWithSpokenStringLanguage(_spokenString(result));
-        //}
+        _speakIfPossible(_spokenString(result), _speakWithResultLanguage);
 
         return ListView(
           padding: const EdgeInsets.only(bottom: 10, top: 30),
@@ -175,12 +186,11 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
 
                       if (inlineString.type == StringTypes.bulleted) {
                         return BulletedList(
-                          textDirection: firstCharIsRtl(snapshot.data!)
-                              ? TextDirection.rtl
-                              : TextDirection.ltr,
+                          textDirection: getDirectionalityOf(snapshot.data!),
                           text: TextWellFormattedWitouthBulleted(
                             data: inlineString.string.substring(2),
                             isSelectableText: true,
+                            textDirection: getDirectionalityOf(snapshot.data!),
                           ),
                         );
                       }
@@ -188,6 +198,7 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
                       return TextWellFormattedWitouthBulleted(
                         data: inlineString.string,
                         isSelectableText: true,
+                        textDirection: getDirectionalityOf(snapshot.data!),
                       );
                     }).toList(),
                   ),

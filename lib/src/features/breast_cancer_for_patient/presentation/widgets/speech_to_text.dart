@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:wakelock/wakelock.dart';
@@ -10,6 +11,7 @@ import 'package:wakelock/wakelock.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/util/builders/custom_snack_bar.dart';
+import '../../../settings/providers/settings_provider.dart';
 
 Future<String?> showSpeechToTextDialog(BuildContext context) async {
   final status = await Permission.microphone.request();
@@ -75,10 +77,15 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget>
   }
 
   void _startListening() async {
+    final currentVoiceSearchLanguageCode =
+        Provider.of<SettingsProvider>(context, listen: false)
+            .currentVoiceSearchLanguageCode;
+
     await _speechToText.listen(
       onResult: _onSpeechResult,
       listenMode: ListenMode.search,
       pauseFor: 5.seconds,
+      localeId: currentVoiceSearchLanguageCode,
     );
 
     setState(() {

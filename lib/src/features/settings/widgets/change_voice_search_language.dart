@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../core/theme/colors.dart';
 import '../providers/settings_provider.dart';
 
-class ChangeLanguage extends StatelessWidget {
-  const ChangeLanguage({super.key});
+class ChangeVoiceSearchLanguage extends StatelessWidget {
+  const ChangeVoiceSearchLanguage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +14,9 @@ class ChangeLanguage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            AppLocalizations.of(context)!.language,
-            style: const TextStyle(
+          const Text(
+            "Voice search language",
+            style: TextStyle(
               color: MyColors.tetraryColor,
               fontSize: 18,
             ),
@@ -27,7 +25,7 @@ class ChangeLanguage extends StatelessWidget {
             builder: (context, provider, child) {
               return DropdownButton<String>(
                 borderRadius: BorderRadius.circular(15),
-                value: provider.currentLanguageCode,
+                value: provider.currentVoiceSearchLanguageCode,
                 items: [
                   DropdownMenuItem<String>(
                     value: "system",
@@ -41,7 +39,7 @@ class ChangeLanguage extends StatelessWidget {
                             ),
                             const SizedBox(width: 20),
                             Text(
-                              AppLocalizations.of(context)!.systemDefault,
+                              "default",
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontSize: 18,
@@ -54,7 +52,7 @@ class ChangeLanguage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  ...provider.allLocaleLanguagesWithDetails
+                  ...provider.allAvailableVoiceSearchLanguagesWithDetails
                       .map((localWithFlage) => DropdownMenuItem<String>(
                             value: localWithFlage.languageCode,
                             child: Row(
@@ -71,11 +69,11 @@ class ChangeLanguage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                          ))
+                          )),
                 ],
                 onChanged: (String? languageCode) {
-                  provider.changeLocale(
-                      languageCode ?? provider.currentLanguageCode);
+                  provider.changeVoiceSearchLanguage(
+                      languageCode ?? provider.currentVoiceSearchLanguageCode);
                 },
               );
             },

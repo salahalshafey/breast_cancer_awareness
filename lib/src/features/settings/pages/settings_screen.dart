@@ -8,6 +8,8 @@ import '../../../core/util/widgets/default_screen.dart';
 import '../providers/settings_provider.dart';
 
 import '../widgets/change_language.dart';
+import '../widgets/change_voice_search_language.dart';
+import '../widgets/change_text_to_speech_type.dart';
 import '../widgets/set_notifications_mode.dart';
 import '../widgets/set_theme_mode.dart';
 
@@ -31,7 +33,7 @@ class SettingsScreen extends StatelessWidget {
         ),
       ],
       child: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 80),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 80),
         children: const [
           SizedBox(height: 60),
           SetThemeMode(),
@@ -40,13 +42,9 @@ class SettingsScreen extends StatelessWidget {
           SizedBox(height: 30),
           SetNotificationsMode(),
           SizedBox(height: 30),
-          /* Text(
-            "Search Engine",
-            style: TextStyle(
-              color: MyColors.tetraryColor,
-              fontSize: 18,
-            ),
-          ),*/
+          ChangeTextToSpeechType(),
+          SizedBox(height: 30),
+          ChangeVoiceSearchLanguage(),
         ],
       ),
     );

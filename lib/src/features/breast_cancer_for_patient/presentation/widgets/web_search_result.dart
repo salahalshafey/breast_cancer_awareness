@@ -4,10 +4,10 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wakelock/wakelock.dart';
+import 'package:flutter_langdetect/flutter_langdetect.dart' as langdetect;
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../app.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../../core/util/widgets/custom_card.dart';
 import '../../../../core/util/widgets/custom_error_widget.dart';
@@ -15,6 +15,8 @@ import '../../../../core/util/widgets/dots_loading.dart';
 
 import '../../domain/entities/search_result.dart';
 import '../../domain/entities/search_types.dart';
+
+import '../../../settings/providers/settings_provider.dart';
 
 import '../providers/search.dart';
 
@@ -53,6 +55,41 @@ class _WebSearchResultState extends State<WebSearchResult>
     super.initState();
   }
 
+  void _speakWithCurrentLanguage(String spokenString) async {
+    final currentAppLanguage = Localizations.localeOf(context).languageCode;
+
+    if (await widget.flutterTts.isLanguageAvailable(currentAppLanguage)) {
+      await widget.flutterTts.setLanguage(currentAppLanguage);
+
+      widget.flutterTts.speak(spokenString);
+      Wakelock.enable();
+    }
+  }
+
+  void _speakWithResultLanguage(String spokenString) async {
+    final spokenStringLanguage = langdetect.detect(spokenString);
+
+    print(spokenStringLanguage);
+    if (await widget.flutterTts.isLanguageAvailable(spokenStringLanguage)) {
+      print("Avaliable");
+      await widget.flutterTts.setLanguage(spokenStringLanguage);
+
+      widget.flutterTts.speak(spokenString);
+      Wakelock.enable();
+    }
+  }
+
+  void _speakIfPossible(String spokenString, void Function(String) speakWith) {
+    final textToSpeechType =
+        Provider.of<SettingsProvider>(context, listen: false).textToSpeechType;
+
+    if (textToSpeechType == TextToSpeechType.alwaysSpeak ||
+        textToSpeechType == TextToSpeechType.whenSearchWithVoiceOnly &&
+            widget.textToSpeech) {
+      speakWith(spokenString);
+    }
+  }
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused) {
@@ -83,10 +120,9 @@ class _WebSearchResultState extends State<WebSearchResult>
       ),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          //   if (widget.textToSpeech) {
-          widget.flutterTts.speak(snapshot.error.toString());
-          Wakelock.enable();
-          // }
+          final theSpokenError = snapshot.error.toString();
+
+          _speakIfPossible(theSpokenError, _speakWithCurrentLanguage);
 
           return Center(
             child: SingleChildScrollView(
@@ -105,13 +141,16 @@ class _WebSearchResultState extends State<WebSearchResult>
 
         final result = snapshot.data!;
 
-        //  if (widget.textToSpeech) {
-        //widget.flutterTts.setLanguage("ar");
-        widget.flutterTts.speak(_spokenString(result));
-        Wakelock.enable();
-        //  }
-
         if (result.isEmpty) {
+          final theSpokenError = AppLocalizations.of(context)!
+              .yourSearchDidNotMatchAnyResultsWithDetails
+              .replaceAll(
+                RegExp(r"^\* |\*\*|`", multiLine: true, dotAll: false),
+                "",
+              );
+
+          _speakIfPossible(theSpokenError, _speakWithCurrentLanguage);
+
           return Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(10.0),
@@ -123,6 +162,8 @@ class _WebSearchResultState extends State<WebSearchResult>
             ),
           );
         }
+
+        _speakIfPossible(_spokenString(result), _speakWithResultLanguage);
 
         return ListView(
           padding: const EdgeInsets.only(bottom: 10),
@@ -228,17 +269,6 @@ class _WebSearchResultState extends State<WebSearchResult>
 }
 
 String _spokenString(List<SearchResult> result) {
-  final context = navigatorKey.currentContext!;
-
-  if (result.isEmpty) {
-    return AppLocalizations.of(context)!
-        .yourSearchDidNotMatchAnyResultsWithDetails
-        .replaceAll(
-          RegExp(r"^\* |\*\*|`", multiLine: true, dotAll: false),
-          "",
-        );
-  }
-
   final instructions = firstCharIsRtl(result.first.title)
       ? "فيما يلي نتائج أخرى، يمكنك الضغط على أي من هذه النتائج لفتحها."
       : "Below is another search results. You can tap on any result to open it.";
