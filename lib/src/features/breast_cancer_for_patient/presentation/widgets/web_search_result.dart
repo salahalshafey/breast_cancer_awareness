@@ -69,9 +69,7 @@ class _WebSearchResultState extends State<WebSearchResult>
   void _speakWithResultLanguage(String spokenString) async {
     final spokenStringLanguage = langdetect.detect(spokenString);
 
-    print(spokenStringLanguage);
     if (await widget.flutterTts.isLanguageAvailable(spokenStringLanguage)) {
-      print("Avaliable");
       await widget.flutterTts.setLanguage(spokenStringLanguage);
 
       widget.flutterTts.speak(spokenString);

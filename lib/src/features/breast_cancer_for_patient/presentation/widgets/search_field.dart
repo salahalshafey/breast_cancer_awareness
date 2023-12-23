@@ -31,9 +31,7 @@ class _SearchFieldState extends State<SearchField> {
   final _focusNode = FocusNode();
   bool _hasFocus = false;
 
-  late TextDirection _textDirection = firstCharIsRtl(widget.controller.text)
-      ? TextDirection.rtl
-      : TextDirection.ltr;
+  late TextDirection _textDirection;
 
   @override
   void initState() {
@@ -55,6 +53,8 @@ class _SearchFieldState extends State<SearchField> {
 
   @override
   Widget build(BuildContext context) {
+    _textDirection = getDirectionalityOf(widget.controller.text);
+
     return Row(
       children: [
         Expanded(
@@ -103,11 +103,7 @@ class _SearchFieldState extends State<SearchField> {
             },
             style: const TextStyle(color: Colors.white, fontSize: 20),
             onChanged: (value) {
-              setState(() {
-                _textDirection = firstCharIsRtl(value)
-                    ? TextDirection.rtl
-                    : TextDirection.ltr;
-              });
+              setState(() {});
             },
             onSubmitted: (value) {
               if (widget.controller.text.trim().isEmpty) {

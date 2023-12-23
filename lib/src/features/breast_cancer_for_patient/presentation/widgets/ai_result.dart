@@ -64,9 +64,9 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
   void _speakWithResultLanguage(String spokenString) async {
     final spokenStringLanguage = langdetect.detect(spokenString);
 
-    print(spokenStringLanguage);
+    // print(spokenStringLanguage);
     if (await widget.flutterTts.isLanguageAvailable(spokenStringLanguage)) {
-      print("Avaliable");
+      // print("Avaliable");
       await widget.flutterTts.setLanguage(spokenStringLanguage);
 
       widget.flutterTts.speak(spokenString);

@@ -10,8 +10,12 @@ import 'package:wakelock/wakelock.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../core/theme/colors.dart';
+import '../../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../../core/util/builders/custom_snack_bar.dart';
+
 import '../../../settings/providers/settings_provider.dart';
+import '../../../settings/widgets/change_voice_search_language_for_search_dialog.dart';
 
 Future<String?> showSpeechToTextDialog(BuildContext context) async {
   final status = await Permission.microphone.request();
@@ -33,8 +37,8 @@ Future<String?> showSpeechToTextDialog(BuildContext context) async {
     builder: (ctx) {
       return const Dialog(
         child: SizedBox(
-          height: 270,
-          width: 200,
+          height: 330,
+          width: 300,
           child: SpeechToTextWidget(),
         ),
       );
@@ -131,6 +135,36 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
+            flex: 4,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      icon: const Icon(
+                        Icons.clear,
+                        color: MyColors.primaryColor,
+                        size: 35,
+                      ),
+                      style: const ButtonStyle(
+                        padding: MaterialStatePropertyAll(EdgeInsets.zero),
+                      ),
+                    ),
+                    ChangViceSearchLanguageForSearchDialog(
+                      _stopListening,
+                      _startListening,
+                    ),
+                  ],
+                ),
+                const Divider(),
+              ],
+            ),
+          ),
+          Expanded(
             flex: 6,
             child: SingleChildScrollView(
               child: Text(
@@ -141,6 +175,7 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget>
                         : _text.isEmpty
                             ? AppLocalizations.of(context)!.listening
                             : _text,
+                textDirection: getDirectionalityOf(_text),
               ),
             ),
           ),
@@ -195,6 +230,7 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget>
             ),
           ),
           Expanded(
+            flex: 2,
             child: Align(
               child: _speechToText.isListening
                   ? const SizedBox()

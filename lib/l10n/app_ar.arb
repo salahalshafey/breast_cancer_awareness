@@ -124,6 +124,13 @@
     "changeLanguage": "تغيير اللغة",
     "changeToLightMode": "التغيير إلى الوضع الفاتح",
     "changeToDarkMode": "التغيير إلى الوضع المظلم",
+    "speakSearchResult": "نطق نتيجة البحث",
+    "alwaysSpeak": "تحدث دائما",
+    "whenVoiceSearch": "عند البحث الصوتي",
+    "neverSpeak": "لا تتحدث أبدا",
+    "selectALanguageToUseVoiceSearch": "حدد لغة لاستخدام البحث الصوتي",
+    "voiceSearchLanguage": "لغة البحث الصوتي",
+    "defaultWord": "تلقائياً",
 
 
 

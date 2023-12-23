@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../core/theme/colors.dart';
 import '../providers/settings_provider.dart';
 
@@ -14,9 +16,9 @@ class ChangeVoiceSearchLanguage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            "Voice search language",
-            style: TextStyle(
+          Text(
+            AppLocalizations.of(context)!.voiceSearchLanguage,
+            style: const TextStyle(
               color: MyColors.tetraryColor,
               fontSize: 18,
             ),
@@ -39,7 +41,7 @@ class ChangeVoiceSearchLanguage extends StatelessWidget {
                             ),
                             const SizedBox(width: 20),
                             Text(
-                              "default",
+                              AppLocalizations.of(context)!.defaultWord,
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontSize: 18,

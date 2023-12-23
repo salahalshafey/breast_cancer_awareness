@@ -553,6 +553,34 @@
   "@changeToDarkMode": {
     "description": "tooltip Change to Dark Mode of ToggleThemeButton"
   },
+  "speakSearchResult": "Speak search result",
+  "@speakSearchResult": {
+    "description": "in `_SETTINGS_SCREEN`"
+  },
+  "alwaysSpeak": "Always speak",
+  "@alwaysSpeak": {
+    "description": "one of the choices of `speak search result`"
+  },
+  "whenVoiceSearch": "When voice search",
+  "@whenVoiceSearch": {
+    "description": "one of the choices of `speak search result`"
+  },
+  "neverSpeak": "Never speak",
+  "@neverSpeak": {
+    "description": "one of the choices of `speak search result`"
+  },
+  "selectALanguageToUseVoiceSearch": "Select a language to use voice search",
+  "@selectALanguageToUseVoiceSearch": {
+    "description": "tooltip for button to change speech language in `_SEARCH_SCREEN`"
+  },
+  "voiceSearchLanguage": "Voice search language",
+  "@voiceSearchLanguage": {
+    "description": "in `_SETTINGS_SCREEN`"
+  },
+  "defaultWord": "default",
+  "@defaultWord": {
+    "description": "the default word"
+  },
 
 
 

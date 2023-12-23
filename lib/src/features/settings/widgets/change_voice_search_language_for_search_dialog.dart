@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../core/theme/colors.dart';
 import '../providers/settings_provider.dart';
 
 class ChangViceSearchLanguageForSearchDialog extends StatelessWidget {
-  const ChangViceSearchLanguageForSearchDialog({super.key});
+  const ChangViceSearchLanguageForSearchDialog(
+    this.stopListing,
+    this.startListing, {
+    super.key,
+  });
+
+  final void Function() stopListing;
+  final void Function() startListing;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +38,8 @@ class ChangViceSearchLanguageForSearchDialog extends StatelessWidget {
               ),
             ],
           ),
-          tooltip: "Select a language to use voice search",
+          tooltip:
+              AppLocalizations.of(context)!.selectALanguageToUseVoiceSearch,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           itemBuilder: (context) {
@@ -60,8 +70,13 @@ class ChangViceSearchLanguageForSearchDialog extends StatelessWidget {
           },
           onSelected: (String? languageCode) {
             provider.changeVoiceSearchLanguage(
-                languageCode ?? provider.currentVoiceSearchLanguageCode);
+              languageCode ?? provider.currentVoiceSearchLanguageCode,
+            );
+
+            startListing();
           },
+          onCanceled: startListing,
+          onOpened: stopListing,
         );
       },
     );
