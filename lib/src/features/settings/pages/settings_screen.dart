@@ -1,3 +1,4 @@
+import 'package:breast_cancer_awareness/src/core/util/extensions/list_seperator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,19 +34,15 @@ class SettingsScreen extends StatelessWidget {
         ),
       ],
       child: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 80),
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 80),
         children: const [
-          SizedBox(height: 60),
+          SizedBox(height: 10),
           SetThemeMode(),
-          SizedBox(height: 30),
           ChangeLanguage(),
-          SizedBox(height: 30),
           SetNotificationsMode(),
-          SizedBox(height: 30),
           ChangeTextToSpeechType(),
-          SizedBox(height: 30),
           ChangeVoiceSearchLanguage(),
-        ],
+        ].verticalSeperateBy(const SizedBox(height: 50)),
       ),
     );
   }

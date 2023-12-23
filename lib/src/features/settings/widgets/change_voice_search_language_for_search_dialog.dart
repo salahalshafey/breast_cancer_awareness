@@ -27,7 +27,7 @@ class ChangViceSearchLanguageForSearchDialog extends StatelessWidget {
                 provider.currentVoiceSearchLanguageName,
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
-                  fontSize: 20,
+                  fontSize: 16,
                   fontWeight: FontWeight.w900,
                 ),
               ),
@@ -44,14 +44,14 @@ class ChangViceSearchLanguageForSearchDialog extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           itemBuilder: (context) {
             return provider.allAvailableVoiceSearchLanguagesWithDetails
-                .map((localWithFlage) => PopupMenuItem<String>(
-                      value: localWithFlage.languageCode,
+                .map((languageWithDetail) => PopupMenuItem<String>(
+                      value: languageWithDetail.languageCode,
                       child: Row(
                         children: [
-                          Text(localWithFlage.countryFlage),
+                          Text(languageWithDetail.countryFlage),
                           const SizedBox(width: 20),
                           Text(
-                            localWithFlage.languageFullName,
+                            languageWithDetail.languageFullName,
                             style: TextStyle(
                               color: Theme.of(context).primaryColor,
                               fontSize: 18,
@@ -59,7 +59,7 @@ class ChangViceSearchLanguageForSearchDialog extends StatelessWidget {
                             ),
                           ),
                           const Spacer(),
-                          localWithFlage.languageCode ==
+                          languageWithDetail.languageCode ==
                                   provider.currentVoiceSearchLanguageCode
                               ? const Icon(Icons.check)
                               : const SizedBox(),

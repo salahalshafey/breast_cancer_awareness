@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/theme/colors.dart';
+import '../../../core/util/widgets/column_or_row.dart';
 import '../providers/settings_provider.dart';
 
 class ChangeLanguage extends StatelessWidget {
@@ -11,16 +12,27 @@ class ChangeLanguage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isColumn = screenWidth < 700;
+
+    print(screenWidth);
+    print(MediaQuery.of(context).size.height);
+
     return Align(
-      // alignment: AlignmentDirectional.centerStart,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      alignment: AlignmentDirectional.centerStart,
+      child: ColumnOrRow(
+        isColumn: isColumn,
+        mainAxisAlignment:
+            isColumn ? MainAxisAlignment.start : MainAxisAlignment.spaceBetween,
+        crossAxisAlignment:
+            isColumn ? CrossAxisAlignment.start : CrossAxisAlignment.center,
         children: [
           Text(
             AppLocalizations.of(context)!.language,
             style: const TextStyle(
               color: MyColors.tetraryColor,
-              fontSize: 18,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
           ),
           Consumer<SettingsProvider>(
@@ -55,14 +67,14 @@ class ChangeLanguage extends StatelessWidget {
                     ),
                   ),
                   ...provider.allLocaleLanguagesWithDetails
-                      .map((localWithFlage) => DropdownMenuItem<String>(
-                            value: localWithFlage.languageCode,
+                      .map((languageWithDetail) => DropdownMenuItem<String>(
+                            value: languageWithDetail.languageCode,
                             child: Row(
                               children: [
-                                Text(localWithFlage.countryFlage),
+                                Text(languageWithDetail.countryFlage),
                                 const SizedBox(width: 20),
                                 Text(
-                                  localWithFlage.languageFullName,
+                                  languageWithDetail.languageFullName,
                                   style: TextStyle(
                                     color: Theme.of(context).primaryColor,
                                     fontSize: 18,

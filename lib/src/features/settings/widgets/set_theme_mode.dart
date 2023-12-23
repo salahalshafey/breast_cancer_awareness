@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/theme/colors.dart';
 
+import '../../../core/util/widgets/column_or_row.dart';
 import '../providers/settings_provider.dart';
 
 class SetThemeMode extends StatelessWidget {
@@ -12,16 +13,24 @@ class SetThemeMode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isColumn = screenWidth < 600;
+
     return Align(
-      // alignment: AlignmentDirectional.centerStart,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      alignment: AlignmentDirectional.centerStart,
+      child: ColumnOrRow(
+        isColumn: isColumn,
+        mainAxisAlignment:
+            isColumn ? MainAxisAlignment.start : MainAxisAlignment.spaceBetween,
+        crossAxisAlignment:
+            isColumn ? CrossAxisAlignment.start : CrossAxisAlignment.center,
         children: [
           Text(
             AppLocalizations.of(context)!.theme,
             style: const TextStyle(
               color: MyColors.tetraryColor,
-              fontSize: 18,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
           ),
           Consumer<SettingsProvider>(

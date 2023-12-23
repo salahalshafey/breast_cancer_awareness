@@ -21,7 +21,8 @@ class SetNotificationsMode extends StatelessWidget {
           AppLocalizations.of(context)!.notifications,
           style: const TextStyle(
             color: MyColors.tetraryColor,
-            fontSize: 18,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
           ),
         ),
         Switch(

@@ -25,14 +25,14 @@ class ChangLanguageForSignIn extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           itemBuilder: (context) {
             return provider.allLocaleLanguagesWithDetails
-                .map((localWithFlage) => PopupMenuItem<String>(
-                      value: localWithFlage.languageCode,
+                .map((languageWithDetail) => PopupMenuItem<String>(
+                      value: languageWithDetail.languageCode,
                       child: Row(
                         children: [
-                          Text(localWithFlage.countryFlage),
+                          Text(languageWithDetail.countryFlage),
                           const SizedBox(width: 20),
                           Text(
-                            localWithFlage.languageFullName,
+                            languageWithDetail.languageFullName,
                             style: TextStyle(
                               color: Theme.of(context).primaryColor,
                               fontSize: 18,
@@ -40,7 +40,7 @@ class ChangLanguageForSignIn extends StatelessWidget {
                             ),
                           ),
                           const Spacer(),
-                          localWithFlage.languageCode ==
+                          languageWithDetail.languageCode ==
                                   provider.currentLanguageCode
                               ? const Icon(Icons.check)
                               : const SizedBox(),

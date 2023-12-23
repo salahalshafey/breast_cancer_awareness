@@ -58,15 +58,15 @@ class SettingsProvider with ChangeNotifier {
   }
 
   String get currentLanguageName => allLocaleLanguagesWithDetails
-      .firstWhere((localWithDetail) =>
-          localWithDetail.languageCode == currentLanguageCode)
+      .firstWhere((languageWithDetail) =>
+          languageWithDetail.languageCode == currentLanguageCode)
       .languageFullName;
 
   Locale? get currentLocale => _userSettings.languageCode == "system"
       ? null
       : Locale(_userSettings.languageCode);
 
-  List<LocaleWithCountryFlage> get allLocaleLanguagesWithDetails =>
+  List<LanguageWithCountryFlag> get allLocaleLanguagesWithDetails =>
       Languages.allLocaleWithDetails
         ..sort((l1, l2) => l1.languageFullName.compareTo(l2.languageFullName));
 
@@ -123,11 +123,11 @@ class SettingsProvider with ChangeNotifier {
 
   String get currentVoiceSearchLanguageName =>
       allAvailableVoiceSearchLanguagesWithDetails
-          .firstWhere((localWithDetail) =>
-              localWithDetail.languageCode == currentVoiceSearchLanguageCode)
+          .firstWhere((languageWithDetail) =>
+              languageWithDetail.languageCode == currentVoiceSearchLanguageCode)
           .languageFullName;
 
-  List<LocaleWithCountryFlage>
+  List<LanguageWithCountryFlag>
       get allAvailableVoiceSearchLanguagesWithDetails => Languages
           .allWithDetails
         ..sort((l1, l2) => l1.languageFullName.compareTo(l2.languageFullName));
