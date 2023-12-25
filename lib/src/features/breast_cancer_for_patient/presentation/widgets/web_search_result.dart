@@ -247,7 +247,7 @@ class _WebSearchResultState extends State<WebSearchResult>
                 if (widget.searchType == SearchTypes.googleScholar)
                   Positioned(
                     right: 0,
-                    top: 30,
+                    top: 20,
                     child: Text(
                       AppLocalizations.of(context)!.articles,
                       style: TextStyle(

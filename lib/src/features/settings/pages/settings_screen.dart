@@ -22,7 +22,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultScreen(
-      appBartitle: AppLocalizations.of(context)!.settings,
+      // appBartitle: AppLocalizations.of(context)!.settings,
       appBarActions: [
         IconButton(
           onPressed: () {
@@ -36,7 +36,7 @@ class SettingsScreen extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 80),
         children: const [
-          SizedBox(height: 10),
+          SizedBox(),
           SetThemeMode(),
           ChangeLanguage(),
           SetNotificationsMode(),

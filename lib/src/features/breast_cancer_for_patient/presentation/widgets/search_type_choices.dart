@@ -24,6 +24,7 @@ class SearchTypeChoices extends StatelessWidget {
         maxWidth: 300,
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      initialValue: searchType,
       itemBuilder: (context) {
         return [
           PopupMenuItem<SearchTypes>(
@@ -32,15 +33,17 @@ class SearchTypeChoices extends StatelessWidget {
               children: [
                 Image.asset("assets/images/ai.png", height: 20),
                 const SizedBox(width: 20),
-                Text(
-                  AppLocalizations.of(context)!.askAi,
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Text(
+                    AppLocalizations.of(context)!.askAi,
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-                const Spacer(),
+                //  const Spacer(),
                 searchType == SearchTypes.ai
                     ? const Icon(Icons.check)
                     : const SizedBox(),

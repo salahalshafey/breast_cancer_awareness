@@ -552,7 +552,7 @@ class _ImageScreenState extends State<ImageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final captionMaxHeight = MediaQuery.of(context).size.height * 0.6;
+    final captionMaxHeight = MediaQuery.of(context).size.height * 0.4;
 
     return Scaffold(
       extendBodyBehindAppBar: true,

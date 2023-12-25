@@ -184,12 +184,15 @@ class ProfileScreen extends StatelessWidget {
                         );
                       },
                       icon: const Icon(Icons.edit),
-                      label: Text(AppLocalizations.of(context)!.editProfile),
-                      style: const ButtonStyle(
-                        fixedSize:
-                            MaterialStatePropertyAll(Size.fromWidth(260)),
-                        padding: MaterialStatePropertyAll(EdgeInsets.zero),
+                      label: Text(
+                        AppLocalizations.of(context)!.editProfile,
+                        // textAlign: TextAlign.center,
                       ),
+                      style: const ButtonStyle(
+                          //  fixedSize:
+                          //   MaterialStatePropertyAll(Size.fromWidth(260)),
+                          //   padding: MaterialStatePropertyAll(EdgeInsets.zero),
+                          ),
                     ),
                   ),
                   DeleteAccountButton(context),

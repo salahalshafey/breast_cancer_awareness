@@ -45,26 +45,28 @@ class SearchKeyWords extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40, // 60
+      height: 60, // 60
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: _keyWords.length,
         itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: ElevatedButton(
-              onPressed: () => setSearchWord(_keyWords[index]),
-              style: ButtonStyle(
-                textStyle:
-                    const MaterialStatePropertyAll(TextStyle(fontSize: 16)),
-                padding: const MaterialStatePropertyAll(EdgeInsets.all(8.0)),
-                backgroundColor: MaterialStatePropertyAll(
-                  _keyWords[index].isTheSameAS(searchWord)
-                      ? const Color.fromRGBO(181, 11, 99, 1)
-                      : null,
+          return Align(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: ElevatedButton(
+                onPressed: () => setSearchWord(_keyWords[index]),
+                style: ButtonStyle(
+                  textStyle:
+                      const MaterialStatePropertyAll(TextStyle(fontSize: 16)),
+                  padding: const MaterialStatePropertyAll(EdgeInsets.all(8.0)),
+                  backgroundColor: MaterialStatePropertyAll(
+                    _keyWords[index].isTheSameAS(searchWord)
+                        ? const Color.fromRGBO(181, 11, 99, 1)
+                        : null,
+                  ),
                 ),
+                child: Text(_keyWords[index]),
               ),
-              child: Text(_keyWords[index]),
             ),
           );
         },

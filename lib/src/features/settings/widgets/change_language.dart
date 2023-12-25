@@ -15,9 +15,6 @@ class ChangeLanguage extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final isColumn = screenWidth < 700;
 
-    print(screenWidth);
-    print(MediaQuery.of(context).size.height);
-
     return Align(
       alignment: AlignmentDirectional.centerStart,
       child: ColumnOrRow(
@@ -44,6 +41,7 @@ class ChangeLanguage extends StatelessWidget {
                   DropdownMenuItem<String>(
                     value: "system",
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Row(
                           children: [

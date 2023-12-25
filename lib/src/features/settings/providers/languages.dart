@@ -40,7 +40,7 @@ class Languages {
     ];
   }
 
-  /// * All languages +80, whether in supported Locales or not.
+  /// * All languages +70, whether in supported Locales or not.
   /// * The languages is in its native naming.
   ///
   static List<LanguageWithCountryFlag> get allWithDetails {
@@ -68,7 +68,6 @@ class Languages {
       const LanguageWithCountryFlag('vi', 'Tiếng Việt', '🇻🇳'),
       const LanguageWithCountryFlag('id', 'Bahasa Indonesia', '🇮🇩'),
       const LanguageWithCountryFlag('th', 'ไทย', '🇹🇭'),
-      const LanguageWithCountryFlag('vi', 'Tiếng Việt', '🇻🇳'),
       const LanguageWithCountryFlag('ms', 'Bahasa Melayu', '🇲🇾'),
       const LanguageWithCountryFlag('fil', 'Filipino', '🇵🇭'),
       const LanguageWithCountryFlag('my', 'မြန်မာ', '🇲🇲'),
@@ -76,7 +75,6 @@ class Languages {
       const LanguageWithCountryFlag('lo', 'ພາສາລາວ', '🇱🇦'),
       const LanguageWithCountryFlag('ne', 'नेपाली', '🇳🇵'),
       const LanguageWithCountryFlag('si', 'සිංහල', '🇱🇰'),
-      const LanguageWithCountryFlag('th', 'ไทย', '🇹🇭'),
       const LanguageWithCountryFlag('el', 'Ελληνικά', '🇬🇷'),
       const LanguageWithCountryFlag('pl', 'Polski', '🇵🇱'),
       const LanguageWithCountryFlag('sv', 'Svenska', '🇸🇪'),
@@ -101,38 +99,26 @@ class Languages {
       const LanguageWithCountryFlag('hy', 'Հայերեն', '🇦🇲'),
       const LanguageWithCountryFlag('ka', 'ქართული', '🇬🇪'),
       const LanguageWithCountryFlag('am', 'አማርኛ', '🇪🇹'),
-      const LanguageWithCountryFlag('sw', 'Kiswahili', '🇰🇪'),
       const LanguageWithCountryFlag('ha', 'Hausa', '🇳🇬'),
       const LanguageWithCountryFlag('yo', 'Yorùbá', '🇳🇬'),
       const LanguageWithCountryFlag('ig', 'Igbo', '🇳🇬'),
-      const LanguageWithCountryFlag('ne', 'नेपाली', '🇳🇵'),
       const LanguageWithCountryFlag('pa', 'ਪੰਜਾਬੀ', '🇮🇳'),
       const LanguageWithCountryFlag('ta', 'தமிழ்', '🇮🇳'),
       const LanguageWithCountryFlag('te', 'తెలుగు', '🇮🇳'),
       const LanguageWithCountryFlag('mr', 'मराठी', '🇮🇳'),
-      const LanguageWithCountryFlag('my', 'မြန်မာ', '🇲🇲'),
-      const LanguageWithCountryFlag('km', 'ភាសាខ្មែរ', '🇰🇭'),
-      const LanguageWithCountryFlag('lo', 'ພາສາລາວ', '🇱🇦'),
       const LanguageWithCountryFlag('uz', 'Oʻzbekcha', '🇺🇿'),
       const LanguageWithCountryFlag('ky', 'Кыргызча', '🇰🇬'),
       const LanguageWithCountryFlag('mn', 'Монгол', '🇲🇳'),
-      const LanguageWithCountryFlag('si', 'සිංහල', '🇱🇰'),
-      const LanguageWithCountryFlag('am', 'አማርኛ', '🇪🇹'),
       const LanguageWithCountryFlag('ti', 'ትግርኛ', '🇪🇹'),
       const LanguageWithCountryFlag('so', 'Soomaaliga', '🇸🇴'),
       const LanguageWithCountryFlag('rw', 'Kinyarwanda', '🇷🇼'),
       const LanguageWithCountryFlag('mg', 'Malagasy', '🇲🇬'),
       const LanguageWithCountryFlag('sn', 'ChiShona', '🇿🇼'),
-      const LanguageWithCountryFlag('ne', 'नेपाली', '🇳🇵'),
       const LanguageWithCountryFlag('dz', 'རྫོང་ཁ', '🇧🇹'),
       const LanguageWithCountryFlag('bo', 'བོད་སྐད', '🇧🇹'),
       const LanguageWithCountryFlag('ps', 'پښتو', '🇦🇫'),
       const LanguageWithCountryFlag('ug', 'ئۇيغۇرچە', '🇨🇳'),
-      const LanguageWithCountryFlag('ky', 'Кыргызча', '🇰🇬'),
       const LanguageWithCountryFlag('tk', 'Türkmen', '🇹🇲'),
-      const LanguageWithCountryFlag('mn', 'Монгол', '🇲🇳'),
-      const LanguageWithCountryFlag('ti', 'ትግርኛ', '🇪🇹'),
-      const LanguageWithCountryFlag('am', 'አማርኛ', '🇪🇹'),
     ];
   }
 }

@@ -108,6 +108,7 @@ Future<T?> showCustomAlretDialog<T>({
                   actionsBuilder(dialogContext).length == 1
               ? null
               : MainAxisAlignment.spaceAround,
+          actionsOverflowAlignment: OverflowBarAlignment.center,
         ),
       );
     },

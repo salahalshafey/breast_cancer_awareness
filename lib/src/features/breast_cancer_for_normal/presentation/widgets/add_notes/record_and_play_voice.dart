@@ -264,13 +264,10 @@ class RecordInfo extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(
-            width: 70,
-            child: Text(
-              formatedDuration(duration),
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 18),
-            ),
+          Text(
+            formatedDuration(duration),
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 18),
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -317,7 +314,6 @@ class AudioWaveProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
       width: 70,
       child: Row(
         textDirection: TextDirection.rtl, // define the direction of the wave

@@ -581,6 +581,10 @@
   "@defaultWord": {
     "description": "the default word"
   },
+  "allLanguages": "All Languages",
+  "@allLanguages": {
+    "description": "the All Languages word"
+  },
 
 
 
@@ -593,7 +597,7 @@
   "@appOverviewdetailed": {
     "description": "the details of the abb Overview in about screen"
   },
-  "contactUs": "* **Contact us** through this email: salahforgraduationproject@gmail.com",
+  "contactUs": "Contact us through this email:",
   "@contactUs": {
     "description": "contact Us through email in about screen"
   },

@@ -128,9 +128,21 @@ class SettingsProvider with ChangeNotifier {
           .languageFullName;
 
   List<LanguageWithCountryFlag>
-      get allAvailableVoiceSearchLanguagesWithDetails => Languages
-          .allWithDetails
-        ..sort((l1, l2) => l1.languageFullName.compareTo(l2.languageFullName));
+      get allAvailableVoiceSearchLanguagesWithDetails =>
+          Languages.allWithDetails.sublist(0, 9) +
+          (Languages.allWithDetails.sublist(9)
+            ..sort((l1, l2) =>
+                l1.languageFullName.compareTo(l2.languageFullName)));
+
+  List<LanguageWithCountryFlag> get suggestedVoiceSearchLanguagesWithDetails =>
+      Languages.allWithDetails
+          .where(
+            (languageWithDetail) =>
+                languageWithDetail.languageCode == "en" ||
+                languageWithDetail.languageCode ==
+                    currentVoiceSearchLanguageCode,
+          )
+          .toList();
 
   void changeVoiceSearchLanguage(String languageCode) {
     _userSettings =

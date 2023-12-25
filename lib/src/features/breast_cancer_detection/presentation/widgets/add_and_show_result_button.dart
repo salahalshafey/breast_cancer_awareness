@@ -222,13 +222,14 @@ class _RadioListState extends State<RadioList> {
   Widget build(BuildContext context) {
     return Container(
       constraints: const BoxConstraints(
-        minHeight: 260,
-        maxHeight: 280,
-        minWidth: 200,
-        maxWidth: 350,
+        //  minHeight: 260,
+        maxHeight: 500,
+        // minWidth: 200,
+        maxWidth: 400,
       ),
       padding: const EdgeInsets.all(16.0),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(

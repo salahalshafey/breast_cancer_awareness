@@ -50,11 +50,17 @@ class AboutScreen extends StatelessWidget {
             TextWellFormattedWithBulleted(
               data: AppLocalizations.of(context)!.appOverviewdetailed,
             ),
-            TextWellFormattedWithBulleted(
-              isSelectableText: true,
-              data: ///////// change this email //////////
-                  AppLocalizations.of(context)!.contactUs,
+            const SizedBox(height: 30),
+            BulletedList(text: Text(AppLocalizations.of(context)!.contactUs)),
+            const BulletedList(
+              bullet: SizedBox(width: 5),
+              text: TextWellFormattedWitouthBulleted(
+                data: "salahforgraduationproject@gmail.com",
+                isSelectableText: true,
+                textDirection: null,
+              ),
             ),
+            const SizedBox(height: 30),
             BulletedList(
               text: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,

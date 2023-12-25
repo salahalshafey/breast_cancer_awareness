@@ -154,7 +154,7 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget>
                         padding: MaterialStatePropertyAll(EdgeInsets.zero),
                       ),
                     ),
-                    ChangViceSearchLanguageForSearchDialog(
+                    ChangeVoiceSearchLanguageForSearchDialog(
                       _stopListening,
                       _startListening,
                     ),

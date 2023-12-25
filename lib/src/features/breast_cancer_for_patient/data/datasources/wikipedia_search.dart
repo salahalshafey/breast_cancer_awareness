@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:html/dom.dart' as dom;
+import 'package:flutter_langdetect/flutter_langdetect.dart' as langdetect;
 
 import '../../../../core/error/exceptions_without_message.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
@@ -23,7 +24,7 @@ class WikipediaScrappingImpl implements WikipediaSearch {
 
       final searchKey = query.split(RegExp(r" +")).join("+");
       final breastCancer = isFirstCharArabic ? "سرطان+الثدي" : "Breast+Cancer";
-      final lang = isFirstCharArabic ? "ar" : "en";
+      final lang = langdetect.detect(query);
       final searchHeaderTitle = isFirstCharArabic
           ? "%D8%AE%D8%A7%D8%B5%3A%D8%A8%D8%AD%D8%AB"
           : "Special:Search";

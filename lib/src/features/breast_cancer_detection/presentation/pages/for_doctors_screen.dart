@@ -55,7 +55,7 @@ class ForDoctorsScreen extends StatelessWidget {
                 height: screenSize.width * 0.65,
                 constraints: const BoxConstraints(
                   maxWidth: 450,
-                  maxHeight: 450 * 0.5,
+                  maxHeight: 450 * 0.75,
                 ),
                 padding: const EdgeInsets.all(1),
                 decoration: BoxDecoration(

@@ -17,19 +17,20 @@ Future<XFile?> myImagePicker(
   final choiceCamera = await showDialog<bool>(
       context: context,
       builder: (context) => Dialog(
-            child: SizedBox(
-              height: 200,
+            child: Padding(
+              padding: const EdgeInsets.all(15),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     AppLocalizations.of(context)!.pleaseChoose,
                     style: const TextStyle(
-                        fontSize: 25, fontWeight: FontWeight.bold),
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10),
                   TextButton.icon(
                     onPressed: () => Navigator.of(context).pop(true),
                     icon: const Icon(Icons.camera_alt),

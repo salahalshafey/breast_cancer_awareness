@@ -90,9 +90,11 @@ void showNoteDialog(BuildContext context, {required Widget child}) async {
     barrierDismissible: false,
     builder: (context) {
       return Dialog(
-        child: SizedBox(
-          height: 270,
-          width: 200,
+        child: Container(
+          constraints: const BoxConstraints(
+            maxWidth: 300,
+            maxHeight: 500,
+          ),
           child: child,
         ),
       );
