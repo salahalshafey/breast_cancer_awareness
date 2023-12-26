@@ -105,14 +105,16 @@ class FindingItem extends StatelessWidget {
             opacity: Theme.of(context).brightness == Brightness.dark ? 0.7 : 1,
           ),
           const SizedBox(width: 20),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: null,
+          Expanded(
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: null,
+              ),
             ),
-          )
+          ),
         ],
       ),
     );

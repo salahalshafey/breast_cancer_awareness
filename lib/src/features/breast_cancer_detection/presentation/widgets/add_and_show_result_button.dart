@@ -29,7 +29,8 @@ class AddAndShowResultButton extends StatelessWidget {
 
         if (provider.networkImage == null && provider.fileImage == null) {
           throw ErrorForDialog(
-              AppLocalizations.of(context)!.youDidntProvideAnImage);
+            AppLocalizations.of(context)!.youDidntProvideAnImage,
+          );
         }
 
         if (user == null || user.userType == UserTypes.guest) {
@@ -40,6 +41,8 @@ class AddAndShowResultButton extends StatelessWidget {
             title: AppLocalizations.of(context)!.signIn,
             titleColor: color,
             content: AppLocalizations.of(context)!.youHaveToSignInToContinue,
+            actionsPadding:
+                const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
             actionsBuilder: (dialogContext) => [
               OutlinedButton(
                 onPressed: () {
@@ -126,28 +129,35 @@ class AddAndShowResultButton extends StatelessWidget {
                   .rotate(begin: 0, end: -1.043 * 3, duration: 50.ms),
             ),
           ),
-          const Spacer(),
-          TextButton(
-            onPressed: showResult,
-            child: Text(
-              AppLocalizations.of(context)!.showResult,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
+          // const Spacer(),
+          Expanded(
+            child: Align(
+              child: TextButton(
+                onPressed: showResult,
+                child: Text(
+                  AppLocalizations.of(context)!.showResult,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
+                  .animate(
+                      target: provider.fileImage != null ||
+                              provider.networkImage != null
+                          ? 1
+                          : 0)
+                  .slideX(
+                    begin: Directionality.of(context) == TextDirection.ltr
+                        ? 2
+                        : -2,
+                    end: 0,
+                    duration: 500.ms,
+                  )
+                  .fade(begin: 0, end: 1),
             ),
           )
-              .animate(
-                  target: provider.fileImage != null ||
-                          provider.networkImage != null
-                      ? 1
-                      : 0)
-              .slideX(
-                begin: Directionality.of(context) == TextDirection.ltr ? 2 : -2,
-                end: 0,
-                duration: 500.ms,
-              )
-              .fade(begin: 0, end: 1)
         ],
       ),
     );

@@ -28,6 +28,7 @@ class BreastCheckHistorytem extends StatelessWidget {
       title: AppLocalizations.of(context)!.areYouSure,
       content: AppLocalizations.of(context)!.confirmDeletion,
       titleColor: Colors.red,
+      actionsPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
       actionsBuilder: (dialogContext) => [
         ElevatedButton(
           onPressed: () {

@@ -136,7 +136,10 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
           },
           style: ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(titleColor)),
-          child: Text(AppLocalizations.of(context)!.finishedResetting),
+          child: Text(
+            AppLocalizations.of(context)!.finishedResetting,
+            textAlign: TextAlign.center,
+          ),
         ),
       ],
     );
@@ -165,6 +168,7 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
             decoration: InputDecoration(
               hintText: AppLocalizations.of(context)!.email,
               fillColor: _isEmailFocused ? focusColor : null,
+              errorMaxLines: 2,
             ),
             onTapOutside: (_) {
               _focusNodeForEmail.unfocus();
@@ -199,7 +203,10 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
                     fixedSize: MaterialStatePropertyAll(
                         Size.fromWidth(double.maxFinite)),
                   ),
-                  child: Text(AppLocalizations.of(context)!.sendResetRequest),
+                  child: Text(
+                    AppLocalizations.of(context)!.sendResetRequest,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
         ],
       ),

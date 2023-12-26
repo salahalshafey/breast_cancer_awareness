@@ -8,7 +8,7 @@
 
 
     "@_CORE": {},
-    "ok": "موافق",
+    "ok": "حسناً",
     "back": "رجوع",
     "error": "خطأ",
     "pleaseChoose": "الرجاء تحديد خيار",
@@ -312,7 +312,7 @@
     "yourReminderHasBeenSet": "تم ضبط تذكيرك:",
     "doYouWantToBeRemindedToCheckAgainIn": "هل ترغبين في أن يتم تذكيرك بالفحص مرة أخرى بعد {durationInString}؟",
     "yourNextSelfcheckIsDue": "الفحص الذاتي التالي قد حان.",
-    "dontWorry": "لا تقلق",
+    "dontWorry": "لا تقلقِ",
     "nextReminder": "التذكير التالي",
     "ifYouNoticedAnythingUnusualWhenExaminingYourBreasts": "إذا لاحظتِ أي شيء غير عادي عند فحص ثدييكِ، فابقي هادئة! قومي بفحص المنطقة مرة أخرى بعد الدورة الشهرية القادمة. إذا استمر التغيير، يجب عليكِ رؤية الطبيب.\n\n",
     "youWillAutomaticallyBeReminded": "سيتم تذكيرك تلقائيًا بالفحص التالي الخاص بك.\n\nهذا سيكون في:",

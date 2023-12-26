@@ -30,6 +30,7 @@ class ChangeVoiceSearchLanguageForSearchDialog extends StatelessWidget {
             children: [
               Text(
                 provider.currentVoiceSearchLanguageName,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
                   fontSize: 16,
@@ -77,9 +78,8 @@ class ChangeVoiceSearchLanguageForSearchDialog extends StatelessWidget {
                       )),
               PopupMenuItem<String>(
                 enabled: false,
-                child: Align(
-                  child: SeeAllAndChangeVoiceSearchLanguages(startListing),
-                ),
+                padding: EdgeInsets.zero,
+                child: SeeAllAndChangeVoiceSearchLanguages(startListing),
               ),
             ];
           },
@@ -116,7 +116,7 @@ class SeeAllAndChangeVoiceSearchLanguages extends StatelessWidget {
             maxWidth: 300,
           ),
           icon: Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 AppLocalizations.of(context)!.allLanguages,

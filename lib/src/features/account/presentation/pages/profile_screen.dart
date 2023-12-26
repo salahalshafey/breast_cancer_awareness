@@ -186,7 +186,7 @@ class ProfileScreen extends StatelessWidget {
                       icon: const Icon(Icons.edit),
                       label: Text(
                         AppLocalizations.of(context)!.editProfile,
-                        // textAlign: TextAlign.center,
+                        textAlign: TextAlign.center,
                       ),
                       style: const ButtonStyle(
                           //  fixedSize:

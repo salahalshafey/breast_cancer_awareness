@@ -68,7 +68,7 @@
   "@doYouWantToExit": {
     "description": "the response if you pressed the system navigation back button ON the scope of homeScreen"
   },
-  "exit": "  Exit  ",
+  "exit": " Exit ",
   "@exit": {
     "description": "the Exit word"
   },

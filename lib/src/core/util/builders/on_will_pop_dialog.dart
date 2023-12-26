@@ -7,12 +7,14 @@ import 'custom_alret_dialog.dart';
 Future<bool> exitWillPopDialog(BuildContext context) async {
   return (await showCustomAlretDialog<bool>(
         context: context,
+        constraints: const BoxConstraints(minWidth: 300),
         canPopScope: false,
         barrierDismissible: false,
         dialogDismissedAfter: const Duration(seconds: 5),
         title: AppLocalizations.of(context)!.attention,
         titleColor: Colors.red,
         content: AppLocalizations.of(context)!.doYouWantToExit,
+        actionsPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
         actionsBuilder: (dialogContext) => [
           ElevatedButton(
             onPressed: () {

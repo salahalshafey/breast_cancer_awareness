@@ -21,11 +21,11 @@ Future<T?> showCustomAlretDialog<T>({
   required String content,
   double contentFontSize = 16.0,
   EdgeInsetsGeometry contentPadding = const EdgeInsets.all(10),
+  EdgeInsetsGeometry actionsPadding = const EdgeInsets.all(10),
   Widget? contentWidget,
   Color? titleColor,
   Widget? icon,
   List<Widget> Function(BuildContext dialogContext)? actionsBuilder,
-  double actionsPaddingAll = 10.0,
   BoxConstraints? constraints,
   bool barrierDismissible = true,
   bool canPopScope = true,
@@ -53,7 +53,7 @@ Future<T?> showCustomAlretDialog<T>({
             top: 10,
             bottom: 10,
           ),
-          actionsPadding: EdgeInsets.all(actionsPaddingAll),
+          actionsPadding: actionsPadding,
           title: Row(
             children: [
               icon ??

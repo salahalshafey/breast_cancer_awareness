@@ -42,21 +42,24 @@ class PickImage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        TextButton(
-          onPressed: () async {
-            final image =
-                await ImagePicker().pickImage(source: ImageSource.camera);
-            if (image == null) {
-              return;
-            }
-            provider.setFileImage(File(image.path));
-          },
-          child: Text(
-            AppLocalizations.of(context)!.openCamera,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).appBarTheme.titleTextStyle!.color,
+        Expanded(
+          child: TextButton(
+            onPressed: () async {
+              final image =
+                  await ImagePicker().pickImage(source: ImageSource.camera);
+              if (image == null) {
+                return;
+              }
+              provider.setFileImage(File(image.path));
+            },
+            child: Text(
+              AppLocalizations.of(context)!.openCamera,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).appBarTheme.titleTextStyle!.color,
+              ),
             ),
           ),
         ),
@@ -68,24 +71,27 @@ class PickImage extends StatelessWidget {
             color: Colors.black45,
           ),
         ),
-        TextButton(
-          onPressed: () async {
-            final image =
-                await ImagePicker().pickImage(source: ImageSource.gallery);
-            if (image == null) {
-              return;
-            }
-            provider.setFileImage(File(image.path));
-          },
-          child: Text(
-            AppLocalizations.of(context)!.pickAnImage,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).appBarTheme.titleTextStyle!.color,
+        Expanded(
+          child: TextButton(
+            onPressed: () async {
+              final image =
+                  await ImagePicker().pickImage(source: ImageSource.gallery);
+              if (image == null) {
+                return;
+              }
+              provider.setFileImage(File(image.path));
+            },
+            child: Text(
+              AppLocalizations.of(context)!.pickAnImage,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).appBarTheme.titleTextStyle!.color,
+              ),
             ),
+            //style: ButtonStyle(textStyle: ),
           ),
-          //style: ButtonStyle(textStyle: ),
         ),
       ],
     );

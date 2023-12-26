@@ -25,6 +25,7 @@ Future<XFile?> myImagePicker(
                 children: [
                   Text(
                     AppLocalizations.of(context)!.pleaseChoose,
+                    textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -55,7 +56,7 @@ Future<XFile?> myImagePicker(
     imageQuality: imageQuality,
     maxWidth: maxWidth,
     maxHeight: maxHeight,
-    preferredCameraDevice: CameraDevice.front,
+    preferredCameraDevice: preferredCameraDevice,
     requestFullMetadata: requestFullMetadata,
   );
 }

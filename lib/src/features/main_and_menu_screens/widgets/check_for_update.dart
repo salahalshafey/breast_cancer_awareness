@@ -108,6 +108,7 @@ void forceUpdateAfterDaysDialog(
     contentPadding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
     content: AppLocalizations.of(context)!
         .thisVersionOfTheAppNotSupportedAfterDays(daysToUpdateString),
+    actionsPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
     actionsBuilder: (dialogContext) => [
       OutlinedButton(
         onPressed: () {
@@ -148,6 +149,7 @@ void selectiveUpdateDialog(
     contentPadding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
     content: AppLocalizations.of(context)!
         .newVersionOfTheAppIsAvailable(latestAppVersion, currentAppVersion),
+    actionsPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
     actionsBuilder: (dialogContext) => [
       OutlinedButton(
         onPressed: () {

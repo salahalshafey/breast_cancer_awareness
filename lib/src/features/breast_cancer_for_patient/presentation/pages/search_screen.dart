@@ -48,6 +48,8 @@ class _SearchScreenState extends State<SearchScreen> {
           title: AppLocalizations.of(context)!.signIn,
           titleColor: color,
           content: AppLocalizations.of(context)!.youHaveToSignInToContinue,
+          actionsPadding:
+              const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
           actionsBuilder: (dialogContext) => [
             OutlinedButton(
               onPressed: () {

@@ -211,7 +211,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.firstName,
                     fillColor: _isFirstNameFocused ? focusColor : null,
-                    errorMaxLines: 2,
+                    errorMaxLines: 3,
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -264,7 +264,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.lastName,
                     fillColor: _isLastNameFocused ? focusColor : null,
-                    errorMaxLines: 2,
+                    errorMaxLines: 3,
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -416,7 +416,7 @@ class _SignUpFormState extends State<SignUpForm> {
             style: const TextStyle(color: Colors.white, fontSize: 20),
             decoration: InputDecoration(
               hintText: AppLocalizations.of(context)!.confirmPassword,
-              errorMaxLines: 1,
+              errorMaxLines: 2,
               fillColor: _isPasswordConfirmFocused ? focusColor : null,
               suffixIconColor: Colors.white,
               suffixIcon: _isPasswordConfirmIconShowen

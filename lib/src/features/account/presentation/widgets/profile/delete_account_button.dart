@@ -30,6 +30,7 @@ class DeleteAccountButton extends StatelessWidget {
       title: AppLocalizations.of(profileScreenContext)!.dangerousArea,
       content: AppLocalizations.of(profileScreenContext)!
           .areYouSureOfDeletingYourAccount,
+      actionsPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
       actionsBuilder: (dialogContext) => [
         ElevatedButton(
           onPressed: () {
@@ -73,7 +74,7 @@ class DeleteAccountButton extends StatelessWidget {
           .pleaseEnterYourPasswordToConfirm,
       contentWidget: const PasswordTextFieldToDeleteAccount(),
       actionsBuilder: (dialogContext) => [],
-      actionsPaddingAll: 0,
+      actionsPadding: const EdgeInsets.all(0),
     );
 
     SystemChrome.setPreferredOrientations([

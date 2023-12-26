@@ -121,14 +121,15 @@ Future<bool?> _showConfirmDeletionDialog(BuildContext context) {
     title: AppLocalizations.of(context)!.warning,
     content: AppLocalizations.of(context)!
         .areYouSureOfDeletingAllYourSelfchecks(textDirection),
+    actionsPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
     actionsBuilder: (dialogContext) => [
       ElevatedButton(
         onPressed: () {
           Navigator.of(dialogContext).pop(true);
         },
         style: ButtonStyle(
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(8.0)),
-          //   fixedSize: const MaterialStatePropertyAll(Size.fromWidth(130)),
+          padding: const MaterialStatePropertyAll(EdgeInsets.zero),
+          fixedSize: const MaterialStatePropertyAll(Size.fromWidth(130)),
           backgroundColor: MaterialStatePropertyAll(Colors.red.shade900),
         ),
         child: Text(AppLocalizations.of(context)!.deleteAll),
@@ -139,9 +140,8 @@ Future<bool?> _showConfirmDeletionDialog(BuildContext context) {
         },
         style: ButtonStyle(
           foregroundColor: MaterialStatePropertyAll(Colors.red.shade900),
-          padding: const MaterialStatePropertyAll(
-              EdgeInsets.symmetric(vertical: 8, horizontal: 30)),
-          // fixedSize: const MaterialStatePropertyAll(Size.fromWidth(110)),
+          padding: const MaterialStatePropertyAll(EdgeInsets.zero),
+          fixedSize: const MaterialStatePropertyAll(Size.fromWidth(110)),
           side:
               MaterialStatePropertyAll(BorderSide(color: Colors.red.shade900)),
         ),

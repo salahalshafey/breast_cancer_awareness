@@ -12,6 +12,10 @@ class ChangLanguageForSignIn extends StatelessWidget {
     return Consumer<SettingsProvider>(
       builder: (context, provider, child) {
         return PopupMenuButton<String>(
+          constraints: const BoxConstraints(
+            minWidth: 4.0 * 56.0,
+            maxWidth: 300,
+          ),
           icon: Text(
             provider.currentLanguageName,
             style: TextStyle(
