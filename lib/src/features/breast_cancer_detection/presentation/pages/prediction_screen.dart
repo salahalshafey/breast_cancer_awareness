@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_ml_model_downloader/firebase_ml_model_downloader.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 
@@ -17,6 +18,7 @@ import 'dart:io';
 import '../../../../app.dart';
 import '../../../../core/error/error_exceptions_with_message.dart';
 import '../../../../core/util/widgets/image_container.dart';
+import '../../../settings/providers/settings_provider.dart';
 import '../providers/for_doctor_screen_state_provider.dart';
 import '../widgets/styled_text.dart';
 
@@ -29,9 +31,31 @@ class PredictionScreen extends StatefulWidget {
 }
 
 class _PredictionScreenState extends State<PredictionScreen> {
+  final FlutterTts _flutterTts = FlutterTts();
+
   @override
   void initState() {
     super.initState();
+  }
+
+  void _speakWithCurrentLanguage(String spokenString) async {
+    final currentAppLanguage = Localizations.localeOf(context).languageCode;
+
+    if (await _flutterTts.isLanguageAvailable(currentAppLanguage)) {
+      await _flutterTts.setLanguage(currentAppLanguage);
+
+      _flutterTts.speak(spokenString);
+    }
+  }
+
+  void _speakIfPossible(String spokenString, void Function(String) speakWith) {
+    final textToSpeechType =
+        Provider.of<SettingsProvider>(context, listen: false).textToSpeechType;
+
+    if (textToSpeechType == TextToSpeechType.alwaysSpeak ||
+        textToSpeechType == TextToSpeechType.whenSearchWithVoiceOnly) {
+      speakWith(spokenString);
+    }
   }
 
   @override
@@ -75,7 +99,9 @@ class _PredictionScreenState extends State<PredictionScreen> {
                 ],
               ),
             );
-          } else if (snapshot.hasError || snapshot.data == null) {
+          }
+
+          if (snapshot.hasError || snapshot.data == null) {
             return Center(
               child: Text(
                 snapshot.error == null
@@ -92,7 +118,11 @@ class _PredictionScreenState extends State<PredictionScreen> {
           final imageType = isXray
               ? AppLocalizations.of(context)!.xrayImage
               : AppLocalizations.of(context)!.histologyImage;
+
           final prediction = snapshot.data!;
+
+          _speakIfPossible(prediction, _speakWithCurrentLanguage);
+
           return ListView(
             padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 20),
             children: [

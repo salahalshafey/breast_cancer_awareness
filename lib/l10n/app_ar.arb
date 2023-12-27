@@ -2,8 +2,8 @@
     "@_LANGAUGES": {},
     "english": "الإنجليزية",
     "arabic": "العربية",
+    "spanish": "الأسبانية",
     "frensh": "الفرنسية",
-
 
 
 
@@ -84,9 +84,6 @@
     "forDoctors": "للأطباء",
     "forPatients": "للمرضى",
     "openMenu": "افتح القائمة",
-
-    
-
     "@_MENUE_SCREEN": {},
     "profile": "الحساب الشخصي",
     "shareTheApp": "شارك التطبيق",
@@ -94,9 +91,6 @@
     "about": "عن التطبيق",
     "logout": "تسجيل الخروج",
     "signIn": "تسجيل الدخول",
-
-
-
     "@_CHECK_FOR_UPDATES": {},
     "checkForUpdates": "تحقق من وجود تحديثات",
     "errorHappendWhileCheckingForUpdates": "حدث خطأ أثناء محاولة البحث عن تحديثات",
@@ -132,7 +126,6 @@
     "voiceSearchLanguage": "لغة البحث الصوتي",
     "defaultWord": "تلقائياً",
     "allLanguages": "كل اللغات",
-
 
 
 

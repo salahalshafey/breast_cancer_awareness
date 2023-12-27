@@ -18,6 +18,7 @@ import '../../domain/entities/search_types.dart';
 
 import '../../../settings/providers/settings_provider.dart';
 
+import '../providers/instructions_with_lang.dart';
 import '../providers/search.dart';
 
 class WebSearchResult extends StatefulWidget {
@@ -267,9 +268,14 @@ class _WebSearchResultState extends State<WebSearchResult>
 }
 
 String _spokenString(List<SearchResult> result) {
-  final instructions = firstCharIsRtl(result.first.title)
-      ? "فيما يلي نتائج أخرى، يمكنك الضغط على أي من هذه النتائج لفتحها."
-      : "Below is another search results. You can tap on any result to open it.";
+  if (result.length == 1) {
+    return "${result.first.title}.\n${result.first.snippet}.";
+  }
+
+  final theResultLanguage =
+      langdetect.detect("${result.first.title}.\n${result.first.snippet}");
+
+  final instructions = INSTRUCTIONS[theResultLanguage] ?? INSTRUCTIONS['en'];
 
   return "${result.first.title}.\n${result.first.snippet}.\n $instructions";
 }

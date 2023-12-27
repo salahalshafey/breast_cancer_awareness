@@ -37,6 +37,11 @@ class Languages {
         AppLocalizations.of(context)!.arabic,
         "🇪🇬",
       ),
+      LanguageWithCountryFlag(
+        "es",
+        AppLocalizations.of(context)!.spanish,
+        "🇪🇸",
+      ),
     ];
   }
 
