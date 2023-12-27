@@ -128,11 +128,14 @@ Future<bool?> _showConfirmDeletionDialog(BuildContext context) {
           Navigator.of(dialogContext).pop(true);
         },
         style: ButtonStyle(
-          padding: const MaterialStatePropertyAll(EdgeInsets.zero),
-          fixedSize: const MaterialStatePropertyAll(Size.fromWidth(130)),
+          //  padding: const MaterialStatePropertyAll(EdgeInsets.zero),
+          // fixedSize: const MaterialStatePropertyAll(Size.fromWidth(130)),
           backgroundColor: MaterialStatePropertyAll(Colors.red.shade900),
         ),
-        child: Text(AppLocalizations.of(context)!.deleteAll),
+        child: Text(
+          AppLocalizations.of(context)!.deleteAll,
+          textAlign: TextAlign.center,
+        ),
       ),
       OutlinedButton(
         onPressed: () {
@@ -140,12 +143,15 @@ Future<bool?> _showConfirmDeletionDialog(BuildContext context) {
         },
         style: ButtonStyle(
           foregroundColor: MaterialStatePropertyAll(Colors.red.shade900),
-          padding: const MaterialStatePropertyAll(EdgeInsets.zero),
-          fixedSize: const MaterialStatePropertyAll(Size.fromWidth(110)),
+          // padding: const MaterialStatePropertyAll(EdgeInsets.zero),
+          // fixedSize: const MaterialStatePropertyAll(Size.fromWidth(110)),
           side:
               MaterialStatePropertyAll(BorderSide(color: Colors.red.shade900)),
         ),
-        child: Text(AppLocalizations.of(context)!.cancel),
+        child: Text(
+          AppLocalizations.of(context)!.cancel,
+          textAlign: TextAlign.center,
+        ),
       ),
     ],
   );

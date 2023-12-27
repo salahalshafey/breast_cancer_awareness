@@ -42,6 +42,21 @@ class Languages {
         AppLocalizations.of(context)!.spanish,
         "🇪🇸",
       ),
+      LanguageWithCountryFlag(
+        "fr",
+        AppLocalizations.of(context)!.frensh,
+        "🇫🇷",
+      ),
+      LanguageWithCountryFlag(
+        "de",
+        AppLocalizations.of(context)!.german,
+        "🇩🇪",
+      ),
+      LanguageWithCountryFlag(
+        "tr",
+        AppLocalizations.of(context)!.turkish,
+        "🇹🇷",
+      ),
     ];
   }
 

@@ -4,6 +4,8 @@
     "arabic": "Árabe",
     "spanish": "Española",
     "frensh": "Francés",
+    "german": "alemán",
+    "turkish": "turco",
 
 
 
@@ -36,7 +38,7 @@
     "oneSpecialCharachtersLike": "1 caracteres especiales como ",
     "passwordMustContainAtLeast": "La contraseña debe contener al menos",
     "comma": ", ",
-    "and": " Y ",
+    "and": "Y ",
     "today": "Hoy",
     "yesterday": "Ayer",
     "at": "a las",
@@ -133,7 +135,7 @@
     "appOverview": "Descripción de la aplicación",
     "appOverviewdetailed": "**Breast Cancer Awareness app** es una herramienta integral diseñada para crear conciencia y promover la detección temprana del cáncer de mama. Aborda cuatro aspectos clave: proporcionar `información y conciencia`, facilitar la `autoexploración` a través de un verificador de síntomas, ayudar a los médicos con modelos de `aprendizaje profundo` para la detección, y ofrecer recursos de `apoyo` y `orientación` para los pacientes.\n* **Propósito:** La aplicación fue creada con el objetivo principal de empoderar a las personas para que tomen el control de su salud mamaria. Al amalgamar información, herramientas de autoexploración, modelos de detección avanzados y recursos de apoyo, buscamos contribuir a la detección temprana y el manejo del cáncer de mama.\n* **Público objetivo:** Nuestro público objetivo abarca una amplia gama, incluyendo a individuos de todos los géneros interesados en la conciencia de la salud mamaria, aquellos que realizan autoexploraciones, profesionales médicos que buscan herramientas de diagnóstico avanzadas y pacientes que necesitan apoyo y orientación.\n\n**Funciones clave**\n* **Centro de información:** Información accesible sobre el cáncer de mama, sus síntomas, factores de riesgo y medidas preventivas.\n* **Verificador de síntomas:** Una herramienta interactiva de autoexploración que guía a los usuarios en la detección de posibles síntomas.\n* **Modelos de aprendizaje profundo:** Modelos de inteligencia artificial avanzados para médicos, ayudando en la detección del cáncer de mama a partir de imágenes de mamografías e histopatología.\n* **Apoyo al paciente:** Orientación sobre nutrición, dieta y ejercicio, junto con un chatbot que proporciona respuestas y orientación a través de capacidades de texto a voz y voz a texto.\n\n**Datos e Investigación**\n* **Breast Cancer Awareness app** se construye sobre una base de investigación exhaustiva y colaboración con profesionales médicos. Hemos incorporado conocimientos de estudios reputados y nos hemos asociado con expertos en el campo para desarrollar los modelos de aprendizaje profundo. El contenido de la aplicación se cura en base a información respaldada por evidencia para garantizar precisión y confiabilidad.\n\n**Contacto y Privacidad de la aplicación**",
     "contactUs": "Contáctenos a través de este correo electrónico:",
-    "app": "Aplicación",
+    "app": "Aplicación ",
     "privacyPolicy": "Política de privacidad",
     "termsOfService": "Términos de servicio",
 

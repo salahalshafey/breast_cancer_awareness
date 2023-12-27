@@ -4,6 +4,8 @@
     "arabic": "العربية",
     "spanish": "الأسبانية",
     "frensh": "الفرنسية",
+    "german": "الألمانية",
+    "turkish": "التركية",
 
 
 
@@ -36,7 +38,7 @@
     "oneSpecialCharachtersLike": "حرف خاص مثل ",
     "passwordMustContainAtLeast": "يجب أن تحتوي كلمة المرور على الأقل",
     "comma": " و",
-    "and": " و",
+    "and": "و",
     "today": "اليوم",
     "yesterday": "أمس",
     "at": "الساعة",

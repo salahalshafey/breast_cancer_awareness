@@ -16,6 +16,15 @@
   "@frensh": {
     "description": "the frensh language word"
   },
+  "german": "German",
+  "@german": {
+    "description": "the german language word"
+  },
+  "turkish": "Turkish",
+  "@turkish": {
+    "description": "the turkish language word"
+  },
+
 
 
 
@@ -132,7 +141,7 @@
   "@comma": {
     "description": "the comma seperator `,`"
   },
-  "and": " And ",
+  "and": "And ",
   "@and": {
     "description": "the and word"
   },
@@ -417,9 +426,6 @@
   "@openMenu": {
     "description": "Open Menu tooltip of mainScreen"
   },
-
-
-
   "@_MENUE_SCREEN": {},
   "profile": "Profile",
   "@profile": {
@@ -449,9 +455,6 @@
   "@signIn": {
     "description": "the Sign In button of menue screen 'guest view'"
   },
-
-
-
   "@_CHECK_FOR_UPDATES": {},
   "checkForUpdates": "Check for updates",
   "@checkForUpdates": {
@@ -985,6 +988,7 @@
   },
 
 
+
   "@_HOME_SCREEN": {},
   "hello": "Hello",
   "@hello": {
@@ -1305,6 +1309,7 @@
   "@recording": {
     "description": "the Recording word"
   },
+
 
 
   "@_FOR_DOCTOR_SCREENS": {},

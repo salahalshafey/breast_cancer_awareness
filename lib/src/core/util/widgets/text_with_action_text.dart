@@ -33,7 +33,7 @@ class _TextWithActionTextState extends State<TextWithActionText> {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.centerLeft,
+      alignment: AlignmentDirectional.centerStart,
       child: Text.rich(
         TextSpan(
           children: [

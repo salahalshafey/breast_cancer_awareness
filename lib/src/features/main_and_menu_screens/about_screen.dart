@@ -62,36 +62,33 @@ class AboutScreen extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             BulletedList(
-              text: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextWithActionText(
-                    text: AppLocalizations.of(context)!.app,
-                    actionText: AppLocalizations.of(context)!.privacyPolicy,
-                    actionTextStyle: const TextStyle(color: Colors.blue),
-                    onActionTextTap: () {
-                      launchUrl(
-                        Uri.parse(
-                            "https://breastcancerawareness-privacypolicy.tiiny.site/"),
-                        mode: LaunchMode.inAppWebView,
-                      );
-                    },
-                  ),
-                  Expanded(
-                    child: TextWithActionText(
-                      text: AppLocalizations.of(context)!.and,
-                      actionText: AppLocalizations.of(context)!.termsOfService,
-                      actionTextStyle: const TextStyle(color: Colors.blue),
-                      onActionTextTap: () {
-                        launchUrl(
-                          Uri.parse(
-                              "https://breastcancerawareness-termsofservice.tiiny.site/"),
-                          mode: LaunchMode.inAppWebView,
-                        );
-                      },
-                    ),
-                  ),
-                ],
+              text: TextWithActionText(
+                text: AppLocalizations.of(context)!.app,
+                actionText: AppLocalizations.of(context)!.privacyPolicy,
+                actionTextStyle: const TextStyle(color: Colors.blue),
+                onActionTextTap: () {
+                  launchUrl(
+                    Uri.parse(
+                        "https://breastcancerawareness-privacypolicy.tiiny.site/"),
+                    mode: LaunchMode.inAppWebView,
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 30),
+            BulletedList(
+              //  bullet: const SizedBox(width: 5),
+              text: TextWithActionText(
+                text: "", //AppLocalizations.of(context)!.and,
+                actionText: AppLocalizations.of(context)!.termsOfService,
+                actionTextStyle: const TextStyle(color: Colors.blue),
+                onActionTextTap: () {
+                  launchUrl(
+                    Uri.parse(
+                        "https://breastcancerawareness-termsofservice.tiiny.site/"),
+                    mode: LaunchMode.inAppWebView,
+                  );
+                },
               ),
             ),
             const SizedBox(height: 50),
