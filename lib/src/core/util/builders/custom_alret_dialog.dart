@@ -47,9 +47,9 @@ Future<T?> showCustomAlretDialog<T>({
         canPop: canPopScope,
         child: AlertDialog(
           contentPadding: contentPadding,
-          titlePadding: const EdgeInsets.only(
-            left: 20,
-            right: 10,
+          titlePadding: const EdgeInsetsDirectional.only(
+            start: 20,
+            end: 10,
             top: 10,
             bottom: 10,
           ),

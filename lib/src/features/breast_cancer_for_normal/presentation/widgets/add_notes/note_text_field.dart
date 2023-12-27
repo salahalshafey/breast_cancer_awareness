@@ -48,8 +48,12 @@ class _NoteTextFieldState extends State<NoteTextField> {
               fontSize: 18,
             ),
             decoration: InputDecoration(
-              contentPadding:
-                  const EdgeInsets.only(left: 20, right: 5, top: 5, bottom: 5),
+              contentPadding: const EdgeInsetsDirectional.only(
+                start: 20,
+                end: 5,
+                top: 5,
+                bottom: 5,
+              ),
               hintText: AppLocalizations.of(context)!.enterATextNote,
               hintStyle: const TextStyle(),
               isDense: true,

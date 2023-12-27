@@ -30,11 +30,14 @@ class ImageWithClearBadge extends StatelessWidget {
                 containingShadow: true,
                 fit: BoxFit.cover,
               ),
-              Positioned(
+              PositionedDirectional(
                 top: 0,
-                right: 0,
+                end: 0,
                 child: Transform.translate(
-                  offset: const Offset(12, -12),
+                  offset: Offset(
+                    Directionality.of(context) == TextDirection.rtl ? -12 : 12,
+                    -12,
+                  ),
                   child: Container(
                     decoration: BoxDecoration(
                       color: MyColors.primaryColor.withOpacity(0.3),

@@ -45,14 +45,14 @@ class SearchKeyWords extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60, // 60
+      height: 60,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: _keyWords.length,
         itemBuilder: (context, index) {
           return Align(
             child: Padding(
-              padding: const EdgeInsets.only(right: 10),
+              padding: const EdgeInsetsDirectional.only(end: 10),
               child: ElevatedButton(
                 onPressed: () => setSearchWord(_keyWords[index]),
                 style: ButtonStyle(

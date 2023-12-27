@@ -30,9 +30,9 @@ class ImageFromFile extends StatelessWidget {
           showHighlight: true,
           showImageScreen: true,
         ).animate().fadeIn(duration: 1.seconds),
-        Positioned(
+        PositionedDirectional(
           top: -10,
-          right: -10,
+          end: -10,
           child: IconButton(
             tooltip: AppLocalizations.of(context)!.clearTheImage,
             onPressed: provider.resetBox,
@@ -71,9 +71,9 @@ class ImageFromNetwork extends StatelessWidget {
           showLoadingIndicator: true,
           showLoadingProgress: true,
         ),
-        Positioned(
+        PositionedDirectional(
           top: -10,
-          right: -10,
+          end: -10,
           child: IconButton(
             tooltip: AppLocalizations.of(context)!.clearTheImage,
             onPressed: provider.resetBox,

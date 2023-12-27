@@ -22,7 +22,7 @@ class GuestView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 150, horizontal: 40),
       children: [
         Align(
-          alignment: Alignment.centerLeft,
+          alignment: AlignmentDirectional.centerStart,
           child: ImageContainer(
             image: "assets/images/person_avatar.png",
             imageSource: From.asset,
@@ -34,7 +34,7 @@ class GuestView extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Align(
-          alignment: Alignment.centerLeft,
+          alignment: AlignmentDirectional.centerStart,
           child: Text(
             AppLocalizations.of(context)!.youAreAGuest,
             style: const TextStyle(
@@ -46,7 +46,7 @@ class GuestView extends StatelessWidget {
         ),
         const SizedBox(height: 100),
         Align(
-          alignment: Alignment.centerLeft,
+          alignment: AlignmentDirectional.centerStart,
           child: ElevatedButton(
             onPressed: () {
               account.signOut(context);

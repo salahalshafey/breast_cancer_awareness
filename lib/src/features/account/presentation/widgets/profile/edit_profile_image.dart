@@ -40,9 +40,9 @@ class EditProfileImage extends StatelessWidget {
             imageTitle: imageTitle,
             imageCaption: imageCaption,
           ),
-          Positioned(
+          PositionedDirectional(
             bottom: -10,
-            left: 49,
+            start: 49,
             child: IconButton(
               tooltip: fileImagePath == null
                   ? AppLocalizations.of(context)!.selectImage
@@ -62,9 +62,9 @@ class EditProfileImage extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
+          PositionedDirectional(
             top: -10,
-            right: -10,
+            end: -10,
             child: IconButton(
               tooltip: AppLocalizations.of(context)!.clearTheImage,
               onPressed: clearTheImage,
