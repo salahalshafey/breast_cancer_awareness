@@ -62,25 +62,26 @@ class EditProfileImage extends StatelessWidget {
               ),
             ),
           ),
-          PositionedDirectional(
-            top: -10,
-            end: -10,
-            child: IconButton(
-              tooltip: AppLocalizations.of(context)!.clearTheImage,
-              onPressed: clearTheImage,
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: MyColors.primaryColor.withOpacity(0.3),
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Icons.close,
-                  size: 40,
-                  color: MyColors.primaryColor,
+          if (fileImagePath != null)
+            PositionedDirectional(
+              top: -10,
+              end: -10,
+              child: IconButton(
+                tooltip: AppLocalizations.of(context)!.clearTheImage,
+                onPressed: clearTheImage,
+                icon: Container(
+                  decoration: BoxDecoration(
+                    color: MyColors.primaryColor.withOpacity(0.3),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.close,
+                    size: 40,
+                    color: MyColors.primaryColor,
+                  ),
                 ),
               ),
             ),
-          ),
         ],
       ),
     );

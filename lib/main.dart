@@ -23,7 +23,7 @@ import 'src/app.dart';
 
 void main() async {
   // to show splash screen for 2 more seconds
-  await Future.delayed(const Duration(seconds: 2));
+  // await Future.delayed(const Duration(seconds: 2));
 
   WidgetsFlutterBinding.ensureInitialized();
 

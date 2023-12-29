@@ -1,7 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -218,6 +216,14 @@ Future<DateTime> getCurrentNetworkTime() async {
 extension IsVersionLessThan on String {
   /// Only used for app version comparison.
 
+  bool operator <(String other) => compareTo(other) < 0;
+}
+
+
+
+/* extension IsVersionLessThan on String {
+  /// Only used for app version comparison.
+
   bool operator <(String other) {
     final thisVersionNums =
         split(".").map((versionNum) => int.parse(versionNum));
@@ -230,8 +236,12 @@ extension IsVersionLessThan on String {
       if (thisVersionNums.elementAt(i) < otherVersionNums.elementAt(i)) {
         return true;
       }
+
+      if (thisVersionNums.elementAt(i) > otherVersionNums.elementAt(i)) {
+        return false;
+      }
     }
 
     return false;
   }
-}
+} */

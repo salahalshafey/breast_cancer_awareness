@@ -112,37 +112,24 @@ class _PredictionScreenState extends State<PredictionScreen> {
             );
           }
 
-          final screenSize = MediaQuery.of(context).size;
-          final imageWidth = min(screenSize.width, screenSize.height) * 0.5;
+          final prediction = snapshot.data!;
+          _speakIfPossible(prediction, _speakWithCurrentLanguage);
 
           final imageType = isXray
               ? AppLocalizations.of(context)!.xrayImage
               : AppLocalizations.of(context)!.histologyImage;
 
-          final prediction = snapshot.data!;
-
-          _speakIfPossible(prediction, _speakWithCurrentLanguage);
-
           return ListView(
             padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 20),
             children: [
               StyledText(
-                  text: AppLocalizations.of(context)!.predictionOf(imageType)),
+                text: AppLocalizations.of(context)!.predictionOf(imageType),
+              ),
               const SizedBox(height: 40),
-              ImageContainer(
-                image: provider.fileImage != null
-                    ? provider.fileImage!.path
-                    : provider.networkImage!,
-                imageSource:
-                    provider.fileImage != null ? From.file : From.network,
-                radius: imageWidth,
-                borderRadius: BorderRadius.circular(10),
-                fit: BoxFit.cover,
-                showHighlight: true,
-                showImageScreen: true,
-                imageTitle:
-                    AppLocalizations.of(context)!.predictionOf(imageType),
-                imageCaption: prediction,
+              MedicalImage(
+                provider: provider,
+                imageType: imageType,
+                prediction: prediction,
               ),
               const SizedBox(height: 20),
               Text(
@@ -160,6 +147,43 @@ class _PredictionScreenState extends State<PredictionScreen> {
     );
   }
 }
+
+class MedicalImage extends StatelessWidget {
+  const MedicalImage({
+    super.key,
+    required this.provider,
+    required this.imageType,
+    required this.prediction,
+  });
+
+  final ForDoctorScreenState provider;
+  final String imageType;
+  final String prediction;
+
+  @override
+  Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final imageWidth = min(screenSize.width, screenSize.height) * 0.5;
+
+    return ImageContainer(
+      image: provider.fileImage != null
+          ? provider.fileImage!.path
+          : provider.networkImage!,
+      imageSource: provider.fileImage != null ? From.file : From.network,
+      radius: imageWidth,
+      borderRadius: BorderRadius.circular(10),
+      fit: BoxFit.cover,
+      showHighlight: true,
+      showImageScreen: true,
+      imageTitle: AppLocalizations.of(context)!.predictionOf(imageType),
+      imageCaption: prediction,
+    );
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////
+///////////////////////
 
 Future<String> _getPrediction(
     BuildContext context, ForDoctorScreenState provider, bool isXray) async {

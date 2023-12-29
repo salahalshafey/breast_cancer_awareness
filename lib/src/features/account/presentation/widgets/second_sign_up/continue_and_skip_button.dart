@@ -105,7 +105,7 @@ class _ContinueAndskipButtonState extends State<ContinueAndskipButton> {
     return Row(
       mainAxisAlignment: _isSkipForNowButtonShowen
           ? MainAxisAlignment.spaceBetween
-          : MainAxisAlignment.end,
+          : MainAxisAlignment.center,
       children: [
         if (_isSkipForNowButtonShowen)
           _isSkipButtonLoading
