@@ -1,4 +1,8 @@
 {
+    "@@locale": "tr",
+
+
+
     "@_LANGUAGES": {},
     "english": "İngilizce",
     "arabic": "Arapça",
@@ -105,7 +109,7 @@
     "thisVersionOfTheAppNotSupportedAfterDays": "Bu sürümün **{numberOfDays} gün içinde güncellenmesi gerekiyor**.\n\nEn son sürüme güncellemek ister misiniz?",
     "later": "Daha Sonra",
     "updateApp": "Uygulamayı Güncelle?",
-    "newVersionOfTheAppIsAvailable": "Meme Kanseri Farkındalık Uygulaması'nın yeni bir sürümü mevcut! Sürüm {latestAppVersion} şu anda kullanılabilir durumda - sizin sürümünüz {currentAppVersion}.\n\nŞimdi güncellemek ister misiniz?",
+    "newVersionOfTheAppIsAvailable": "Meme Kanseri Farkındalık Uygulaması'nın yeni bir sürümü mevcut! Sürüm {latestAppVersion} şu anda kullanılabilir durumda - sizin sürümünüz {currentAppVersion}\n\nŞimdi güncellemek ister misiniz?",
 
 
 
@@ -180,7 +184,6 @@
     "dangerousArea": "Tehlikeli bölge",
     "areYouSureOfDeletingYourAccount": "* **Hesabınızı Silmek İstediğinizden Emin misiniz?** Tüm veri ve bilgiler silinecektir. **Bu geri alınamaz.**\n* Kimliğinizi doğrulamak için **onay** istenebilir.",
     "delete": "Sil",
-    "cancel": "İptal",
     "pleaseEnterYourPasswordToConfirm": "Lütfen hesabınızı silmek için şifrenizi girin.",
     "password": "Şifre",
     "passwordMustBeAtLeast8CharactersLong": "Şifre en az 8 karakter uzunluğunda olmalıdır.",
@@ -198,7 +201,6 @@
     "lastName": "Soyad",
     "pleaseEnterTheFirstName": "Lütfen adınızı girin.",
     "pleaseEnterTheLastName": "Lütfen soyadınızı girin.",
-    "pleaseEnterAValidPhoneNumber": "Lütfen geçerli bir telefon numarası girin.",
 
 
 
@@ -377,7 +379,6 @@
     "gifToExplainTheAbove": "Yukarıdakini Açıklayan GIF",
     "errorHappenedCouldntLoadTheGif": "Hata oluştu, GIF yüklenemedi",
     "accessChromeMenuInstructions": "* **Chrome Menüsüne Erişim:** Sağ üst (veya sol) köşede üç nokta (Menü) bulacaksınız. Menüyü açmak için onlara dokunun.\n* **\"Çevir\" Seçin:** Menüde \"Çevir\" seçeneğini arayın. Üzerine dokunun.\n* **Çeviriyi Etkinleştirin:** Anahtarı açın, web sitesi için çeviriyi etkinleştirecektir. Chrome otomatik olarak sayfanın dilini algılar ve çevirmek isteyip istemediğinizi sorar.\n* **Çeviriyi Onaylayın:** Sayfayı çevirmek isteyip istemediğinizi soran bir pencere belirecektir. \"Çevir\" üzerine dokunun.",
-    "otherResources": "Diğer Kaynaklar",
     "takeALookAtSomeOtherHelpfulResources": "Diğer faydalı kaynaklara bir göz atın\n",
     "support": "Destek: ",
     "youngSurvivalCoalition": "Genç Hayatta Kalma Koalisyonu\n",

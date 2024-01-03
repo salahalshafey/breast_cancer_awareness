@@ -1,4 +1,8 @@
 {
+    "@@locale": "ar",
+
+
+
     "@_LANGAUGES": {},
     "english": "الإنجليزية",
     "arabic": "العربية",
@@ -104,7 +108,7 @@
     "thisVersionOfTheAppNotSupportedAfterDays": "يجب تحديث هذا الإصدار من التطبيق في **خلال {numberOfDays}**.\n\nهل تريد التحديث إلى الإصدار الأحدث؟",
     "later": "لاحقاً",
     "updateApp": "تحديث التطبيق؟",
-    "newVersionOfTheAppIsAvailable": "نسخة جديدة من التطبيق متاحة! الإصدار {latestAppVersion} متوفر الآن - لديك {currentAppVersion}.\n\nهل ترغب في تحديثه الآن؟",
+    "newVersionOfTheAppIsAvailable": "نسخة جديدة من التطبيق متاحة! الإصدار {latestAppVersion} متوفر الآن - لديك {currentAppVersion}\n\nهل ترغب في تحديثه الآن؟",
 
   
 
@@ -180,7 +184,6 @@
     "dangerousArea": "منطقة خطر",
     "areYouSureOfDeletingYourAccount": "* هل أنت متأكد من **حذف حسابك؟** سيتم حذف كافة البيانات والمعلومات. **لا يمكن التراجع عن ذلك.**\n* قد يُطلب منك **تأكيد** بياناتك للتأكد من هويتك.",
     "delete": "حذف",
-    "cancel": "إلغاء",
     "pleaseEnterYourPasswordToConfirm": "الرجاء إدخال كلمة المرور الخاصة بك لتأكيد حذف حسابك.",
     "password": "كلمة المرور",
     "passwordMustBeAtLeast8CharactersLong": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل.",
@@ -198,7 +201,6 @@
     "lastName": "الإسم الأخير",
     "pleaseEnterTheFirstName": "الرجاء إدخال الاسم الأول.",
     "pleaseEnterTheLastName": "الرجاء إدخال الاسم الأخير.",
-    "pleaseEnterAValidPhoneNumber": "يرجى إدخال رقم هاتف صالح.",
 
 
 
@@ -377,7 +379,6 @@
     "gifToExplainTheAbove": "GIF لشرح ما ورد أعلاه",
     "errorHappenedCouldntLoadTheGif": "حدث خطأ، تعذر تحميل ملف GIF",
     "accessChromeMenuInstructions": "* **الدخول إلى قائمة Chrome:** في الزاوية العلوية اليسرى أو اليمنى، ستجد ثلاث نقاط (القائمة). انقر عليها لفتح القائمة.\n* **حدد \"ترجمة\":** ابحث عن خيار \"ترجمة\" في القائمة. انقر عليها.\n* **تمكين الترجمة:** قم بتبديل المفتاح لتمكين الترجمة لموقع الويب. سيكتشف Chrome تلقائيًا لغة صفحة الويب ويسألك عما إذا كنت تريد ترجمتها.\n* **تأكيد الترجمة:** ستظهر نافذة منبثقة تسألك عما إذا كنت تريد ترجمة الصفحة. اضغط على \"ترجمة\" للتأكيد.",
-    "otherResources": "مصادر أخرى ",
     "takeALookAtSomeOtherHelpfulResources": "ألقِ نظرة على بعض المصادر المفيدة الأخرى\n ",
     "support": "الدعم: ",
     "youngSurvivalCoalition": "تحالف البقاء على قيد الحياة للشباب\n ",

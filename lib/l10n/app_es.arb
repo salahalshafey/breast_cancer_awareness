@@ -1,4 +1,8 @@
 {
+    "@@locale": "es",
+
+
+    
     "@_LANGAUGES": {},
     "english": "Inglés",
     "arabic": "Árabe",
@@ -105,7 +109,7 @@
     "thisVersionOfTheAppNotSupportedAfterDays": "Esta versión de Conciencia sobre el Cáncer de Mama necesita ser **actualizada en {numberOfDays}**.\n\n¿Actualizar a la última versión?",
     "later": "Más tarde",
     "updateApp": "¿Actualizar la aplicación?",
-    "newVersionOfTheAppIsAvailable": "¡Hay una nueva versión de Conciencia sobre el Cáncer de Mama disponible! La versión {latestAppVersion} ya está disponible, tienes la versión {currentAppVersion}.\n\n¿Te gustaría actualizarla ahora?",
+    "newVersionOfTheAppIsAvailable": "¡Hay una nueva versión de Conciencia sobre el Cáncer de Mama disponible! La versión {latestAppVersion} ya está disponible, tienes la versión {currentAppVersion}\n\n¿Te gustaría actualizarla ahora?",
 
 
 
@@ -180,7 +184,6 @@
     "dangerousArea": "Área peligrosa",
     "areYouSureOfDeletingYourAccount": "* ¿Estás seguro de **Eliminar tu cuenta?** Todos los datos e información serán eliminados. **Esto no se puede deshacer.**\n* Es posible que se te pida **confirmar** tus credenciales para asegurar que eres tú.",
     "delete": "Eliminar",
-    "cancel": "Cancelar",
     "pleaseEnterYourPasswordToConfirm": "Por favor, ingresa tu contraseña para confirmar la eliminación de tu cuenta.",
     "password": "Contraseña",
     "passwordMustBeAtLeast8CharactersLong": "La contraseña debe tener al menos 8 caracteres.",
@@ -198,7 +201,6 @@
     "lastName": "Apellido",
     "pleaseEnterTheFirstName": "Por favor, ingresa el primer nombre.",
     "pleaseEnterTheLastName": "Por favor, ingresa el apellido.",
-    "pleaseEnterAValidPhoneNumber": "Por favor, ingresa un número de teléfono válido.",
 
 
 
@@ -377,7 +379,6 @@
     "gifToExplainTheAbove": "GIF para explicar lo anterior",
     "errorHappenedCouldntLoadTheGif": "Se produjo un error, no se pudo cargar el GIF",
     "accessChromeMenuInstructions": "* **Accede al menú de Chrome:** En la esquina superior derecha (o izquierda), encontrarás tres puntos (Menú). Toca sobre ellos para abrir el menú.\n* **Selecciona \"Traducir\":** Busca la opción \"Traducir\" en el menú. Toca sobre ella.\n* **Habilita la traducción:** Mueve el interruptor para habilitar la traducción para el sitio web. Chrome detectará automáticamente el idioma de la página web y preguntará si deseas traducirla.\n* **Confirma la traducción:** Aparecerá una ventana emergente preguntando si deseas traducir la página. Toca \"Traducir\" para confirmar.",
-    "otherResources": "Otros recursos",
     "takeALookAtSomeOtherHelpfulResources": "Echa un vistazo a algunos otros recursos útiles\n",
     "support": "Soporte: ",
     "youngSurvivalCoalition": "Coalición de Supervivencia Joven\n",

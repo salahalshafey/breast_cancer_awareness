@@ -1,4 +1,8 @@
 {
+    "@@locale": "fr",
+
+
+
     "@_LANGAUGES": {},
     "english": "Anglais",
     "arabic": "Arabe",
@@ -105,7 +109,7 @@
     "thisVersionOfTheAppNotSupportedAfterDays": "Cette version de Sensibilisation au cancer du sein doit être **mise à jour dans {numberOfDays}**.\n\nMettre à jour vers la dernière version ?",
     "later": "Plus tard",
     "updateApp": "Mettre à jour l'application ?",
-    "newVersionOfTheAppIsAvailable": "Une nouvelle version de Sensibilisation au cancer du sein est disponible ! La version {latestAppVersion} est maintenant disponible - vous avez la version {currentAppVersion}.\n\nVoulez-vous la mettre à jour maintenant?",
+    "newVersionOfTheAppIsAvailable": "Une nouvelle version de Sensibilisation au cancer du sein est disponible ! La version {latestAppVersion} est maintenant disponible - vous avez la version {currentAppVersion}\n\nVoulez-vous la mettre à jour maintenant?",
 
 
     
@@ -180,7 +184,6 @@
     "dangerousArea": "Zone dangereuse",
     "areYouSureOfDeletingYourAccount": "* Êtes-vous sûr de **supprimer votre compte?** Toutes les données et informations seront supprimées. **Cela ne peut pas être annulé.**\n* Vous pouvez être invité à **confirmer** vos informations d'identification pour vous assurer que c'est bien vous.",
     "delete": "Supprimer",
-    "cancel": "Annuler",
     "pleaseEnterYourPasswordToConfirm": "Veuillez entrer votre mot de passe pour confirmer la suppression de votre compte.",
     "password": "Mot de passe",
     "passwordMustBeAtLeast8CharactersLong": "Le mot de passe doit comporter au moins 8 caractères.",
@@ -198,7 +201,6 @@
     "lastName": "Nom de famille",
     "pleaseEnterTheFirstName": "Veuillez entrer le prénom.",
     "pleaseEnterTheLastName": "Veuillez entrer le nom de famille.",
-    "pleaseEnterAValidPhoneNumber": "Veuillez entrer un numéro de téléphone valide.",
 
 
 
@@ -377,7 +379,6 @@
     "gifToExplainTheAbove": "GIF pour expliquer ce qui précède",
     "errorHappenedCouldntLoadTheGif": "Une erreur s'est produite, impossible de charger le GIF",
     "accessChromeMenuInstructions": "* **Accédez au menu Chrome :** En haut à droite (ou à gauche), vous trouverez trois points (Menu). Appuyez dessus pour ouvrir le menu.\n* **Sélectionnez \"Traduire\" :** Recherchez l'option \"Traduire\" dans le menu. Appuyez dessus.\n* **Activer la traduction :** Basculez le commutateur pour activer la traduction pour le site Web. Chrome détectera automatiquement la langue de la page Web et vous demandera si vous souhaitez la traduire.\n* **Confirmer la traduction :** Une fenêtre contextuelle apparaîtra, vous demandant si vous souhaitez traduire la page. Appuyez sur \"Traduire\" pour confirmer.",
-    "otherResources": "Autres ressources",
     "takeALookAtSomeOtherHelpfulResources": "Jetez un coup d'œil à d'autres ressources utiles\n",
     "support": "Support : ",
     "youngSurvivalCoalition": "Young Survival Coalition\n",

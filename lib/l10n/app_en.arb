@@ -1,4 +1,8 @@
 {
+  "@@locale": "en",
+
+
+
   "@_LANGAUGES": {},
   "english": "English",
   "@english": {
@@ -502,7 +506,7 @@
   "@updateApp": {
     "description": "the update App? word"
   },
-  "newVersionOfTheAppIsAvailable": "A new version of Breast Cancer Awareness is available! Version {latestAppVersion} is now available-you have {currentAppVersion}.\n\nWould you like to update it now?",
+  "newVersionOfTheAppIsAvailable": "A new version of Breast Cancer Awareness is available! Version {latestAppVersion} is now available-you have {currentAppVersion}\n\nWould you like to update it now?",
   "@newVersionOfTheAppIsAvailable": {
     "description": "the response if you can choose if you want to update the app",
     "placeholders": {
@@ -800,10 +804,6 @@
   "@delete": {
     "description": "the Delete word"
   },
-  "cancel": "Cancel",
-  "@cancel": {
-    "description": "the Cancel word"
-  },
   "pleaseEnterYourPasswordToConfirm": "Please enter your password to confirm deleting your account.",
   "@pleaseEnterYourPasswordToConfirm": {
     "description": "the contentString of putting password dialog 'to delete Password type account'"
@@ -859,10 +859,6 @@
   "pleaseEnterTheLastName": "Please enter the last name.",
   "@pleaseEnterTheLastName": {
     "description": "error under textField 'validator' if you did not put the last name"
-  },
-  "pleaseEnterAValidPhoneNumber": "Please enter a valid Phone Number.",
-  "@pleaseEnterAValidPhoneNumber": {
-    "description": "error under textField 'validator' if you did not put a valid phone number"
   },
 
 
@@ -1538,10 +1534,6 @@
   "accessChromeMenuInstructions": "* **Access Chrome Menu:** In the top-right (or left) corner, you'll find three dots (Menu). Tap on them to open the menu.\n* **Select \"Translate\":** Look for the \"Translate\" option in the menu. Tap on it.\n* **Enable Translation:** Toggle the switch to enable translation for the website. Chrome will automatically detect the language of the web page and ask if you want to translate it.\n* **Confirm Translation:** A pop-up will appear asking if you want to translate the page. Tap on \"Translate\" to confirm.",
   "@accessChromeMenuInstructions": {
     "description": "the content of show Tips dialog"
-  },
-  "otherResources": "Other Resources",
-  "@otherResources": {
-    "description": "the title of `_OTHER_RESOURCES_SCREEN`"
   },
   "takeALookAtSomeOtherHelpfulResources": "Take a look at some other helpful resources\n",
   "@takeALookAtSomeOtherHelpfulResources": {
