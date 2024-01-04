@@ -27,14 +27,15 @@
 
 
 
-## Login screen
+## Login
+### the Login screen 
   ![Login screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/01c35c8c-211f-4ee0-ae21-06ef8995e841)
   * The login can be with `Email & Password`.
   * Notice that the API error appears in the **TextField error**.
 ### Continue on the Login screen 
   ![Login screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/eca81bf3-91ea-4a83-90be-9cccb152d049)
   * you can change the `Theme` or `Language` from the **Login screen**.
-### If the Password is forgotten 
+### If the Password is forgotten screen
   ![Forget Password Screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/b5a16dcb-be14-4b24-8135-dd9d9b410ece)
 ### Sign-in Can be done with Social
   ![Login with Social](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/3febb26a-d71a-4f98-a9e7-8890f094b60d)
@@ -46,7 +47,8 @@
   * But some functionality is not available in the `Guest` account.
 
 
-## sign-up screens
+## sign-up
+### First sign-up screen
   ![First sign-up screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/21c7b7ec-384f-4b57-981d-8fd0ba5ae6ce)
   * In case if creating a new Account with `Email & Password`.
 ### Second sign-up screen
@@ -55,7 +57,8 @@
   * In case of an `error` the `Skip For Now` button will appear to just go to the `home screen`.
 
 
-## Home screens
+## Home
+### Home Screen
   ![Home Screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/11bc2a20-2406-4150-b27f-17c7a92132ee)
   * The Home Screens contain the `Awareness info`, `self-check`, and the `history` of self-checks.
 ### Awareness screens
@@ -65,7 +68,8 @@
   
 
 
-## For doctor screens
+## For doctor
+### For doctor screen
   ![For doctor screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/b4009dfd-5ff0-4aa4-a4c6-defea6f2cd1c)
   * The user (Doctor or radiologist) can pick an image and there are four ways to do that:
     * **Open the Camera** and take a picture of the medical image if he has it physically
