@@ -7,14 +7,17 @@
 ## This link provides the details of how we built the Breast Cancer Detection Models for both histopathology and X-ray
 * https://github.com/salahalshafey/breast_cancer_detection.git
 
-## Download the app in apk for android
-* [Download the app](https://firebasestorage.googleapis.com/v0/b/breast-cancer-awareness-bf348.appspot.com/o/the%20app%20in%20apk%2Fbreast_cancer_awareness_v_0_5_0.apk?alt=media&token=e3d928cc-7c89-452c-aee3-20eadfb352f1)
+[//]: # " ## Download the app in apk for android"
+[//]: # " * [Download the app](https://firebasestorage.googleapis.com/v0/b/breast-cancer-awareness-bf348.appspot.com/o/the%20app%20in%20apk%2Fbreast_cancer_awareness_v_0_5_0.apk?alt=media&token=e3d928cc-7c89-452c-aee3-20eadfb352f1)"
+
+## Download the app from the Play Store
+[Download the app](https://play.google.com/store/apps/details?id=com.salahalshafey.breastcancerawareness)
 
 
 ## App pages
 * **Login screen**
   
-  ![Login screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/27c087e4-e41c-464b-8706-a5068527d554)
+  ![Login screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/01c35c8c-211f-4ee0-ae21-06ef8995e841)
 
 * **First sign-up screen**
   
