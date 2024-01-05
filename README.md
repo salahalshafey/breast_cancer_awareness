@@ -15,12 +15,52 @@
 * https://github.com/salahalshafey/breast_cancer_detection.git
 
 
-[//]: # " ## Download the app in apk for android"
-[//]: # " * [Download the app](https://firebasestorage.googleapis.com/v0/b/breast-cancer-awareness-bf348.appspot.com/o/the%20app%20in%20apk%2Fbreast_cancer_awareness_v_0_5_0.apk?alt=media&token=e3d928cc-7c89-452c-aee3-20eadfb352f1)"
-
-
 ## Download the app from the Play Store
-[Download the app](https://play.google.com/store/apps/details?id=com.salahalshafey.breastcancerawareness)
+* [Download the app](https://play.google.com/store/apps/details?id=com.salahalshafey.breastcancerawareness)
+
+
+
+# The main Technologies & Packages/Plugins used in the App
+  * The **Backend** is `Firbease`:
+    * `Cloud Firestore` to save the user data.
+    * `Firebase Storage` to save the images of the user.
+    * `Firebase Auth` to handle the **Authentication** and it uses 5 different `Sign-in providers`:
+      * `Email/Password`.
+      * `Google`.
+      * `Facebook`.
+      * `Twitter`.
+      * `Anonymous`.
+    * `Machine Learning` using `Custom models`, for the **models that we built**. And `download` the model for **Model Inference** using `firebase_ml_model_downloader`.
+  * Using [tflite](https://pub.dev/packages/tflite) plugin for in-app `Models Inference`.
+  * Using `Large language model` API from Google [Gemini Pro](https://makersuite.google.com/app/prompts/new_chat) for `Chat Prompt`.
+  * Searching the web Using `Web Scraping` using [html](https://pub.dev/packages/html) the dom package.
+  * `Speech-to-text` And `Text-to-speech` Capabilities:
+    * Using [speech_to_text](https://pub.dev/packages/speech_to_text) plugin for speech recogintion.
+    * Using [flutter_tts](https://pub.dev/packages/flutter_tts) for `Text-to-speech`.
+    * Using [flutter_langdetect](https://pub.dev/packages/flutter_langdetect) to detect the language for `Text-to-speech`.
+  * Using [youtube_player_flutter](https://pub.dev/packages/youtube_player_flutter) for playing `YouTube` videos.
+  * Using [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications) plugin to set `reminder every 2 weeks`.
+  * Using [flutter_sound](https://pub.dev/packages/flutter_sound) package for `recording` and `sound player`.
+  * Using [shared_preferences](https://pub.dev/packages/shared_preferences) plugin to save the `notes` and `Settings` data in the device.
+  * Using [path_provider](https://pub.dev/packages/path_provider) plugin to save The files `images` and `sounds` in `ApplicationDocumentsDirectory`.
+  * Using [url_launcher](https://pub.dev/packages/url_launcher) plugin.
+  * Providing `Check for updates` Capabilities.
+  * The `Animation` in the App is done Using [flutter_animate](https://pub.dev/packages/flutter_animate) Package.
+
+
+
+
+# The App Architecture, File structure, And State Management
+  * Using `Provider` State Management.
+  * Using `get_it` for Dependency injection.
+  * Using the `Clean Architecture` of `Uncle Bob`.
+
+ 
+    ![Screenshot 2024-01-05 200144](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/45754ffb-f8ee-4115-a5ca-79977638e27a)
+  * And
+
+    ![0_zUtZYiJ1bDTugOYY](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/b17e7fc7-ddaa-4371-933d-1bff4a577622)
+
 
 
 # App pages
@@ -64,27 +104,31 @@
 ### Awareness screens
   ![Awareness screens](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/299a3180-29ce-4f00-a277-01547c45cbe9)
   * some helpful `Information` and `Awareness` with `videos`.
+  * Using [youtube_player_flutter](https://pub.dev/packages/youtube_player_flutter) for playing `YouTube` videos.
 ### Self-Check Screens
   ![Starting Self-Check Screens](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/63624070-7ce7-47da-b9e3-f279f1720cf3)
 ### Continue on Self-Check and Finding Screens
   ![Self-Check Screens](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/98efca1a-8fe9-4d64-ba58-4176dc835045)
 ### Reminder and notes adding screen
   ![Reminder and notes adding screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/2271fee4-2047-4e9c-85fb-6c19715740f9)
+  * If the user clicks `Ok` button, he will be notified every `2 weeks` to check again.
+  * Using [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications) plugin to set `reminder every 2 weeks`.
+  * The user can remove this reminder from `Settings`.
 ### Adding notes
   ![adding notes](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/8e9b60c6-8adb-4933-94e7-05ac5dd57b16)
   * Notes can be `Text`, `Voice`, or `Image`.
   * You can record a `Voice` and `play the sound` and continue recording like a `WhatsApp` recording message.
-  * Used [flutter_sound](https://pub.dev/packages/flutter_sound) package for `recording` and `sound player`.
-  * Used [image_picker](https://pub.dev/packages/image_picker) plugin for choosing the image.
+  * Using [flutter_sound](https://pub.dev/packages/flutter_sound) package for `recording` and `sound player`.
+  * Using [image_picker](https://pub.dev/packages/image_picker) plugin for choosing the image.
 ### Self-checks history
   ![Self-checks history](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/4df242b0-f71b-42b8-b73a-1f7e645e552c)
   * Self-checks history saved in the local device and not on the server `Only the user can see` and it contains the `Notes`.
-  * Used [shared_preferences](https://pub.dev/packages/shared_preferences) plugin to save the notes data in the device.
+  * Using [shared_preferences](https://pub.dev/packages/shared_preferences) plugin to save the notes data in the device.
   * The files `images` and `sounds` saved in `ApplicationDocumentsDirectory` using [path_provider](https://pub.dev/packages/path_provider) plugin.
 ### The Image of Self-check Note
   ![image of Self-check](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/d85a3d10-d949-4d62-b58c-a8f8b3346017)
-  * The **Image** can be opened in a **New Screen** and used [photo_view](https://pub.dev/packages/photo_view) package to `zoom` in or out.
-  * The `Image screen` contains actions buttons `save to gallery` and `share`, used [gallery_saver](https://pub.dev/packages/gallery_saver) and [share_plus](https://pub.dev/packages/share_plus) plugins.
+  * The **Image** can be opened in a **New Screen** and Using [photo_view](https://pub.dev/packages/photo_view) package to `zoom` in or out.
+  * The `Image screen` contains actions buttons `save to gallery` and `share`, Using [gallery_saver](https://pub.dev/packages/gallery_saver) and [share_plus](https://pub.dev/packages/share_plus) plugins.
   * The `Text Note` will be above the image, and can be `toggled` to appear or disappear.
 ### deleting self-check
   ![deleting self-check](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/b2a30dcb-0c82-45eb-9984-a2574622ea6b)
@@ -93,7 +137,7 @@
 
 ## For doctors
   * In this feature we **infer** the `Deep Learning` models that we built to make a `prediction` if Breast Cancer exists.
-  * Used [firebase_ml_model_downloader](https://pub.dev/packages/firebase_ml_model_downloader) and [tflite_flutter](https://pub.dev/packages/tflite_flutter) plugins to `Download` the model from `Firebase` and making `model inference`.
+  * Using [firebase_ml_model_downloader](https://pub.dev/packages/firebase_ml_model_downloader) and [tflite](https://pub.dev/packages/tflite) plugins to `Download` the model from `Firebase` and making `model inference`.
 ### For doctors' screen
   ![For doctors' screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/9e161c73-8838-43b6-91a2-9afeb608da65)
   * The user `Doctor or radiologist` can pick an image and there are four ways to do that:
@@ -132,7 +176,7 @@
 ### Tips and Other Resources screens
   ![Tips and Other resources screens](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/f54d2a71-2045-4ee4-b62b-ec3896eb87db)
   * In the Other resources screen the `link` will open in the `browser`
-  * Used [url_launcher](https://pub.dev/packages/url_launcher) plugin.
+  * Using [url_launcher](https://pub.dev/packages/url_launcher) plugin.
 ### Tips for translation
   ![Tips for translation](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/5cb1c7fc-9929-4a15-8052-64964139edf0)
 ### GIF to explain the above
@@ -147,13 +191,13 @@
   ![Ways of search](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/3d22afd8-09a4-41b9-8c9e-b088dc01947c)
   * The **Search** can be with `Voice`, `Text`, or `Some keywords`.
   * The `Voice Search` is available in +70 languages. 
-  * Used [speech_to_text](https://pub.dev/packages/speech_to_text) plugin for speech recogintion.
+  * Using [speech_to_text](https://pub.dev/packages/speech_to_text) plugin for speech recogintion.
 ### Ask AI
   ![Ask AI](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/b47f9150-11d7-4038-a7e0-d7175bea710b)
   * You can `Ask AI` for Guidance.
   * The result is in the `Markdown` format, and it can be spoken if possible `i.e. settings allow it`.
-  * Used [flutter_tts](https://pub.dev/packages/flutter_tts) for `Text-to-speech`.
-  * Used [flutter_langdetect](https://pub.dev/packages/flutter_langdetect) to detect the language for `Text-to-speech`.
+  * Using [flutter_tts](https://pub.dev/packages/flutter_tts) for `Text-to-speech`.
+  * Using [flutter_langdetect](https://pub.dev/packages/flutter_langdetect) to detect the language for `Text-to-speech`.
   * The `AI` is from [Gemini Pro](https://makersuite.google.com/app/prompts/new_chat) API from Google.
 ### Web Search
   ![Web Search](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/22f8579a-802f-47bf-af29-948e82c9dd9f)
@@ -220,11 +264,11 @@
 ### Force updates after period of time
   ![Force updates after period of time](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/d9979ebe-7049-4500-8e40-0c679bcdc7d2)
   * In this scenario `latest_version` and `force_update_version_below` is higher than `current app version`, but the `current App time` is before `force_update_after`.
-  * Used [ntp](https://pub.dev/packages/ntp) Plugin for getting `Network Time Protocol (NTP)` in case the user changes the `local device time` manually, to still get the right `Time`.
+  * Using [ntp](https://pub.dev/packages/ntp) Plugin for getting `Network Time Protocol (NTP)` in case the user changes the `local device time` manually, to still get the right `Time`.
 ### Force updates
   ![Screenshot 2024-01-05 174151](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/a6529ec0-d9d4-4dae-a930-1926e330c79e)
    * In this scenario `latest_version` and `force_update_version_below` is higher than `current app version`, but the `current App time` is after `force_update_after`.
-   * Also used [ntp](https://pub.dev/packages/ntp) Plugin.
+   * Also Using [ntp](https://pub.dev/packages/ntp) Plugin.
    * The user can't use the app, and he must update the app from the `Play Store`.
 
 
