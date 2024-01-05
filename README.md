@@ -7,8 +7,8 @@
 * Providing `information and awareness` of this disease.
 * Facilitating `self-examination` through a symptom checker.
 * Offering support `resources` and `guidance` for patients. 
-* Chatbot providing answers and guidance through text-to-speech and speech-to-text capabilities.
-* Web Search `Google Search, Google Scholar, Wikipedia`.
+* Chatbot providing answers and guidance through `text-to-speech` and `speech-to-text` capabilities.
+* Web Search `Google Search`, `Google Scholar`, and `Wikipedia`.
 
 
 ## This link provides the details of how we built the Breast Cancer Detection Models for both histopathology and X-ray
@@ -31,8 +31,16 @@
       * `Twitter`.
       * `Anonymous`.
     * `Machine Learning` using `Custom models`, for the **models that we built**. And `download` the model for **Model Inference** using `firebase_ml_model_downloader`.
+  * The app supports `Localizations` in `6 languages`:
+    * English `en`.
+    * Arabic `ar`.
+    * Spanish `es`.
+    * Frensh `fr`.
+    * German `de`.
+    * Turkish `tr`.
+  * The app supports `Theming` for `Light` and `Dark`.
   * Using [tflite](https://pub.dev/packages/tflite) plugin for in-app `Models Inference`.
-  * Using `Large language model` API from Google [Gemini Pro](https://makersuite.google.com/app/prompts/new_chat) for `Chat Prompt`.
+  * Using `Large Language Model` API from Google [Gemini Pro](https://makersuite.google.com/app/prompts/new_chat) for `Chat Prompt`.
   * Searching the web Using `Web Scraping` using [html](https://pub.dev/packages/html) the dom package.
   * `Speech-to-text` And `Text-to-speech` Capabilities:
     * Using [speech_to_text](https://pub.dev/packages/speech_to_text) plugin for speech recogintion.
