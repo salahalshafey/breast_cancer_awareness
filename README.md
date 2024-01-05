@@ -75,6 +75,7 @@
   * Notes can be `Text`, `Voice`, or `Image`.
   * You can record a `Voice` and `play the sound` and continue recording like a `WhatsApp` recording message.
   * Used [flutter_sound](https://pub.dev/packages/flutter_sound) package for `recording` and `sound player`.
+  * Used [image_picker](https://pub.dev/packages/image_picker) plugin for choosing the image.
 ### Self-checks history
   ![Self-checks history](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/4df242b0-f71b-42b8-b73a-1f7e645e552c)
   * Self-checks history saved in the local device and not on the server `Only the user can see` and it contains the `Notes`.
@@ -128,18 +129,107 @@
 ### For Patients' Screen
   ![For Patients' Screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/f5e8858a-420a-4e02-97ad-b21fdeb9b6f9)
   * Offering support `resources` and `guidance` for patients. 
-### 
+### Tips and Other Resources screens
+  ![Tips and Other resources screens](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/f54d2a71-2045-4ee4-b62b-ec3896eb87db)
+  * In the Other resources screen the `link` will open in the `browser`
+  * Used [url_launcher](https://pub.dev/packages/url_launcher) plugin.
+### Tips for translation
+  ![Tips for translation](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/5cb1c7fc-9929-4a15-8052-64964139edf0)
+### GIF to explain the above
+  ![Tips for translation](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/c0f0593c-0d91-4e96-b74e-1915a18c5493)
+### Some resources for diet and fitness for patients
+  ![some resources for diet and fitness for patients](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/cba17428-5ac1-405d-9f47-efef2334d3e3)
+### Search Screen
+  ![Search Screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/8a1337d9-adfa-41dc-b2ff-291784066eed)
+  * Warning dialog will `pop up when opening the `Search screen`.
+  * This feature is not available for `Guest users`.
+### Ways of search
+  ![Ways of search](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/3d22afd8-09a4-41b9-8c9e-b088dc01947c)
+  * The **Search** can be with `Voice`, `Text`, or `Some keywords`.
+  * The `Voice Search` is available in +70 languages. 
+  * Used [speech_to_text](https://pub.dev/packages/speech_to_text) plugin for speech recogintion.
+### Ask AI
+  ![Ask AI](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/b47f9150-11d7-4038-a7e0-d7175bea710b)
+  * You can `Ask AI` for Guidance.
+  * The result is in the `Markdown` format, and it can be spoken if possible `i.e. settings allow it`.
+  * Used [flutter_tts](https://pub.dev/packages/flutter_tts) for `Text-to-speech`.
+  * Used [flutter_langdetect](https://pub.dev/packages/flutter_langdetect) to detect the language for `Text-to-speech`.
+  * The `AI` is from [Gemini Pro](https://makersuite.google.com/app/prompts/new_chat) API from Google.
+### Web Search
+  ![Web Search](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/22f8579a-802f-47bf-af29-948e82c9dd9f)
+  * You can Search with `Google`, `GoogleScholar`, or `Wikipedia`.
+  * The Web Search is achieved using `Web Scraping`.
+  * The `Web Scraping` using [html](https://pub.dev/packages/html) the dom package.
+  * The first result also will be spoken.
+### The Possible errors in the result
+  ![The Possible errors in the result](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/4c88ed53-846d-488d-8bc5-74d7fcc883e2)
 
 
-## Menu and Profile screen
-  ![Menu and Profile screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/37488f81-eae5-4659-8480-f99b7e0c3eb3)
+## Menu Screen
+  ![Menu Screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/7df7183c-12a1-4713-8148-c890d7c0327c)
+  * you can `share` the app `the link to the Play Store`
+  * The most right screen is the view of `guest user`.
 
 
-## Settings screen
-  ![Settings screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/d55e7c0b-5707-4290-8159-64e401181eac)
+## Profile
+### Profile Screen
+  ![Profile Screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/b0076bc0-7efe-48e6-9d28-cdbc7c81de3d)
+  * Notice the difference if the user signed with `Email & Password`, `Twitter`, `Facebook`, `Google`, or `as a Guest`.
+### Delete the account
+  ![Delete the account](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/a16fa8ff-5926-414d-8f80-ca1d0de3b84c)
+  * If the account is `Email & Password` the user will asked to put `his password`.
+  * If the account is `social`, the user will be asked to `Authorize` the social account `for deletion`.
+### Edit Profile screen
+  ![Edit Profile screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/02a1b2bd-4c0f-4a6f-984f-255980ca4fc8)
+  * The user can **Change** the `image`, `Names`, `user type`, or `phone number`.
+  * The `phone number` must be **valid** or **no phone number**.
 
 
-## Home screen and for patient screen
-  ![Home screen and for patient screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/6904a1d2-7604-48bd-8b89-8a54da444e22)
-  * These screens are “optional” and will be implemented in the future
+## Settings
+### Settings screen
+  ![Settings screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/f0bf3ce6-e133-4f30-8e1f-395f6a06c59b)
+### Theme can be changed
+  ![Theme can be changed](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/fe0ce2ac-2634-4669-86d9-0faeaacc5901)
+  * Some `examples` of `Dark theme`.
+### Language can be changed
+  ![language can be changed](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/192ebc23-1882-4aeb-8a45-53390a314b51)
+  * The App is available in `6 languages`.
+  * Some `examples` of `Arabic` language.
+### Search result settings
+  ![Search result settings](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/22ffdfcd-2bd7-46b1-9b9c-6c6c401bbc77)
+  * You can choose `to speak` the `search result` or **not**.
+  * You can `change` the `Voice search language`, available `+70` languages.
+
+
+## About Screen
+  ![About Screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/1d950464-93dc-43d5-8138-27753abb6b20)
+  * You can `check for updates`.
+  * App `privacy policy` and `terms of services`, etc...
+
+
+## Check for updates
+  * In all scenarios below the `current app version` is 1.0.1
+  * And `current App Datetime` is Jan 4th, 2024 at 1:36 PM.
+### The data on Firebase
+  ![The data on Firebase](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/4f152123-a2de-4849-91a1-a4562de6931e)
+  * The App will read this data from `Firebase` to show the user a `dialog` with info about `Updates` the app's `status`.
+  * Notice that in the `security rules` adding a part to allow only `read` to work with `unauthenticated` read, for example, `sign-in` screen, **, in other words,** `can check for updates from the sign-in screen`.
+### Selective Check for updates
+  ![Selective Check for updates](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/f2634a7a-2d48-41d9-baf9-5d74f7aa6ed7)
+  * In this scenario `latest_version` is higher than `current app version`, but no `force updates`.
+### Force updates after period of time
+  ![Force updates after period of time](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/d9979ebe-7049-4500-8e40-0c679bcdc7d2)
+  * In this scenario `latest_version` and `force_update_version_below` is higher than `current app version`, but the `current App time` is before `force_update_after`.
+  * Used [ntp](https://pub.dev/packages/ntp) Plugin for getting `Network Time Protocol (NTP)` in case the user changes the `local device time` manually, to still get the right `Time`.
+### Force updates
+  ![Screenshot 2024-01-05 174151](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/a6529ec0-d9d4-4dae-a930-1926e330c79e)
+   * In this scenario `latest_version` and `force_update_version_below` is higher than `current app version`, but the `current App time` is after `force_update_after`.
+   * Also used [ntp](https://pub.dev/packages/ntp) Plugin.
+   * The user can't use the app, and he must update the app from the `Play Store`.
+
+
+
+
+
+
 
