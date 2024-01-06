@@ -68,7 +68,106 @@
   * And
 
     ![0_zUtZYiJ1bDTugOYY](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/b17e7fc7-ddaa-4371-933d-1bff4a577622)
-
+## Directory Structure
+```
+lib
+│
+│───main.dart
+│───firebase_options.dart
+│───l10n
+│  
+└───src
+    │
+    │───core
+    |    |
+    |    |──error
+    |    │──network
+    |    │──theme
+    |    |   │──colors
+    |    |   │──dark_theme
+    |    |   └──light_theme   
+    |    |
+    |    └──util
+    |        |──builders
+    |        │──classes
+    |        │──extensions
+    |        │──functions
+    |        └──widgets   
+    |    
+    │───features
+    |    |
+    |    |──account
+    |    │──breast_cancer_detection
+    |    │──breast_cancer_for_normal
+    |    │──breast_cancer_for_patient
+    |    │──main_and_menu_screens
+    |    └──settings
+    |
+    │───app.dart      
+    │───dispose_container.dart  
+    └───injection_container.dart
+```
+### Example of One feature: `breast_cancer_for_patient`
+```
+│───features
+         |
+         |──account
+         │──breast_cancer_detection
+         │──breast_cancer_for_normal
+         │──breast_cancer_for_patient
+         |   |
+         |   │──data
+         |   |   |──datasources
+         |   |   |   |──ai_chat.dart
+         |   |   |   |──google_scholar_search.dart
+         |   |   |   |──google_search.dart
+         |   |   |   └──wikipedia_search.dart
+         |   |   |
+         |   |   |──models
+         |   |   |   └──search_result_model.dart
+         |   |   |
+         |   |   └──repositories
+         |   |       └──search_repositories_impl.dart
+         |   |   
+         |   │──domain
+         |   |   |──entities
+         |   |   |   |──search_result.dart
+         |   |   |   └──search_types.dart
+         |   |   |
+         |   |   |──repositories
+         |   |   |   └──search_repositories.dart
+         |   |   |
+         |   |   └──usecases
+         |   |       |──ai_result.dart
+         |   |       └──custom_web_search.dart
+         |   |   
+         |   |   
+         |   └──presentation
+         |       |──pages
+         |       |   |──for_patients_screen.dart
+         |       |   |──other_resources_screen.dart
+         |       |   |──search_screen.dart
+         |       |   └──tips_for_your_visit_screen.dart
+         |       |
+         |       |──providers
+         |       |   |──instructions_with_lang.dart
+         |       |   └──search.dart
+         |       | 
+         |       └──widgets
+         |           |──ai_result.dart
+         |           |──for_patients_item.dart
+         |           |──resource_item.dart
+         |           |──search_field.dart
+         |           |──search_keywords.dart
+         |           |──search_type_choices.dart
+         |           |──speech_to_text.dart
+         |           └──web_search_result.dart
+         |       
+         |      
+         |
+         │──main_and_menu_screens
+         └──settings
+``` 
 
 
 # App pages
