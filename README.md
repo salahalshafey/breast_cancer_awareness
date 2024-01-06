@@ -266,16 +266,19 @@
   ![The data on Firebase](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/4f152123-a2de-4849-91a1-a4562de6931e)
   * The App will read this data from `Firebase` to show the user a `dialog` with info about `Updates` the app's `status`.
   * Notice that in the `security rules` adding a part to allow only `read` to work with `unauthenticated` read, for example, `sign-in` screen, **, in other words,** `can check for updates from the sign-in screen`.
-### Selective Check for updates
+### No updates
+  ![Screenshot 2024-01-06 110634](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/6b128140-9d4d-40fe-9e1b-ce120cf9e42c)
+  * In this scenario `latest_version` is the same as `current app version`, no `update dialog` is shown.
+### Selective update
   ![Selective Check for updates](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/f2634a7a-2d48-41d9-baf9-5d74f7aa6ed7)
   * In this scenario `latest_version` is higher than `current app version`, but no `force updates`.
-### Force updates after period of time
+### Force update after period of time
   ![Force updates after period of time](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/d9979ebe-7049-4500-8e40-0c679bcdc7d2)
-  * In this scenario `latest_version` and `force_update_version_below` is higher than `current app version`, but the `current App time` is before `force_update_after`.
+  * In this scenario `latest_version` and `force_update_versions_below` is higher than `current app version`, but the `current App time` is before `force_update_after`.
   * Using [ntp](https://pub.dev/packages/ntp) Plugin for getting `Network Time Protocol (NTP)` in case the user changes the `local device time` manually, to still get the right `Time`.
-### Force updates
+### Force update
   ![Screenshot 2024-01-05 174151](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/a6529ec0-d9d4-4dae-a930-1926e330c79e)
-   * In this scenario `latest_version` and `force_update_version_below` is higher than `current app version`, but the `current App time` is after `force_update_after`.
+   * In this scenario `latest_version` and `force_update_versions_below` is higher than `current app version`, but the `current App time` is after `force_update_after`.
    * Also Using [ntp](https://pub.dev/packages/ntp) Plugin.
    * The user can't use the app, and he must update the app from the `Play Store`.
 
