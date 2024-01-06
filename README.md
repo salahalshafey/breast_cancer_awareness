@@ -58,7 +58,7 @@
 
 
 
-# The App Architecture, File structure, And State Management
+# The App Architecture, Directory structure, And State Management
   * Using `Provider` State Management.
   * Using `get_it` for Dependency injection.
   * Using the `Clean Architecture` of `Uncle Bob`.
