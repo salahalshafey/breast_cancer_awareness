@@ -176,7 +176,7 @@ lib
 
 
 ## Login
-### the Login screen 
+### The Login screen 
   ![Login screen](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/01c35c8c-211f-4ee0-ae21-06ef8995e841)
   * The login can be with `Email & Password`.
   * Notice that the API error appears in the **TextField error**.
