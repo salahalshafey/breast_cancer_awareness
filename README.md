@@ -32,6 +32,7 @@
       * `Twitter`.
       * `Anonymous`.
     * `Machine Learning` using `Custom models`, for the **models that we built**. And `download` the model for **Model Inference** using `firebase_ml_model_downloader`.
+  * Providing `Offline Capabilities` Using [shared_preferences](https://pub.dev/packages/shared_preferences) plugin to save the `notes`, `Settings`, and user data in the device.
   * The app supports `Localizations` in `6 languages`:
     * English `en`.
     * Arabic `ar`.
@@ -50,7 +51,6 @@
   * Using [youtube_player_flutter](https://pub.dev/packages/youtube_player_flutter) for playing `YouTube` videos.
   * Using [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications) plugin to set `reminder every 2 weeks`.
   * Using [flutter_sound](https://pub.dev/packages/flutter_sound) package for `recording` and `sound player`.
-  * Using [shared_preferences](https://pub.dev/packages/shared_preferences) plugin to save the `notes` and `Settings` data in the device.
   * Using [path_provider](https://pub.dev/packages/path_provider) plugin to save The files `images` and `sounds` in `ApplicationDocumentsDirectory`.
   * Using [url_launcher](https://pub.dev/packages/url_launcher) plugin.
   * Providing `Check for updates` Capabilities.
