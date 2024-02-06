@@ -17,7 +17,7 @@
 
 ## Download the app from the Play Store
 [//]: # "* [Download the app](https://play.google.com/store/apps/details?id=com.salahalshafey.breastcancerawareness)"
-<a href="https://play.google.com/store/apps/details?id=com.salahalshafey.breastcancerawareness"><img src="https://playerzon.com/asset/download.png" width="200"></img></a>
+<a href="https://play.google.com/store/apps/details?id=com.salahalshafey.breastcancerawareness"><img src="https://playerzon.com/asset/download.png" width="300"></img></a>
 
 
 
