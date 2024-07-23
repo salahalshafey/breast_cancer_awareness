@@ -37,10 +37,10 @@ class DeleteAccountButton extends StatelessWidget {
             Navigator.of(dialogContext).pop(true);
           },
           style: ButtonStyle(
-            // padding: const MaterialStatePropertyAll(
+            // padding: const WidgetStatePropertyAll(
             //   EdgeInsets.symmetric(vertical: 8, horizontal: 15),
             //  ),
-            backgroundColor: MaterialStatePropertyAll(Colors.red.shade900),
+            backgroundColor: WidgetStatePropertyAll(Colors.red.shade900),
           ),
           child: Text(AppLocalizations.of(profileScreenContext)!.delete),
         ),
@@ -49,12 +49,12 @@ class DeleteAccountButton extends StatelessWidget {
             Navigator.of(dialogContext).pop(false);
           },
           style: ButtonStyle(
-            //  padding: const MaterialStatePropertyAll(
+            //  padding: const WidgetStatePropertyAll(
             //    EdgeInsets.symmetric(vertical: 8, horizontal: 15),
             //   ),
-            foregroundColor: MaterialStatePropertyAll(Colors.red.shade900),
-            side: MaterialStatePropertyAll(
-                BorderSide(color: Colors.red.shade900)),
+            foregroundColor: WidgetStatePropertyAll(Colors.red.shade900),
+            side:
+                WidgetStatePropertyAll(BorderSide(color: Colors.red.shade900)),
           ),
           child: Text(AppLocalizations.of(profileScreenContext)!.cancel),
         ),
@@ -167,10 +167,10 @@ class DeleteAccountButton extends StatelessWidget {
           ],
         ),
         style: ButtonStyle(
-          // fixedSize: const MaterialStatePropertyAll(Size.fromWidth(270)),
-          padding: const MaterialStatePropertyAll(
+          // fixedSize: const WidgetStatePropertyAll(Size.fromWidth(270)),
+          padding: const WidgetStatePropertyAll(
               EdgeInsets.symmetric(vertical: 8, horizontal: 25)),
-          backgroundColor: MaterialStatePropertyAll(Colors.red.shade900),
+          backgroundColor: WidgetStatePropertyAll(Colors.red.shade900),
         ),
       ),
     );

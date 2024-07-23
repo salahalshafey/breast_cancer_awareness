@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class YoutubePlayerScreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _YoutubePlayerScreenState extends State<YoutubePlayerScreen> {
   void initState() {
     _controller.toggleFullScreenMode();
 
-    Wakelock.enable();
+    WakelockPlus.enable();
 
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
@@ -44,7 +44,7 @@ class _YoutubePlayerScreenState extends State<YoutubePlayerScreen> {
   void dispose() {
     _controller.dispose();
 
-    Wakelock.disable();
+    WakelockPlus.disable();
 
     // Reset system UI overlays when the page is disposed (exit full screen)
     SystemChrome.setEnabledSystemUIMode(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -99,7 +99,7 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
       overlays: [],
     );
     // prevent the screen from sleeping
-    Wakelock.enable();
+    WakelockPlus.enable();
 
     super.initState();
   }
@@ -112,7 +112,7 @@ class _SelfCheckScreenState extends State<SelfCheckScreen> {
       overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom],
     );
     // turning the screen sleeping back to default
-    Wakelock.disable();
+    WakelockPlus.disable();
 
     super.dispose();
   }

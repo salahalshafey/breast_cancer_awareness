@@ -38,7 +38,7 @@ class HomeScreen extends StatelessWidget {
                 const StartingSelfCheckScreen(),
               ),
               style: const ButtonStyle(
-                padding: MaterialStatePropertyAll(
+                padding: WidgetStatePropertyAll(
                     EdgeInsets.symmetric(horizontal: 55)),
               ),
               child: Text(

@@ -68,7 +68,7 @@ class _FinishButtonState extends State<FinishButton> {
       child: ElevatedButton(
         onPressed: _isLoading ? null : _saveNotes,
         style: const ButtonStyle(
-          fixedSize: MaterialStatePropertyAll(Size.fromWidth(260)),
+          fixedSize: WidgetStatePropertyAll(Size.fromWidth(260)),
         ),
         child: _isLoading
             ? const SizedBox(

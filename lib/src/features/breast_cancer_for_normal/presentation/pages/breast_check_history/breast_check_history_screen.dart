@@ -128,9 +128,9 @@ Future<bool?> _showConfirmDeletionDialog(BuildContext context) {
           Navigator.of(dialogContext).pop(true);
         },
         style: ButtonStyle(
-          //  padding: const MaterialStatePropertyAll(EdgeInsets.zero),
-          // fixedSize: const MaterialStatePropertyAll(Size.fromWidth(130)),
-          backgroundColor: MaterialStatePropertyAll(Colors.red.shade900),
+          //  padding: const WidgetStatePropertyAll(EdgeInsets.zero),
+          // fixedSize: const WidgetStatePropertyAll(Size.fromWidth(130)),
+          backgroundColor: WidgetStatePropertyAll(Colors.red.shade900),
         ),
         child: Text(
           AppLocalizations.of(context)!.deleteAll,
@@ -142,11 +142,10 @@ Future<bool?> _showConfirmDeletionDialog(BuildContext context) {
           Navigator.of(dialogContext).pop(false);
         },
         style: ButtonStyle(
-          foregroundColor: MaterialStatePropertyAll(Colors.red.shade900),
-          // padding: const MaterialStatePropertyAll(EdgeInsets.zero),
-          // fixedSize: const MaterialStatePropertyAll(Size.fromWidth(110)),
-          side:
-              MaterialStatePropertyAll(BorderSide(color: Colors.red.shade900)),
+          foregroundColor: WidgetStatePropertyAll(Colors.red.shade900),
+          // padding: const WidgetStatePropertyAll(EdgeInsets.zero),
+          // fixedSize: const WidgetStatePropertyAll(Size.fromWidth(110)),
+          side: WidgetStatePropertyAll(BorderSide(color: Colors.red.shade900)),
         ),
         child: Text(
           AppLocalizations.of(context)!.cancel,

@@ -29,10 +29,10 @@ class LogOutButton extends StatelessWidget {
         ),
         icon: Icon(account.userId == "guest" ? Icons.login : Icons.logout),
         style: const ButtonStyle(
-          foregroundColor: MaterialStatePropertyAll(MyColors.tetraryColor),
-          side: MaterialStatePropertyAll(
-              BorderSide(color: MyColors.tetraryColor)),
-          padding: MaterialStatePropertyAll(
+          foregroundColor: WidgetStatePropertyAll(MyColors.tetraryColor),
+          side:
+              WidgetStatePropertyAll(BorderSide(color: MyColors.tetraryColor)),
+          padding: WidgetStatePropertyAll(
               EdgeInsets.symmetric(vertical: 5, horizontal: 20)),
         ),
       ),

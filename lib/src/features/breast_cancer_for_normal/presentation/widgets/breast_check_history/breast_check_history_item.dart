@@ -35,7 +35,7 @@ class BreastCheckHistorytem extends StatelessWidget {
             Navigator.of(dialogContext).pop(true);
           },
           style: const ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll(Colors.red),
+            backgroundColor: WidgetStatePropertyAll(Colors.red),
           ),
           child: Text(AppLocalizations.of(context)!.delete),
         ),
@@ -44,8 +44,8 @@ class BreastCheckHistorytem extends StatelessWidget {
             Navigator.of(dialogContext).pop(false);
           },
           style: const ButtonStyle(
-            foregroundColor: MaterialStatePropertyAll(Colors.red),
-            side: MaterialStatePropertyAll(BorderSide(color: Colors.red)),
+            foregroundColor: WidgetStatePropertyAll(Colors.red),
+            side: WidgetStatePropertyAll(BorderSide(color: Colors.red)),
           ),
           child: Text(AppLocalizations.of(context)!.cancel),
         ),

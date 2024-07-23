@@ -56,8 +56,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 Navigator.of(dialogContext).pop();
               },
               style: ButtonStyle(
-                foregroundColor: MaterialStatePropertyAll(color),
-                side: MaterialStatePropertyAll(BorderSide(color: color!)),
+                foregroundColor: WidgetStatePropertyAll(color),
+                side: WidgetStatePropertyAll(BorderSide(color: color!)),
               ),
               child: Text(AppLocalizations.of(context)!.later),
             ),
@@ -69,7 +69,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ..pop();
               },
               style:
-                  ButtonStyle(backgroundColor: MaterialStatePropertyAll(color)),
+                  ButtonStyle(backgroundColor: WidgetStatePropertyAll(color)),
               child: Text(AppLocalizations.of(context)!.signIn),
             ),
           ],

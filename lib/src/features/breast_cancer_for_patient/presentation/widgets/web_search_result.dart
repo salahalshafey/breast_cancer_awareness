@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:flutter_langdetect/flutter_langdetect.dart' as langdetect;
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -46,11 +46,11 @@ class _WebSearchResultState extends State<WebSearchResult>
     WidgetsBinding.instance.addObserver(this);
 
     widget.flutterTts.setCompletionHandler(() {
-      Wakelock.disable();
+      WakelockPlus.disable();
     });
 
     widget.flutterTts.setCancelHandler(() {
-      Wakelock.disable();
+      WakelockPlus.disable();
     });
 
     super.initState();
@@ -63,7 +63,7 @@ class _WebSearchResultState extends State<WebSearchResult>
       await widget.flutterTts.setLanguage(currentAppLanguage);
 
       widget.flutterTts.speak(spokenString);
-      Wakelock.enable();
+      WakelockPlus.enable();
     }
   }
 
@@ -74,7 +74,7 @@ class _WebSearchResultState extends State<WebSearchResult>
       await widget.flutterTts.setLanguage(spokenStringLanguage);
 
       widget.flutterTts.speak(spokenString);
-      Wakelock.enable();
+      WakelockPlus.enable();
     }
   }
 
@@ -103,7 +103,7 @@ class _WebSearchResultState extends State<WebSearchResult>
     WidgetsBinding.instance.removeObserver(this);
 
     widget.flutterTts.stop();
-    Wakelock.disable();
+    WakelockPlus.disable();
 
     super.dispose();
   }

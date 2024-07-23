@@ -137,8 +137,8 @@ class _SearchFieldState extends State<SearchField> {
           highlightColor: Colors.white.withOpacity(0.2),
           style: ButtonStyle(
             backgroundColor:
-                MaterialStatePropertyAll(Theme.of(context).primaryColor),
-            padding: const MaterialStatePropertyAll(EdgeInsets.all(10)),
+                WidgetStatePropertyAll(Theme.of(context).primaryColor),
+            padding: const WidgetStatePropertyAll(EdgeInsets.all(10)),
           ),
         ),
       ],

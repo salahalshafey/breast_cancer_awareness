@@ -50,40 +50,40 @@ ThemeData myDarkTheme() {
     elevatedButtonTheme: const ElevatedButtonThemeData(
       style: ButtonStyle(
         //  overlayColor: const MaterialStatePropertyAll(Colors.white12),
-        backgroundColor: MaterialStatePropertyAll(_myPrimaryColor),
-        foregroundColor: MaterialStatePropertyAll(Colors.white),
-        textStyle: MaterialStatePropertyAll(TextStyle(
+        backgroundColor: WidgetStatePropertyAll(_myPrimaryColor),
+        foregroundColor: WidgetStatePropertyAll(Colors.white),
+        textStyle: WidgetStatePropertyAll(TextStyle(
           fontSize: 20,
           //  color: Colors.white,
         )),
-        shape: MaterialStatePropertyAll(
+        shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(22)),
           ),
         ),
-        padding: MaterialStatePropertyAll(
+        padding: WidgetStatePropertyAll(
             EdgeInsets.symmetric(vertical: 5, horizontal: 30)),
       ),
     ),
     outlinedButtonTheme: const OutlinedButtonThemeData(
       style: ButtonStyle(
-        foregroundColor: MaterialStatePropertyAll(_myPrimaryColor),
-        textStyle: MaterialStatePropertyAll(TextStyle(
+        foregroundColor: WidgetStatePropertyAll(_myPrimaryColor),
+        textStyle: WidgetStatePropertyAll(TextStyle(
           fontSize: 20,
         )),
-        shape: MaterialStatePropertyAll(
+        shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(22)),
           ),
         ),
-        padding: MaterialStatePropertyAll(
+        padding: WidgetStatePropertyAll(
             EdgeInsets.symmetric(vertical: 5, horizontal: 30)),
       ),
     ),
     textButtonTheme: const TextButtonThemeData(
       style: ButtonStyle(
-        foregroundColor: MaterialStatePropertyAll(_myPrimaryColor),
-        textStyle: MaterialStatePropertyAll(TextStyle(fontSize: 20)),
+        foregroundColor: WidgetStatePropertyAll(_myPrimaryColor),
+        textStyle: WidgetStatePropertyAll(TextStyle(fontSize: 20)),
       ),
     ),
     //iconTheme: const IconThemeData(color: _myPrimaryColor),

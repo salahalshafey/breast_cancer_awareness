@@ -57,9 +57,9 @@ class SearchKeyWords extends StatelessWidget {
                 onPressed: () => setSearchWord(_keyWords[index]),
                 style: ButtonStyle(
                   textStyle:
-                      const MaterialStatePropertyAll(TextStyle(fontSize: 16)),
-                  padding: const MaterialStatePropertyAll(EdgeInsets.all(8.0)),
-                  backgroundColor: MaterialStatePropertyAll(
+                      const WidgetStatePropertyAll(TextStyle(fontSize: 16)),
+                  padding: const WidgetStatePropertyAll(EdgeInsets.all(8.0)),
+                  backgroundColor: WidgetStatePropertyAll(
                     _keyWords[index].isTheSameAS(searchWord)
                         ? const Color.fromRGBO(181, 11, 99, 1)
                         : null,

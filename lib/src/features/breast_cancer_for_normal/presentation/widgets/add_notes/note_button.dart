@@ -21,10 +21,10 @@ class NoteButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onTap,
           style: ButtonStyle(
-            fixedSize: const MaterialStatePropertyAll(Size(70, 70)),
-            shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+            fixedSize: const WidgetStatePropertyAll(Size(70, 70)),
+            shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(1000))),
-            padding: const MaterialStatePropertyAll(EdgeInsets.all(8.0)),
+            padding: const WidgetStatePropertyAll(EdgeInsets.all(8.0)),
           ),
           child: Icon(icon, size: 40),
         ),

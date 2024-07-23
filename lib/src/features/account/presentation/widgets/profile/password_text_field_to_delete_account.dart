@@ -162,8 +162,7 @@ class _PasswordTextFieldToDeleteAccountState
               ElevatedButton(
                 onPressed: _isLoading ? null : _saveFormAndReauthenticate,
                 style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStatePropertyAll(Colors.red.shade900),
+                  backgroundColor: WidgetStatePropertyAll(Colors.red.shade900),
                 ),
                 child: Stack(
                   alignment: Alignment.center,
@@ -191,9 +190,8 @@ class _PasswordTextFieldToDeleteAccountState
                   Navigator.of(context).pop(false);
                 },
                 style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStatePropertyAll(Colors.red.shade900),
-                  side: MaterialStatePropertyAll(
+                  foregroundColor: WidgetStatePropertyAll(Colors.red.shade900),
+                  side: WidgetStatePropertyAll(
                       BorderSide(color: Colors.red.shade900)),
                 ),
                 child: Text(AppLocalizations.of(context)!.cancel),

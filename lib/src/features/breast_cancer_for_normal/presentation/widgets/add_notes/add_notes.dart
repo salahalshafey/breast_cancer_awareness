@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -80,7 +80,7 @@ class AddNotes extends StatelessWidget {
 ////////////////////////////////////////////////////////////////////////////////
 
 void showNoteDialog(BuildContext context, {required Widget child}) async {
-  Wakelock.enable();
+  WakelockPlus.enable();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
@@ -101,7 +101,7 @@ void showNoteDialog(BuildContext context, {required Widget child}) async {
     },
   );
 
-  Wakelock.disable();
+  WakelockPlus.disable();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
@@ -113,7 +113,7 @@ void showNoteDialog(BuildContext context, {required Widget child}) async {
 /////////////////////////////////////////////////
 
 void showBottomSheet(BuildContext context, {required Widget child}) async {
-  Wakelock.enable();
+  WakelockPlus.enable();
 
   await showModalBottomSheet(
     context: context,
@@ -129,5 +129,5 @@ void showBottomSheet(BuildContext context, {required Widget child}) async {
     },
   );
 
-  Wakelock.disable();
+  WakelockPlus.disable();
 }

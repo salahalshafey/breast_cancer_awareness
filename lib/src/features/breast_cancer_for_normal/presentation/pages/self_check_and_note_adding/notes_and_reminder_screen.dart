@@ -98,8 +98,7 @@ class _NotesAndReminderScreenState extends State<NotesAndReminderScreen> {
                       });
                     },
                     style: const ButtonStyle(
-                        fixedSize:
-                            MaterialStatePropertyAll(Size.fromWidth(260))),
+                        fixedSize: WidgetStatePropertyAll(Size.fromWidth(260))),
                     child: Text(
                       AppLocalizations.of(context)!.ok,
                       style: const TextStyle(

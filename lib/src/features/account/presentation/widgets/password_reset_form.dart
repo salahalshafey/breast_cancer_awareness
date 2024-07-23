@@ -134,8 +134,8 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
             Navigator.of(dialogContext).pop();
             Navigator.of(dialogContext).pop();
           },
-          style: ButtonStyle(
-              backgroundColor: MaterialStatePropertyAll(titleColor)),
+          style:
+              ButtonStyle(backgroundColor: WidgetStatePropertyAll(titleColor)),
           child: Text(
             AppLocalizations.of(context)!.finishedResetting,
             textAlign: TextAlign.center,
@@ -200,7 +200,7 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
               : ElevatedButton(
                   onPressed: _sendResetRequest,
                   style: const ButtonStyle(
-                    fixedSize: MaterialStatePropertyAll(
+                    fixedSize: WidgetStatePropertyAll(
                         Size.fromWidth(double.maxFinite)),
                   ),
                   child: Text(

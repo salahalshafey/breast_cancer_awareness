@@ -6,7 +6,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -30,7 +30,7 @@ Future<String?> showSpeechToTextDialog(BuildContext context) async {
     return null;
   }
 
-  Wakelock.enable();
+  WakelockPlus.enable();
 
   final text = await showDialog<String>(
     context: context,
@@ -45,7 +45,7 @@ Future<String?> showSpeechToTextDialog(BuildContext context) async {
     },
   );
 
-  await Wakelock.disable();
+  await WakelockPlus.disable();
 
   return text;
 }
@@ -87,7 +87,7 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget>
 
     await _speechToText.listen(
       onResult: _onSpeechResult,
-      listenMode: ListenMode.search,
+      listenOptions: SpeechListenOptions(listenMode: ListenMode.search),
       pauseFor: 5.seconds,
       localeId: currentVoiceSearchLanguageCode,
     );
@@ -151,7 +151,7 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget>
                         size: 35,
                       ),
                       style: const ButtonStyle(
-                        padding: MaterialStatePropertyAll(EdgeInsets.zero),
+                        padding: WidgetStatePropertyAll(EdgeInsets.zero),
                       ),
                     ),
                     ChangeVoiceSearchLanguageForSearchDialog(
@@ -215,13 +215,13 @@ class _SpeechToTextWidgetState extends State<SpeechToTextWidget>
                           : _stopListening();
                     },
                     style: ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(
+                      backgroundColor: WidgetStatePropertyAll(
                         _speechToText.isListening ? null : Colors.grey,
                       ),
-                      fixedSize: const MaterialStatePropertyAll(Size(70, 70)),
-                      shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                      fixedSize: const WidgetStatePropertyAll(Size(70, 70)),
+                      shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(1000))),
-                      padding: const MaterialStatePropertyAll(EdgeInsets.zero),
+                      padding: const WidgetStatePropertyAll(EdgeInsets.zero),
                     ),
                     child: const Icon(Icons.mic, size: 45),
                   ),

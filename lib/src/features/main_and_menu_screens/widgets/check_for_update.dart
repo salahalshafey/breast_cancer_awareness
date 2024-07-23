@@ -86,7 +86,7 @@ void forcUpdateDialog(BuildContext context) {
           );
         },
         style: ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll(Colors.red.shade900)),
+            backgroundColor: WidgetStatePropertyAll(Colors.red.shade900)),
         child: Text(AppLocalizations.of(context)!.update),
       ),
     ],
@@ -113,8 +113,8 @@ void forceUpdateAfterDaysDialog(
           Navigator.of(dialogContext).pop();
         },
         style: const ButtonStyle(
-          foregroundColor: MaterialStatePropertyAll(titleColor),
-          side: MaterialStatePropertyAll(BorderSide(color: titleColor)),
+          foregroundColor: WidgetStatePropertyAll(titleColor),
+          side: WidgetStatePropertyAll(BorderSide(color: titleColor)),
         ),
         child: Text(AppLocalizations.of(context)!.later),
       ),
@@ -127,7 +127,7 @@ void forceUpdateAfterDaysDialog(
           );
         },
         style: const ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll(titleColor)),
+            backgroundColor: WidgetStatePropertyAll(titleColor)),
         child: Text(AppLocalizations.of(context)!.update),
       ),
     ],
@@ -154,8 +154,8 @@ void selectiveUpdateDialog(
           Navigator.of(dialogContext).pop();
         },
         style: ButtonStyle(
-          foregroundColor: MaterialStatePropertyAll(titleColor),
-          side: MaterialStatePropertyAll(BorderSide(color: titleColor!)),
+          foregroundColor: WidgetStatePropertyAll(titleColor),
+          side: WidgetStatePropertyAll(BorderSide(color: titleColor!)),
         ),
         child: Text(AppLocalizations.of(context)!.later),
       ),
@@ -167,8 +167,7 @@ void selectiveUpdateDialog(
             mode: LaunchMode.externalApplication,
           );
         },
-        style:
-            ButtonStyle(backgroundColor: MaterialStatePropertyAll(titleColor)),
+        style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(titleColor)),
         child: Text(AppLocalizations.of(context)!.update),
       ),
     ],

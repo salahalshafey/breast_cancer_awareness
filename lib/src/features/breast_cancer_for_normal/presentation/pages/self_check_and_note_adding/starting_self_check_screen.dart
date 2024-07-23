@@ -53,7 +53,7 @@ class StartingSelfCheckScreen extends StatelessWidget {
                 Navigator.of(context).pushNamed(SelfCheckScreen.routName);
               },
               style: const ButtonStyle(
-                padding: MaterialStatePropertyAll(
+                padding: WidgetStatePropertyAll(
                     EdgeInsets.symmetric(horizontal: 40)),
               ),
               child: Text(

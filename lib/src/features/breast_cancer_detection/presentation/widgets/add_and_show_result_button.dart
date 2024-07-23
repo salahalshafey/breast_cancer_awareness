@@ -49,8 +49,8 @@ class AddAndShowResultButton extends StatelessWidget {
                   Navigator.of(dialogContext).pop();
                 },
                 style: ButtonStyle(
-                  foregroundColor: MaterialStatePropertyAll(color),
-                  side: MaterialStatePropertyAll(BorderSide(color: color!)),
+                  foregroundColor: WidgetStatePropertyAll(color),
+                  side: WidgetStatePropertyAll(BorderSide(color: color!)),
                 ),
                 child: Text(AppLocalizations.of(context)!.later),
               ),
@@ -59,8 +59,8 @@ class AddAndShowResultButton extends StatelessWidget {
                   account.signOut(dialogContext);
                   Navigator.of(dialogContext).pop();
                 },
-                style: ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(color)),
+                style:
+                    ButtonStyle(backgroundColor: WidgetStatePropertyAll(color)),
                 child: Text(AppLocalizations.of(context)!.signIn),
               ),
             ],
