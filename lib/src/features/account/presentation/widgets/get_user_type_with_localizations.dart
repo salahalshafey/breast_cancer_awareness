@@ -1,8 +1,6 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../domain/entities/user_information.dart';
-
 import '../../../../app.dart';
+import '../../../../../l10n/app_localizations.dart';
+import '../../domain/entities/user_information.dart';
 
 String getuserTypeWithLocalizations(UserTypes userType) {
   final context = navigatorKey.currentContext!;

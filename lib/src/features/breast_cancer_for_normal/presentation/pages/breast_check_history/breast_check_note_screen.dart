@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../../l10n/app_localizations.dart';
 import '../../../../../core/util/functions/date_time_and_duration.dart';
 import '../../../../../core/util/widgets/default_screen.dart';
 import '../../../../../core/util/widgets/image_container.dart';
-import '../../../../account/presentation/widgets/icon_from_asset.dart';
-
-import '../../../domain/entities/note.dart';
 import '../../../../../core/util/widgets/note_description.dart';
+
+import '../../../../account/presentation/widgets/icon_from_asset.dart';
+import '../../../domain/entities/note.dart';
 import '../../widgets/audio_player.dart';
 import '../../widgets/breast_check_history/breast_check_history_item.dart';
 

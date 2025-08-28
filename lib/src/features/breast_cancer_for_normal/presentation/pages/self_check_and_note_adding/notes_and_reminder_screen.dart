@@ -3,8 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../../l10n/app_localizations.dart';
 import '../../../../../core/util/functions/date_time_and_duration.dart';
 import '../../../../../core/util/widgets/default_screen.dart';
 

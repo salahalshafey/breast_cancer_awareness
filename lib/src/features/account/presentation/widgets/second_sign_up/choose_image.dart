@@ -4,8 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../../l10n/app_localizations.dart';
 import '../../../../../core/util/builders/image_picker.dart';
 import '../../../../../core/util/widgets/image_container.dart';
 
@@ -32,9 +31,12 @@ class _ChooseImageState extends State<ChooseImage> {
     final socialPhoto = FirebaseAuth.instance.currentUser?.photoURL;
 
     if (socialPhoto != null) {
-      _getNetworkImageToFile(socialPhoto).then((imagePath) =>
+      _getNetworkImageToFile(socialPhoto).then((imagePath) {
+        if (mounted) {
           Provider.of<ImageAndUserTypeProvider>(context, listen: false)
-              .changeImage(imagePath));
+              .changeImage(imagePath);
+        }
+      });
     }
   }
 

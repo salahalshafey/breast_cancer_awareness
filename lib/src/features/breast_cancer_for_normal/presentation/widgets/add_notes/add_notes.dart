@@ -3,8 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../../l10n/app_localizations.dart';
 import '../../../../../core/util/builders/image_picker.dart';
 
 import '../../../domain/entities/note.dart';

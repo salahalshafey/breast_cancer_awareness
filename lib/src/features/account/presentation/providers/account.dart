@@ -8,8 +8,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:twitter_login/twitter_login.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../app.dart';
 import '../../../../core/error/error_exceptions_with_message.dart';
 import '../../../../dispose_container.dart';
@@ -197,21 +196,22 @@ class Account extends DisposableProvider {
     }
 
     // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    await GoogleSignIn.instance.initialize();
+    final GoogleSignInAccount googleUser =
+        await GoogleSignIn.instance.authenticate();
 
-    if (googleUser == null) {
-      throw ErrorForSnackBar(AppLocalizations.of(_context)!
-          .noProviderNameAccountWasSelected(
-              AppLocalizations.of(_context)!.google));
-    }
+    // if (googleUser == null) {
+    //   throw ErrorForSnackBar(AppLocalizations.of(_context)!
+    //       .noProviderNameAccountWasSelected(
+    //           AppLocalizations.of(_context)!.google));
+    // }
 
     // Obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
+    final GoogleSignInAuthentication googleAuth = googleUser.authentication;
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
+      // accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
 
@@ -482,8 +482,8 @@ class Account extends DisposableProvider {
     }
 
     if (_providerId == "google.com") {
-      GoogleSignIn().disconnect();
-      GoogleSignIn().signOut();
+      GoogleSignIn.instance.disconnect();
+      GoogleSignIn.instance.signOut();
     } else if (_providerId == "facebook.com") {
       FacebookAuth.instance.logOut();
     }

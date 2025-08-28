@@ -5,12 +5,11 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../l10n/app_localizations.dart';
 import '../../app.dart';
 import '../../core/util/builders/on_will_pop_dialog.dart';
-import 'main_screen_state_provider.dart';
 
+import 'main_screen_state_provider.dart';
 import '../breast_cancer_for_normal/presentation/pages/home_screen.dart';
 import '../breast_cancer_detection/presentation/pages/for_doctors_screen.dart';
 import '../breast_cancer_for_patient/presentation/pages/for_patients_screen.dart';
@@ -52,7 +51,7 @@ class MainScreen extends StatelessWidget {
 
     return PopScope(
       canPop: false,
-      onPopInvoked: (_) async {
+      onPopInvokedWithResult: (didPoped, result) async {
         if (provider.currentPageIndex != 0) {
           provider.animateToPage(0);
           return;

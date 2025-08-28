@@ -1,12 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../../l10n/app_localizations.dart';
 import '../../../../app.dart';
 import '../../../../core/error/error_exceptions_with_message.dart';
-import '../../../../dispose_container.dart';
-
 import '../../../../core/error/exceptions_without_message.dart';
+import '../../../../dispose_container.dart';
 
 import '../../domain/entities/note.dart';
 import '../../domain/usecases/add_note.dart';

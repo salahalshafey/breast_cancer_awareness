@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../core/error/error_exceptions_with_message.dart';
 import '../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../account/domain/entities/user_information.dart';
@@ -109,11 +108,11 @@ class AddAndShowResultButton extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  const Color(0xff0079ff).withOpacity(1),
-                  const Color(0xff313bbd).withOpacity(1),
-                  const Color(0xff521191).withOpacity(1),
-                  const Color(0xff4d1798).withOpacity(1),
-                  const Color(0xff5f0080).withOpacity(1)
+                  const Color(0xff0079ff).withValues(alpha: 1),
+                  const Color(0xff313bbd).withValues(alpha: 1),
+                  const Color(0xff521191).withValues(alpha: 1),
+                  const Color(0xff4d1798).withValues(alpha: 1),
+                  const Color(0xff5f0080).withValues(alpha: 1)
                 ],
                 stops: const [0, 0.5, 0.862, 0.897, 1],
               ),

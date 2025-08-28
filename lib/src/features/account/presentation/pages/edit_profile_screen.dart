@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../core/util/builders/image_picker.dart';
 import '../../../../core/util/extensions/list_seperator.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';

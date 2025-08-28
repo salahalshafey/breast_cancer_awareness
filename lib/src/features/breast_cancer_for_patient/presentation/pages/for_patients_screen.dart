@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../core/util/builders/go_to_screen_with_slide_transition.dart';
 
 import '../widgets/for_patients_item.dart';

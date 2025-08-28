@@ -133,7 +133,7 @@ class _AudioPlayerState extends State<AudioPlayer> {
     return Container(
       padding: const EdgeInsetsDirectional.only(end: 10),
       decoration: BoxDecoration(
-        color: MyColors.primaryColor.withOpacity(0.3),
+        color: MyColors.primaryColor.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(30),
       ),
       child: Row(

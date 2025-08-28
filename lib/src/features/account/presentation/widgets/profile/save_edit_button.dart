@@ -7,12 +7,10 @@ import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../../l10n/app_localizations.dart';
 import '../../../../../core/util/builders/custom_alret_dialog.dart';
 
 import '../../../domain/entities/user_information.dart';
-
 import '../../providers/account.dart';
 
 class SaveEditButton extends StatefulWidget {

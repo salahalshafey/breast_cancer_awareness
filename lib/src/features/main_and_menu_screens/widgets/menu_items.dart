@@ -3,8 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:share_plus/share_plus.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../l10n/app_localizations.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/util/builders/go_to_screen_with_slide_transition.dart';
 
@@ -50,7 +49,11 @@ class MenuItems extends StatelessWidget {
           assetIcon: "assets/icons/share_icon.png",
           iconHeight: 40,
           onTap: () {
-            Share.share(AppLocalizations.of(context)!.shareTheAppText);
+            SharePlus.instance.share(
+              ShareParams(
+                text: AppLocalizations.of(context)!.shareTheAppText,
+              ),
+            );
           },
         ),
         MenuItem(

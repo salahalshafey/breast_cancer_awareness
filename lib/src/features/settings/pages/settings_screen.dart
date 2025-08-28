@@ -1,10 +1,9 @@
-import 'package:breast_cancer_awareness/src/core/util/extensions/list_seperator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../l10n/app_localizations.dart';
 import '../../../core/util/widgets/default_screen.dart';
+import '../../../core/util/extensions/list_seperator.dart';
 
 import '../providers/settings_provider.dart';
 

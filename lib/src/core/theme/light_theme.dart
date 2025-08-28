@@ -27,14 +27,14 @@ ThemeData myLightTheme() {
         color: _appBarForGroundColor,
       ),
       systemOverlayStyle: const SystemUiOverlayStyle().copyWith(
-        statusBarColor: _mysecondaryColor.withOpacity(0.5),
+        statusBarColor: _mysecondaryColor.withValues(alpha: 0.5),
         systemNavigationBarColor: MyColors.secondaryColor,
         systemNavigationBarIconBrightness: Brightness.light,
       ),
     ),
 
     textSelectionTheme: TextSelectionThemeData(
-      selectionColor: _mysecondaryColor.withOpacity(0.6),
+      selectionColor: _mysecondaryColor.withValues(alpha: 0.6),
       cursorColor: _mysecondaryColor,
       selectionHandleColor: _mysecondaryColor,
     ),
@@ -113,7 +113,7 @@ ThemeData myLightTheme() {
 
     iconTheme: const IconThemeData(color: _myPrimaryColor),
 
-    dialogTheme: const DialogTheme(
+    dialogTheme: const DialogThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(22)),
       ),

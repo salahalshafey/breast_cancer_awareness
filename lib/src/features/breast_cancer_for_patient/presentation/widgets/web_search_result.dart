@@ -6,8 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:flutter_langdetect/flutter_langdetect.dart' as langdetect;
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../../core/util/widgets/custom_card.dart';
 import '../../../../core/util/widgets/custom_error_widget.dart';

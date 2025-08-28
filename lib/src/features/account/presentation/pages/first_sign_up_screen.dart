@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../../l10n/app_localizations.dart';
 
 import '../widgets/backgroud_shapes/first_sign_up_screen_shapes.dart';
 import '../widgets/sign_up_form.dart';

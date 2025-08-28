@@ -4,8 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../l10n/app_localizations.dart';
 import 'core/theme/colors.dart';
 import 'core/theme/dark_theme.dart';
 import 'core/theme/light_theme.dart';
@@ -110,7 +109,9 @@ class LandingPageWithCheckForUpdate extends StatelessWidget {
       changStatusAndSystemNavigationBarDynamicWithTheme(context);
 
       Future.delayed(Durations.short1, () {
-        forcUpdateDialog(context);
+        if (context.mounted) {
+          forcUpdateDialog(context);
+        }
       });
 
       return const Scaffold(
@@ -124,7 +125,9 @@ class LandingPageWithCheckForUpdate extends StatelessWidget {
           dayWithLocalization(daysToUpdate == 0 ? 1 : daysToUpdate);
 
       Future.delayed(const Duration(seconds: 2), () {
-        forceUpdateAfterDaysDialog(context, daysToUpdateString);
+        if (context.mounted) {
+          forceUpdateAfterDaysDialog(context, daysToUpdateString);
+        }
       });
 
       return const LandingPage();
@@ -132,7 +135,9 @@ class LandingPageWithCheckForUpdate extends StatelessWidget {
 
     if (currentAppVersion < latestAppVersion) {
       Future.delayed(const Duration(seconds: 2), () {
-        selectiveUpdateDialog(context, latestAppVersion, currentAppVersion);
+        if (context.mounted) {
+          selectiveUpdateDialog(context, latestAppVersion, currentAppVersion);
+        }
       });
 
       return const LandingPage();
@@ -175,7 +180,7 @@ class LandingPage extends StatelessWidget {
 
 void changStatusAndSystemNavigationBarDynamicWithTheme(BuildContext context) {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: MyColors.primaryColor.withOpacity(0.5),
+    statusBarColor: MyColors.primaryColor.withValues(alpha: 0.5),
     systemNavigationBarColor: Theme.of(context).brightness == Brightness.light
         ? MyColors.secondaryColor
         : Colors.black87,

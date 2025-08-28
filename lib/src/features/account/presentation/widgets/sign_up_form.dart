@@ -5,17 +5,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../core/error/error_exceptions_with_message.dart';
-import '../../domain/entities/user_information.dart';
-
-import '../providers/account.dart';
-
 import '../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../../core/util/functions/password_validation.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 
+import '../../domain/entities/user_information.dart';
+import '../providers/account.dart';
 import 'dont_or_already_have_accout.dart';
 
 class SignUpForm extends StatefulWidget {

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../../l10n/app_localizations.dart';
 import '../../../../../core/util/functions/string_manipulations_and_search.dart';
-import '../../../../account/presentation/providers/account.dart';
 
+import '../../../../account/presentation/providers/account.dart';
 import '../custom_texts.dart';
 
 class Greeting extends StatelessWidget {

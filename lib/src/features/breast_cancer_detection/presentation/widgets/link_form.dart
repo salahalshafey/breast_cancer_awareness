@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../core/util/functions/general_functions.dart';
+
 import '../providers/for_doctor_screen_state_provider.dart';
 
 class LinkForm extends StatefulWidget {

@@ -35,7 +35,7 @@ void showCustomSnackBar({
       ),
       padding: const EdgeInsets.all(12),
       dismissDirection: DismissDirection.none,
-      backgroundColor: Colors.grey.shade300.withOpacity(0.9),
+      backgroundColor: Colors.grey.shade300.withValues(alpha: 0.9),
     ),
   );
 }

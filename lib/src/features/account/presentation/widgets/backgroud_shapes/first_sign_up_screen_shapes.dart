@@ -29,8 +29,8 @@ class PaintForFirstSignUpScreen extends CustomPainter {
         Offset(size.width * 0.07300000, size.height * 0.9090000),
         Offset(size.width * 0.3180000, size.height * 0.9460000),
         [
-          const Color(0xffe6106b).withOpacity(0.27),
-          const Color(0xff7b5465).withOpacity(0.27),
+          const Color(0xffe6106b).withValues(alpha: 0.27),
+          const Color(0xff7b5465).withValues(alpha: 0.27),
         ],
         [0, 1],
       );

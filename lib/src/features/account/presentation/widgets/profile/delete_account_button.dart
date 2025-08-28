@@ -5,8 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../../l10n/app_localizations.dart';
 import '../../../../../core/util/builders/custom_alret_dialog.dart';
 
 import '../../../../breast_cancer_for_normal/presentation/providers/notes.dart';

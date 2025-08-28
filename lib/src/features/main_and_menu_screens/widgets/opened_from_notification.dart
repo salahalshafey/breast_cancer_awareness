@@ -22,6 +22,8 @@ void ifTheAppOpenedFromNotificationOpenSelfCheckScreen(
         !provider.didLunchSelfCheckScreenOnce) {
       provider.setAsAlreadyLunchedSelfCheckScreenOnce();
 
+      if (!context.mounted) return;
+
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => const StartingSelfCheckScreen(),
       ));

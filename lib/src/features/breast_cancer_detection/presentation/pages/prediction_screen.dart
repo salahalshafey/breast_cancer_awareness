@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:io';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
@@ -8,16 +9,14 @@ import 'package:firebase_ml_model_downloader/firebase_ml_model_downloader.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
-import 'dart:io';
 
 import '../../../../app.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../core/error/error_exceptions_with_message.dart';
 import '../../../../core/util/widgets/image_container.dart';
+
 import '../../../settings/providers/settings_provider.dart';
 import '../providers/for_doctor_screen_state_provider.dart';
 import '../widgets/styled_text.dart';

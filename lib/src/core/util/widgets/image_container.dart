@@ -13,7 +13,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../l10n/app_localizations.dart';
 
 import '../builders/custom_alret_dialog.dart';
 import '../builders/custom_snack_bar.dart';
@@ -268,7 +268,7 @@ class __ImageContainerState extends State<_ImageContainer> {
     _border = widget.border ??
         Border.all(
           width: 0,
-          color: Colors.white.withOpacity(1),
+          color: Colors.white.withValues(alpha: 1),
         );
     super.initState();
   }
@@ -333,7 +333,7 @@ class __ImageContainerState extends State<_ImageContainer> {
           width: 2 * widget.radius,
           height: 2 * widget.radius,
           decoration: BoxDecoration(
-            color: Colors.black.withOpacity(_opacity),
+            color: Colors.black.withValues(alpha: _opacity),
             border: _border,
             shape: widget.shape,
             borderRadius: widget.borderRadius,
@@ -773,11 +773,12 @@ class __ShareButtonState extends State<_ShareButton> {
           widget.image, widget.imageSource);
 
       _loadingState(false);
-      await Share.shareXFiles(
-        [XFile(imagePath)],
-        text: widget.caption,
-        subject: widget.title,
-        //sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+      await SharePlus.instance.share(
+        ShareParams(
+          text: widget.caption,
+          subject: widget.title,
+          files: [XFile(imagePath)],
+        ), //sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
       );
     } catch (error) {
       _loadingState(false);

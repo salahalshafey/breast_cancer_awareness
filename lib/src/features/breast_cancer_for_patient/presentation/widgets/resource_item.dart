@@ -39,7 +39,10 @@ class _ResourceItemState extends State<ResourceItem> {
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
                 backgroundColor: _isEntered
-                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                    ? Theme.of(context)
+                        .colorScheme
+                        .secondary
+                        .withValues(alpha: 0.5)
                     : null,
               ),
               recognizer: TapGestureRecognizer()

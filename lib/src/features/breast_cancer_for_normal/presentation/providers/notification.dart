@@ -84,6 +84,7 @@ class Noti {
       body,
       RepeatInterval.weekly, // it will be every 2 weeks
       notificationDetails,
+      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
     );
   }
 

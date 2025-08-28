@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../../l10n/app_localizations.dart';
+import '../../../../core/util/builders/go_to_screen_with_slide_transition.dart';
 
 import '../widgets/awareness/awareness_title.dart';
 import '../widgets/awareness/greeting.dart';
 import '../widgets/custom_texts.dart';
-import '../../../../core/util/builders/go_to_screen_with_slide_transition.dart';
 
 import 'breast_check_history/breast_check_history_screen.dart';
 import 'self_check_and_note_adding/starting_self_check_screen.dart';

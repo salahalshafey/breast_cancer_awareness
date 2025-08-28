@@ -7,8 +7,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:ntp/ntp.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../l10n/app_localizations.dart';
 import '../../../core/network/network_info.dart';
 import '../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../core/util/functions/nouns_in_diff_languages.dart';
@@ -217,8 +216,6 @@ extension IsVersionLessThan on String {
 
   bool operator <(String other) => compareTo(other) < 0;
 }
-
-
 
 /* extension IsVersionLessThan on String {
   /// Only used for app version comparison.

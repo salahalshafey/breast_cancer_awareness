@@ -3,19 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'package:provider/provider.dart';
 
-import '../../providers/account.dart';
-
+import '../../../../../../l10n/app_localizations.dart';
 import '../../../../../core/error/error_exceptions_with_message.dart';
 import '../../../../../core/util/builders/custom_alret_dialog.dart';
 
 import '../../pages/send_password_reset_email_screen.dart';
 import '../../pages/first_sign_up_screen.dart';
 
+import '../../providers/account.dart';
 import '../dont_or_already_have_accout.dart';
 import 'sign_in_as_guest_button.dart';
 import 'social_sign_in.dart';

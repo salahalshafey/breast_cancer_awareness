@@ -64,7 +64,10 @@ class _LinkifyTextState extends State<LinkifyText> {
               text: inlineText.first,
               style: widget.linkStyle.copyWith(
                 backgroundColor: _enteredSpanIndex == currentSpanIndex
-                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                    ? Theme.of(context)
+                        .colorScheme
+                        .secondary
+                        .withValues(alpha: 0.5)
                     : null,
               ),
             );
@@ -78,7 +81,10 @@ class _LinkifyTextState extends State<LinkifyText> {
               text: inlineText.first,
               style: widget.linkStyle.copyWith(
                 backgroundColor: _enteredSpanIndex == currentSpanIndex
-                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                    ? Theme.of(context)
+                        .colorScheme
+                        .secondary
+                        .withValues(alpha: 0.5)
                     : null,
               ),
             );
@@ -92,7 +98,10 @@ class _LinkifyTextState extends State<LinkifyText> {
               text: inlineText.first,
               style: widget.linkStyle.copyWith(
                 backgroundColor: _enteredSpanIndex == currentSpanIndex
-                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                    ? Theme.of(context)
+                        .colorScheme
+                        .secondary
+                        .withValues(alpha: 0.5)
                     : null,
               ),
             );
@@ -171,7 +180,10 @@ class _SelectableLinkifyTextState extends State<SelectableLinkifyText> {
               text: inlineText.first,
               style: widget.linkStyle.copyWith(
                 backgroundColor: _enteredSpanIndex == currentSpanIndex
-                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                    ? Theme.of(context)
+                        .colorScheme
+                        .secondary
+                        .withValues(alpha: 0.5)
                     : null,
               ),
             );
@@ -185,7 +197,10 @@ class _SelectableLinkifyTextState extends State<SelectableLinkifyText> {
               text: inlineText.first,
               style: widget.linkStyle.copyWith(
                 backgroundColor: _enteredSpanIndex == currentSpanIndex
-                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                    ? Theme.of(context)
+                        .colorScheme
+                        .secondary
+                        .withValues(alpha: 0.5)
                     : null,
               ),
             );
@@ -199,7 +214,10 @@ class _SelectableLinkifyTextState extends State<SelectableLinkifyText> {
               text: inlineText.first,
               style: widget.linkStyle.copyWith(
                 backgroundColor: _enteredSpanIndex == currentSpanIndex
-                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                    ? Theme.of(context)
+                        .colorScheme
+                        .secondary
+                        .withValues(alpha: 0.5)
                     : null,
               ),
             );

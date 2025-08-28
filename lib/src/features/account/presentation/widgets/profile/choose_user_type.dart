@@ -113,12 +113,12 @@ class UserType extends StatelessWidget {
         .scaleXY(end: 1.1, duration: 200.ms)
         .boxShadow(
           begin: BoxShadow(
-            color: Colors.black.withOpacity(0.16),
+            color: Colors.black.withValues(alpha: 0.16),
             offset: const Offset(10, 10),
             blurRadius: 10,
           ),
           end: BoxShadow(
-            color: Colors.black.withOpacity(0.16),
+            color: Colors.black.withValues(alpha: 0.16),
             offset: const Offset(15, 15),
             blurRadius: 15,
           ),

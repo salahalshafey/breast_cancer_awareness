@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../l10n/app_localizations.dart';
 
 /////// Don't forget to get image_picker package by using this command: flutter pub add image_picker////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////

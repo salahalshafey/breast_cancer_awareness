@@ -5,8 +5,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../../l10n/app_localizations.dart';
 import '../../../../../core/theme/colors.dart';
 import '../../../../../core/util/builders/custom_snack_bar.dart';
 import '../../../../../core/util/functions/date_time_and_duration.dart';

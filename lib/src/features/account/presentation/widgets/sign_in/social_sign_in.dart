@@ -3,8 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../../l10n/app_localizations.dart';
 import '../../../../../core/error/error_exceptions_with_message.dart';
 import '../../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../../../core/util/builders/custom_snack_bar.dart';

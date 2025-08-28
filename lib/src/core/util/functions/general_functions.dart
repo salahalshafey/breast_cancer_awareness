@@ -5,7 +5,7 @@
 import 'dart:math';
 import 'package:http/http.dart' as http;
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../l10n/app_localizations.dart';
 
 import '../../../app.dart';
 

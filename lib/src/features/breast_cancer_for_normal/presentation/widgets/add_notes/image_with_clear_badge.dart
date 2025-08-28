@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../../l10n/app_localizations.dart';
 import '../../../../../core/theme/colors.dart';
 import '../../../../../core/util/widgets/image_container.dart';
 
@@ -40,7 +39,7 @@ class ImageWithClearBadge extends StatelessWidget {
                   ),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: MyColors.primaryColor.withOpacity(0.3),
+                      color: MyColors.primaryColor.withValues(alpha: 0.3),
                       shape: BoxShape.circle,
                     ),
                     child: IconButton(

@@ -31,7 +31,9 @@ class _MirrorScreenState extends State<MirrorScreen> {
         switch (e.code) {
           case 'CameraAccessDenied':
             // Handle access errors here.
-            Navigator.of(context).pop();
+            if (mounted) {
+              Navigator.of(context).pop();
+            }
             break;
           default:
             // Handle other errors here.

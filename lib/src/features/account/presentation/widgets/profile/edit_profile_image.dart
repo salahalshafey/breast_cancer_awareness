@@ -1,8 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../../l10n/app_localizations.dart';
 import '../../../../../core/theme/colors.dart';
 import '../../../../../core/util/widgets/image_container.dart';
 
@@ -51,7 +50,7 @@ class EditProfileImage extends StatelessWidget {
               icon: Container(
                 padding: const EdgeInsets.all(3.0),
                 decoration: BoxDecoration(
-                  color: MyColors.primaryColor.withOpacity(0.3),
+                  color: MyColors.primaryColor.withValues(alpha: 0.3),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
@@ -71,7 +70,7 @@ class EditProfileImage extends StatelessWidget {
                 onPressed: clearTheImage,
                 icon: Container(
                   decoration: BoxDecoration(
-                    color: MyColors.primaryColor.withOpacity(0.3),
+                    color: MyColors.primaryColor.withValues(alpha: 0.3),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(

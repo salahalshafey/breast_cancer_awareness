@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../app.dart';
 import '../../../../core/util/widgets/default_screen.dart';
 import '../../../../core/util/widgets/bulleted_list.dart';
+
 import '../../../account/presentation/widgets/icon_from_asset.dart';
 
 class TipsForYourVisit extends StatelessWidget {

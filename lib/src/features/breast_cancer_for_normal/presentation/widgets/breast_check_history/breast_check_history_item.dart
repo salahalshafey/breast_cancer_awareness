@@ -3,19 +3,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../../../l10n/app_localizations.dart';
 import '../../../../../core/theme/colors.dart';
 import '../../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../../../core/util/functions/date_time_and_duration.dart';
-import '../../../../account/presentation/widgets/icon_from_asset.dart';
+import '../../../../../core/util/builders/go_to_screen_with_slide_transition.dart';
 
+import '../../../../account/presentation/widgets/icon_from_asset.dart';
 import '../../../../account/presentation/providers/account.dart';
-import '../../providers/notes.dart';
 import '../../../domain/entities/note.dart';
 
+import '../../providers/notes.dart';
 import '../../pages/breast_check_history/breast_check_note_screen.dart';
-import '../../../../../core/util/builders/go_to_screen_with_slide_transition.dart';
 
 class BreastCheckHistorytem extends StatelessWidget {
   const BreastCheckHistorytem(this.note, {super.key});

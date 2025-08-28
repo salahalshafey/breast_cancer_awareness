@@ -2,13 +2,12 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../../app.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../core/error/error_exceptions_with_message.dart';
 import '../../../../core/error/exceptions_without_message.dart';
-import '../../domain/entities/search_result.dart';
 
+import '../../domain/entities/search_result.dart';
 import '../../domain/entities/search_types.dart';
 import '../../domain/usecases/ai_result.dart';
 import '../../domain/usecases/custom_web_search.dart';

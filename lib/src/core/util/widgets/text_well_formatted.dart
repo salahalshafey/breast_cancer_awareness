@@ -155,7 +155,10 @@ class _TextWellFormattedWitouthBulletedState
               fontSize: widget.fontSize?.plusOne ?? 15,
               color: Colors.blue,
               backgroundColor: _enteredSpanIndex == currentSpanIndex
-                  ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                  ? Theme.of(context)
+                      .colorScheme
+                      .secondary
+                      .withValues(alpha: 0.5)
                   : null,
               // decoration: TextDecoration.underline,
               //  decorationColor: Colors.blue,
@@ -179,7 +182,10 @@ class _TextWellFormattedWitouthBulletedState
               fontSize: widget.fontSize?.plusOne ?? 15,
               color: Colors.blue,
               backgroundColor: _enteredSpanIndex == currentSpanIndex
-                  ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                  ? Theme.of(context)
+                      .colorScheme
+                      .secondary
+                      .withValues(alpha: 0.5)
                   : null,
               // decoration: TextDecoration.underline,
               // decorationColor: Colors.blue,
@@ -208,7 +214,10 @@ class _TextWellFormattedWitouthBulletedState
               fontSize: widget.fontSize?.plusOne ?? 15,
               color: Colors.blue,
               backgroundColor: _enteredSpanIndex == currentSpanIndex
-                  ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                  ? Theme.of(context)
+                      .colorScheme
+                      .secondary
+                      .withValues(alpha: 0.5)
                   : null,
             ),
             recognizer: _customTapGestureRecognizerOf(currentSpanIndex)
@@ -224,7 +233,7 @@ class _TextWellFormattedWitouthBulletedState
             style: TextStyle(
               fontSize: widget.fontSize?.plusOne ?? 15,
               backgroundColor: Theme.of(context).brightness == Brightness.light
-                  ? Colors.grey.withOpacity(0.3)
+                  ? Colors.grey.withValues(alpha: 0.3)
                   : Colors.black,
             ),
           );

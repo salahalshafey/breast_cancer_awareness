@@ -12,7 +12,9 @@ class MainScreenWithDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(Durations.short1, () {
-      ifTheAppOpenedFromNotificationOpenSelfCheckScreen(context);
+      if (context.mounted) {
+        ifTheAppOpenedFromNotificationOpenSelfCheckScreen(context);
+      }
     });
 
     return ZoomDrawer(

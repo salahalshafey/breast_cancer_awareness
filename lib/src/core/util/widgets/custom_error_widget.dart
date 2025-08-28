@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../l10n/app_localizations.dart';
 
 import 'text_well_formatted.dart';
 
@@ -57,7 +57,7 @@ class CustomErrorWidget extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border.all(color: color),
               borderRadius: BorderRadius.circular(10),
-              color: color.withOpacity(0.1),
+              color: color.withValues(alpha: 0.1),
             ),
             child: TextWellFormattedWithBulleted(
               data: error ?? "",

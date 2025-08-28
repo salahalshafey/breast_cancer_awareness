@@ -45,7 +45,10 @@ class _TextWithActionTextState extends State<TextWithActionText> {
               text: widget.actionText,
               style: widget.actionTextStyle.copyWith(
                 backgroundColor: _isEntered
-                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                    ? Theme.of(context)
+                        .colorScheme
+                        .secondary
+                        .withValues(alpha: 0.5)
                     : null,
               ),
               recognizer: TapGestureRecognizer()

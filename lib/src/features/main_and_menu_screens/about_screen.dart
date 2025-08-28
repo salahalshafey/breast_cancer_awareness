@@ -6,15 +6,14 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../l10n/app_localizations.dart';
 import '../../core/util/builders/custom_alret_dialog.dart';
 import '../../core/util/widgets/bulleted_list.dart';
 import '../../core/util/widgets/default_screen.dart';
 import '../../core/theme/colors.dart';
 import '../../core/util/widgets/text_well_formatted.dart';
-
 import '../../core/util/widgets/text_with_action_text.dart';
+
 import '../account/presentation/widgets/icon_from_asset.dart';
 import 'widgets/check_for_update.dart';
 

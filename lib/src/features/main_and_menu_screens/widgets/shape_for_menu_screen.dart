@@ -36,9 +36,9 @@ class PaintForMenuScreen extends CustomPainter {
         Offset(size.width * 0.1130000, size.height * 0.4470000),
         Offset(size.width * 0.5000000, size.height * 0.01000000),
         [
-          const Color(0xfff6a8c9).withOpacity(0.27),
-          const Color(0xffff016f).withOpacity(0.27),
-          const Color(0xffff006f).withOpacity(0.27),
+          const Color(0xfff6a8c9).withValues(alpha: 0.27),
+          const Color(0xffff016f).withValues(alpha: 0.27),
+          const Color(0xffff006f).withValues(alpha: 0.27),
         ],
         [0, 0.423, 1],
       );
