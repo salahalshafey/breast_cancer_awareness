@@ -7,15 +7,15 @@ import 'package:flutter/services.dart';
 
 import 'package:photo_view/photo_view.dart';
 import 'package:dio/dio.dart';
-import 'package:gallery_saver/gallery_saver.dart';
+// import 'package:gallery_saver/gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+// import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../l10n/app_localizations.dart';
 
-import '../builders/custom_alret_dialog.dart';
+// import '../builders/custom_alret_dialog.dart';
 import '../builders/custom_snack_bar.dart';
 
 import '../functions/string_manipulations_and_search.dart';
@@ -200,11 +200,11 @@ class _ImageContainerState extends State<ImageContainer> {
       final docDir = await getApplicationDocumentsDirectory();
       final docPath = '${docDir.path}/${networkImage.hashCode}.jpeg';
 
-      await Dio().download(networkImage, docPath);
-      await GallerySaver.saveImage(
-        docPath,
-        albumName: (await PackageInfo.fromPlatform()).appName,
-      );
+      // await Dio().download(networkImage, docPath);
+      // await GallerySaver.saveImage(
+      //   docPath,
+      //   albumName: (await PackageInfo.fromPlatform()).appName,
+      // );
       return docPath;
     } catch (_) {
       return '';
@@ -563,7 +563,7 @@ class _ImageScreenState extends State<ImageScreen> {
               backgroundColor: Colors.black54,
               elevation: 0,
               actions: [
-                DownloadButton(widget.image, widget.imageSource),
+                // DownloadButton(widget.image, widget.imageSource),
                 _ShareButton(
                   image: widget.image,
                   imageSource: widget.imageSource,
@@ -652,91 +652,91 @@ class _ImageScreenState extends State<ImageScreen> {
   }
 }
 
-class DownloadButton extends StatefulWidget {
-  const DownloadButton(this.image, this.imageSource, {super.key});
+// class DownloadButton extends StatefulWidget {
+//   const DownloadButton(this.image, this.imageSource, {super.key});
 
-  final String image;
-  final From imageSource;
+//   final String image;
+//   final From imageSource;
 
-  @override
-  State<DownloadButton> createState() => _DownloadButtonState();
-}
+//   @override
+//   State<DownloadButton> createState() => _DownloadButtonState();
+// }
 
-class _DownloadButtonState extends State<DownloadButton> {
-  bool _imageDownloaded = false;
-  bool _isImageDownloading = false;
+// class _DownloadButtonState extends State<DownloadButton> {
+//   bool _imageDownloaded = false;
+//   bool _isImageDownloading = false;
 
-  /*Future<bool> _checkIfImageAlreadySavedInGallery() async {
-    final tempDir =
-        await getApplicationDocumentsDirectory(); // should be getGalleryDirectory or something like that
-    final path = '${tempDir.path}/${widget.image.hashCode}.jpeg';
+//   /*Future<bool> _checkIfImageAlreadySavedInGallery() async {
+//     final tempDir =
+//         await getApplicationDocumentsDirectory(); // should be getGalleryDirectory or something like that
+//     final path = '${tempDir.path}/${widget.image.hashCode}.jpeg';
 
-    return (await File(path).exists());
-  }*/
+//     return (await File(path).exists());
+//   }*/
 
-  void _loadingState(bool state) {
-    setState(() {
-      _isImageDownloading = state;
-    });
-  }
+//   void _loadingState(bool state) {
+//     setState(() {
+//       _isImageDownloading = state;
+//     });
+//   }
 
-  void _saveImageToGallery() async {
-    bool? savedToGallery;
+//   void _saveImageToGallery() async {
+//     bool? savedToGallery;
 
-    try {
-      _loadingState(true);
-      final path = await _saveAnySourceOfImageToTempDir(
-        widget.image,
-        widget.imageSource,
-      );
+//     try {
+//       _loadingState(true);
+//       final path = await _saveAnySourceOfImageToTempDir(
+//         widget.image,
+//         widget.imageSource,
+//       );
 
-      savedToGallery = await GallerySaver.saveImage(
-        path,
-        albumName: (await PackageInfo.fromPlatform()).appName,
-      );
-    } catch (error) {
-      _loadingState(false);
-      showCustomAlretDialog(
-        context: context,
-        title: AppLocalizations.of(context)!.error,
-        content: AppLocalizations.of(context)!.errorHappenedWhileSavingTheImage,
-        titleColor: Colors.red,
-      );
-      return;
-    }
+//       savedToGallery = await GallerySaver.saveImage(
+//         path,
+//         albumName: (await PackageInfo.fromPlatform()).appName,
+//       );
+//     } catch (error) {
+//       _loadingState(false);
+//       showCustomAlretDialog(
+//         context: context,
+//         title: AppLocalizations.of(context)!.error,
+//         content: AppLocalizations.of(context)!.errorHappenedWhileSavingTheImage,
+//         titleColor: Colors.red,
+//       );
+//       return;
+//     }
 
-    _loadingState(false);
-    if (savedToGallery == null || !savedToGallery) {
-      showCustomAlretDialog(
-        context: context,
-        title: AppLocalizations.of(context)!.error,
-        content: AppLocalizations.of(context)!.errorHappenedWhileSavingTheImage,
-        titleColor: Colors.red,
-      );
+//     _loadingState(false);
+//     if (savedToGallery == null || !savedToGallery) {
+//       showCustomAlretDialog(
+//         context: context,
+//         title: AppLocalizations.of(context)!.error,
+//         content: AppLocalizations.of(context)!.errorHappenedWhileSavingTheImage,
+//         titleColor: Colors.red,
+//       );
 
-      return;
-    }
+//       return;
+//     }
 
-    setState(() {
-      _imageDownloaded = true;
-    });
-  }
+//     setState(() {
+//       _imageDownloaded = true;
+//     });
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return _isImageDownloading
-        ? const Center(child: CircularProgressIndicator())
-        : IconButton(
-            icon: !_imageDownloaded
-                ? const Icon(Icons.download)
-                : const Icon(Icons.download_done, color: Colors.white),
-            tooltip: !_imageDownloaded
-                ? AppLocalizations.of(context)!.saveToGallery
-                : AppLocalizations.of(context)!.imageSavedToGallery,
-            onPressed: !_imageDownloaded ? _saveImageToGallery : null,
-          );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return _isImageDownloading
+//         ? const Center(child: CircularProgressIndicator())
+//         : IconButton(
+//             icon: !_imageDownloaded
+//                 ? const Icon(Icons.download)
+//                 : const Icon(Icons.download_done, color: Colors.white),
+//             tooltip: !_imageDownloaded
+//                 ? AppLocalizations.of(context)!.saveToGallery
+//                 : AppLocalizations.of(context)!.imageSavedToGallery,
+//             onPressed: !_imageDownloaded ? _saveImageToGallery : null,
+//           );
+//   }
+// }
 
 class _ShareButton extends StatefulWidget {
   const _ShareButton({

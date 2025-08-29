@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:async';
 
+import 'package:firebase_ai/firebase_ai.dart' hide ServerException;
 import 'package:http/http.dart' as http;
 
 import '../../../../core/error/exceptions_without_message.dart';
@@ -15,89 +17,72 @@ abstract class AIChatStream {
   Stream<String> chatResult(String message);
 }
 
-class GeminiPro implements AIChat {
+// dart
+// Requires: import 'dart:async'; import 'dart:convert';
+//           import 'package:http/http.dart' as http;
+// And your own exceptions: ServerException, FilterException
+
+// dart
+// pubspec: firebase_core, firebase_ai, http (if you still need it elsewhere)
+// Make sure you have your own ServerException / FilterException types as before.
+
+class Gemini25ProFirebase implements AIChat {
+  Gemini25ProFirebase();
+
+  // Keep your original instruction block (shortened here)
+  static const String _preamble = """
+Role: Act as a Doctor, and you are My Breast Cancer Assistant.
+Main Task: provide useful information about Breast Cancer.
+Goal: Make awareness about Breast Cancer and help patients.
+Constraints: Max 500 words. Avoid medical jargon. Be helpful and clear.
+If I ask in another language, answer in that language.
+""";
+
+  // Optional: your original canned model reply (keeps the "history" behavior)
+  static const String _seedReply =
+      "Absolutely, I'm ready! Breast cancer is a serious but treatable condition..."
+      " Together, let's promote early detection and healthier living.";
+
   @override
   Future<String> chatResult(String message) async {
-    String apiKey = makerSuiteAPIKey;
+    try {
+      // Build the model without thinkingConfig (Firebase AI SDK doesn't support it)
+      final model = FirebaseAI.googleAI().generativeModel(
+        model: 'gemini-2.5-flash',
+        generationConfig: GenerationConfig(
+          temperature: 0.9,
+          topK: 1,
+          topP: 1.0,
+          maxOutputTokens: 2048,
+        ),
+      );
 
-    String url =
-        'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=$apiKey';
+      // Keep your prior conversation style (preamble + model greeting)
+      final history = <Content>[
+        Content('user', [TextPart(_preamble)]),
+        Content('model', [TextPart(_seedReply)]),
+      ];
 
-    Map<String, dynamic> requestBody = {
-      "contents": [
-        {
-          "role": "user",
-          "parts": [
-            {
-              "text":
-                  "\"Role: [Act as a Doctor, and you are My Breast Cancer Assistant.] \n\nMain Task: [provide me useful information about Breast Cancer]\n\n\nGoal: [Make Awareness about Breast Cancer Disease and help the patients]\n\nConstraints: [Maximum of 500 words. -Avoid medical jargon. - Make it helpful- Make it clear\"].\"\n\nI could ask you in a different language, but make sure you answer me in this language.\n\nReady?"
-            }
-          ]
-        },
-        {
-          "role": "model",
-          "parts": [
-            {
-              "text":
-                  "Absolutely, I'm ready! Breast cancer is a serious but treatable condition. Regular self-exams help in early detection. Feel for any lumps, thickening, or changes in shape. If you notice anything unusual, consult a doctor promptly. Mammograms are key for women over 40, detecting issues before symptoms appear. Maintain a healthy lifestyle—balanced diet, regular exercise, limited alcohol—to reduce risks. Share this knowledge, encourage friends and family to prioritize screenings. Together, let's promote early detection and healthier living."
-            }
-          ]
-        },
-        {
-          "role": "user",
-          "parts": [
-            {"text": message}
-          ]
-        }
-      ],
-      "generationConfig": {
-        "temperature": 0.9,
-        "topK": 1,
-        "topP": 1,
-        "maxOutputTokens": 2048,
-        "stopSequences": []
-      },
-      "safetySettings": [
-        {
-          "category": "HARM_CATEGORY_HARASSMENT",
-          "threshold": "BLOCK_MEDIUM_AND_ABOVE"
-        },
-        {
-          "category": "HARM_CATEGORY_HATE_SPEECH",
-          "threshold": "BLOCK_MEDIUM_AND_ABOVE"
-        },
-        {
-          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-          "threshold": "BLOCK_MEDIUM_AND_ABOVE"
-        },
-        {
-          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-          "threshold": "BLOCK_MEDIUM_AND_ABOVE"
-        }
-      ]
-    };
+      final chat = model.startChat(history: history);
 
-    final response = await http.post(
-      Uri.parse(url),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode(requestBody),
-    );
+      final response = await chat.sendMessage(
+        Content('user', [TextPart(message)]),
+      );
 
-    if (response.statusCode != 200) {
+      print(response);
+
+      final text = response.text?.trim();
+      if (text == null || text.isEmpty) {
+        // Mirrors your old behavior when candidates were filtered/empty
+        throw FilterException();
+      }
+      return text;
+    } catch (_) {
+      // Keep same surface behavior as your old code
+
+      print(_);
       throw ServerException();
     }
-
-    //print(response.body);
-
-    final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
-
-    if (responseMap["candidates"] == null) {
-      throw FilterException();
-    }
-
-    return responseMap["candidates"][0]["content"]["parts"][0]["text"];
   }
 }
 

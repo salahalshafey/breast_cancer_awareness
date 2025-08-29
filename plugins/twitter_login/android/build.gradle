@@ -1,0 +1,44 @@
+// AGP 8+ compatible build.gradle for com.maru.twitter_login
+
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+android {
+    // REQUIRED by AGP 7.3+/8+
+    namespace 'com.maru.twitter_login'
+
+    // Match your app (e.g., 34)
+    compileSdkVersion 34
+
+    defaultConfig {
+        // Modern minimum; align with your app (21+ recommended)
+        minSdkVersion 21
+        consumerProguardFiles 'consumer-rules.pro'
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions { jvmTarget = '11' }
+
+    sourceSets { main.java.srcDirs += 'src/main/kotlin' }
+
+    lintOptions { disable 'InvalidPackage' }
+}
+
+dependencies {
+    // AndroidX browser for Custom Tabs
+    implementation 'androidx.browser:browser:1.8.0'
+
+    // Kotlin stdlib (host controls Kotlin plugin version; stdlib 1.9.x is fine)
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.24'
+}

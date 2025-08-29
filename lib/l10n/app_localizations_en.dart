@@ -337,9 +337,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String newVersionOfTheAppIsAvailable(
-    String latestAppVersion,
-    String currentAppVersion,
-  ) {
+      String latestAppVersion, String currentAppVersion) {
     return 'A new version of Breast Cancer Awareness is available! Version $latestAppVersion is now available-you have $currentAppVersion\n\nWould you like to update it now?';
   }
 
@@ -456,8 +454,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String anAccountAlreadyExistsWithTheSameEmailAddressAsYourProviderAccount(
-    String providerName,
-  ) {
+      String providerName) {
     return 'An account already exists with the same email address as your $providerName account.\nSign in using the account that is associated with this email address.';
   }
 
@@ -668,8 +665,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hello => 'Hello';
 
   @override
-  String
-  get youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection =>
+  String get youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection =>
       'You understand that every day counts when it comes to early breast cancer detection. it\'s great that you take responsibility for your health and check your breasts regularly.';
 
   @override
@@ -912,8 +908,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recording => 'Recording';
 
   @override
-  String
-  get pickAMedicalImageOfBreastCancerMammogramXrayOrHistologyOfThePatient =>
+  String get pickAMedicalImageOfBreastCancerMammogramXrayOrHistologyOfThePatient =>
       'Pick a Medical Image of Breast Cancer Mammogram (X-Ray) or Histology of The Patient.';
 
   @override

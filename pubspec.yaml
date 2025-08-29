@@ -43,11 +43,13 @@ dependencies:
   cloud_firestore: ^5.6.12
   firebase_storage: ^12.4.10
   firebase_ml_model_downloader: ^0.3.3+8
-  flutter_tflite: ^1.0.1
+  flutter_tflite:
+    path: plugins/flutter_tflite
   photo_view: ^0.15.0
   image_picker: ^0.8.9
   url_launcher: ^6.3.2
-  gallery_saver: ^2.3.2
+  # gallery_saver:
+  #   path: plugins/gallery_saver
   dio: ^5.9.0
   path_provider: ^2.1.5
   share_plus: ^11.1.0
@@ -58,22 +60,28 @@ dependencies:
   shared_preferences: ^2.5.3
   flutter_zoom_drawer: ^3.2.0
   dotted_border: ^3.1.0
-  http: ^0.13.6
-  flutter_barcode_scanner: ^2.0.0
+  http: ^1.1.0
+  mobile_scanner: ^7.0.1
   youtube_player_flutter: ^9.1.2
   camera: ^0.11.2
   flutter_local_notifications: ^18.0.1
   flutter_timezone: ^4.1.1
-  flutter_sound: ^9.2.13
+  flutter_sound: ^9.28.0
   permission_handler: ^12.0.1
   speech_to_text: ^7.3.0
   flutter_tts: ^4.2.3
   html: ^0.15.6
   google_sign_in: ^7.1.1
   flutter_facebook_auth: ^6.0.4
-  twitter_login: ^4.4.0
+  twitter_login:
+    path: plugins/twitter_login
   ntp: ^2.0.0
-  flutter_langdetect: ^0.0.2
+  # google_ml_kit: ^0.20.0
+  google_mlkit_language_id: ^0.13.0
+  firebase_ai: ^2.3.0
+  # tflite: ^1.1.2
+  # tflite_flutter: ^0.11.0
+  # flutter_langdetect: ^0.0.2
 
 
   # # flutter_local_notifications:

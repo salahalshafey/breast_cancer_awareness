@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 import '../../../../../l10n/app_localizations.dart';
 import '../../../../core/util/builders/custom_alret_dialog.dart';
@@ -11,6 +10,7 @@ import '../../../../core/util/builders/custom_snack_bar.dart';
 import '../../../../core/util/functions/general_functions.dart';
 
 import '../providers/for_doctor_screen_state_provider.dart';
+import 'mobile_scanner_widget.dart';
 
 class ReadLinkByQRCode extends StatefulWidget {
   const ReadLinkByQRCode({super.key});
@@ -31,15 +31,10 @@ class _ReadLinkByQRCodeState extends State<ReadLinkByQRCode> {
     final forDoctorScreenState =
         Provider.of<ForDoctorScreenState>(context, listen: false);
     try {
-      final String imagelink = await FlutterBarcodeScanner.scanBarcode(
-        '#ff6666',
-        AppLocalizations.of(context)!.cancel,
-        true,
-        ScanMode.QR,
-      );
+      final imagelink = await scanQrAndGetText(context);
       if (!mounted) return;
 
-      if (imagelink == "-1") {
+      if (imagelink == null) {
         showCustomSnackBar(
           context: context,
           content: AppLocalizations.of(context)!.youDidntReadQrCode,

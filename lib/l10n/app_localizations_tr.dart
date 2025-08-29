@@ -337,9 +337,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String newVersionOfTheAppIsAvailable(
-    String latestAppVersion,
-    String currentAppVersion,
-  ) {
+      String latestAppVersion, String currentAppVersion) {
     return 'Meme Kanseri Farkındalık Uygulaması\'nın yeni bir sürümü mevcut! Sürüm $latestAppVersion şu anda kullanılabilir durumda - sizin sürümünüz $currentAppVersion\n\nŞimdi güncellemek ister misiniz?';
   }
 
@@ -457,8 +455,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String anAccountAlreadyExistsWithTheSameEmailAddressAsYourProviderAccount(
-    String providerName,
-  ) {
+      String providerName) {
     return '$providerName hesabınızla aynı e-posta adresine sahip bir hesap zaten mevcut.\nBu e-posta adresi ile ilişkilendirilmiş hesapla giriş yapın.';
   }
 
@@ -669,8 +666,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get hello => 'Merhaba';
 
   @override
-  String
-  get youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection =>
+  String get youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection =>
       'Erken meme kanseri tespiti konusunda her günün önemli olduğunu anlıyorsunuz. Sağlığınız için sorumluluk almanız ve düzenli olarak meme muayenenizi yapmanız harika.';
 
   @override
@@ -914,8 +910,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get recording => 'Kaydediliyor';
 
   @override
-  String
-  get pickAMedicalImageOfBreastCancerMammogramXrayOrHistologyOfThePatient =>
+  String get pickAMedicalImageOfBreastCancerMammogramXrayOrHistologyOfThePatient =>
       'Hasta\'nın Meme Kanseri Mamogram (X-Ray) veya Histoloji Medikal Görüntüsünü Seçin.';
 
   @override

@@ -1,12 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
-import 'package:flutter_langdetect/flutter_langdetect.dart' as langdetect;
 
 import '../../../../../l10n/app_localizations.dart';
+import '../../../../core/util/functions/lang_detect.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../../core/util/widgets/custom_card.dart';
 import '../../../../core/util/widgets/custom_error_widget.dart';
@@ -67,7 +69,7 @@ class _WebSearchResultState extends State<WebSearchResult>
   }
 
   void _speakWithResultLanguage(String spokenString) async {
-    final spokenStringLanguage = langdetect.detect(spokenString);
+    final spokenStringLanguage = await detectLang(spokenString);
 
     if (await widget.flutterTts.isLanguageAvailable(spokenStringLanguage)) {
       await widget.flutterTts.setLanguage(spokenStringLanguage);
@@ -77,14 +79,17 @@ class _WebSearchResultState extends State<WebSearchResult>
     }
   }
 
-  void _speakIfPossible(String spokenString, void Function(String) speakWith) {
+  void _speakIfPossible(
+    FutureOr<String> spokenString,
+    void Function(String) speakWith,
+  ) async {
     final textToSpeechType =
         Provider.of<SettingsProvider>(context, listen: false).textToSpeechType;
 
     if (textToSpeechType == TextToSpeechType.alwaysSpeak ||
         textToSpeechType == TextToSpeechType.whenSearchWithVoiceOnly &&
             widget.textToSpeech) {
-      speakWith(spokenString);
+      speakWith(await spokenString);
     }
   }
 
@@ -266,13 +271,13 @@ class _WebSearchResultState extends State<WebSearchResult>
   }
 }
 
-String _spokenString(List<SearchResult> result) {
+Future<String> _spokenString(List<SearchResult> result) async {
   if (result.length == 1) {
     return "${result.first.title}.\n${result.first.snippet}.";
   }
 
   final theResultLanguage =
-      langdetect.detect("${result.first.title}.\n${result.first.snippet}");
+      await detectLang("${result.first.title}.\n${result.first.snippet}");
 
   final instructions = INSTRUCTIONS[theResultLanguage] ?? INSTRUCTIONS['en'];
 

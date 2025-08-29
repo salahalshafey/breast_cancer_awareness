@@ -338,9 +338,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String newVersionOfTheAppIsAvailable(
-    String latestAppVersion,
-    String currentAppVersion,
-  ) {
+      String latestAppVersion, String currentAppVersion) {
     return '¡Hay una nueva versión de Conciencia sobre el Cáncer de Mama disponible! La versión $latestAppVersion ya está disponible, tienes la versión $currentAppVersion\n\n¿Te gustaría actualizarla ahora?';
   }
 
@@ -458,8 +456,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String anAccountAlreadyExistsWithTheSameEmailAddressAsYourProviderAccount(
-    String providerName,
-  ) {
+      String providerName) {
     return 'Ya existe una cuenta con la misma dirección de correo electrónico que tu cuenta $providerName.\nInicia sesión utilizando la cuenta asociada a esta dirección de correo electrónico.';
   }
 
@@ -671,8 +668,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get hello => 'Hola';
 
   @override
-  String
-  get youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection =>
+  String get youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection =>
       'Entiendes que cada día cuenta cuando se trata de la detección temprana del cáncer de mama. Es genial que asumas la responsabilidad de tu salud y revises tus senos regularmente.';
 
   @override
@@ -916,8 +912,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get recording => 'Grabando';
 
   @override
-  String
-  get pickAMedicalImageOfBreastCancerMammogramXrayOrHistologyOfThePatient =>
+  String get pickAMedicalImageOfBreastCancerMammogramXrayOrHistologyOfThePatient =>
       'Selecciona una imagen médica de mamografía (Rayos X) de cáncer de mama o histología del paciente.';
 
   @override

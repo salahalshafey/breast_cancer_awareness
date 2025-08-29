@@ -67,7 +67,7 @@ import 'app_localizations_tr.dart';
 /// property.
 abstract class AppLocalizations {
   AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -90,11 +90,11 @@ abstract class AppLocalizations {
   /// of delegates is preferred or required.
   static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
       <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
@@ -103,7 +103,7 @@ abstract class AppLocalizations {
     Locale('en'),
     Locale('es'),
     Locale('fr'),
-    Locale('tr'),
+    Locale('tr')
   ];
 
   /// the english language word
@@ -675,9 +675,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A new version of Breast Cancer Awareness is available! Version {latestAppVersion} is now available-you have {currentAppVersion}\n\nWould you like to update it now?'**
   String newVersionOfTheAppIsAvailable(
-    String latestAppVersion,
-    String currentAppVersion,
-  );
+      String latestAppVersion, String currentAppVersion);
 
   /// the reset to default tooltip in `_SETTINGS_SCREEN`
   ///
@@ -888,8 +886,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An account already exists with the same email address as your {providerName} account.\nSign in using the account that is associated with this email address.'**
   String anAccountAlreadyExistsWithTheSameEmailAddressAsYourProviderAccount(
-    String providerName,
-  );
+      String providerName);
 
   /// the response if an `API` error `trying to reauthenticate with different account`
   ///
@@ -1268,7 +1265,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You understand that every day counts when it comes to early breast cancer detection. it\'s great that you take responsibility for your health and check your breasts regularly.'**
   String
-  get youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection;
+      get youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection;
 
   /// self check button on the home screen
   ///
@@ -1701,7 +1698,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pick a Medical Image of Breast Cancer Mammogram (X-Ray) or Histology of The Patient.'**
   String
-  get pickAMedicalImageOfBreastCancerMammogramXrayOrHistologyOfThePatient;
+      get pickAMedicalImageOfBreastCancerMammogramXrayOrHistologyOfThePatient;
 
   /// instruction for models usage
   ///
@@ -2309,13 +2306,13 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) => <String>[
-    'ar',
-    'de',
-    'en',
-    'es',
-    'fr',
-    'tr',
-  ].contains(locale.languageCode);
+        'ar',
+        'de',
+        'en',
+        'es',
+        'fr',
+        'tr'
+      ].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -2339,9 +2336,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   }
 
   throw FlutterError(
-    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-    'an issue with the localizations generation tool. Please file an issue '
-    'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.',
-  );
+      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
 }

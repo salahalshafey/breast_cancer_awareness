@@ -337,9 +337,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String newVersionOfTheAppIsAvailable(
-    String latestAppVersion,
-    String currentAppVersion,
-  ) {
+      String latestAppVersion, String currentAppVersion) {
     return 'نسخة جديدة من التطبيق متاحة! الإصدار $latestAppVersion متوفر الآن - لديك $currentAppVersion\n\nهل ترغب في تحديثه الآن؟';
   }
 
@@ -456,8 +454,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String anAccountAlreadyExistsWithTheSameEmailAddressAsYourProviderAccount(
-    String providerName,
-  ) {
+      String providerName) {
     return 'يوجد حساب بالفعل بنفس عنوان البريد الإلكتروني لحساب $providerName.\nقم بتسجيل الدخول باستخدام الحساب المقترن بعنوان البريد الإلكتروني هذا.';
   }
 
@@ -667,8 +664,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get hello => 'أهلاً';
 
   @override
-  String
-  get youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection =>
+  String get youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection =>
       'أنت تدرك أن كل يوم مهم عندما يتعلق الأمر بالكشف المبكر عن سرطان الثدي. من الرائع أن تتحمل مسؤولية صحتك وتقوم بفحص الثدي بانتظام.';
 
   @override
@@ -910,8 +906,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get recording => 'جارِ التسجيل';
 
   @override
-  String
-  get pickAMedicalImageOfBreastCancerMammogramXrayOrHistologyOfThePatient =>
+  String get pickAMedicalImageOfBreastCancerMammogramXrayOrHistologyOfThePatient =>
       'اختر صورة طبية لسرطان الثدي، سواء كانت صورة الأشعة السينية (الماموغرام) أو لأنسجة المريض (هيستولوجي).';
 
   @override

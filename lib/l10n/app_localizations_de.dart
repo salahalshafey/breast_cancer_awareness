@@ -337,9 +337,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String newVersionOfTheAppIsAvailable(
-    String latestAppVersion,
-    String currentAppVersion,
-  ) {
+      String latestAppVersion, String currentAppVersion) {
     return 'Eine neue Version von Breast Cancer Awareness ist verfügbar! Version $latestAppVersion ist jetzt verfügbar - Sie haben $currentAppVersion\n\nMöchten Sie es jetzt aktualisieren?';
   }
 
@@ -458,8 +456,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String anAccountAlreadyExistsWithTheSameEmailAddressAsYourProviderAccount(
-    String providerName,
-  ) {
+      String providerName) {
     return 'Es existiert bereits ein Konto mit derselben E-Mail-Adresse wie Ihr $providerName-Konto.\nMelden Sie sich mit dem Konto an, das mit dieser E-Mail-Adresse verknüpft ist.';
   }
 
@@ -672,8 +669,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get hello => 'Hallo';
 
   @override
-  String
-  get youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection =>
+  String get youUnderstandThatEveryDayCountsWhenItComesToEarlyBreastCancerDetection =>
       'Du verstehst, dass jeder Tag zählt, wenn es um die frühzeitige Erkennung von Brustkrebs geht. Es ist großartig, dass du Verantwortung für deine Gesundheit übernimmst und regelmäßig deine Brüste überprüfst.';
 
   @override
@@ -916,8 +912,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get recording => 'Aufnahme';
 
   @override
-  String
-  get pickAMedicalImageOfBreastCancerMammogramXrayOrHistologyOfThePatient =>
+  String get pickAMedicalImageOfBreastCancerMammogramXrayOrHistologyOfThePatient =>
       'Wählen Sie ein medizinisches Bild von Brustkrebs Mammogramm (Röntgen) oder Histologie des Patienten.';
 
   @override

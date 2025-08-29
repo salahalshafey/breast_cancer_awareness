@@ -3,8 +3,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:provider/provider.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
-import 'package:flutter_langdetect/flutter_langdetect.dart' as langdetect;
 
+import '../../../../core/util/functions/lang_detect.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../../core/util/classes/pair_class.dart';
 
@@ -62,7 +62,7 @@ class _AIResultState extends State<AIResult> with WidgetsBindingObserver {
   }
 
   void _speakWithResultLanguage(String spokenString) async {
-    final spokenStringLanguage = langdetect.detect(spokenString);
+    final spokenStringLanguage = await detectLang(spokenString);
 
     // print(spokenStringLanguage);
     if (await widget.flutterTts.isLanguageAvailable(spokenStringLanguage)) {

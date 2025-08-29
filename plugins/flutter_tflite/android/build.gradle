@@ -1,0 +1,40 @@
+// AGP 8+ compatible build.gradle for flutter_tflite
+
+plugins {
+    id 'com.android.library'
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+android {
+    // REQUIRED by AGP 7.3+ / 8+
+    namespace 'sq.flutter.tflite'
+
+    // Match your app's compileSdk (e.g., 34)
+    compileSdkVersion 34
+
+    defaultConfig {
+        // Modern floor for TF Lite builds
+        minSdkVersion 21
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+}
+
+// Pin TensorFlow Lite to stable versions on Maven Central (no '+' wildcards)
+dependencies {
+    implementation 'org.tensorflow:tensorflow-lite:2.14.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:2.14.0'
+}

@@ -145,7 +145,7 @@ Future<void> init() async {
 
 // Datasources
 
-  sl.registerLazySingleton<AIChat>(() => GeminiPro());
+  sl.registerLazySingleton<AIChat>(() => Gemini25ProFirebase());
   sl.registerLazySingleton<GoogleSearch>(() => GoogleSearchScrappingImpl());
   sl.registerLazySingleton<GoogleScholarSearch>(
       () => GoogleScholarScrappingImpl());
