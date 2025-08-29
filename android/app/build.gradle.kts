@@ -56,8 +56,18 @@ android {
     }
 
     buildTypes {
-        release {
+        getByName("release") {
             signingConfig = signingConfigs.getByName("release")
+
+            // Enable code shrinking/obfuscation for release
+            isMinifyEnabled = true
+            // (optional) also shrink unused resources
+            // isShrinkResources = true
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro" // <— the file you created in step 1
+            )
         }
     }
 
@@ -82,7 +92,7 @@ dependencies {
     implementation("androidx.window:window-java:1.0.0")
 
     // TensorFlow Lite GPU nightly (keep only if you really need nightly)
-    implementation("org.tensorflow:tensorflow-lite-gpu:0.0.0-nightly")
+    // implementation("org.tensorflow:tensorflow-lite-gpu:0.0.0-nightly")
 
     // Desugar JDK libs for Java 11 APIs on older Android
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.2")
