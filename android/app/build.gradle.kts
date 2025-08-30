@@ -17,7 +17,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "com.example.breast_cancer_awareness"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 35
     ndkVersion = flutter.ndkVersion
 
     // Keep TFLite files uncompressed in APK/AAB
@@ -40,7 +40,7 @@ android {
     defaultConfig {
         applicationId = "com.salahalshafey.breastcancerawareness"
         minSdk = 24
-        targetSdk = flutter.targetSdkVersion
+        targetSdk = 35
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled = true

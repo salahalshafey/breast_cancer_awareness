@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -22,6 +23,11 @@ void print2(NotificationResponse details) {
 
 class Noti {
   static Future<void> initialize() async {
+    if (await Permission.notification.isDenied ||
+        await Permission.notification.isPermanentlyDenied) {
+      await Permission.notification.request();
+    }
+
     const androidInitialize =
         AndroidInitializationSettings('mipmap/ic_launcher');
     const iOSInitialize = DarwinInitializationSettings();
